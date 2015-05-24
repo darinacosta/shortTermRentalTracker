@@ -19,9 +19,9 @@ function paginate() {
 	  if (parsedResult['ids'].length > 1){
 	  	paginate(); 
 	  } else {
-	  	console.log('=================================================\n' +
-	  	parsedResult + '\n' + 
-	  	'=================================================')
+	  	console.log('==================FINAL PAGE===============\n' +
+	  	result + '\n' + 
+	  	'==============END FINAL PAGE===============')
 	  	var geoJsonString = JSON.stringify(geoJson);
 	  	fs.writeFile(rentalsGeoJsonPath, geoJsonString);
 	  }
