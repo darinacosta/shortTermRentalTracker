@@ -4,7 +4,8 @@
   "description": "A tool for mapping and analyzing short term rentals.",
   "main": "scrape_rentals.js",
   "dependencies": {
-    "unirest": "*",
+    "gdal": "^0.4.4",
+    "unirest": "*"
   },
   "devDependencies": {},
   "scripts": {
