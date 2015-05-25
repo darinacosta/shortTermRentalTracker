@@ -4,8 +4,8 @@ from pprint import pprint
 
 class GeometryHelper():
   def switch_lat_lng(self, latlng):
-    lat = latlng[0]
-    lng = latlng[1]
+    lat = latlng[1]
+    lng = latlng[0]
     return [lat, lng]
 
 class RentalScraper():
@@ -31,6 +31,20 @@ class RentalScraper():
     )
     result = response.body
     return result
+  
+  def iterate_through_all_pages(self, function):
+    i = 1
+    escape = 0
+    while escape == 0:
+      page_result = self.get_response_by_page(i)
+      body_result = page_result['result']
+      output = []
+      print "Scanning page " + str(i) + "..."
+      for ii in range(len(body_result)):
+        function(body_result[ii])
+      if len(page_result['ids']) < 1:
+        print "Scan complete."
+        escape = 1
 
   def get_complete_response(self):
     i = 1
@@ -39,24 +53,29 @@ class RentalScraper():
     geometry_helper = self.geometry_helper
     while escape == 0:
       page_result = self.get_response_by_page(i)
-      result = page_result['result']
-      print i
-      for ii in range(len(result)):
-        print result[ii]['latLng']
-        results.append({
-          "type":"Feature",
-          "geometry":{
-            "type":"Point",
-            "coordinates": geometry_helper.switch_lat_lng(result[ii]['latLng'])
-          },"properties":{
-            "url": result[ii]['provider']['url']
-          }
-        })
+      body_result = page_result['result']
+      print "Scanning page " + str(i)
+      for ii in range(len(body_result)):
+        coords = geometry_helper.switch_lat_lng(body_result[ii]['latLng'])
+        url = body_result[ii]['provider']['url']
+        geofeature = self.return_geojson_feature(coords, url)
+        results.append(geofeature)
         ii += 1
       i += 1
       if len(page_result['ids']) < 1:
         escape = 1
     return results
+
+  def return_geojson_feature(self, coords, url):
+    return {
+      "type":"Feature",
+      "geometry":{
+        "type":"Point",
+        "coordinates": coords
+      },"properties":{
+        "url": url
+      }
+    }
       
   def scrape_guest_images(self):
     results = self.results
@@ -72,7 +91,9 @@ class RentalScraper():
   def write_geojson_to_file(self):
     self.geojson['features'] = self.get_complete_response()
     self.rentals_geojson.write(json.dumps(self.geojson))
-  
+
 rs = RentalScraper()
-rs.write_geojson_to_file()  
+rs.write_geojson_to_file()
+  
+ 
 
