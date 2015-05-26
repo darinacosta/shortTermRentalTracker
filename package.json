@@ -1,0 +1,24 @@
+{
+  "name": "rentaltracker",
+  "version": "0.0.1",
+  "description": "An app for tracking and analyzing the New Orleans short term rental market.",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "^1.3.15",
+    "angular-sanitize": "^1.3.15"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darinacosta/shortTermRentalTracker.git"
+  },
+  "author": "Darin Acosta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darinacosta/shortTermRentalTracker/issues"
+  },
+  "homepage": "https://github.com/darinacosta/shortTermRentalTracker"
+}

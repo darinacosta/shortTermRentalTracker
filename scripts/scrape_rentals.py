@@ -10,7 +10,7 @@ rs = scraper.RentalScraper()
 
 try:
   rs.write_geojson_to_file()
-  log.write(str(timestamp) + '\n SUCCESS')
+  log.write(str(timestamp) + '\n SUCCESS' + '\n')
 except:
   e = sys.exc_info()[0]
   log.write(str(timestamp) + '\n' + str(e))

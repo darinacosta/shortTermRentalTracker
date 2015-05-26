@@ -34,55 +34,17 @@
     }
 
   </style>
+</head>
+<body ng-app="app">
+  <div id="map"></div>
+  <div ng-view></div>
   <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
   <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
   <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
-
-</head>
-<body>
-  <div id="loader">
-    <img src="i/ajax-loader.gif">
-  </div>
-  <div id="map"></div>
-  <script>
-
-  var HERE_normalNightGrey = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.night.grey/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
-  attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-  subdomains: '1234',
-  mapID: 'newest',
-  app_id: 'Y8m9dK2brESDPGJPdrvs',
-  app_code: 'dq2MYIvjAotR8tHvY8Q_Dg',
-  base: 'base',
-  maxZoom: 20
-});
-
-  $.getJSON("./layers/rentals.json", function(data) {
-    var geojson = L.geoJson(data, {
-      onEachFeature: function (feature, layer) {
-        layer.bindPopup('<a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a>');
-      },
-      pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, {
-          radius: 11,
-          fillColor: "#ff7800",
-          color: "#000",
-          weight: 1,
-          opacity: 1,
-          fillOpacity: 0.8
-      });
-      }
-    });
-    var map = L.map('map', {maxZoom: 18}).fitBounds(geojson.getBounds());
-    var markers = new L.MarkerClusterGroup();
-    markers.addLayer(geojson);
-    map.addLayer(markers);
-    HERE_normalNightGrey.addTo(map);
-  });
-
-  $( document ).ready(function(){
-    $('#loader').remove();
-  })
-
-  </script>
+  <script src="node_modules/angular/angular.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
+  <script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
+  <script src="app.js"></script>
+  <script src="components/map/mapCtrl.js"></script>
 </body>
 </html>
