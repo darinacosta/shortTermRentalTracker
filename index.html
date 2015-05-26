@@ -4,6 +4,8 @@
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
   <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.css">
   <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css">
+  <meta name=viewport content='width=400'>
+
   <!--[if lte IE 8]>
      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" />
   <![endif]-->
@@ -61,7 +63,7 @@
       },
       pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, {
-          radius: 8,
+          radius: 11,
           fillColor: "#ff7800",
           color: "#000",
           weight: 1,
