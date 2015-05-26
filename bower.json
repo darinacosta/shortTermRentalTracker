@@ -6,7 +6,7 @@
     "darinacosta <darinjacosta@gmail.com>"
   ],
   "description": "A tool to trac short term rentals in New Orleans.",
-  "main": "track_rentals.py",
+  "main": "index.html",
   "license": "MIT",
   "private": true,
   "ignore": [

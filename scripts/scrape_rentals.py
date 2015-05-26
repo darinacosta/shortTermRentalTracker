@@ -12,7 +12,7 @@ class RentalScraper():
   def __init__(self):
     self.geometry_helper = GeometryHelper()
     self.photo_page = open('images.html', 'w')
-    self.rentals_geojson = open('rentals.json', 'w')
+    self.rentals_geojson = open('../layers/rentals.json', 'w')
     self.geojson = { "type": "FeatureCollection",
       "features": []
     }
@@ -31,20 +31,6 @@ class RentalScraper():
     )
     result = response.body
     return result
-  
-  def iterate_through_all_pages(self, function):
-    i = 1
-    escape = 0
-    while escape == 0:
-      page_result = self.get_response_by_page(i)
-      body_result = page_result['result']
-      output = []
-      print "Scanning page " + str(i) + "..."
-      for ii in range(len(body_result)):
-        function(body_result[ii])
-      if len(page_result['ids']) < 1:
-        print "Scan complete."
-        escape = 1
 
   def get_complete_response(self):
     i = 1
@@ -103,7 +89,7 @@ class RentalScraper():
     self.rentals_geojson.write(json.dumps(self.geojson))
 
 rs = RentalScraper()
-rs.scrape_guest_images()
+rs.write_geojson_to_file()
   
  
 
