@@ -17,6 +17,19 @@
       height: 100%;
     }
 
+    .leaflet-control-attribution{
+      display:none;
+    }
+
+    #loader {
+      position: fixed;
+      top: 43%;
+      left: 50%;
+      width: 30em;
+      height: 18em;
+      font-size: 70px;
+    }
+
   </style>
   <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
   <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
@@ -24,6 +37,9 @@
 
 </head>
 <body>
+  <div id="loader">
+    <img src="i/ajax-loader.gif">
+  </div>
   <div id="map"></div>
   <script>
 
@@ -59,6 +75,10 @@
     map.addLayer(markers);
     HERE_normalNightGrey.addTo(map);
   });
+
+  $( document ).ready(function(){
+    $('#loader').html('');
+  })
 
   </script>
 </body>
