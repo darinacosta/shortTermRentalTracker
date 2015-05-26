@@ -1,0 +1,22 @@
+{
+  "name": "rentaltracker",
+  "version": "0.0.1",
+  "homepage": "https://github.com/darinacosta/shortTermRentalTracker",
+  "authors": [
+    "darinacosta <darinjacosta@gmail.com>"
+  ],
+  "description": "A tool to trac short term rentals in New Orleans.",
+  "main": "track_rentals.py",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "leaflet.markercluster": "~0.4.0"
+  }
+}

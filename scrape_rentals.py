@@ -78,14 +78,24 @@ class RentalScraper():
     }
       
   def scrape_guest_images(self):
-    results = self.results
-    response = self.response
+    i = 1
+    escape = 0
     photo_string = ''
-    for i in range(len(results)):
-      result_entries = results[i]['reviews']['entries']
-      for ii in range(len(result_entries)):
-        if not "defaults" in result_entries[ii]['picture']:
-          photo_string += '<img src="' + result_entries[ii]['picture'] + '">'
+    while escape == 0:
+      page_result = self.get_response_by_page(i)
+      body_result = page_result['result']
+      output = []
+      print "Scanning page " + str(i) + "..."
+      for n in range(len(body_result)):
+        result_entries = body_result[n]['reviews']['entries']
+        for ii in range(len(result_entries)):
+          if not "defaults" in result_entries[ii]['picture']:
+            photo_string += '<img src="' + result_entries[ii]['picture'] + '">'
+          ii += 1
+      i += 1
+      if len(page_result['ids']) < 1:
+        print "Scan complete."
+        escape = 1
     self.photo_page.write(photo_string)
 
   def write_geojson_to_file(self):
@@ -93,7 +103,7 @@ class RentalScraper():
     self.rentals_geojson.write(json.dumps(self.geojson))
 
 rs = RentalScraper()
-rs.write_geojson_to_file()
+rs.scrape_guest_images()
   
  
 
