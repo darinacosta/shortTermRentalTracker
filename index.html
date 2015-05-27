@@ -47,24 +47,22 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid"
       <div ng-controller="navCtrl">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li><a href="#/">Home</a></li>
-            <li><a href="#/">About</a></li>
-            <!--Dropdown-->
-            <li class="dropdown" dropdown on-toggle="toggled(open)">
-              <a href class="dropdown-toggle" dropdown-toggle>
-                Case Studies
-              </a>
-              <ul class="dropdown-menu">
-                <li ng-repeat="choice in items">
-                  <a href>{{choice}}</a>
-                </li>
-              </ul>
-            </li>
-            <!--/Dropdown-->
-          </ul>
-        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="#/">Home</a></li>
+          <li><a href="#/">About</a></li>
+          <!--Dropdown-->
+          <li class="dropdown" dropdown on-toggle="toggled(open)">
+            <a href class="dropdown-toggle" dropdown-toggle>
+              Case Studies
+            </a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="choice in items">
+                <a href>{{choice}}</a>
+              </li>
+            </ul>
+          </li>
+          <!--/Dropdown-->
+        </ul>
       </div>
     </div>
   </nav>
