@@ -8,6 +8,7 @@ function mapSvc($http){
   },
   layers = [],
   map = L.map('map', mapAttributes),
+  layerControl = L.control.layers(),
   date = new Date(),
   current_hour = date.getHours(),
 
@@ -110,6 +111,7 @@ function mapSvc($http){
   // add the new control to the map
   var zoomHome = new L.Control.zoomHome();
   zoomHome.addTo(map);
+  layerControl.addTo(map);
 
   (function addBasemap(){
     if (current_hour < 6 || current_hour > 17){
@@ -119,39 +121,9 @@ function mapSvc($http){
     }
   })();
 
-  function shortTermRentalPointStyle(feature, latlng) {
-    return L.circleMarker(latlng, {
-      radius: 11,
-      fillColor: "#ff7800",
-      color: "#000",
-      weight: 1,
-      opacity: 1,
-      fillOpacity: 0.8
-    })
-  };
-
-  function shortTermRentalPopup(feature, layer) {
-    layer.bindPopup('<a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a>');
-  };
-
-  function configureShortTermRentalLayer(data, status) {
-    var geojson = L.geoJson(data, {
-      onEachFeature: shortTermRentalPopup,
-      pointToLayer: shortTermRentalPointStyle
-    });
-    var shortTermRentalClusters = new L.MarkerClusterGroup();
-    shortTermRentalClusters.addLayer(geojson);
-    layers.push(shortTermRentalClusters);
-    map.addLayer(shortTermRentalClusters);
-  };
-
-  $http.get("./layers/rentals.json").success(
-    configureShortTermRentalLayer
-  );
-
   mapSvc = {
+    layerControl: layerControl,
     map: map,
-    layers: layers,
     mapAttributes: mapAttributes
   }
 
