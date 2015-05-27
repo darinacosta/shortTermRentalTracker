@@ -2,10 +2,10 @@ var app = angular.module("app", ["ngRoute", "ngSanitize"]) //ngSanitize is requi
   
   .config(function ($routeProvider) {
     $routeProvider
-      .when("/map", {
-        controller: 'mapCtrl', 
-        controllerUrl: 'components/map/mapCtrl.js',
-        templateUrl: 'components/map/map.html'
+      .when("/home", {
+        controller: 'homeCtrl', 
+        controllerUrl: 'components/home/homeCtrl.js',
+        templateUrl: 'components/home/home.html'
       })
-      .otherwise({redirectTo: "/map"})
+      .otherwise({redirectTo: "/home"})
   })

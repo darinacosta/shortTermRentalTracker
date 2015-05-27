@@ -4,6 +4,8 @@
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
   <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.css">
   <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <meta name=viewport content='width=400'>
 
   <!--[if lte IE 8]>
@@ -15,8 +17,9 @@
       margin: 0;
     }
 
-    html, body, #map {
+    html, body {
       height: 100%;
+      background-color:#E2E2E2;
     }
 
     .leaflet-control-attribution{
@@ -33,11 +36,17 @@
       z-index: 9999;
     }
 
+    #map{
+      height:300px;
+    }
+
   </style>
 </head>
 <body ng-app="app">
   <div id="map"></div>
-  <div ng-view></div>
+  <div class="container">
+    <div ng-view></div>
+  </div>
   <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
   <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
   <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
@@ -45,7 +54,7 @@
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
   <script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
   <script src="app.js"></script>
-  <script src="components/map/mapCtrl.js"></script>
+  <script src="components/home/homeCtrl.js"></script>
   <script src="services/mapSvc.js"></script>
 </body>
 </html>

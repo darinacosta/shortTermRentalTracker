@@ -1,4 +1,5 @@
 node_modules
 bower_components
 scripts/scraper_env.py
+scripts/log.txt
 *.pyc
