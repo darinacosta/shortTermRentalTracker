@@ -112,7 +112,7 @@ function mapSvc($http){
   zoomHome.addTo(map);
 
   (function addBasemap(){
-    if (current_hour > 17){
+    if (current_hour < 6 || current_hour > 17){
       map.addLayer(nightTileLayer)
     }else{
       map.addLayer(dayTileLayer)

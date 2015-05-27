@@ -1,4 +1,4 @@
-var app = angular.module("app", ["ngRoute", "ngSanitize"]) //ngSanitize is require to use ng-bind-html
+var app = angular.module("app", ["ngRoute", "ngSanitize", "ui.bootstrap"]) //ngSanitize is require to use ng-bind-html
   
   .config(function ($routeProvider) {
     $routeProvider

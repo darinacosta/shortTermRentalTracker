@@ -44,6 +44,30 @@
 </head>
 <body ng-app="app">
   <div id="map"></div>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid"
+      <div ng-controller="navCtrl">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/">About</a></li>
+            <!--Dropdown-->
+            <li class="dropdown" dropdown on-toggle="toggled(open)">
+              <a href class="dropdown-toggle" dropdown-toggle>
+                Case Studies
+              </a>
+              <ul class="dropdown-menu">
+                <li ng-repeat="choice in items">
+                  <a href>{{choice}}</a>
+                </li>
+              </ul>
+            </li>
+            <!--/Dropdown-->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
   <div class="container">
     <div ng-view></div>
   </div>
@@ -53,8 +77,10 @@
   <script src="node_modules/angular/angular.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
   <script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
+  <script src="node_modules/angular-bootstrap/dist/ui-bootstrap.min.js"></script>
   <script src="app.js"></script>
   <script src="components/home/homeCtrl.js"></script>
+  <script src="components/nav/navCtrl.js"></script>
   <script src="services/mapSvc.js"></script>
 </body>
 </html>
