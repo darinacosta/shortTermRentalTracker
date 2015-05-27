@@ -57,7 +57,7 @@
             </a>
             <ul class="dropdown-menu">
               <li ng-repeat="choice in items">
-                <a href>{{choice}}</a>
+                <a href="#/{{choice.url}}">{{choice.name}}</a>
               </li>
             </ul>
           </li>
@@ -78,6 +78,8 @@
   <script src="node_modules/angular-bootstrap/dist/ui-bootstrap.min.js"></script>
   <script src="app.js"></script>
   <script src="components/home/homeCtrl.js"></script>
+  <script src="components/treme/tremeCtrl.js"></script>
+  <script src="components/bywater/bywaterCtrl.js"></script>
   <script src="components/nav/navCtrl.js"></script>
   <script src="services/mapSvc.js"></script>
 </body>

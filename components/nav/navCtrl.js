@@ -2,17 +2,13 @@ app.controller('navCtrl', navCtrl);
 
 function navCtrl($scope,  $log) {
     $scope.items = [
-    'Citywide Survey',
-    'Treme',
-    'Bywater'
+    {name:'Citywide Survey', url: "citywide"},
+    {name:'Treme', url: "treme"},
+    {name:'Bywater', url: "bywater"}
   ];
 
   $scope.status = {
     isopen: false
-  };
-
-  $scope.toggled = function(open) {
-    $log.log('Dropdown is now: ', open);
   };
 
   $scope.toggleDropdown = function($event) {

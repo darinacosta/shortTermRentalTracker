@@ -151,7 +151,8 @@ function mapSvc($http){
 
   mapSvc = {
     map: map,
-    layers: layers
+    layers: layers,
+    mapAttributes: mapAttributes
   }
 
   return mapSvc;
