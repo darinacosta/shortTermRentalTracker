@@ -1,2 +1,2 @@
-2015-05-27 11:55:52.007269
-SUCCESS
+2015-05-28 20:03:12.296000
+<urlopen error [Errno 10054] An existing connection was forcibly closed by the remote host>

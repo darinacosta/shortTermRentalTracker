@@ -1,6 +1,7 @@
 import unirest
 import json
 import scraper_env
+import shapely
 from pprint import pprint
 
 class GeometryHelper():
@@ -85,6 +86,6 @@ class RentalScraper():
     geojson = { "type": "FeatureCollection",
       "features": []
     }
-    rentals_geojson = open('../layers/rentals.json', 'w')
+    rentals_geojson = open(scraper_env.root_dir + '../layers/rentals.json', 'w')
     geojson['features'] = self.get_complete_response()
     rentals_geojson.write(json.dumps(geojson))
