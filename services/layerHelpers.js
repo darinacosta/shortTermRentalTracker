@@ -8,7 +8,7 @@ function layerHelpers(mapSvc){
 
   hideAllLayers = function(){
     angular.forEach(layerControl._layers, function(val, key) {
-      console.log(map.removeLayer(layerControl._layers[key]))
+      console.log(map.removeLayer(layerControl._layers[key].layer))
       map.removeLayer(layerControl._layers[key])
     });
   };
@@ -21,7 +21,7 @@ function layerHelpers(mapSvc){
       }
     })
   };
-
+  
   addLayerCustom = function(layer){
     compileLayerControlList();
     if (layerControlList.indexOf(layer.alias) === -1){
