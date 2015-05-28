@@ -26,7 +26,7 @@ function paginate() {
 	  	fs.writeFile(rentalsGeoJsonPath, geoJsonString);
 	  }
 	});
-};
+}; 
 paginate();
 
 function handleResult(result){
