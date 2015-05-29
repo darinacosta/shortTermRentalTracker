@@ -1,15 +1,16 @@
 var unirest = require('unirest'),
     fs = require('fs'),
-    scraper_env = require('./scraper_env.js'),
+    Q = require('q'),
+    scraper_env = require('./scraper_env'),
     rentalsGeoJsonPath = '../layers/rentals.json', 
-    i = 1,
+    i = 1;
 
 rentalScraper = {
 
   geoJson: { "type": "FeatureCollection",
              "features": []},
 
-  getResponseByPage: function(pageNumber) { 
+  getResponseByPage: function(pageNumber, callback) { 
   	var nelatitude = 30.123749,
         nelongitude = -89.868164,
         swlatitude = 29.881137,
@@ -22,25 +23,24 @@ rentalScraper = {
   	.end(function (result) {
      
   		var parsedResult = JSON.parse(result.body);
-      console.log(parsedResult);
+      callback()
   	  return parsedResult;
     });
   },
   
   getCompleteResponse: function(){
     var rentalScraper = this,
-        i = 1,
-        escape = 0,
-        results = [];
-    while (escape === 0){
-      rentalScraper.getResponseByPage(i).then(function(pageResult){
-        bodyResult = pageResult['result'];
-        if (pageResult['ids'] < 1) escape = 1;
-        for (var n = 0; n < bodyResult.length; n ++){
-          rentalScraper._pushToGeoJson(bodyResult[n])
-        } 
-      });
-    } 
+    i = 1,
+    escape = 0,
+    results = [];
+    rentalScraper.getResponseByPage(i, function(pageResult){
+      console.log('TEEEEST')
+      bodyResult = pageResult['result'];
+      if (pageResult['ids'] < 1) escape = 1;
+      for (var n = 0; n < bodyResult.length; n ++){
+        rentalScraper._pushToGeoJson(bodyResult[n])
+      } 
+    }); 
   },
 
   writeGeojsonToFile: function(){
