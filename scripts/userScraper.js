@@ -54,8 +54,10 @@ function fetchHtml(urlJson){
             user: "http://airbnb.com" + href
           };
           userProfiles['userProfiles'].push(entry);
-          setTimeout(function() { i++; cb(null,entry); }, 700);
+          setTimeout(function() { i++; cb(null,entry); }, 300);
         } else {
+          console.log("There's a problem with this URL.");
+          i++;
           cb(null, 'error')
         }
       }
