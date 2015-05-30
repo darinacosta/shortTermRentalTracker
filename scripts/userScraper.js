@@ -54,7 +54,9 @@ function fetchHtml(urlJson){
             user: "http://airbnb.com" + href
           };
           userProfiles['userProfiles'].push(entry);
-          setTimeout(function() { i++; cb(null,entry); }, 900);
+          setTimeout(function() { i++; cb(null,entry); }, 700);
+        } else {
+          cb(null, 'error')
         }
       }
     })
