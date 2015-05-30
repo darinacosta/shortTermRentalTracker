@@ -1,0 +1,1 @@
+{"userProfiles":[{"rental":"http://airbnb.com/rooms/339449","user":"http://airbnb.com/users/show/1723455"},{"rental":"http://airbnb.com/rooms/718256","user":"http://airbnb.com/users/show/1340014"}]}
