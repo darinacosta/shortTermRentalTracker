@@ -32,10 +32,9 @@ function handleResponse(response) {
 
 function fetchHtml(urlJson){
   var parsedJSON = JSON.parse(urlJson),
-  urls = parsedJSON['urls'],
+  urls = parsedJSON['urls'].slice(15,20),
   urlsLength = urls.length,
   i = 0;
-
   console.log('Begining to scrape ' + urlsLength + ' urls.')
   
   var fetch = function(cb){
@@ -61,7 +60,7 @@ function fetchHtml(urlJson){
           setTimeout(function() { i++; cb(null,entry); }, 200);
         } else {
           urlsLength -= 1;
-          console.log(urls[i] + ' was not scraped. Check to ensure it exists. This brings the url count to ' + urlsLength)
+          console.log(urls[i] + ' was not scraped. Check to ensure it exists.')
           i++;
           cb(null, 'error')
         }
@@ -82,7 +81,10 @@ function fetchHtml(urlJson){
       }
       userProfilesString = JSON.stringify(userProfiles);
       fs.writeFile(userProfileUrls, userProfilesString);
-      console.log(i + ' entries written.')
+      console.log('-----------------------------' + '\n' +
+                  'Entries requested: ' + i + '\n' +
+                  'Entries written:   '+  urlsLength + '\n' +
+                  '-----------------------------')
     }
 
   )
