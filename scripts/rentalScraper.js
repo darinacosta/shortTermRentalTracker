@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var unirest = require('unirest'),
     fs = require('fs'),
     geo,

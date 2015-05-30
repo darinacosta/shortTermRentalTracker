@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var async = require('async'),
     fs = require('fs'),
     request = require('request'),
@@ -31,7 +33,10 @@ function handleResponse(response) {
 function fetchHtml(urlJson){
   var parsedJSON = JSON.parse(urlJson),
   urls = parsedJSON['urls'],
+  urlsLength = urls.length,
   i = 0;
+
+  console.log('Begining to scrape ' + urlsLength + ' urls.')
   
   var fetch = function(cb){
     options = {
@@ -41,7 +46,6 @@ function fetchHtml(urlJson){
       }
     };
     request(options, function(error, response, html){
-      console.log(urls[i])
       if (error){
         console.log(error)
       } else {
@@ -54,9 +58,10 @@ function fetchHtml(urlJson){
             user: "http://airbnb.com" + href
           };
           userProfiles['userProfiles'].push(entry);
-          setTimeout(function() { i++; cb(null,entry); }, 300);
+          setTimeout(function() { i++; cb(null,entry); }, 200);
         } else {
-          console.log("There's a problem with this URL.");
+          urlsLength -= 1;
+          console.log(urls[i] + ' was not scraped. Check to ensure it exists. This brings the url count to ' + urlsLength)
           i++;
           cb(null, 'error')
         }
@@ -72,6 +77,9 @@ function fetchHtml(urlJson){
     },
 
     function(err, results){
+      if (err){
+        console.log('Connection Error. Continuing application...');
+      }
       userProfilesString = JSON.stringify(userProfiles);
       fs.writeFile(userProfileUrls, userProfilesString);
       console.log(i + ' entries written.')
