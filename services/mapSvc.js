@@ -4,7 +4,8 @@ function mapSvc($http){
   mapAttributes = {
     center: [29.9930, -90.0667],
     zoom: 11,
-    zoomControl:false 
+    zoomControl: false,
+    scrollWheelZoom: false
   },
   layers = [],
   map = L.map('map', mapAttributes),
@@ -22,14 +23,9 @@ function mapSvc($http){
     maxZoom: 20
   }),
 
-  dayTileLayer = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/terrain.day/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
-    attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
-    subdomains: '1234',
-    mapID: 'newest',
-    app_id: 'Y8m9dK2brESDPGJPdrvs',
-    app_code: 'dq2MYIvjAotR8tHvY8Q_Dg',
-    base: 'aerial',
-    maxZoom: 20
+  dayTileLayer  = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   });
 
   //Zoom Home Bar

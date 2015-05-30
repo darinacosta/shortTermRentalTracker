@@ -6,14 +6,14 @@ var async = require('async'),
     http = require('http'),
     cheerio = require('cheerio'),
     Q = require("q"),
-    userProfileUrlDoc = './userProfiles.json',
+    multiUnitUrlDoc = './multiUnits.json',
     i = 0;
 
 userScraper = {
 
-  buildUserProfileJson: function(){
+  buildMultiUnitJson: function(){
     var userScraper = this;
-    userScraper._getUrlList()
+    userScraper._getUserProfiles()
     .then(_getHtml);
 
     function _getHtml(response) {
@@ -22,18 +22,21 @@ userScraper = {
         json += d;
       });
       response.on('end', function(){
-        var parsedJSON = JSON.parse(json),
-        urls = parsedJSON['urls'].slice(15,20);
-        userScraper._scrapePages(urls, userProfileUrlDoc);
-      });
-    };
+        var userProfiles = JSON.parse(json)['userProfiles'];
+        var urls = [];
+        for (var i = 0; i < userProfiles.length; i++){
+          urls.push(userProfiles[i]['user']);
+        };
+        userScraper._scrapePages(urls, multiUnitUrlDoc);
+    });
+    }
   },
 
-  _getUrlList: function(){
+  _getUserProfiles: function(){
     var deferred = Q.defer();
     http.get({
       host: 'localhost',
-      path: '/rentaltracker/scripts/urlList.json'
+      path: '/rentaltracker/scripts/userProfiles.json'
      }, deferred.resolve);
     return deferred.promise;
   },
@@ -59,12 +62,14 @@ userScraper = {
           console.log(error)
         } else {
           var $ = cheerio.load(html);
-          userDetails = $('#host-profile').find("a")[0];
-          if (userDetails !== undefined){
-            href = $('#host-profile').find("a")[0]['attribs']['href'],
+          rentalNumberParan = $('.row-space-3').find("small").text()
+          if (rentalNumberParan !== undefined && rentalNumberParan !== null ){
+            rentalNumber = /\(([^\)]+)\)/.exec(rentalNumberParan)[1];
+            console.log(rentalNumber)
             entry = {
               rental: urls[i],
-              user: "http://airbnb.com" + href
+              user: urls[i],
+              units: rentalNumber
             };
             entries.push(entry);
             setTimeout(function() { i++; cb(null,entry); }, 200);
@@ -101,7 +106,7 @@ userScraper = {
   }
 }
 
-userScraper.buildUserProfileJson()
+userScraper.buildMultiUnitJson()
 
 
 
