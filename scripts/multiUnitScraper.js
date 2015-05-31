@@ -22,11 +22,7 @@ userScraper = {
         json += d;
       });
       response.on('end', function(){
-        var userProfiles = JSON.parse(json)['userProfiles'];
-        var urls = [];
-        for (var i = 0; i < userProfiles.length; i++){
-          urls.push(userProfiles[i]['user']);
-        };
+        var urls = JSON.parse(json)['userProfiles'];
         userScraper._scrapePages(urls, multiUnitUrlDoc);
     });
     }
@@ -50,7 +46,7 @@ userScraper = {
     
     var _fetch = function(cb){
       options = {
-        url: urls[i],
+        url: urls[i]['user'],
         headers: {
           'User-Agent': "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
         }
@@ -61,21 +57,22 @@ userScraper = {
         if (error){
           console.log(error)
         } else {
-          var $ = cheerio.load(html);
-          rentalNumberParan = $('.row-space-3').find("small").text()
-          if (rentalNumberParan !== undefined && rentalNumberParan !== null ){
-            rentalNumber = /\(([^\)]+)\)/.exec(rentalNumberParan)[1];
-            console.log(rentalNumber)
+          var $ = cheerio.load(html),
+          rentalNumberParan = $('.row-space-3').find("small").text(),
+          rentalNumberRegex = /\(([^\)]+)\)/.exec(rentalNumberParan);
+          if (rentalNumberParan !== undefined && rentalNumberRegex !== null ){
+            rentalNumber = rentalNumberRegex[1];
+            console.log(i + ': ' + urls[i]['user'] + ', ' + rentalNumber)
             entry = {
-              rental: urls[i],
-              user: urls[i],
+              rental: urls[i]['rental'],
+              user: urls[i]['user'],
               units: rentalNumber
             };
             entries.push(entry);
             setTimeout(function() { i++; cb(null,entry); }, 200);
           } else {
             urlsLength -= 1;
-            console.log(urls[i] + ' was not scraped. Check to ensure it still exists.')
+            console.log(urls[i]['user'] + ' was not scraped. Check to ensure that it still exists and contains a listings div.')
             i++;
             cb(null, 'error')
           }
