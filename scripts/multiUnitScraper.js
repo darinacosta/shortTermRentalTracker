@@ -9,36 +9,47 @@ var async = require('async'),
     multiUnitUrlDoc = './multiUnits.json',
     i = 0;
 
-userScraper = {
+multiUnitScraper = {
 
   buildMultiUnitJson: function(){
     var userScraper = this;
-    userScraper._getUserProfiles()
-    .then(_getHtml);
+    userScraper._getLocalFile('/rentaltracker/scripts/userProfiles.json')
+    .then(function(response){
+      userScraper._scrapePages(response, multiUnitUrlDoc)
+    });
+  },
 
-    function _getHtml(response) {
-      var json = '';
-      response.on('data', function(d) {
+  mergeUnitsIntoGeojson: function(){
+    var userScraper = this,
+        userProfilesGet = userScraper._getLocalFile('/rentaltracker/scripts/userProfiles.json'),
+        rentalsGet = userScraper._getLocalFile('/rentaltracker/layers/rentals.json');
+    Q.all([userProfilesGet, rentalsGet])
+      .then(function (res) {
+        userProfiles = res[0]
+        rentalGeojson = res[1])
+      });
+   },
+
+  _getLocalFile: function(path) {
+    var deferred  = Q.defer(),
+        json = '';
+    http.get({
+      host: 'localhost',
+      path: path
+    }, function(response){
+        response.on('data', function(d) {
         json += d;
       });
       response.on('end', function(){
-        var urls = JSON.parse(json)['userProfiles'];
-        userScraper._scrapePages(urls, multiUnitUrlDoc);
+        deferred.resolve(json);
+      });
     });
-    }
-  },
-
-  _getUserProfiles: function(){
-    var deferred = Q.defer();
-    http.get({
-      host: 'localhost',
-      path: '/rentaltracker/scripts/userProfiles.json'
-     }, deferred.resolve);
     return deferred.promise;
   },
 
-  _scrapePages: function(urls, writeDoc){
-    var entries = [],
+  _scrapePages: function(response, writeDoc){
+    var urls = JSON.parse(response)['body'],
+    entries = [],
     urlsLength = urls.length,
     i = 0;
 
@@ -91,7 +102,7 @@ userScraper = {
         if (err){
           console.log('Connection Error. Continuing application...');
         };
-        writeJson = {'result': entries}
+        writeJson = {'body': entries}
         writeString = JSON.stringify(writeJson);
         fs.writeFile(writeDoc, writeString);
         console.log('-----------------------------' + '\n' +
@@ -103,7 +114,7 @@ userScraper = {
   }
 }
 
-userScraper.buildMultiUnitJson()
+multiUnitScraper.mergeUnitsIntoGeojson()
 
 
 

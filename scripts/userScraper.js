@@ -89,7 +89,7 @@ userScraper = {
         if (err){
           console.log('Connection Error. Continuing application...');
         };
-        writeJson = {'result': entries}
+        writeJson = {'body': entries}
         writeString = JSON.stringify(writeJson);
         fs.writeFile(writeDoc, writeString);
         console.log('-----------------------------' + '\n' +
