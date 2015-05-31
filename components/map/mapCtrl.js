@@ -18,7 +18,6 @@ function mapCtrl($scope, mapSvc, layerHelpers, $http) {
 
   function colorPointsConditionally(feature){
     unitNumber = parseInt(feature.properties.units)
-    console.log(unitNumber)
     if (unitNumber > 1 && unitNumber < 5){
       return "#FF7000";
     }else if (unitNumber > 4 && unitNumber < 20){
@@ -33,11 +32,13 @@ function mapCtrl($scope, mapSvc, layerHelpers, $http) {
   function shortTermRentalPopup(feature, layer) {
     var popup;
     if (feature.properties.user !== undefined){
-      popup = '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
+      popup = '<h4>' + feature.properties.street + ' Rental (' + feature.properties.roomType + ')</h4>' +
+              '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
               '<b>Renter profile:</b> <a target="_blank" href="' + feature.properties.user + '">' + feature.properties.user + '</a><br>' + 
               '<b>Total units listed by renter:</b> '+ feature.properties.units
     } else {
-      popup = '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>';
+      popup = '<h3>' + feature.properties.street + ' Rental (' + feature.properties.roomType + ')</h3>' +
+              '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>';
     }
     layer.bindPopup(popup);
   };
