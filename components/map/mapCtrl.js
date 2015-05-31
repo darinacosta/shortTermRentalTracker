@@ -21,7 +21,7 @@ function mapCtrl($scope, mapSvc, layerHelpers, $http) {
     console.log(unitNumber)
     if (unitNumber > 1 && unitNumber < 5){
       return "#FF7000";
-    }else if (unitNumber > 5 && unitNumber < 20){
+    }else if (unitNumber > 4 && unitNumber < 20){
       return "#FF4000"
     }else if (unitNumber > 20){ 
       return "#FF0000"
@@ -35,7 +35,7 @@ function mapCtrl($scope, mapSvc, layerHelpers, $http) {
     if (feature.properties.user !== undefined){
       popup = '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
               '<b>Renter profile:</b> <a target="_blank" href="' + feature.properties.user + '">' + feature.properties.user + '</a><br>' + 
-              '<b>Total units listed by renter: '+ feature.properties.units
+              '<b>Total units listed by renter:</b> '+ feature.properties.units
     } else {
       popup = '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>';
     }
