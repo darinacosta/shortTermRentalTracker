@@ -9,7 +9,7 @@ var async = require('async'),
     multiUnitUrlDoc = './multiUnits.json',
     i = 0;
 
-multiUnitScraper = {
+userProfileScraper = {
 
   buildMultiUnitDataset: function(){
     var userScraper = this;
@@ -131,7 +131,7 @@ multiUnitScraper = {
   }
 }
 
-multiUnitScraper.buildMultiUnitGeojson()
+userProfileScraper.buildMultiUnitGeojson()
 
 
 

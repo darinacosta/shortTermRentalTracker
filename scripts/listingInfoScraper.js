@@ -9,11 +9,11 @@ var async = require('async'),
     userProfileUrlDoc = './userProfiles.json',
     i = 0;
 
-userScraper = {
+listingInfoScraper = {
 
   buildUserProfileJson: function(){
-    var userScraper = this;
-    userScraper._getUrlList()
+    var listingInfoScraper = this;
+    listingInfoScraper._getUrlList()
     .then(_getHtml);
 
     function _getHtml(response) {
@@ -24,7 +24,7 @@ userScraper = {
       response.on('end', function(){
         var parsedJSON = JSON.parse(json),
         urls = parsedJSON['urls'];
-        userScraper._scrapePages(urls, userProfileUrlDoc);
+        listingInfoScraper._scrapePages(urls, userProfileUrlDoc);
       });
     };
   },
@@ -101,7 +101,7 @@ userScraper = {
   }
 }
 
-userScraper.buildUserProfileJson()
+listingInfoScraper.buildUserProfileJson()
 
 
 
