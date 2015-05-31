@@ -69,6 +69,8 @@ rentalScraper = {
       },
       "properties":{
         "url": location['provider']['url'],
+        "roomType": location['attr']['roomType']['text'],
+        "street": location['location']['streetName']
       }
     })
   }
