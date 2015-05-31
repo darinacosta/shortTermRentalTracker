@@ -60,7 +60,7 @@ function mapCtrl($scope, mapSvc, layerHelpers, $http) {
   };
 
 
-  $http.get("./layers/multiUnitRentals.json?v=0.01").success(
+  $http.get("./layers/multiUnitRentals.json?v=0.02").success(
     configureShortTermRentalLayer
   );
   
