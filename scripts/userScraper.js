@@ -23,7 +23,7 @@ userScraper = {
       });
       response.on('end', function(){
         var parsedJSON = JSON.parse(json),
-        urls = parsedJSON['urls'].slice(15,20);
+        urls = parsedJSON['urls'];
         userScraper._scrapePages(urls, userProfileUrlDoc);
       });
     };
