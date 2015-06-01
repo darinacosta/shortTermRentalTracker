@@ -11,7 +11,7 @@ var async = require('async'),
 
 userProfileScraper = {
 
-  buildMultiUnitDataset: function(){
+  crawlUserProfiles: function(){
     var userScraper = this;
     userScraper._getLocalFile('/rentaltracker/scripts/userProfiles.json')
     .then(function(response){
@@ -133,5 +133,5 @@ userProfileScraper = {
 
 userProfileScraper.buildMultiUnitGeojson()
 
-module.exports = {userProfileScraper: userProfileScraper}
+module.exports = {userProfileScraper}
 

@@ -11,7 +11,7 @@ var async = require('async'),
 
 listingInfoScraper = {
 
-  buildUserProfileJson: function(){
+  crawlListingHtml: function(){
     var listingInfoScraper = this;
     listingInfoScraper._getUrlList()
     .then(_getHtml);
@@ -90,8 +90,8 @@ listingInfoScraper = {
           console.log('Connection Error. Continuing application...');
         };
         writeJson = {'body': entries}
-        writeString = JSON.stringify(writeJson);
-        fs.writeFile(writeDoc, writeString);
+        writeJsonString = JSON.stringify(writeJson);
+        fs.writeFile(writeDoc, writeJsonString);
         console.log('-----------------------------' + '\n' +
                     'Entries requested: ' + i + '\n' +
                     'Entries written:   '+  urlsLength + '\n' +
@@ -101,7 +101,8 @@ listingInfoScraper = {
   }
 }
 
-listingInfoScraper.buildUserProfileJson()
+module.exports = listingInfoScraper;
+
 
 
 

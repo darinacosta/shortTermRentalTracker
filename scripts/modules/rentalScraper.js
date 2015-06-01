@@ -2,17 +2,19 @@
 
 var unirest = require('unirest'),
     fs = require('fs'),
-    geo,
-    scraperEnv = require('./../env/scraperEnv');
+    scraperEnv = require('./../env/scraperEnv'),
+    today = new Date();
 
 rentalScraper = {
   _rentalsGeoJsonPath: './../../layers/rentals.json',
-  _urlListFile: './urlList.json',
+  _logFile: './../output/log.txt',
+  _urlListFile: './../ouput/urlList.json',
   _geoJson: { "type": "FeatureCollection",
              "features": []},
   _pageCount: 1,
+  _numberOfFeaturesWritten: 0,
   _urlList: {urls:[]},
-  fetchRecords: function(pageNum) { 
+  fetchListings: function(pageNum) { 
   	var rentalScraper = this,
         nelatitude = 30.123749,
         nelongitude = -89.868164,
@@ -33,7 +35,7 @@ rentalScraper = {
       rentalScraper._handleResult(parsedResult);
       rentalScraper._pageCount = rentalScraper._pageCount + 1;
       if (parsedResult['ids'].length > 1 && pageNum === undefined){
-        rentalScraper.fetchRecords()
+        rentalScraper.fetchListings()
       }else if (pageNum !== undefined){
         console.log(pageNum)
         console.log(parsedResult['result'][1]['provider']['url'])
@@ -44,7 +46,9 @@ rentalScraper = {
   },
   
   _handleResult: function(result){
-    rentalScraper = this;
+    var rentalScraper = this, 
+        resultLength = result['result'].length;
+    rentalScraper._numberOfFeaturesWritten += resultLength;
     for (var i = 0; i < result['result'].length; i += 1){
       rentalScraper._pushToGeoJson(result['result'][i]); 
       rentalScraper._urlList['urls'].push(result['result'][i]['provider']['url']); 
@@ -56,6 +60,7 @@ rentalScraper = {
         urlString = JSON.stringify(this._urlList);
     fs.writeFile(this._rentalsGeoJsonPath, geoJsonString);
     fs.writeFile(this._urlListFile, urlString);
+    this._writeToLog();
     console.log('Complete.')
   },
 
@@ -72,9 +77,20 @@ rentalScraper = {
         "roomType": location['attr']['roomType']['text'],
         "city": location['location']['city'],
         "neighborhood": location['location']['neighbourhood'],
-        "street": location['location']['streetName']
+        "street": location['location']['streetName'],
+        "dateCollected": today
       }
     })
+  },
+
+  _writeToLog: function(){
+    var rentalScraper = this,
+    logString = "--------------------------" + "\n" +
+    "Rental Scraper Log: " + today + "\n" +
+    "Features collected: " + rentalScraper._numberOfFeaturesWritten + "\n" +
+    "Calls to server:    " + rentalScraper._pageCount + "\n" +
+    "--------------------------";
+    fs.appendFile(rentalScraper._logFile, logString);
   }
 };
 
@@ -84,7 +100,5 @@ function switchLatLong(latlng){
       return [lng, lat]
 };
 
-rentalScraper.fetchRecords();
-
-module.exports = {rentalScraper: rentalScraper}
+module.exports = rentalScraper;
 
