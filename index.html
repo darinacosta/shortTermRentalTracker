@@ -55,6 +55,10 @@
       border-bottom: 2px solid #fff;
     }
 
+    .dropdown-menu>li>a{
+      padding: 7px 20px;
+    }
+
     .navbar{
       margin-bottom:0px;
     }
@@ -126,7 +130,7 @@
             Rentals:
           </td>
           <td>
-            
+            <span ng-bind="nolaTotal"></span>
           </td>
         </tr>
         <tr>
@@ -162,7 +166,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#/">New Orleans Short Term Rental Report</a>
+    <a class="navbar-brand" href="#/"></a>
   </div>
   <div id="map"></div>
   <div class="container">

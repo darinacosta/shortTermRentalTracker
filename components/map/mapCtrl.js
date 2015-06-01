@@ -45,6 +45,18 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerHelpers, $http, gju) {
   };
 
   function configureShortTermRentalLayer(data, status) {
+    var nolaTotal = 0;
+    angular.forEach(data['features'], function(feature){
+      if (feature['properties']['city'] === 'New Orleans'){
+        nolaTotal += 1;
+      }
+    });
+    $timeout(function() {
+      $scope.$apply(function() {
+        $scope.nolaTotal = nolaTotal;
+        console.log(nolaTotal)
+      });
+    });
     var shortTermRentalLayer = L.geoJson(data, {
       onEachFeature: shortTermRentalPopup,
       pointToLayer: shortTermRentalPointStyle
@@ -57,7 +69,6 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerHelpers, $http, gju) {
       "Rental Clusters": shortTermRentalClusters, 
       "Rental Points": shortTermRentalLayer
     });
-    console.log(data);
   };
 
 
