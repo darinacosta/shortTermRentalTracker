@@ -6,7 +6,7 @@ var async = require('async'),
     http = require('http'),
     cheerio = require('cheerio'),
     Q = require("q"),
-    multiUnitUrlDoc = './multiUnits.json',
+    multiUnitUrlDoc = './../output/multiUnits.json',
     i = 0;
 
 userProfileScraper = {
@@ -21,7 +21,7 @@ userProfileScraper = {
 
   buildMultiUnitGeojson: function(){
     var userScraper = this,
-        multiUnitsGet = userScraper._getLocalFile('/rentaltracker/scripts/multiUnits.json'),
+        multiUnitsGet = userScraper._getLocalFile('/rentaltracker/scripts/output/multiUnits.json'),
         rentalsGet = userScraper._getLocalFile('/rentaltracker/layers/rentals.json');
     Q.all([multiUnitsGet, rentalsGet])
       .then(userScraper._mergeMultiUnitDataIntoGeojson);
@@ -44,7 +44,7 @@ userProfileScraper = {
         })
       });
       rentalGeojsonString = JSON.stringify(rentalGeojson)
-      fs.writeFile('../layers/multiUnitRentals.json', rentalGeojsonString);
+      fs.writeFile('./../../layers/multiUnitRentals.json', rentalGeojsonString);
    },
 
   _getLocalFile: function(path) {
@@ -133,6 +133,5 @@ userProfileScraper = {
 
 userProfileScraper.buildMultiUnitGeojson()
 
-
-
+module.exports = {userProfileScraper: userProfileScraper}
 

@@ -6,7 +6,7 @@ var async = require('async'),
     http = require('http'),
     cheerio = require('cheerio'),
     Q = require("q"),
-    userProfileUrlDoc = './userProfiles.json',
+    userProfileUrlDoc = './../output/userProfiles.json',
     i = 0;
 
 listingInfoScraper = {
@@ -33,7 +33,7 @@ listingInfoScraper = {
     var deferred = Q.defer();
     http.get({
       host: 'localhost',
-      path: '/rentaltracker/scripts/urlList.json'
+      path: '/rentaltracker/scripts/output/urlList.json'
      }, deferred.resolve);
     return deferred.promise;
   },

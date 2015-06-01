@@ -3,10 +3,10 @@
 var unirest = require('unirest'),
     fs = require('fs'),
     geo,
-    scraperEnv = require('./scraperEnv');
+    scraperEnv = require('./../env/scraperEnv');
 
 rentalScraper = {
-  _rentalsGeoJsonPath: '../layers/rentals.json',
+  _rentalsGeoJsonPath: './../../layers/rentals.json',
   _urlListFile: './urlList.json',
   _geoJson: { "type": "FeatureCollection",
              "features": []},
