@@ -1,6 +1,6 @@
-app.controller('mapCtrl', ['$scope', 'mapSvc', 'layerHelpers', '$http', mapCtrl]);
+app.controller('mapCtrl', ['$scope', '$q', '$timeout', 'mapSvc', 'layerHelpers', '$http', 'geojsonUtils', mapCtrl]);
 
-function mapCtrl($scope, mapSvc, layerHelpers, $http) {
+function mapCtrl($scope, $q, $timeout, mapSvc, layerHelpers, $http, gju) {
   var map = mapSvc.map,
     mapAttributes = mapSvc.mapAttributes,
     layerControl = mapSvc.layerControl;
@@ -32,10 +32,11 @@ function mapCtrl($scope, mapSvc, layerHelpers, $http) {
   function shortTermRentalPopup(feature, layer) {
     var popup;
     if (feature.properties.user !== undefined){
-      popup = '<h4>' + feature.properties.street + ' Rental (' + feature.properties.roomType + ')</h4>' +
+      var pluralListing = feature.properties.units === '1' ? 'listing' : 'listings';
+      popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomType + '</small></h4>' +
               '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
-              '<b>Renter profile:</b> <a target="_blank" href="' + feature.properties.user + '">' + feature.properties.user + '</a><br>' + 
-              '<b>Total units listed by renter:</b> '+ feature.properties.units
+              '<b>User:</b> <a target="_blank" href="' + feature.properties.user + '">' + feature.properties.user + '</a><br><br>' + 
+              '<b>This user has ' + feature.properties.units + ' ' + pluralListing + '.</b>'
     } else {
       popup = '<h3>' + feature.properties.street + ' Rental (' + feature.properties.roomType + ')</h3>' +
               '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>';
@@ -52,16 +53,26 @@ function mapCtrl($scope, mapSvc, layerHelpers, $http) {
     shortTermRentalClusters.addLayer(shortTermRentalLayer);
     layerHelpers.addLayerCustom({alias: "Rental Clusters",
                                 layer:  shortTermRentalClusters});
-    layerHelpers.populateLayerControl({
+    layerHelpers.populateBaseLayerControl({
       "Rental Clusters": shortTermRentalClusters, 
       "Rental Points": shortTermRentalLayer
     });
-    console.log(layerControl);
+    console.log(data);
   };
 
 
   $http.get("./layers/multiUnitRentals.json?v=0.02").success(
     configureShortTermRentalLayer
   );
+
+  /*$http.get('./scripts/stats.json').success(function(data){  
+    $timeout(function() {
+      $scope.$apply(function() {
+        $scope.total = data.stats.total;
+        console.log(data.stats.total)
+      });
+    });
+  });*/
+
   
 }

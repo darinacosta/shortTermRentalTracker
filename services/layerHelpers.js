@@ -21,6 +21,15 @@ function layerHelpers(mapSvc){
       }
     })
   };
+
+  populateBaseLayerControl = function(layers){
+    compileLayerControlList();
+    angular.forEach(layers, function(layer, alias){
+      if (layerControlList.indexOf(alias) === -1){
+        layerControl.addBaseLayer(layer, alias);
+      }
+    })
+  };
   
   addLayerCustom = function(layer){
     compileLayerControlList();
@@ -38,6 +47,7 @@ function layerHelpers(mapSvc){
   return {
     hideAllLayers: hideAllLayers,
     populateLayerControl: populateLayerControl,
+    populateBaseLayerControl: populateBaseLayerControl,
     addLayerCustom: addLayerCustom
   }
   
