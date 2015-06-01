@@ -112,7 +112,7 @@ listingInfoScraper = {
         writeJson = {'body': entries}
         writeJsonString = JSON.stringify(writeJson);
         fs.writeFile(writeDoc, writeJsonString);
-        _writeToLog();
+        listingInfoScraper._writeToLog();
         console.log('-----------------------------' + '\n' +
                     'Entries requested: ' + listingInfoScraper._totalUrlsRequest + '\n' +
                     'Entries written:   '+  urlsLength + '\n' +
