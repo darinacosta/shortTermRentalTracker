@@ -2,12 +2,13 @@
 
 var async = require('async'),
     fs = require('fs'),
+    path = require('path'),
     request = require('request'),
     http = require('http'),
     cheerio = require('cheerio'),
     Q = require("q"),
-    multiUnitUrlDoc = './../output/multiUnits.json',
-    i = 0;
+    multiUnitUrlDoc = path.join(__dirname, '../output/multiUnits.json'),
+    multiUnitGeojsonPath = path.join(__dirname,'../../layers/multiUnitRentals.json');
 
 userProfileScraper = {
 
@@ -19,7 +20,9 @@ userProfileScraper = {
     });
   },
 
-  buildMultiUnitGeojson: function(){
+  _logFile: path.join(__dirname, '../output/log.txt'),
+
+  _buildMultiUnitGeojson: function(){
     var userScraper = this,
         multiUnitsGet = userScraper._getLocalFile('/rentaltracker/scripts/output/multiUnits.json'),
         rentalsGet = userScraper._getLocalFile('/rentaltracker/layers/rentals.json');
@@ -27,25 +30,25 @@ userProfileScraper = {
       .then(userScraper._mergeMultiUnitDataIntoGeojson);
    },
 
-   _mergeMultiUnitDataIntoGeojson: function(res){
-      var multiUnitProfiles = JSON.parse(res[0]),
-          rentalGeojson = JSON.parse(res[1]),
-          i = 0;
-      rentalGeojson["features"].forEach(function(feature){
-        var geoFeatureUrl = feature['properties']['url'];
-        multiUnitProfiles['result'].forEach(function(profile){
-          profileRentalUrl = profile['rental'];
-          if (profileRentalUrl === geoFeatureUrl){
-            feature['properties']['units'] = profile['units'];
-            feature['properties']['user'] = profile['user'];
-            console.log(i + ': Data added to ' + profileRentalUrl);
-            i++
-          }
-        })
-      });
-      rentalGeojsonString = JSON.stringify(rentalGeojson)
-      fs.writeFile('./../../layers/multiUnitRentals.json', rentalGeojsonString);
-   },
+  _mergeMultiUnitDataIntoGeojson: function(res){
+    var multiUnitProfiles = JSON.parse(res[0]),
+        rentalGeojson = JSON.parse(res[1]),
+        i = 0;
+    rentalGeojson["features"].forEach(function(feature){
+      var geoFeatureUrl = feature['properties']['url'];
+      multiUnitProfiles['result'].forEach(function(profile){
+        profileRentalUrl = profile['rental'];
+        if (profileRentalUrl === geoFeatureUrl){
+          feature['properties']['units'] = profile['units'];
+          feature['properties']['user'] = profile['user'];
+          console.log(i + ': Data added to ' + profileRentalUrl);
+          i++
+        }
+      })
+    });
+    rentalGeojsonString = JSON.stringify(rentalGeojson)
+    fs.writeFile(multiUnitGeojsonPath, rentalGeojsonString);
+  },
 
   _getLocalFile: function(path) {
     var deferred  = Q.defer(),
@@ -119,19 +122,22 @@ userProfileScraper = {
         if (err){
           console.log('Connection Error. Continuing application...');
         };
-        writeJson = {'body': entries}
-        writeString = JSON.stringify(writeJson);
-        fs.writeFile(writeDoc, writeString);
-        console.log('-----------------------------' + '\n' +
-                    'Entries requested: ' + i + '\n' +
-                    'Entries written:   '+  urlsLength + '\n' +
-                    '-----------------------------')
+        var writeJson = {'body': entries},
+        writeString = JSON.stringify(writeJson),
+        log = '-----------------------------' + '\n' +
+        "User Scraper log: " + today + "\n" +
+        'Entries requested: ' + i + '\n' +
+        'Entries written:   '+  urlsLength + '\n' +
+        '-----------------------------'
+        fs.writeFile(writeDoc, writeString, function(err){
+          userProfileScraper._buildMultiUnitGeojson();
+        });
+        fs.appendFile(userProfileScraper._logFile, logString);
+        console.log(log)
       }
     )
   }
 }
-
-userProfileScraper.buildMultiUnitGeojson()
 
 module.exports = {userProfileScraper}
 
