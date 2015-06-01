@@ -8,7 +8,8 @@ var async = require('async'),
     cheerio = require('cheerio'),
     Q = require("q"),
     multiUnitUrlDoc = path.join(__dirname, '../output/multiUnits.json'),
-    multiUnitGeojsonPath = path.join(__dirname,'../../layers/multiUnitRentals.json');
+    multiUnitGeojsonPath = path.join(__dirname,'../../layers/multiUnitRentals.json'),
+    today = new Date();
 
 userProfileScraper = {
 
@@ -139,5 +140,5 @@ userProfileScraper = {
   }
 }
 
-module.exports = {userProfileScraper}
+module.exports = userProfileScraper;
 
