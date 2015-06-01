@@ -2,14 +2,22 @@
 
 var async = require('async'),
     fs = require('fs'),
+    path = require('path'),
     request = require('request'),
     http = require('http'),
     cheerio = require('cheerio'),
     Q = require("q"),
-    userProfileUrlDoc = './../output/userProfiles.json',
-    i = 0;
+    userProfileUrlDoc = path.join(__dirname, '../output/userProfiles.json'),
+    i = 0, 
+    today = new Date();
 
 listingInfoScraper = {
+
+  _totalUrlsCrawled: 0,
+
+  _totalUrlsRequested: 0,
+
+  _logFile: path.join(__dirname, '../output/log.txt'),
 
   crawlListingHtml: function(){
     var listingInfoScraper = this;
@@ -24,6 +32,8 @@ listingInfoScraper = {
       response.on('end', function(){
         var parsedJSON = JSON.parse(json),
         urls = parsedJSON['urls'];
+        listingInfoScraper._totalUrlsCrawled = urls.length;
+        listingInfoScraper._totalUrlsRequest = urls.length;
         listingInfoScraper._scrapePages(urls, userProfileUrlDoc);
       });
     };
@@ -38,9 +48,19 @@ listingInfoScraper = {
     return deferred.promise;
   },
 
+  _writeToLog: function(){
+    var listingInfoScraper = this,
+    logString = "--------------------------" + "\n" +
+    "Listing Scraper log: " + today + "\n" +
+    "URLs requested: " + listingInfoScraper._totalUrlsRequested + "\n" +
+    "URLs crawled:    " + listingInfoScraper._totalUrlsCrawled + "\n" +
+    "--------------------------" + "\n";
+    fs.appendFile(listingInfoScraper._logFile, logString);
+  },
+
   _scrapePages: function(urls, writeDoc){
     var entries = [],
-    urlsLength = urls.length,
+    urlsLength = listingInfoScraper._totalUrlsCrawled,
     i = 0;
 
     console.log('Begining to scrape ' + urlsLength + ' urls.');
@@ -77,7 +97,7 @@ listingInfoScraper = {
         }
       }
     };
-  
+
     async.whilst(
       function() { return i <= urls.length-1; },
   
@@ -92,8 +112,9 @@ listingInfoScraper = {
         writeJson = {'body': entries}
         writeJsonString = JSON.stringify(writeJson);
         fs.writeFile(writeDoc, writeJsonString);
+        _writeToLog();
         console.log('-----------------------------' + '\n' +
-                    'Entries requested: ' + i + '\n' +
+                    'Entries requested: ' + listingInfoScraper._totalUrlsRequest + '\n' +
                     'Entries written:   '+  urlsLength + '\n' +
                     '-----------------------------')
       }

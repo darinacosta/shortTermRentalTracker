@@ -2,13 +2,14 @@
 
 var unirest = require('unirest'),
     fs = require('fs'),
+    path = require('path'),
     scraperEnv = require('./../env/scraperEnv'),
     today = new Date();
 
 rentalScraper = {
-  _rentalsGeoJsonPath: './../../layers/rentals.json',
-  _logFile: './../output/log.txt',
-  _urlListFile: './../ouput/urlList.json',
+  _rentalsGeoJsonPath: path.join(__dirname, '../../layers/rentals.json'),
+  _logFile: path.join(__dirname, '../output/log.txt'),
+  _urlListFile: path.join(__dirname, '../output/urlList.json'),
   _geoJson: { "type": "FeatureCollection",
              "features": []},
   _pageCount: 1,
@@ -58,7 +59,9 @@ rentalScraper = {
   _writeGeojsonToFile: function(){
     var geoJsonString = JSON.stringify(this._geoJson),
         urlString = JSON.stringify(this._urlList);
-    fs.writeFile(this._rentalsGeoJsonPath, geoJsonString);
+    fs.writeFile(this._rentalsGeoJsonPath, geoJsonString, function (err) {
+      if (err) throw err;
+    });
     fs.writeFile(this._urlListFile, urlString);
     this._writeToLog();
     console.log('Complete.')
@@ -89,7 +92,7 @@ rentalScraper = {
     "Rental Scraper Log: " + today + "\n" +
     "Features collected: " + rentalScraper._numberOfFeaturesWritten + "\n" +
     "Calls to server:    " + rentalScraper._pageCount + "\n" +
-    "--------------------------";
+    "--------------------------"+ "\n";
     fs.appendFile(rentalScraper._logFile, logString);
   }
 };
