@@ -3,7 +3,8 @@ app.controller('mapCtrl', ['$scope', '$q', '$timeout', 'mapSvc', 'layerHelpers',
 function mapCtrl($scope, $q, $timeout, mapSvc, layerHelpers, $http, gju) {
   var map = mapSvc.map,
     mapAttributes = mapSvc.mapAttributes,
-    layerControl = mapSvc.layerControl;
+    layerControl = mapSvc.layerControl
+    $scope.legend = "";
 
   function shortTermRentalPointStyle(feature, latlng) {
     return L.circleMarker(latlng, {
@@ -61,19 +62,38 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerHelpers, $http, gju) {
       onEachFeature: shortTermRentalPopup,
       pointToLayer: shortTermRentalPointStyle
     });
+    console.log(shortTermRentalLayer)
     var shortTermRentalClusters = new L.MarkerClusterGroup();
     shortTermRentalClusters.addLayer(shortTermRentalLayer);
     layerHelpers.addLayerCustom({alias: "Rental Clusters",
                                 layer:  shortTermRentalClusters});
     layerHelpers.populateBaseLayerControl({
-      "Rental Clusters": shortTermRentalClusters, 
-      "Rental Points": shortTermRentalLayer
+      "Regional STR Clusters": shortTermRentalClusters, 
+      "Regional STR Points": shortTermRentalLayer
     });
   };
 
 
-  $http.get("./layers/multiUnitRentals.json?v=0.02").success(
+  $http.get("./layers/multiUnitRentals.json").success(
     configureShortTermRentalLayer
+  );
+
+  $http.get("./layers/licensed-rentals.json").success(function(data){
+    console.log(data)
+    var licensedRentals = L.geoJson(data, {
+      pointToLayer: function(feature,latlng){
+      return L.circleMarker(latlng, {
+        radius: 4,
+        fillColor: "lightblue",
+        color: "#000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+      })
+    }
+    })
+    layerHelpers.populateBaseLayerControl({"Orleans Parish Licensed STRs":licensedRentals})
+    }
   );
 
   /*$http.get('./scripts/stats.json').success(function(data){  

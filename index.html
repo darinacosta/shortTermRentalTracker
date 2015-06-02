@@ -56,6 +56,13 @@
       border-bottom: 2px solid #fff;
     }
 
+    #map-legend{
+      position: absolute;
+      right: 20px;
+      z-index: 9999;
+      top: 262px;
+    }
+
     .dropdown-menu>li>a{
       padding: 7px 20px;
     }
@@ -173,6 +180,7 @@
     </button>
     <a class="navbar-brand" href="#/"></a>
   </div>
+  <div id="map-legend" ng-bind-html="legend"></div>
   <div id="map"></div>
   <div class="container">
     <div ng-view></div>
