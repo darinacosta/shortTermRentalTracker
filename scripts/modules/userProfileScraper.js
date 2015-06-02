@@ -13,6 +13,8 @@ var async = require('async'),
 
 userProfileScraper = {
 
+   _logFile: path.join(__dirname, '../output/log.txt'),
+
   crawlUserProfiles: function(){
     var userScraper = this;
     userScraper._getLocalFile('/rentaltracker/scripts/output/userProfiles.json')
@@ -20,8 +22,6 @@ userProfileScraper = {
       userScraper._scrapePages(response, multiUnitUrlDoc)
     });
   },
-
-  _logFile: path.join(__dirname, '../output/log.txt'),
 
   _buildMultiUnitGeojson: function(){
     var userScraper = this,
@@ -42,6 +42,7 @@ userProfileScraper = {
         if (profileRentalUrl === geoFeatureUrl){
           feature['properties']['units'] = profile['units'];
           feature['properties']['user'] = profile['user'];
+          feature['properties']['dateCollected'] = today;
           console.log(i + ': Data added to ' + profileRentalUrl);
           i++
         }
@@ -125,7 +126,7 @@ userProfileScraper = {
         };
         var writeJson = {'body': entries},
         writeString = JSON.stringify(writeJson),
-        log = '-----------------------------' + '\n' +
+        logString = '-----------------------------' + '\n' +
         "User Scraper log: " + today + "\n" +
         'Entries requested: ' + i + '\n' +
         'Entries written:   '+  urlsLength + '\n' +
@@ -134,7 +135,7 @@ userProfileScraper = {
           userProfileScraper._buildMultiUnitGeojson();
         });
         fs.appendFile(userProfileScraper._logFile, logString);
-        console.log(log)
+        console.log(logString)
       }
     )
   }
