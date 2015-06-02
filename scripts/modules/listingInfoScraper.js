@@ -7,7 +7,6 @@ var async = require('async'),
     http = require('http'),
     cheerio = require('cheerio'),
     Q = require("q"),
-    userProfileUrlDoc = path.join(__dirname, '../output/userProfiles.json'),
     i = 0, 
     today = new Date();
 
@@ -18,6 +17,8 @@ listingInfoScraper = {
   _totalUrlsRequested: 0,
 
   _logFile: path.join(__dirname, '../output/log.txt'),
+
+  _userProfileUrlDoc: path.join(__dirname, '../output/userProfiles.json'),
 
   crawlListingHtml: function(){
     var listingInfoScraper = this;
@@ -32,9 +33,8 @@ listingInfoScraper = {
       response.on('end', function(){
         var parsedJSON = JSON.parse(json),
         urls = parsedJSON['urls'];
-        listingInfoScraper._totalUrlsCrawled = urls.length;
         listingInfoScraper._totalUrlsRequest = urls.length;
-        listingInfoScraper._scrapePages(urls, userProfileUrlDoc);
+        listingInfoScraper._scrapePages(urls, listingInfoScraper._userProfileUrlDoc);
       });
     };
   },
@@ -55,6 +55,7 @@ listingInfoScraper = {
     "URLs requested: " + listingInfoScraper._totalUrlsRequested + "\n" +
     "URLs crawled:    " + listingInfoScraper._totalUrlsCrawled + "\n" +
     "--------------------------" + "\n";
+    console.log(logString);
     fs.appendFile(listingInfoScraper._logFile, logString);
   },
 
@@ -84,7 +85,8 @@ listingInfoScraper = {
             href = $('#host-profile').find("a")[0]['attribs']['href'],
             entry = {
               rental: urls[i],
-              user: "http://airbnb.com" + href
+              user: "http://airbnb.com" + href,
+              dateRetrieved: today
             };
             entries.push(entry);
             setTimeout(function() { i++; cb(null,entry); }, 200);
@@ -113,10 +115,6 @@ listingInfoScraper = {
         writeJsonString = JSON.stringify(writeJson);
         fs.writeFile(writeDoc, writeJsonString);
         listingInfoScraper._writeToLog();
-        console.log('-----------------------------' + '\n' +
-                    'Entries requested: ' + listingInfoScraper._totalUrlsRequest + '\n' +
-                    'Entries written:   '+  urlsLength + '\n' +
-                    '-----------------------------')
       }
     )
   }

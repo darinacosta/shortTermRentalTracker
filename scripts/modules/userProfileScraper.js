@@ -15,7 +15,7 @@ userProfileScraper = {
 
   crawlUserProfiles: function(){
     var userScraper = this;
-    userScraper._getLocalFile('/rentaltracker/scripts/userProfiles.json')
+    userScraper._getLocalFile('/rentaltracker/scripts/output/userProfiles.json')
     .then(function(response){
       userScraper._scrapePages(response, multiUnitUrlDoc)
     });
