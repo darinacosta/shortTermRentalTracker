@@ -1,10 +1,10 @@
-app.controller('mapCtrl', ['$scope', '$q', '$timeout', 'mapSvc', 'layerHelpers', '$http', 'geojsonUtils', mapCtrl]);
+app.controller('mapCtrl', ['$scope', '$q', '$timeout', 'mapSvc', 'layerSvc', 'layerHelpers', '$http', 'geojsonUtils', mapCtrl]);
 
-function mapCtrl($scope, $q, $timeout, mapSvc, layerHelpers, $http, gju) {
+function mapCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http, gju) {
   var map = mapSvc.map,
     mapAttributes = mapSvc.mapAttributes,
     layerControl = mapSvc.layerControl
-    $scope.legend = "";
+    $scope.legend = "<i>Regional Short Term Rental Clusters</i>";
 
   function shortTermRentalPointStyle(feature, latlng) {
     return L.circleMarker(latlng, {
@@ -13,7 +13,8 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerHelpers, $http, gju) {
       color: "#000",
       weight: 1,
       opacity: 1,
-      fillOpacity: 0.8
+      fillOpacity: 0.8,
+      name: 'shortterm'
     })
   };
 
@@ -55,14 +56,12 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerHelpers, $http, gju) {
     $timeout(function() {
       $scope.$apply(function() {
         $scope.nolaTotal = nolaTotal;
-        console.log(nolaTotal)
       });
     });
     var shortTermRentalLayer = L.geoJson(data, {
       onEachFeature: shortTermRentalPopup,
       pointToLayer: shortTermRentalPointStyle
     });
-    console.log(shortTermRentalLayer)
     var shortTermRentalClusters = new L.MarkerClusterGroup();
     shortTermRentalClusters.addLayer(shortTermRentalLayer);
     layerHelpers.addLayerCustom({alias: "Rental Clusters",
@@ -73,28 +72,39 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerHelpers, $http, gju) {
     });
   };
 
+  map.on('baselayerchange', function(e){
+    console.log(e)
+   if (e.name === "Regional STR Clusters"){
+      $timeout(function(){
+        $scope.$apply(function() {
+          $scope.legend = "<i>Regional Short Term Rental Clusters</i>";
+        });
+      })
+    }else if (e.name === "Regional STR Points"){
+        $timeout(function(){
+          $scope.$apply(function() {
+            $scope.legend = "<i>Regional Short Term Rental Points</i>";
+          });
+        });
+    } else {
+      $timeout(function(){
+        $scope.$apply(function() {
+          $scope.legend = "<i>Orleans Parish Licensed Short Term Rentals</i>";
+        });
+      });
+    }
+  });
+
 
   $http.get("./layers/multiUnitRentals.json").success(
     configureShortTermRentalLayer
   );
 
-  $http.get("./layers/licensed-rentals.json").success(function(data){
-    console.log(data)
-    var licensedRentals = L.geoJson(data, {
-      pointToLayer: function(feature,latlng){
-      return L.circleMarker(latlng, {
-        radius: 4,
-        fillColor: "lightblue",
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-      })
-    }
-    })
-    layerHelpers.populateBaseLayerControl({"Orleans Parish Licensed STRs":licensedRentals})
-    }
-  );
+  layerSvc.getLicensedRentals().then(function(licensedRentals){
+     layerHelpers.populateBaseLayerControl({
+      "Orleans Parish Licensed Rentals": licensedRentals 
+    });
+  })
 
   /*$http.get('./scripts/stats.json').success(function(data){  
     $timeout(function() {
