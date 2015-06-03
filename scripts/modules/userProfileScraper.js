@@ -7,32 +7,38 @@ var async = require('async'),
     http = require('http'),
     cheerio = require('cheerio'),
     Q = require("q"),
-    multiUnitUrlDoc = path.join(__dirname, '../output/multiUnits.json'),
-    multiUnitGeojsonPath = path.join(__dirname,'../../layers/multiUnitRentals.json'),
     today = new Date();
 
 userProfileScraper = {
 
-   _logFile: path.join(__dirname, '../output/log.txt'),
+  _logFile: path.join(__dirname, '../output/log.txt'),
+  _multiUnitUrlDoc: path.join(__dirname, '../output/multiUnits.json'),
+  _multiUnitGeojsonPath: path.join(__dirname,'../../layers/multiUnitRentals.json'),
 
   crawlUserProfiles: function(){
-    var userScraper = this;
-    userScraper._getLocalFile('/rentaltracker/scripts/output/userProfiles.json')
-    .then(function(response){
-      userScraper._scrapePages(response, multiUnitUrlDoc)
+    var userScraper = this,
+        rentalsGet = userScraper._getLocalFile('/rentaltracker/layers/rentals.json'),
+        userProfilesGet = userScraper._getLocalFile('/rentaltracker/scripts/output/userProfiles.json');
+    Q.all([rentalsGet, userProfilesGet])
+    .then(function(result){
+      userScraper._scrapePages(result)
+    })
+    .then(function(result){
+      console.log(result)
     });
   },
 
-  _buildMultiUnitGeojson: function(){
+  /*_buildMultiUnitGeojson: function(){
     var userScraper = this,
         multiUnitsGet = userScraper._getLocalFile('/rentaltracker/scripts/output/multiUnits.json'),
         rentalsGet = userScraper._getLocalFile('/rentaltracker/layers/rentals.json');
     Q.all([multiUnitsGet, rentalsGet])
       .then(userScraper._mergeMultiUnitDataIntoGeojson);
-   },
+   },*/
 
   _mergeMultiUnitDataIntoGeojson: function(res){
-    var multiUnitProfiles = JSON.parse(res[0]),
+    var userScraper = this,
+        multiUnitProfiles = JSON.parse(res[0]),
         rentalGeojson = JSON.parse(res[1]),
         i = 0;
     rentalGeojson["features"].forEach(function(feature){
@@ -49,7 +55,7 @@ userProfileScraper = {
       })
     });
     rentalGeojsonString = JSON.stringify(rentalGeojson)
-    fs.writeFile(multiUnitGeojsonPath, rentalGeojsonString);
+    fs.writeFile(userScraper._multiUnitGeojsonPath, rentalGeojsonString);
   },
 
   _getLocalFile: function(path) {
@@ -69,8 +75,9 @@ userProfileScraper = {
     return deferred.promise;
   },
 
-  _scrapePages: function(response, writeDoc){
-    var urls = JSON.parse(response)['body'],
+  _scrapePages: function(response){
+    var rentalsGeojson = JSON.parse(response[0]),
+    urls = JSON.parse(response[1])['body'],
     entries = [],
     urlsLength = urls.length,
     i = 0;
@@ -114,32 +121,39 @@ userProfileScraper = {
     };
   
     async.whilst(
-      function() { return i <= urls.length-1; },
+      function() { return i <= 3-1; }, //urls.length
   
       function(cb){
         _fetch(cb)
       },
   
       function(err, results){
-        if (err){
-          console.log('Connection Error. Continuing application...');
-        };
-        var writeJson = {'body': entries},
-        writeString = JSON.stringify(writeJson),
-        logString = '-----------------------------' + '\n' +
-        "User Scraper log: " + today + "\n" +
-        'Entries requested: ' + i + '\n' +
-        'Entries written:   '+  urlsLength + '\n' +
-        '-----------------------------'
-        fs.writeFile(writeDoc, writeString, function(err){
-          userProfileScraper._buildMultiUnitGeojson();
-        });
-        fs.appendFile(userProfileScraper._logFile, logString);
-        console.log(logString)
+        return entries;
       }
     )
   }
 }
 
 module.exports = userProfileScraper;
+
+/*
+var writeJson = {'body': entries},
+writeString = JSON.stringify(writeJson),
+logString = '-----------------------------' + '\n' +
+"User Scraper log: " + today + "\n" +
+'Entries requested: ' + i + '\n' +
+'Entries written:   '+  urlsLength + '\n' +
+'-----------------------------'
+fs.writeFile(writeDoc, writeString, function(err){
+  userProfileScraper._buildMultiUnitGeojson();
+});
+fs.appendFile(userProfileScraper._logFile, logString);
+console.log(logString)
+*/
+
+/*
+if (err){
+          console.log('Connection Error. Continuing application...');
+        };
+        */
 

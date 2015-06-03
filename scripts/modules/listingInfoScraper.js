@@ -34,6 +34,7 @@ listingInfoScraper = {
         var parsedJSON = JSON.parse(json),
         urls = parsedJSON['urls'];
         listingInfoScraper._totalUrlsRequest = urls.length;
+        listingInfoScraper._totalUrlsCrawled = urls.length;
         listingInfoScraper._scrapePages(urls, listingInfoScraper._userProfileUrlDoc);
       });
     };
