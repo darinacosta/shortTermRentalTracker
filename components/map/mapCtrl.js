@@ -71,26 +71,30 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http, gj
       "Regional STR Points": shortTermRentalLayer
     });
   };
+  
+
+  //create asyncSvc
+  function asyncHelper(callback){
+    $timeout(function(){
+      $scope.$apply(
+        callback()
+      )
+    });
+  }
 
   map.on('baselayerchange', function(e){
     console.log(e)
    if (e.name === "Regional STR Clusters"){
-      $timeout(function(){
-        $scope.$apply(function() {
-          $scope.legend = "<i>Regional Short Term Rental Clusters</i>";
-        });
-      })
+      asyncHelper(function() {
+        $scope.legend = "<i>Regional Short Term Rental Clusters</i>";
+      });
     }else if (e.name === "Regional STR Points"){
-        $timeout(function(){
-          $scope.$apply(function() {
-            $scope.legend = "<i>Regional Short Term Rental Points</i>";
-          });
-        });
+      asyncHelper(function() {
+        $scope.legend = "<i>Regional Short Term Rental Points</i>";
+      });
     } else {
-      $timeout(function(){
-        $scope.$apply(function() {
-          $scope.legend = "<i>Orleans Parish Licensed Short Term Rentals</i>";
-        });
+      asyncHelper(function() {
+        $scope.legend = "<i>Orleans Parish Licensed Short Term Rentals</i>";
       });
     }
   });
