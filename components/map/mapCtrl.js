@@ -33,6 +33,7 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http, gj
 
   function shortTermRentalPopup(feature, layer) {
     var popup;
+    console.log(feature);
     if (feature.properties.user !== undefined){
       var pluralListing = feature.properties.units === '1' ? 'listing' : 'listings';
       popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomType + '</small></h4>' +
