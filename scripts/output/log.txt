@@ -6,4 +6,22 @@ Pages written:   1196
 User Scraper log: Wed Jun 03 2015 22:27:05 GMT-0500 (CDT)
 Pages requested: 1196
 Pages written:   1196
+-------------------------------------------------------
+Rental Scraper Log: Thu Jun 04 2015 16:53:18 GMT+0000 (UTC)
+Features collected: 1383
+Calls to server:    101
+--------------------------
+-----------------------------
+User Scraper log: Thu Jun 04 2015 17:00:01 GMT+0000 (UTC)
+Pages requested: 1196
+Pages written:   1182
+-------------------------------------------------------
+Listing Scraper log: Thu Jun 04 2015 16:53:43 GMT+0000 (UTC)
+URLs requested: 0
+URLs crawled:    1383
+--------------------------
+-----------------------------
+User Scraper log: Thu Jun 04 2015 17:30:34 GMT+0000 (UTC)
+Pages requested: 1166
+Pages written:   1166
 -----------------------------

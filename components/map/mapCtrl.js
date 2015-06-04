@@ -63,10 +63,14 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http, gj
       onEachFeature: shortTermRentalPopup,
       pointToLayer: shortTermRentalPointStyle
     });
+    //gotta make an extra layer for the cluster or it freaks outs
+    var shortTermRentalClusterLayer = L.geoJson(data, {
+      onEachFeature: shortTermRentalPopup,
+      pointToLayer: shortTermRentalPointStyle
+    });
     var shortTermRentalClusters = new L.MarkerClusterGroup();
-    shortTermRentalClusters.addLayer(shortTermRentalLayer);
-    layerHelpers.addLayerCustom({alias: "Rental Clusters",
-                                layer:  shortTermRentalClusters});
+    shortTermRentalClusters.addLayer(shortTermRentalClusterLayer);
+    map.addLayer(shortTermRentalClusters);
     layerHelpers.populateBaseLayerControl({
       "Regional STR Clusters": shortTermRentalClusters, 
       "Regional STR Points": shortTermRentalLayer
@@ -101,7 +105,7 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http, gj
   });
 
 
-  $http.get("./layers/multiUnitRentals.json?v=0.2").success(
+  $http.get("./layers/multiUnitRentals.json?v=0.03").success(
     configureShortTermRentalLayer
   );
 
