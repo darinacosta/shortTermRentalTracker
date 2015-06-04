@@ -1,15 +1,9 @@
-2015-05-29 13:23:35.551053
- SUCCESS
---------------------------
-Rental Scraper Log: Mon Jun 01 2015 17:05:25 GMT-0500 (Central Daylight Time)
-Features collected: 25
-Calls to server:    101
-----------------------------------------------------
-Rental Scraper Log: Mon Jun 01 2015 17:06:05 GMT-0500 (Central Daylight Time)
-Features collected: 25
-Calls to server:    101
-----------------------------------------------------
-Rental Scraper Log: Mon Jun 01 2015 19:27:15 GMT-0500 (CDT)
-Features collected: 1383
-Calls to server:    101
---------------------------
+-----------------------------
+User Scraper log: Wed Jun 03 2015 22:24:22 GMT-0500 (CDT)
+Pages requested: 1196
+Pages written:   1196
+----------------------------------------------------------
+User Scraper log: Wed Jun 03 2015 22:27:05 GMT-0500 (CDT)
+Pages requested: 1196
+Pages written:   1196
+-----------------------------

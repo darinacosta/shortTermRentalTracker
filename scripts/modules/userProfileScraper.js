@@ -14,36 +14,35 @@ userProfileScraper = {
   _logFile: path.join(__dirname, '../output/log.txt'),
   _multiUnitUrlDoc: path.join(__dirname, '../output/multiUnits.json'),
   _multiUnitGeojsonPath: path.join(__dirname,'../../layers/multiUnitRentals.json'),
+  _pagesRequested: 0,
+  _pagesWritten: 0,
 
   crawlUserProfiles: function(){
     var userScraper = this,
         rentalsGet = userScraper._getLocalFile('/rentaltracker/layers/rentals.json'),
-        userProfilesGet = userScraper._getLocalFile('/rentaltracker/scripts/output/userProfiles.json');
+        userProfilesGet = userScraper._getLocalFile('/rentaltracker/scripts/output/userProfiles.json'),
+        userProfileData,
+        rentalsGeojson,
+        urls;
     Q.all([rentalsGet, userProfilesGet])
-    .then(function(result){
-      userScraper._scrapePages(result)
+    .then(function(res){
+      rentalsGeojson = JSON.parse(res[0]);
+      urls = JSON.parse(res[1])['body'];
+      userScraper._pagesRequested = urls.length;
+      userScraper._pagesWritten = urls.length;
+      return userScraper._scrapePages(urls);
     })
-    .then(function(result){
-      console.log(result)
+    .then(function(multiUnitProfiles){
+      userScraper._mergeMultiUnitDataIntoGeojson(rentalsGeojson, multiUnitProfiles)
     });
   },
 
-  /*_buildMultiUnitGeojson: function(){
+  _mergeMultiUnitDataIntoGeojson: function(rentalsGeojson, multiUnitProfiles){
     var userScraper = this,
-        multiUnitsGet = userScraper._getLocalFile('/rentaltracker/scripts/output/multiUnits.json'),
-        rentalsGet = userScraper._getLocalFile('/rentaltracker/layers/rentals.json');
-    Q.all([multiUnitsGet, rentalsGet])
-      .then(userScraper._mergeMultiUnitDataIntoGeojson);
-   },*/
-
-  _mergeMultiUnitDataIntoGeojson: function(res){
-    var userScraper = this,
-        multiUnitProfiles = JSON.parse(res[0]),
-        rentalGeojson = JSON.parse(res[1]),
         i = 0;
-    rentalGeojson["features"].forEach(function(feature){
+    rentalsGeojson["features"].forEach(function(feature){
       var geoFeatureUrl = feature['properties']['url'];
-      multiUnitProfiles['result'].forEach(function(profile){
+      multiUnitProfiles.forEach(function(profile){
         profileRentalUrl = profile['rental'];
         if (profileRentalUrl === geoFeatureUrl){
           feature['properties']['units'] = profile['units'];
@@ -54,8 +53,20 @@ userProfileScraper = {
         }
       })
     });
-    rentalGeojsonString = JSON.stringify(rentalGeojson)
-    fs.writeFile(userScraper._multiUnitGeojsonPath, rentalGeojsonString);
+    userScraper._writeToLog();
+    rentalsGeojsonString = JSON.stringify(rentalsGeojson);
+    fs.writeFile(userScraper._multiUnitGeojsonPath, rentalsGeojsonString);
+  },
+
+  _writeToLog: function(){
+    var userScraper = this;
+    logString = '-----------------------------' + '\n' +
+    "User Scraper log: " + today + "\n" +
+    'Pages requested: ' + userScraper._pagesRequested + '\n' +
+    'Pages written:   '+  userScraper._pagesWritten + '\n' +
+    '-----------------------------'
+    fs.appendFile(userScraper._logFile, logString);
+    console.log(logString)
   },
 
   _getLocalFile: function(path) {
@@ -75,14 +86,14 @@ userProfileScraper = {
     return deferred.promise;
   },
 
-  _scrapePages: function(response){
-    var rentalsGeojson = JSON.parse(response[0]),
-    urls = JSON.parse(response[1])['body'],
+  _scrapePages: function(urls){
+    var userScraper = this,
     entries = [],
-    urlsLength = urls.length,
-    i = 0;
+    i = 0,
+    deferred  = Q.defer();
 
-    console.log('Begining to scrape ' + urlsLength + ' urls.');
+
+    console.log('Begining to scrape ' + userScraper._pagesRequested + ' urls.');
     
     var _fetch = function(cb){
       options = {
@@ -111,7 +122,7 @@ userProfileScraper = {
             entries.push(entry);
             setTimeout(function() { i++; cb(null,entry); }, 200);
           } else {
-            urlsLength -= 1;
+            userScraper._pagesWritten -= 1;
             console.log(urls[i]['user'] + ' was not scraped. Check to ensure that it still exists and contains a listings div.')
             i++;
             cb(null, 'error')
@@ -121,35 +132,22 @@ userProfileScraper = {
     };
   
     async.whilst(
-      function() { return i <= 3-1; }, //urls.length
+      function() { return i <= 4; }, //urls.length-1
   
       function(cb){
         _fetch(cb)
       },
   
       function(err, results){
-        return entries;
+        deferred.resolve(entries);
       }
     )
+    return deferred.promise; 
   }
 }
 
 module.exports = userProfileScraper;
 
-/*
-var writeJson = {'body': entries},
-writeString = JSON.stringify(writeJson),
-logString = '-----------------------------' + '\n' +
-"User Scraper log: " + today + "\n" +
-'Entries requested: ' + i + '\n' +
-'Entries written:   '+  urlsLength + '\n' +
-'-----------------------------'
-fs.writeFile(writeDoc, writeString, function(err){
-  userProfileScraper._buildMultiUnitGeojson();
-});
-fs.appendFile(userProfileScraper._logFile, logString);
-console.log(logString)
-*/
 
 /*
 if (err){
