@@ -1,6 +1,6 @@
-node_modules
-bower_components
-scripts/scraper_env.*
-scripts/output
-layers/multiUnitRentals.json
+/node_modules
+/bower_components
+/scripts/scraper_env.*
+/scripts/output
+/layers/multiUnitRentals.json
 *.pyc
