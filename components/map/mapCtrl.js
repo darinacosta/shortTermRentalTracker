@@ -101,7 +101,7 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http, gj
   });
 
 
-  $http.get("./layers/multiUnitRentals.json").success(
+  $http.get("./layers/multiUnitRentals.json?v=0.2").success(
     configureShortTermRentalLayer
   );
 
