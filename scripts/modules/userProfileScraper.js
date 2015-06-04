@@ -49,9 +49,9 @@ userProfileScraper = {
           rentalsGeojson["features"][i]['properties']['user'] = profile['user'];
           rentalsGeojson["features"][i]['properties']['dateCollected'] = today;
           console.log(i + ': Data added to ' + profileRentalUrl);
-          i++
         }
       })
+      i++
     });
     userScraper._writeToLog();
     rentalsGeojsonString = JSON.stringify(rentalsGeojson);
