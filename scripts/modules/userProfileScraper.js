@@ -45,9 +45,9 @@ userProfileScraper = {
       multiUnitProfiles.forEach(function(profile){
         profileRentalUrl = profile['rental'];
         if (profileRentalUrl === geoFeatureUrl){
-          feature['properties']['units'] = profile['units'];
-          feature['properties']['user'] = profile['user'];
-          feature['properties']['dateCollected'] = today;
+          rentalsGeojson["features"][i]['properties']['units'] = profile['units'];
+          rentalsGeojson["features"][i]['properties']['user'] = profile['user'];
+          rentalsGeojson["features"][i]['properties']['dateCollected'] = today;
           console.log(i + ': Data added to ' + profileRentalUrl);
           i++
         }
