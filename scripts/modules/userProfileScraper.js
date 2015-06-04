@@ -132,7 +132,7 @@ userProfileScraper = {
     };
   
     async.whilst(
-      function() { return i <= 4; }, //urls.length-1
+      function() { return i <= urls.length-1; }, 
   
       function(cb){
         _fetch(cb)
