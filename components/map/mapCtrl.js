@@ -167,10 +167,9 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http, gj
   }
 
   $scope.clearSelection = function(){
-    map.removeLayer(queryLayer);
+    layerHelpers.hideAllLayers();
     map.addLayer(shortTermRentalClusters);
     map.setView(mapSvc.mapAttributes.center, mapSvc.mapAttributes.zoom);
-
   }
 
   $http.get("./layers/multiUnitRentals.json?v=0.03").success(function(data){
