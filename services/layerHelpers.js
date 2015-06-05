@@ -43,11 +43,34 @@ function layerHelpers(mapSvc){
     });
   };
 
+  layerManager = function(layerName) {
+    return {
+      activated: false,
+      layer: {},
+      getLayer: function(){
+        var layers = layerControl._layers,
+            layerManager = this;
+        if (layerManager.activated === false){
+          for (var layer in layers){
+            if (layers[layer].name === layerName){
+              layerManager.layer = layers[layer].layer;
+              layerManager.activated = true;
+              return layers[layer].layer;
+            }
+          }
+        } else {
+          return layerManager.layer;
+        }
+      }
+    }
+  };
+
   return {
     hideAllLayers: hideAllLayers,
     populateLayerControl: populateLayerControl,
     populateBaseLayerControl: populateBaseLayerControl,
-    addLayerCustom: addLayerCustom
+    addLayerCustom: addLayerCustom,
+    layerManager: layerManager
   }
   
 }

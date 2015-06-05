@@ -1,0 +1,111 @@
+html, body {
+  height: 100%;
+  background-color:#E2E2E2;
+}
+
+body {
+  padding: 50px 0 0 0;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+td{
+  padding: 2px 5px;
+}
+
+.infobar{
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.leaflet-control-attribution{
+  display:none;
+}
+
+#loader {
+  position: fixed;
+  top: 43%;
+  left: 50%;
+  width: 30em;
+  height: 18em;
+  font-size: 70px;
+}
+
+#last-update{
+  font-style: italic;
+  padding: 30px 15px 15px 15px;
+}
+
+#map{
+  height:300px;
+  border-bottom: 2px solid #fff;
+}
+
+#map-legend{
+  position: absolute;
+  right: 20px;
+  z-index: 1000;
+  top: 315px;
+}
+
+#user-search{
+  padding:15px;
+}
+
+.container {
+  max-width: 100%;
+}
+
+.dropdown-menu>li>a{
+  padding: 7px 20px;
+}
+
+.navmenu-nav.dropdown-menu {  /*Added this to fix the menu on Android. Remove if it doesn't work */
+  position:relative; 
+}
+
+.navbar{
+  margin-bottom:0px;
+}
+
+.navmenu {
+  padding-top: 50px;
+}
+
+.navbar {
+  display: block;
+  text-align: center;
+}
+.navbar-brand {
+  display: inline-block;
+  float: none;
+}
+.navbar-toggle {
+  position: absolute;
+  float: left;
+  margin-left: 15px;
+}
+
+@media (min-width: 1px) {
+  .navbar-toggle {
+    display: block !important;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    padding: 0 0 0 300px;
+  }
+  .navmenu {
+    padding-top: 0;
+  }
+  .navbar {
+    display: none !important; /* IE8 fix */
+  }
+  #map-legend{
+    top: 262px;
+  }
+}

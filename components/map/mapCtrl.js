@@ -8,13 +8,11 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http) {
     shortTermRentalClusters = {};
     $scope.legend = "";
 
-
   layerSvc.getShortTermRentals().then(function(rentalLayers){
-    console.log(rentalLayers)
     map.addLayer(rentalLayers.shortTermRentalClusters);
     layerHelpers.populateBaseLayerControl({
-      "Regional STR Clusters": rentalLayers.shortTermRentalClusters, 
-      "Regional STR Points": rentalLayers.shortTermRentalLayer
+      "Regional Short Term Rental Clusters": rentalLayers.shortTermRentalClusters, 
+      "Regional Short Term Rental Points": rentalLayers.shortTermRentalLayer
     })
   })
 
