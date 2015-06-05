@@ -1,0 +1,77 @@
+<div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
+    <a class="navmenu-brand visible-md visible-lg" href="#/">New Orleans Short Term<br> Rental Report</a>
+    <ul class="nav navmenu-nav">
+      <li><a href="#/home">Home</a></li>
+      <li><a href="#/about">About</a></li>
+      <li class="dropdown">
+        <a href class="dropdown-toggle" data-toggle="dropdown">Case Studies <b class="caret"></b></a>
+        <ul class="dropdown-menu navmenu-nav">
+          <li><a href="#/citywide">Citywide</a></li>
+          <li><a href="#/treme">Treme</a></li>
+          <li><a href="#/bywater">Bywater</a></li>
+        </ul>
+      </li>
+      <li><a href="#/donate">Donate</a></li>
+    </ul>
+    <hr>
+    <span class="navmenu-brand"><small>Summary (Orleans Parish)</small></span>
+    <ul class="infobar">
+      <table>
+        <tr>
+          <td>
+            Total available Airbnbs:
+          </td>
+          <td>
+            <span ng-bind="nolaTotal"></span>
+          </td>
+        </tr>
+         <tr>
+          <td>
+            Multiple-listing renters:
+          </td>
+          <td>
+            <span ng-bind="usersWithMultiListings"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Most listings by a single user:
+          </td>
+          <td>
+             <span ng-bind-html="mostListings"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Licensed bed and breakfasts: 
+          </td>
+          <td>
+            <span ng-bind="licensedRentals"></span>
+          </td>
+        </tr>
+      </table>
+    </ul>
+    <hr>
+    <div id="user-search">
+      Search for properties by user ID:
+      <form>
+        <input type="text" ng-model="userUrl">
+        <input ng-click="queryByUserUrl(userUrl)" type="submit" value="Search">
+        <input ng-click="clearSelection()" type="submit" value="Clear">
+      </form>
+      <small><i><span ng-bind="searchError"></span></i></small>
+    </div>
+    <div id="last-update">
+      <small>
+        Last updated <span ng-bind="lastUpdate"></span>
+      </small>
+    </div>
+  </div>
+  <div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg">
+    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#/"></a>
+  </div>
