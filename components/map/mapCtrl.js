@@ -163,11 +163,13 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http, gj
     group = new L.featureGroup([queryLayer]);
     layerHelpers.hideAllLayers();
     map.addLayer(queryLayer);
+    layerControl.addOverlay(queryLayer, 'User Query');
     map.fitBounds(group.getBounds());
   }
 
   $scope.clearSelection = function(){
     map.removeLayer(queryLayer);
+    //map.removeOverlay(queryLayer);
     layerHelpers.hideAllLayers();
     map.addLayer(shortTermRentalClusters);
     map.setView(mapSvc.mapAttributes.center, mapSvc.mapAttributes.zoom);
