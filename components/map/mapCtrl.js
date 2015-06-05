@@ -167,6 +167,7 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http, gj
   }
 
   $scope.clearSelection = function(){
+    map.removeLayer(queryLayer);
     layerHelpers.hideAllLayers();
     map.addLayer(shortTermRentalClusters);
     map.setView(mapSvc.mapAttributes.center, mapSvc.mapAttributes.zoom);
