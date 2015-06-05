@@ -3,7 +3,7 @@
 var unirest = require('unirest'),
     fs = require('fs'),
     path = require('path'),
-    scraperEnv = require('./../env/scraperEnv'),
+    config = require('./../config'),
     today = new Date();
 
 rentalScraper = {
@@ -28,7 +28,7 @@ rentalScraper = {
               "page=" + rentalScraper._pageCount;
     
   	unirest.get(url)
-  	.header("X-Mashape-Key", scraperEnv.mashape_key)
+  	.header("X-Mashape-Key", config.mashape_key)
   	.header("Accept", "application/json")
   	.end(function (result) {
       console.log('Scanning page ' + rentalScraper._pageCount + '...')
