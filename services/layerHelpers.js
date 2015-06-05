@@ -8,8 +8,7 @@ function layerHelpers(mapSvc){
 
   hideAllLayers = function(){
     angular.forEach(layerControl._layers, function(val, key) {
-      console.log(layerControl)
-      map.removeLayer(layerControl._layers[key]);
+      map.removeLayer(layerControl._layers[key].layer);
     });
   };
 

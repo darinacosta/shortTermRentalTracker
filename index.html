@@ -50,6 +50,11 @@
       font-size: 70px;
     }
 
+    #last-update{
+      font-style: italic;
+      padding: 30px 15px 15px 15px;
+    }
+
     #map{
       height:300px;
       border-bottom: 2px solid #fff;
@@ -60,6 +65,14 @@
       right: 20px;
       z-index: 1000;
       top: 315px;
+    }
+
+    #user-search{
+      padding:15px;
+    }
+
+    .container {
+      max-width: 100%;
     }
 
     .dropdown-menu>li>a{
@@ -90,10 +103,6 @@
       position: absolute;
       float: left;
       margin-left: 15px;
-    }
-    
-    .container {
-      max-width: 100%;
     }
 
     @media (min-width: 1px) {
@@ -141,38 +150,53 @@
       <table>
         <tr>
           <td>
-            Rentals:
+            Total available Airbnbs:
           </td>
           <td>
             <span ng-bind="nolaTotal"></span>
           </td>
         </tr>
-        <tr>
+         <tr>
           <td>
-            Users:
+            Multiple-listing renters:
           </td>
           <td>
-            
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Single listing renters:
-          </td>
-          <td>
-            
+            <span ng-bind="usersWithMultiListings"></span>
           </td>
         </tr>
         <tr>
           <td>
-            Multi-listing renters:
+            Most listings by a single user:
           </td>
           <td>
-            
+             <span ng-bind-html="mostListings"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Licensed bed and breakfasts: 
+          </td>
+          <td>
+            <span ng-bind="licensedRentals"></span>
           </td>
         </tr>
       </table>
     </ul>
+    <hr>
+    <div id="user-search">
+      Search for properties by user ID:
+      <form>
+        <input type="text" ng-model="userUrl">
+        <input ng-click="queryByUserUrl(userUrl)" type="submit" value="Search">
+        <input ng-click="clearSelection()" type="submit" value="Clear">
+      </form>
+      <small><i><span ng-bind="searchError"></span></i></small>
+    </div>
+    <div id="last-update">
+      <small>
+        Last updated <span ng-bind="lastUpdate"></span>
+      </small>
+    </div>
   </div>
   <div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg">
     <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
