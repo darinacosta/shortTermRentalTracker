@@ -51,8 +51,8 @@ td{
   top: 315px;
 }
 
-#user-search{
-  padding:15px;
+#user-search-bar{
+  width: 85px;
 }
 
 .container {
@@ -61,6 +61,10 @@ td{
 
 .dropdown-menu>li>a{
   padding: 7px 20px;
+}
+
+.menu-area{
+  padding:0px 15px;
 }
 
 .navmenu-nav.dropdown-menu {  /*Added this to fix the menu on Android. Remove if it doesn't work */
