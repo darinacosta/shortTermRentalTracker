@@ -26,6 +26,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
 
   function gatherStats (data){
     var nolaTotal = 0,
+        numEntireHomes = 0,
         mostListings = 0,
         usersWithMultiListings = 0,
         highestUrl, mostListings;
@@ -33,16 +34,21 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
     angular.forEach(data['features'], function(feature){
       numUnits = parseInt(feature['properties']['units']);
       userUrl = feature['properties']['user'];
-      feature['properties']['city'] === 'New Orleans' ? nolaTotal += 1 : nolaTotal = nolaTotal;
-      numUnits > 1 ? usersWithMultiListings += 1 : usersWithMultiListings = usersWithMultiListings;
-      if (numUnits > mostListings){
-        mostListings = numUnits;
-        highestUrl = userUrl;
-      } 
+      if (feature['properties']['city'] === 'New Orleans'){
+        nolaTotal += 1;
+        feature['properties']['roomType'] === 'Entire home/apt' ? numEntireHomes += 1 : numEntireHomes = numEntireHomes;
+        numUnits > 1 ? usersWithMultiListings += 1 : usersWithMultiListings = usersWithMultiListings;
+        if (numUnits > mostListings){
+          mostListings = numUnits;
+          highestUrl = userUrl;
+        } 
+
+      }
     });
     asyncHelper(function() {
       $scope.mostListings = "<a href='" + highestUrl + "' target='_blank'>" + mostListings + "</a>";
       $scope.nolaTotal = nolaTotal;
+      $scope.numEntireHomes = numEntireHomes;
       $scope.lastUpdate = dateSplit(data['features'][0]['properties']['dateCollected']);
       $scope.usersWithMultiListings = usersWithMultiListings;
     });
