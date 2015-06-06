@@ -29,6 +29,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
         numEntireHomes = 0,
         mostListings = 0,
         usersWithMultiListings = 0,
+        multiListingUsers = [],
         highestUrl, mostListings;
 
     angular.forEach(data['features'], function(feature){
@@ -37,12 +38,14 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
       if (feature['properties']['city'] === 'New Orleans'){
         nolaTotal += 1;
         feature['properties']['roomType'] === 'Entire home/apt' ? numEntireHomes += 1 : numEntireHomes = numEntireHomes;
-        numUnits > 1 ? usersWithMultiListings += 1 : usersWithMultiListings = usersWithMultiListings;
+        if (numUnits > 1 && multiListingUsers.indexOf(feature['properties']['user']) === -1){
+          usersWithMultiListings += 1;
+          multiListingUsers.push(feature['properties']['user']);
+        }
         if (numUnits > mostListings){
           mostListings = numUnits;
           highestUrl = userUrl;
         } 
-
       }
     });
     asyncHelper(function() {
