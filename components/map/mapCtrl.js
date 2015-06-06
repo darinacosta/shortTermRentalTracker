@@ -1,6 +1,6 @@
-app.controller('mapCtrl', ['$scope', '$q', '$timeout', 'mapSvc', 'layerSvc', 'layerHelpers', '$http', mapCtrl]);
+app.controller('mapCtrl', ['$scope', '$rootScope', '$q', '$timeout', 'mapSvc', 'layerSvc', 'layerHelpers', '$http', mapCtrl]);
 
-function mapCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http) {
+function mapCtrl($scope, $rootScope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http) {
   var map = mapSvc.map,
     mapAttributes = mapSvc.mapAttributes,
     layerControl = mapSvc.layerControl,
@@ -9,11 +9,11 @@ function mapCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http) {
     $scope.legend = "";
 
   layerSvc.getShortTermRentals().then(function(rentalLayers){
-    map.addLayer(rentalLayers.shortTermRentalClusters);
     layerHelpers.populateBaseLayerControl({
       "Regional Short Term Rental Clusters": rentalLayers.shortTermRentalClusters, 
       "Regional Short Term Rental Points": rentalLayers.shortTermRentalLayer
     })
+    $rootScope.$broadcast('loadBaseLayers', 'complete')
   })
 
   layerSvc.getLicensedRentals().then(function(licensedRentals){
