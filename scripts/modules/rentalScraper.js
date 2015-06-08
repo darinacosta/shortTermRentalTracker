@@ -76,11 +76,14 @@ rentalScraper = {
         "coordinates": latlng
       },
       "properties":{
+        "id": location['id'],
         "url": location['provider']['url'],
         "roomType": location['attr']['roomType']['text'],
         "city": location['location']['city'],
         "neighborhood": location['location']['neighbourhood'],
         "street": location['location']['streetName'],
+        "nightlyPrice": location['price']['nightly'],
+        "monthlyPrice": location['price']['monthly'],
         "dateCollected": today
       }
     })

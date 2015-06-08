@@ -24,4 +24,8 @@ URLs crawled:    1383
 User Scraper log: Thu Jun 04 2015 17:30:34 GMT+0000 (UTC)
 Pages requested: 1166
 Pages written:   1166
------------------------------
+-------------------------------------------------------
+Rental Scraper Log: Sun Jun 07 2015 12:51:15 GMT-0500 (CDT)
+Features collected: 1383
+Calls to server:    101
+--------------------------
