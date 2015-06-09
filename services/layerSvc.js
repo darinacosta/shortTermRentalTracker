@@ -64,7 +64,10 @@ app.factory("layerSvc", ['$http', 'layerHelpers', layerSvc]);
               '<b>This user has ' + feature.properties.units + ' ' + pluralListing + '.</b>'
     } else {
       popup = '<h3>' + feature.properties.street + ' Rental (' + feature.properties.roomType + ')</h3>' +
-              '<b>Rental:</b> <a target="_blank" href="' + userUrl + '">' + userUrl + '</a><br>';
+              '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>';
+      if (feature.properties.id.match(/air/g)[0] === "air"){
+        popup += "<br><i>This listing has been recently removed."
+      }
     }
     layer.bindPopup(popup);
   };

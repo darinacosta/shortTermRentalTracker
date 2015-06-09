@@ -25,11 +25,21 @@ function getLocalFile(path) {
   return deferred.promise;
 }
 
+
+
 var insertDocument = function(db, feature) {
-  if (cursorKeyLength === 0){
-    db.collection('feature').insertOne(feature);
-    //console.log(feature.properties.url + ' added.');
-  //}
+  console.log('--------------------------------------------------------------------')
+  db.collection('features').find({"properties.url" : feature.properties.url}).toArray(function (err, items) {
+    console.log('in it')
+    console.log(items.length)
+  });
+  console.log('--------------------------------------------------------------------')
+  /*if (cursor === null){
+    db.collection('features').insertOne(feature);
+    console.log(feature.properties.url + ' added.');
+  }else{
+    console.log('Feature already exists.')
+  }*/
 };
 
 MongoClient.connect(url, function(err, db) {
@@ -37,9 +47,9 @@ MongoClient.connect(url, function(err, db) {
   console.log('Connected to db');
   getLocalFile(multiUnitGeojsonPath).then(function(data){
     console.log('Got ' + data.features.length + ' features.');
-    for (var i = 0; i < 100; i ++){
+    for (var i = 0; i < data.features.length; i ++){
       var feature = data.features[i];
-      console.log('Passing ' + feature.properties.url)
+      console.log(i + ': Passing ' + feature.properties.url)
       insertDocument(db, feature);
     }
     console.log('For loop has executed.')
