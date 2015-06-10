@@ -42,7 +42,8 @@ userProfileScraper = {
     console.log('multi unit profile length: ' + multiUnitProfiles.length);
     for (var i = 0; i < rentalsGeojson["features"].length; i ++){
       var feature = rentalsGeojson["features"][i],
-          geoFeatureUrl = feature['properties']['url'];
+          geoFeatureUrl = feature['properties']['url'],
+          match;
       for (var n = 0; n < multiUnitProfiles.length; n ++){
         var profile = multiUnitProfiles[n],
         profileRentalUrl = profile['rental'];
@@ -50,14 +51,13 @@ userProfileScraper = {
           feature['properties']['units'] = profile['units'];
           feature['properties']['user'] = profile['user'];
           feature['properties']['dateCollected'] = today;
-          console.log(feature['properties']['id'].match(/air/g)[0])
-          if (feature['properties']['user'] === undefined){
-            console.log(i + ': ' + profileRentalUrl + ' does not exist and has been removed.');
-            delete rentalsGeojson["features"][i];
-          } else {
-            console.log(i + ': Data added to ' + profileRentalUrl);
-          }
+          match = true;
+          console.log(i + ': Data added to ' + profileRentalUrl);
         } 
+      }
+      if (rentalsGeojson["features"][i].id.match(/air/g)[0] === "air" && match !== true){
+        console.log(i + ': ' + profileRentalUrl + ' does not exist and has been removed.');
+        delete rentalsGeojson["features"][i];
       }
     };
     userScraper._writeToLog();
