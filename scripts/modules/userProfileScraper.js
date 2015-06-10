@@ -37,25 +37,25 @@ userProfileScraper = {
   },
 
   _mergeMultiUnitDataIntoGeojson: function(rentalsGeojson, multiUnitProfiles){
-    console.log('START MULTI');
+    console.log('BEGIN MERGE');
     var userScraper = this,
         i = 0;
     rentalsGeojson["features"].forEach(function(feature){
       var geoFeatureUrl = feature['properties']['url'];
-      multiUnitProfiles['body'].forEach(function(profile){
+      multiUnitProfiles.forEach(function(profile){
         profileRentalUrl = profile['rental'];
+        console.log(profileRentalUrl)
         if (profileRentalUrl === geoFeatureUrl){
           feature['properties']['units'] = profile['units'];
           feature['properties']['user'] = profile['user'];
           feature['properties']['dateCollected'] = 'today';
-          console.log(feature['properties']['user'])
           if (feature['properties']['id'].match(/air/g)[0] === "air" && feature['properties']['user'] === undefined){
             console.log(i + ': ' + profileRentalUrl + ' does not exist and has been removed.');
             delete rentalsGeojson["features"][i];
           } else {
             console.log(i + ': Data added to ' + profileRentalUrl);
           }
-        }
+        } 
       })
       i+=1
     });
@@ -138,7 +138,7 @@ userProfileScraper = {
     };
   
     async.whilst(
-      function() { return i <= urls.length-1; }, 
+      function() { return i <= urls.length - 1; }, 
   
       function(cb){
         _fetch(cb)
