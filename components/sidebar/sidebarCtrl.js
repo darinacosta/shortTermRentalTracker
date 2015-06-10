@@ -33,6 +33,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
         highestUrl, mostListings;
 
     angular.forEach(data['features'], function(feature){
+      if (feature === null){return false};
       numUnits = parseInt(feature['properties']['units']);
       userUrl = feature['properties']['user'];
       if (feature['properties']['city'] === 'New Orleans'){

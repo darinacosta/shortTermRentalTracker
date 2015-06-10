@@ -60,6 +60,7 @@ userProfileScraper = {
         delete rentalsGeojson["features"][i];
       }
     };
+    rentalsGeojson["features"] = rentalsGeojson["features"].filter(function(n){ return n != undefined }); 
     userScraper._writeToLog();
     rentalsGeojsonString = JSON.stringify(rentalsGeojson);
     fs.writeFile(userScraper._multiUnitGeojsonPath, rentalsGeojsonString);
