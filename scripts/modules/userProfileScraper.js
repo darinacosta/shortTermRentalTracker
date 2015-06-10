@@ -30,14 +30,14 @@ userProfileScraper = {
       urls = JSON.parse(res[1])['body'];
       userScraper._pagesRequested = urls.length;
       userScraper._pagesWritten = urls.length;
-      return userScraper._scrapePages(urls);
+      userScraper._scrapePages(urls).then(function(multiUnitProfiles){
+        userScraper._mergeMultiUnitDataIntoGeojson(rentalsGeojson, multiUnitProfiles)
+      });
     })
-    .then(function(multiUnitProfiles){
-      userScraper._mergeMultiUnitDataIntoGeojson(rentalsGeojson, multiUnitProfiles)
-    });
   },
 
   _mergeMultiUnitDataIntoGeojson: function(rentalsGeojson, multiUnitProfiles){
+    console.log('START MULTI');
     var userScraper = this,
         i = 0;
     rentalsGeojson["features"].forEach(function(feature){
@@ -48,10 +48,15 @@ userProfileScraper = {
           rentalsGeojson["features"][i]['properties']['units'] = profile['units'];
           rentalsGeojson["features"][i]['properties']['user'] = profile['user'];
           rentalsGeojson["features"][i]['properties']['dateCollected'] = today;
-          console.log(i + ': Data added to ' + profileRentalUrl);
+          if (rentalsGeojson["features"][i].id.match(/air/g)[0] === "air" && rentalsGeojson["features"][i].user === undefined){
+            delete rentalsGeojson["features"][i];
+            console.log(i + ': ' + profileRentalUrl + ' does not exist and has been removed.');
+          } else {
+            console.log(i + ': Data added to ' + profileRentalUrl);
+          }
         }
+        i++
       })
-      i++
     });
     userScraper._writeToLog();
     rentalsGeojsonString = JSON.stringify(rentalsGeojson);

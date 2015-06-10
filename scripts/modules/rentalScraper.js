@@ -84,6 +84,8 @@ rentalScraper = {
         "street": location['location']['streetName'],
         "nightlyPrice": location['price']['nightly'],
         "monthlyPrice": location['price']['monthly'],
+        //"description": location['attr']['description'],
+        //"reviews" : location['reviews']['entries'],
         "dateCollected": today
       }
     })

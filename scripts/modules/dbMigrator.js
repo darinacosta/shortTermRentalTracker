@@ -28,12 +28,12 @@ function getLocalFile(path) {
 
 
 var insertDocument = function(db, feature) {
-  console.log('--------------------------------------------------------------------')
-  db.collection('features').find({"properties.url" : feature.properties.url}).toArray(function (err, items) {
-    console.log('in it')
-    console.log(items.length)
-  });
-  console.log('--------------------------------------------------------------------')
+  var deferred  = Q.defer(),
+      cursor = db.collection('features').find({"properties.url" : feature.properties.url});
+  cursor.count(function(err, num){
+    deferred.resolve(num);
+  })
+  return deferred.promise;
   /*if (cursor === null){
     db.collection('features').insertOne(feature);
     console.log(feature.properties.url + ' added.');
@@ -42,7 +42,7 @@ var insertDocument = function(db, feature) {
   }*/
 };
 
-MongoClient.connect(url, function(err, db) {
+/*MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);
   console.log('Connected to db');
   getLocalFile(multiUnitGeojsonPath).then(function(data){
@@ -50,11 +50,27 @@ MongoClient.connect(url, function(err, db) {
     for (var i = 0; i < data.features.length; i ++){
       var feature = data.features[i];
       console.log(i + ': Passing ' + feature.properties.url)
-      insertDocument(db, feature);
+      insertDocument(db, feature).
+      then(function(items){
+        console.log(items)
+      })
     }
     console.log('For loop has executed.')
     console.log('Closing database connection.')
     db.close();
   })
-});
+});*/
+
+MongoClient.connect(url, function(err, db) {
+  getLocalFile(multiUnitGeojsonPath).then(function(data){
+    for (var i = 0; i < data.features.length; i ++){
+      var feature = data.features[i];
+      insertDocument(db, feature)
+      .then(function(num){
+        console.log(num);
+      })
+    }
+    db.close();
+  })
+})
 
