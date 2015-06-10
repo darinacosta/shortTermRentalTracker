@@ -32,7 +32,11 @@ listingInfoScraper = {
       });
       response.on('end', function(){
         var parsedJSON = JSON.parse(json),
-        urls = parsedJSON['urls'];
+        features = parsedJSON.features,
+        urls = [];
+        features.forEach(function(feature){
+          urls.push(feature.properties.url)
+        })
         listingInfoScraper._totalUrlsRequest = urls.length;
         listingInfoScraper._totalUrlsCrawled = urls.length;
         listingInfoScraper._scrapePages(urls, listingInfoScraper._userProfileUrlDoc);
@@ -44,7 +48,7 @@ listingInfoScraper = {
     var deferred = Q.defer();
     http.get({
       host: 'localhost',
-      path: '/rentaltracker/scripts/output/urlList.json'
+      path: '/rentaltracker/layers/rentals.json'
      }, deferred.resolve);
     return deferred.promise;
   },
@@ -90,10 +94,11 @@ listingInfoScraper = {
               dateRetrieved: today
             };
             entries.push(entry);
+            console.log(i + ': ' + urls[i] + ' belonging to user ' + href + ' was succesfully scraped.')
             setTimeout(function() { i++; cb(null,entry); }, 200);
           } else {
             urlsLength -= 1;
-            console.log(urls[i] + ' was not scraped. Check to ensure it still exists.')
+            console.log(i + ': ' + urls[i] + ' was not scraped. Check to ensure it still exists.')
             i++;
             cb(null, 'error')
           }

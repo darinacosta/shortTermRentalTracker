@@ -60,4 +60,24 @@ Calls to server:    101
 User Scraper log: Wed Jun 10 2015 00:54:47 GMT-0500 (CDT)
 Pages requested: 1166
 Pages written:   1166
+----------------------------------------------------------
+User Scraper log: Wed Jun 10 2015 07:49:30 GMT-0500 (CDT)
+Pages requested: 1166
+Pages written:   1161
+----------------------------------------------------------
+User Scraper log: Wed Jun 10 2015 09:30:24 GMT-0500 (CDT)
+Pages requested: 1166
+Pages written:   1166
+----------------------------------------------------------
+User Scraper log: Wed Jun 10 2015 09:32:38 GMT-0500 (CDT)
+Pages requested: 1166
+Pages processed:   1166
+----------------------------------------------------------
+User Scraper log: Wed Jun 10 2015 09:33:42 GMT-0500 (CDT)
+Pages requested: 1166
+Pages processed:   1166
+----------------------------------------------------------
+User Scraper log: Wed Jun 10 2015 09:38:40 GMT-0500 (CDT)
+Pages requested: 1166
+Pages processed:   1161
 -----------------------------
