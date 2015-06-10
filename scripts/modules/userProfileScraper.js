@@ -43,7 +43,7 @@ userProfileScraper = {
     for (var i = 0; i < rentalsGeojson["features"].length; i ++){
       var feature = rentalsGeojson["features"][i],
           geoFeatureUrl = feature['properties']['url'],
-          match;
+          match = "none";
       for (var n = 0; n < multiUnitProfiles.length; n ++){
         var profile = multiUnitProfiles[n],
         profileRentalUrl = profile['rental'];
@@ -51,12 +51,12 @@ userProfileScraper = {
           feature['properties']['units'] = profile['units'];
           feature['properties']['user'] = profile['user'];
           feature['properties']['dateCollected'] = today;
-          match = true;
+          match = "matched";
           console.log(i + ': Data added to ' + profileRentalUrl);
         } 
       }
-      if (rentalsGeojson["features"][i].id.match(/air/g)[0] === "air" && match !== true){
-        console.log(i + ': ' + profileRentalUrl + ' does not exist and has been removed.');
+       if (match === 'none' && feature['properties']['id'].match(/air/g)[0] === "air"){
+        console.log(i + ': ' + geoFeatureUrl + ' does not exist and has been removed.');
         delete rentalsGeojson["features"][i];
       }
     };
