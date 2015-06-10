@@ -19,8 +19,8 @@ userProfileScraper = {
 
   crawlUserProfiles: function(){
     var userScraper = this,
-        rentalsGet = userScraper._getLocalFile('/rentaltracker/layers/rentals.json'),
-        userProfilesGet = userScraper._getLocalFile('/rentaltracker/scripts/output/userProfiles.json'),
+        rentalsGet = userScraper._getLocalFile('/devapps/rentaltracker-dev/layers/rentals.json'),
+        userProfilesGet = userScraper._getLocalFile('/devapps/rentaltracker-dev/scripts/output/userProfiles.json'),
         userProfileData,
         rentalsGeojson,
         urls;

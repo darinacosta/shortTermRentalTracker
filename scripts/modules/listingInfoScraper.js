@@ -48,7 +48,7 @@ listingInfoScraper = {
     var deferred = Q.defer();
     http.get({
       host: 'localhost',
-      path: '/rentaltracker/layers/rentals.json'
+      path: '/devapps/rentaltracker-dev/layers/rentals.json'
      }, deferred.resolve);
     return deferred.promise;
   },
