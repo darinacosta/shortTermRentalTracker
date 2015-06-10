@@ -51,7 +51,7 @@ userProfileScraper = {
           feature['properties']['user'] = profile['user'];
           feature['properties']['dateCollected'] = today;
           console.log(feature['properties']['id'].match(/air/g)[0])
-          if (feature['properties']['id'].match(/air/g)[0] === "air" && feature['properties']['user'] === undefined){
+          if (feature['properties']['user'] === undefined){
             console.log(i + ': ' + profileRentalUrl + ' does not exist and has been removed.');
             delete rentalsGeojson["features"][i];
           } else {
