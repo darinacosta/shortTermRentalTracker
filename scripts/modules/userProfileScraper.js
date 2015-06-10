@@ -36,7 +36,7 @@ userProfileScraper = {
     })
   },
 
-  _mergeMultiUnitDataIntoGeojson = function(rentalsGeojson, multiUnitProfiles){
+  _mergeMultiUnitDataIntoGeojson: function(rentalsGeojson, multiUnitProfiles){
     console.log('START MULTI');
     var userScraper = this,
         i = 0;
