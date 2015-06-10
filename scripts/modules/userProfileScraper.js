@@ -37,28 +37,28 @@ userProfileScraper = {
   },
 
   _mergeMultiUnitDataIntoGeojson: function(rentalsGeojson, multiUnitProfiles){
-    console.log('BEGIN MERGE');
-    var userScraper = this,
-        i = 0;
-    rentalsGeojson["features"].forEach(function(feature){
-      var geoFeatureUrl = feature['properties']['url'];
-      multiUnitProfiles.forEach(function(profile){
+    var userScraper = this;
+    console.log('Begining merge ... \n' + 'rental geojson length: ' + rentalsGeojson["features"].length)
+    console.log('multi unit profile length: ' + multiUnitProfiles.length);
+    for (var i = 0; i < rentalsGeojson["features"].length; i ++){
+      var feature = rentalsGeojson["features"][i],
+          geoFeatureUrl = feature['properties']['url'];
+      for (var n = 0; n < multiUnitProfiles.length; n ++){
+        var profile = multiUnitProfiles[n],
         profileRentalUrl = profile['rental'];
-        console.log(profileRentalUrl)
         if (profileRentalUrl === geoFeatureUrl){
           feature['properties']['units'] = profile['units'];
           feature['properties']['user'] = profile['user'];
-          feature['properties']['dateCollected'] = 'today';
-          if (feature['properties']['id'].match(/air/g)[0] === "air" && feature['properties']['user'] === undefined){
+          feature['properties']['dateCollected'] = today;
+          if (feature['properties']['id'] === undefined || feature['properties']['id'].match(/air/g)[0] === "air" && feature['properties']['user'] === undefined){
             console.log(i + ': ' + profileRentalUrl + ' does not exist and has been removed.');
             delete rentalsGeojson["features"][i];
           } else {
             console.log(i + ': Data added to ' + profileRentalUrl);
           }
         } 
-      })
-      i+=1
-    });
+      }
+    };
     userScraper._writeToLog();
     rentalsGeojsonString = JSON.stringify(rentalsGeojson);
     fs.writeFile(userScraper._multiUnitGeojsonPath, rentalsGeojsonString);
@@ -138,7 +138,7 @@ userProfileScraper = {
     };
   
     async.whilst(
-      function() { return i <= urls.length - 1; }, 
+      function() { return i <= urls.length - 1; },  
   
       function(cb){
         _fetch(cb)
