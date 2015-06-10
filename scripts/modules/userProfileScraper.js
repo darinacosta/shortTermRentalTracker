@@ -36,27 +36,28 @@ userProfileScraper = {
     })
   },
 
-  _mergeMultiUnitDataIntoGeojson: function(rentalsGeojson, multiUnitProfiles){
+  _mergeMultiUnitDataIntoGeojson = function(rentalsGeojson, multiUnitProfiles){
     console.log('START MULTI');
     var userScraper = this,
         i = 0;
     rentalsGeojson["features"].forEach(function(feature){
       var geoFeatureUrl = feature['properties']['url'];
-      multiUnitProfiles.forEach(function(profile){
+      multiUnitProfiles['body'].forEach(function(profile){
         profileRentalUrl = profile['rental'];
         if (profileRentalUrl === geoFeatureUrl){
-          rentalsGeojson["features"][i]['properties']['units'] = profile['units'];
-          rentalsGeojson["features"][i]['properties']['user'] = profile['user'];
-          rentalsGeojson["features"][i]['properties']['dateCollected'] = today;
-          if (rentalsGeojson["features"][i].id.match(/air/g)[0] === "air" && rentalsGeojson["features"][i].user === undefined){
-            delete rentalsGeojson["features"][i];
+          feature['properties']['units'] = profile['units'];
+          feature['properties']['user'] = profile['user'];
+          feature['properties']['dateCollected'] = 'today';
+          console.log(feature['properties']['user'])
+          if (feature['properties']['id'].match(/air/g)[0] === "air" && feature['properties']['user'] === undefined){
             console.log(i + ': ' + profileRentalUrl + ' does not exist and has been removed.');
+            delete rentalsGeojson["features"][i];
           } else {
             console.log(i + ': Data added to ' + profileRentalUrl);
           }
         }
-        i++
       })
+      i+=1
     });
     userScraper._writeToLog();
     rentalsGeojsonString = JSON.stringify(rentalsGeojson);
