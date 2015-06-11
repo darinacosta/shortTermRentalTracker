@@ -19,8 +19,8 @@ userProfileScraper = {
 
   crawlUserProfiles: function(){
     var userScraper = this,
-        rentalsGet = userScraper._getLocalFile('/rentaltracker/layers/rentals.json'),
-        userProfilesGet = userScraper._getLocalFile('/rentaltracker/scripts/output/userProfiles.json'),
+        rentalsGet = userScraper._getLocalFile('/devapps/rentaltracker-dev/layers/rentals.json'),
+        userProfilesGet = userScraper._getLocalFile('/devapps/rentaltracker-dev/scripts/output/userProfiles.json'),
         userProfileData,
         rentalsGeojson,
         urls;
@@ -42,7 +42,8 @@ userProfileScraper = {
     console.log('multi unit profile length: ' + multiUnitProfiles.length);
     for (var i = 0; i < rentalsGeojson["features"].length; i ++){
       var feature = rentalsGeojson["features"][i],
-          geoFeatureUrl = feature['properties']['url'];
+          geoFeatureUrl = feature['properties']['url'],
+          match = "none";
       for (var n = 0; n < multiUnitProfiles.length; n ++){
         var profile = multiUnitProfiles[n],
         profileRentalUrl = profile['rental'];
@@ -50,16 +51,16 @@ userProfileScraper = {
           feature['properties']['units'] = profile['units'];
           feature['properties']['user'] = profile['user'];
           feature['properties']['dateCollected'] = today;
-          console.log(feature['properties']['id'].match(/air/g)[0])
-          if (feature['properties']['id'].match(/air/g)[0] === "air" && feature['properties']['user'] === undefined){
-            console.log(i + ': ' + profileRentalUrl + ' does not exist and has been removed.');
-            delete rentalsGeojson["features"][i];
-          } else {
-            console.log(i + ': Data added to ' + profileRentalUrl);
-          }
+          match = "matched";
+          console.log(i + ': Data added to ' + profileRentalUrl);
         } 
       }
+       if (match === 'none' && feature['properties']['id'].match(/air/g)[0] === "air"){
+        console.log(i + ': ' + geoFeatureUrl + ' does not exist and has been removed.');
+        delete rentalsGeojson["features"][i];
+      }
     };
+    rentalsGeojson["features"] = rentalsGeojson["features"].filter(function(n){ return n != undefined }); 
     userScraper._writeToLog();
     rentalsGeojsonString = JSON.stringify(rentalsGeojson);
     fs.writeFile(userScraper._multiUnitGeojsonPath, rentalsGeojsonString);
