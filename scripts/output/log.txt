@@ -80,4 +80,28 @@ Pages processed:   1166
 User Scraper log: Wed Jun 10 2015 09:38:40 GMT-0500 (CDT)
 Pages requested: 1166
 Pages processed:   1161
------------------------------
+-------------------------------------------------------
+Rental Scraper Log: Thu Jun 11 2015 10:37:37 GMT-0500 (CDT)
+Features collected: 1383
+Calls to server:    101
+--------------------------
+--------------------------
+Rental Scraper Log: Thu Jun 11 2015 11:20:49 GMT-0500 (CDT)
+Features collected: 956
+Calls to server:    71
+--------------------------
+--------------------------
+Rental Scraper Log: Thu Jun 11 2015 11:35:08 GMT-0500 (CDT)
+Features collected: 956
+Calls to server:    71
+--------------------------
+--------------------------
+Rental Scraper Log: Thu Jun 11 2015 11:38:07 GMT-0500 (CDT)
+Features collected: 970
+Calls to server:    1
+--------------------------
+--------------------------
+Rental Scraper Log: Thu Jun 11 2015 11:38:07 GMT-0500 (CDT)
+Features collected: 2353
+Calls to server:    1
+--------------------------
