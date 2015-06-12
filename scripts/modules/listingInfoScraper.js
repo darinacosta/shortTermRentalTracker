@@ -37,6 +37,7 @@ listingInfoScraper = {
         features.forEach(function(feature){
           if (feature['properties']['id'].match(/air/g) !== null){
             urls.push(feature.properties.url);
+            console.log(feature.properties.url)
           }
         })
         listingInfoScraper._totalUrlsRequest = urls.length;

@@ -47,7 +47,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
           mostListings = numUnits;
           highestUrl = userUrl;
         } 
-        if (feature.properties.id.match(/air/g)[0] === "air" && feature.properties.user === undefined){
+        if (feature.properties.id !== undefined && feature.properties.id.match(/air/g)[0] === "air" && feature.properties.user === undefined){
           nolaTotal -= 1;
         }
       }
