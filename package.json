@@ -33,7 +33,7 @@
   "bugs": {
     "url": "https://github.com/darinacosta/shortTermRentalTracker/issues"
   },
-   "engines": {
+  "engines": {
     "node": "0.12.x",
     "npm": "2.5.x"
   },
