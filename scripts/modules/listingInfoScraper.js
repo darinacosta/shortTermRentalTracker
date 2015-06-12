@@ -35,7 +35,9 @@ listingInfoScraper = {
         features = parsedJSON.features,
         urls = [];
         features.forEach(function(feature){
-          urls.push(feature.properties.url)
+          if (feature['properties']['id'].match(/air/g) !== null){
+            urls.push(feature.properties.url);
+          }
         })
         listingInfoScraper._totalUrlsRequest = urls.length;
         listingInfoScraper._totalUrlsCrawled = urls.length;
@@ -48,7 +50,7 @@ listingInfoScraper = {
     var deferred = Q.defer();
     http.get({
       host: 'localhost',
-      path: '/devapps/rentaltracker-dev/layers/rentals.json'
+      path: '/devapps/rentaltracker-dev/layers/rentals.json' //'/devapps/rentaltracker-dev/layers/rentals.json'
      }, deferred.resolve);
     return deferred.promise;
   },

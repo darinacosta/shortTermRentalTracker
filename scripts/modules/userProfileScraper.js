@@ -55,7 +55,7 @@ userProfileScraper = {
           console.log(i + ': Data added to ' + profileRentalUrl);
         } 
       }
-       if (match === 'none' && feature['properties']['id'].match(/air/g)[0] === "air"){
+      if (match === 'none' && feature['properties']['id'].match(/air/g)[0] === "air"){
         console.log(i + ': ' + geoFeatureUrl + ' does not exist and has been removed.');
         delete rentalsGeojson["features"][i];
       }
