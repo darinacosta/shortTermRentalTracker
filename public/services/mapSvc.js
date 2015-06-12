@@ -13,7 +13,7 @@ function mapSvc($http){
   date = new Date(),
   current_hour = date.getHours(),
 
-  nightTileLayer = L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.night.grey/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
+  nightTileLayer = L.tileLayer('//{s}.{base}.maps.cit.api.here.com/maptile/2.1/maptile/{mapID}/normal.night.grey/{z}/{x}/{y}/256/png8?app_id={app_id}&app_code={app_code}', {
     attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
     subdomains: '1234',
     mapID: 'newest',
@@ -23,7 +23,7 @@ function mapSvc($http){
     maxZoom: 20
   }),
 
-  dayTileLayer  = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+  dayTileLayer  = L.tileLayer('//{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   });
