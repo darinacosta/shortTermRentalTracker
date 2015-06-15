@@ -52,8 +52,8 @@ rentalScraper = {
         rentalScraper._fetchListingsByProvider(provider)
       } else {
         rentalScraper._pageTracker[provider] = "complete";
-        console.log(provider + ' scan complete.')
-        if (rentalScraper._detectScanCompletion === true){
+        console.log(provider + ' scan complete.');
+        if (rentalScraper._detectScanCompletion() === true){
           rentalScraper._writeToLog();
         }
       }
