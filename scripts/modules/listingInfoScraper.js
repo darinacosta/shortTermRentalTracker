@@ -47,15 +47,6 @@ listingInfoScraper = {
     };
   },
 
-  _getUrlList: function(){
-    var deferred = Q.defer();
-    http.get({
-      host: 'localhost',
-      path: '/devapps/rentaltracker-dev/layers/rentals.json' //'/devapps/rentaltracker-dev/layers/rentals.json'
-     }, deferred.resolve);
-    return deferred.promise;
-  },
-
   _writeToLog: function(){
     var listingInfoScraper = this,
     logString = "--------------------------" + "\n" +
