@@ -125,8 +125,10 @@ rentalScraper = {
             console.log(feature.properties.id + ' added to features.');
             rentalScraper._numberOfFeaturesWritten += 1;
           });
-        } else{
-          //console.log(feature.properties.id + ' already exists.')
+        } else {
+          db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(err, obj){
+            console.log(feature.properties.id + ' date updated.')
+          })
         };
         db.close();
       });
