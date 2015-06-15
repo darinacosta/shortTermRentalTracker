@@ -4,20 +4,25 @@ var unirest = require('unirest'),
     fs = require('fs'),
     path = require('path'),
     config = require('./../config'),
-    today = new Date();
+    today = new Date(),
+    MongoClient = require('mongodb').MongoClient,
+    assert = require('assert'),
+    rentaldb = 'mongodb://localhost:27017/shorttermrentals';
 
 rentalScraper = {
   _rentalsGeoJsonPath: path.join(__dirname, '../../layers/rentals.json'),
   _logFile: path.join(__dirname, '../output/log.txt'),
-  _urlListFile: path.join(__dirname, '../output/urlList.json'),
   _geoJson: { "type": "FeatureCollection",
              "features": []},
   _pageCount: 1,
   _numberOfFeaturesWritten: 0,
   _urlList: {urls:[]},
-  fetchListings: function(providers) { 
+  _pageTracker: {},
+
+  init: function(providers) { 
     var rentalScraper = this;
     providers.forEach(function(provider){
+      rentalScraper._pageTracker[provider] = 1;
       rentalScraper._fetchListingsByProvider(provider);
     });
   },
@@ -32,49 +37,60 @@ rentalScraper = {
               "&nelatitude=" + nelatitude + "&nelongitude=" + nelongitude + 
               "&swlatitude=" + swlatitude + "&swlongitude=" + swlongitude + 
               "&&provider=" + provider + "&" +
-              "page=" + rentalScraper._pageCount;
+              "page=" + rentalScraper._pageTracker[provider];
     
     unirest.get(url)
     .header("X-Mashape-Key", config.mashape_key)
     .header("Accept", "application/json")
     .end(function (result) {
-      console.log('Scanning page ' + rentalScraper._pageCount + '...')
+      console.log('Scanning ' + provider + ' page ' + rentalScraper._pageTracker[provider] + '...')
       var parsedResult = JSON.parse(result.body);
-      rentalScraper._handleResult(parsedResult);
+      rentalScraper._handlePageResult(parsedResult);
+      rentalScraper._pageTracker[provider] = rentalScraper._pageTracker[provider] + 1;
       rentalScraper._pageCount = rentalScraper._pageCount + 1;
-      if (parsedResult['ids'].length > 1){
+      if (parsedResult['ids'].length > 0){
         rentalScraper._fetchListingsByProvider(provider)
       } else {
-        rentalScraper._pageCount = 1;
-        rentalScraper._writeGeojsonToFile();
+        rentalScraper._pageTracker[provider] = "complete";
+        console.log(provider + ' scan complete.')
+        if (rentalScraper._detectScanCompletion === true){
+          rentalScraper._writeToLog();
+        }
       }
     })
   },
+
+  _detectScanCompletion: function(){
+    var pageTracker = rentalScraper._pageTracker;
+        resultList = [],
+        scanComplete = true;
+
+    for (var provider in pageTracker) {
+      var result = pageTracker[provider];
+      resultList.push(result); 
+    };
+
+    for (var i = 0; i < resultList.length; i ++){
+      if (resultList[i] !== "complete"){
+        scanComplete = false;
+      }
+    };
+
+    return scanComplete;
+  },
   
-  _handleResult: function(result){
+  _handlePageResult: function(result){
     var rentalScraper = this, 
         resultLength = result['result'].length;
-    rentalScraper._numberOfFeaturesWritten += resultLength;
     for (var i = 0; i < result['result'].length; i += 1){
-      rentalScraper._pushToGeoJson(result['result'][i]); 
-      rentalScraper._urlList['urls'].push(result['result'][i]['provider']['url']); 
+      var feature = rentalScraper._buildFeature(result['result'][i]); 
+      rentalScraper._writeFeatureToDb(feature);
     }
   },
 
-  _writeGeojsonToFile: function(){
-    var geoJsonString = JSON.stringify(this._geoJson),
-        urlString = JSON.stringify(this._urlList);
-    fs.writeFile(this._rentalsGeoJsonPath, geoJsonString, function (err) {
-      if (err) throw err;
-    });
-    fs.writeFile(this._urlListFile, urlString);
-    this._writeToLog();
-    console.log('Complete.')
-  },
-
-  _pushToGeoJson: function(location){
+  _buildFeature: function(location){
     var latlng = switchLatLong(location['latLng']);
-    this._geoJson['features'].push({
+    var feature = {
       "type": "Feature",
       "geometry": {
         "type": "Point",
@@ -91,8 +107,27 @@ rentalScraper = {
         "monthlyPrice": location['price']['monthly'],
         //"description": location['attr']['description'],
         //"reviews" : location['reviews']['entries'],
-        "dateCollected": today
+        "dateCollected": today,
+        "scraped": false
       }
+    };
+    return feature;
+  },
+
+  _writeFeatureToDb: function(feature){
+    MongoClient.connect(rentaldb, function(err, db) {
+      db.collection('features').find({"properties.id" : feature.properties.id}).count(function(e, n){
+        assert.equal(e, null);
+        if (n === 0){
+          db.collection('features').insert(feature, function(e, records) {
+            console.log(feature.properties.id + ' added to features.');
+            rentalScraper._numberOfFeaturesWritten += 1;
+          });
+        } else{
+          //console.log(feature.properties.id + ' already exists.')
+        };
+        db.close();
+      });
     })
   },
 
@@ -103,6 +138,7 @@ rentalScraper = {
     "Features collected: " + rentalScraper._numberOfFeaturesWritten + "\n" +
     "Calls to server:    " + rentalScraper._pageCount + "\n" +
     "--------------------------"+ "\n";
+    console.log(logString);
     fs.appendFile(rentalScraper._logFile, logString);
   }
 };
