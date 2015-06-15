@@ -184,7 +184,7 @@ rentalScraper = {
 
         if (n === 0){
           if (feature['properties']['id'].match(/air/g) !== null){ 
-            rentalScraper.scrapeListing(feature)
+            rentalScraper._scrapeListing(feature)
             .then(_addNewFeature(feature));
           } else {
             _addNewFeature(feature);
