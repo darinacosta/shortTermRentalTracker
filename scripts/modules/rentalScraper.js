@@ -10,13 +10,15 @@ var unirest = require('unirest'),
     rentaldb = 'mongodb://localhost:27017/shorttermrentals';
 
 rentalScraper = {
+
   _rentalsGeoJsonPath: path.join(__dirname, '../../layers/rentals.json'),
+
   _logFile: path.join(__dirname, '../output/log.txt'),
-  _geoJson: { "type": "FeatureCollection",
-             "features": []},
-  _pageCount: 1,
+
+  _totPageCount: 1,
+
   _numberOfFeaturesWritten: 0,
-  _urlList: {urls:[]},
+
   _pageTracker: {},
 
   init: function(providers) { 
@@ -136,7 +138,7 @@ rentalScraper = {
     logString = "--------------------------" + "\n" +
     "Rental Scraper Log: " + today + "\n" +
     "Features collected: " + rentalScraper._numberOfFeaturesWritten + "\n" +
-    "Calls to server:    " + rentalScraper._pageCount + "\n" +
+    "Calls to server:    " + rentalScraper._totalPageCount + "\n" +
     "--------------------------"+ "\n";
     console.log(logString);
     fs.appendFile(rentalScraper._logFile, logString);
