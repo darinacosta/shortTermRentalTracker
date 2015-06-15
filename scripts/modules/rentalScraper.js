@@ -2,12 +2,15 @@
 
 var unirest = require('unirest'),
     fs = require('fs'),
+    request = require('request'),
     path = require('path'),
     config = require('./../config'),
     today = new Date(),
     MongoClient = require('mongodb').MongoClient,
     assert = require('assert'),
-    rentaldb = 'mongodb://localhost:27017/shorttermrentals';
+    rentaldb = 'mongodb://localhost:27017/shorttermrentals',
+    cheerio = require('cheerio'),
+    Q = require("q");
 
 rentalScraper = {
 
@@ -47,7 +50,7 @@ rentalScraper = {
     .end(function (result) {
       console.log('Scanning ' + provider + ' page ' + rentalScraper._pageTracker[provider] + '...')
       var parsedResult = JSON.parse(result.body);
-      rentalScraper._handlePageResult(parsedResult);
+      rentalScraper._handleApiPageResult(parsedResult);
       rentalScraper._pageTracker[provider] = rentalScraper._pageTracker[provider] + 1;
       rentalScraper._pageCount = rentalScraper._pageCount + 1;
       if (parsedResult['ids'].length > 0){
@@ -81,11 +84,11 @@ rentalScraper = {
     return scanComplete;
   },
   
-  _handlePageResult: function(result){
+  _handleApiPageResult: function(result){
     var rentalScraper = this, 
         resultLength = result['result'].length;
     for (var i = 0; i < result['result'].length; i += 1){
-      var feature = rentalScraper._buildFeature(result['result'][i]); 
+      var feature = rentalScraper._buildFeature(result['result'][i]);
       rentalScraper._writeFeatureToDb(feature);
     }
   },
@@ -116,17 +119,78 @@ rentalScraper = {
     return feature;
   },
 
+  _getLocalFile: function(path) {
+    var deferred  = Q.defer(),
+        json = '';
+    http.get({
+      host: 'localhost',
+      path: path
+    }, function(response){
+        response.on('data', function(d) {
+        json += d;
+      });
+      response.on('end', function(){
+        deferred.resolve(json);
+      });
+    });
+    return deferred.promise;
+  },
+
+
+  _scrapeListing: function(feature){
+    var deferred  = Q.defer(),
+
+    options = {
+      url: feature.properties.url,
+      headers: {
+        'User-Agent': "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+      }
+    };
+
+    request(options, _getUserProfileUrl);
+
+    return deferred.promise; 
+
+    function _getUserProfileUrl(error, response, html){
+      if (error){
+        console.log(error)
+      } else {
+        var $ = cheerio.load(html);
+        userDetails = $('#host-profile').find("a")[0];
+        if (userDetails !== undefined){
+          var href = $('#host-profile').find("a")[0]['attribs']['href'];
+          feature.properties['user'] = "http://airbnb.com" + href;
+          console.log(i + ': ' + urls[i] + ' belonging to user ' + href + ' was succesfully scraped.')
+        } else {
+          console.log(i + ': ' + urls[i] + ' was not scraped. Check to ensure it still exists.')
+          i++;
+        }
+        deferred.resolve(feature);
+      }
+    }
+  },
+
   _writeFeatureToDb: function(feature){
     MongoClient.connect(rentaldb, function(err, db) {
       db.collection('features').find({"properties.id" : feature.properties.id}).count(function(e, n){
         assert.equal(e, null);
-        if (n === 0){
+
+        function _addNewFeature(feature){
           db.collection('features').insert(feature, function(e, records) {
             console.log(feature.properties.id + ' added to features.');
             rentalScraper._numberOfFeaturesWritten += 1;
           });
+        };
+
+        if (n === 0){
+          if (feature['properties']['id'].match(/air/g) !== null){ 
+            rentalScraper.scrapeListing(feature)
+            .then(_addNewFeature(feature));
+          } else {
+            _addNewFeature(feature);
+          }
         } else {
-          db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(err, obj){
+          db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(e, obj){
             console.log(feature.properties.id + ' date updated.')
           })
         };
