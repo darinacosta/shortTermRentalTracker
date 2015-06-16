@@ -52,7 +52,8 @@ rentalScraper = {
       var parsedResult = JSON.parse(result.body);
       rentalScraper._apiPageTracker[provider] = rentalScraper._apiPageTracker[provider] + 1;
       rentalScraper._pageCount = rentalScraper._pageCount + 1;
-      rentalScraper._handleApiPageResult(parsedResult).then(function(){
+      rentalScraper._handleApiPageResult(parsedResult).then(function(testmessage){
+        console.log(testmessage);
         if (parsedResult['ids'].length > 0){
           rentalScraper._fetchListingsByProvider(provider)
         } else {
@@ -97,16 +98,16 @@ rentalScraper = {
     return rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb)
     .then(function(){
       deferred.resolve('test')
-      return deferred.promise();
     });
+    return deferred.promise();
   },
 
   _map: function (arr, func) {
-      return Q().then(function () {
-        // inside a `then`, exceptions will be handled in next onRejected
-        return arr.map(function (el) { return func(el) })
-      }).all() // return group promise
-    },  
+    return Q().then(function () {
+      // inside a `then`, exceptions will be handled in next onRejected
+      return arr.map(function (el) { return func(el) })
+    }).all() // return group promise
+  },  
 
   _mapSeries: function(arr, iterator) {
     // create a empty promise to start our series (so we can use `then`)
