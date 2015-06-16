@@ -33,6 +33,7 @@ rentalScraper = {
   },
 
   _fetchListingsByProvider: function(provider){
+
     var rentalScraper = this,
         nelatitude = 30.123749,
         nelongitude = -89.868164,
@@ -47,14 +48,14 @@ rentalScraper = {
     unirest.get(url)
     .header("X-Mashape-Key", config.mashape_key)
     .header("Accept", "application/json")
-    .end(function (result) {
+    .end(_getListing);
+
+    function _getListing(result){
       console.log('Scanning ' + provider + ' page ' + rentalScraper._apiPageTracker[provider] + '...')
       var parsedResult = JSON.parse(result.body);
       rentalScraper._apiPageTracker[provider] = rentalScraper._apiPageTracker[provider] + 1;
       rentalScraper._pageCount = rentalScraper._pageCount + 1;
-      rentalScraper._handleApiPageResult(parsedResult, next)
-
-      function next(){  
+      rentalScraper._handleApiPageResult(parsedResult, function(){
         if (parsedResult['ids'].length > 0){
           rentalScraper._fetchListingsByProvider(provider)
         } else {
@@ -64,8 +65,8 @@ rentalScraper = {
             rentalScraper._writeToLog();
           }
         }
-      }
-    })
+      })
+    };
   },
 
   _detectScanCompletion: function(){
@@ -95,7 +96,14 @@ rentalScraper = {
       var feature = rentalScraper._buildFeature(result['result'][i]);
       features.push(feature);
     };
-    rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb, cb)
+    rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb).then(
+    function () { 
+      console.log('NEXT');
+      cb();
+    },
+    function (err) { 
+      cb(err);
+    })
   },
 
   _map: function (arr, func) {
@@ -115,14 +123,7 @@ rentalScraper = {
       })
     })
     // group the results and return the group promise
-    return Q.all(promises).then(
-    function () { 
-      console.log('NEXT');
-      cb();
-    },
-    function (err) { 
-      cb(err);
-    })
+    return Q.all(promises);
   },
 
   _buildFeature: function(location){
