@@ -120,7 +120,10 @@ rentalScraper = {
   },
 
   _writeFeatureToDb: function(feature){
-    MongoClient.connect(rentaldb, function(err, db) {
+    MongoClient.connect(rentaldb, function(e, db) {
+      if (e){
+        console.log(e);
+      };
       db.collection('features').find({"properties.id" : feature.properties.id}).count(function(e, n){
         assert.equal(e, null);
         function _addNewFeature(feature){
