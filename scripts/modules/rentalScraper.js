@@ -111,13 +111,13 @@ rentalScraper = {
     var promises = arr.map(function (el) {
       return currentPromise = currentPromise.then(function () {
         // execute the next function after the previous has resolved successfully
-        console.log(el.properties.id + " HI");
         return iterator(el)
       })
     })
     // group the results and return the group promise
     return Q.all(promises).then(
     function () { 
+      console.log('NEXT');
       cb();
     },
     function (err) { 
