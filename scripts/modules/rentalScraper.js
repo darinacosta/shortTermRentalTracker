@@ -93,6 +93,7 @@ rentalScraper = {
         features = [];
     for (var i = 0; i < result['result'].length; i += 1){
       var feature = rentalScraper._buildFeature(result['result'][i]);
+      console.log(feature.properties.id);
       features.push(feature);
     };
     rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb, cb)
