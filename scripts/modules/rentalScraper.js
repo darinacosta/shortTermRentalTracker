@@ -56,6 +56,7 @@ rentalScraper = {
       rentalScraper._apiPageTracker[provider] = rentalScraper._apiPageTracker[provider] + 1;
       rentalScraper._pageCount = rentalScraper._pageCount + 1;
       rentalScraper._handleApiPageResult(parsedResult, function(){
+        console.log("NEXT NEXT")
         if (parsedResult['ids'].length > 0){
           rentalScraper._fetchListingsByProvider(provider)
         } else {
