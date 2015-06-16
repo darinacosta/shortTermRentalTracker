@@ -221,9 +221,6 @@ rentalScraper = {
       if (error){
         console.log(error)
       } else {
-        console.log('---------------------------------------------')
-        console.log(html);
-        console.log('---------------------------------------------')
         var $ = cheerio.load(html),
         rentalNumberParan = $('.row-space-3').find("small").text(),
         rentalNumberRegex = /\(([^\)]+)\)/.exec(rentalNumberParan);
