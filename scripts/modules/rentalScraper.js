@@ -55,19 +55,21 @@ rentalScraper = {
       var parsedResult = JSON.parse(result.body);
       rentalScraper._apiPageTracker[provider] = rentalScraper._apiPageTracker[provider] + 1;
       rentalScraper._pageCount = rentalScraper._pageCount + 1;
-      rentalScraper._handleApiPageResult(parsedResult, function(){
-        console.log("NEXT NEXT")
-        if (parsedResult['ids'].length > 0){
-          rentalScraper._fetchListingsByProvider(provider)
-        } else {
-          rentalScraper._apiPageTracker[provider] = "complete";
-          console.log(provider + ' scan complete.');
-          if (rentalScraper._detectScanCompletion() === true){
-            rentalScraper._writeToLog();
-          }
-        }
-      })
+      rentalScraper._handleApiPageResult(parsedResult, provider)
     };
+  },
+
+  _getNextListing: function(result, provider){
+    console.log("NEXT NEXT")
+    if (parsedResult['ids'].length > 0){
+      rentalScraper._fetchListingsByProvider(provider)
+    } else {
+      rentalScraper._apiPageTracker[provider] = "complete";
+      console.log(provider + ' scan complete.');
+      if (rentalScraper._detectScanCompletion() === true){
+        rentalScraper._writeToLog();
+      }
+    }
   },
 
   _detectScanCompletion: function(){
@@ -89,7 +91,7 @@ rentalScraper = {
     return scanComplete;
   },
   
-  _handleApiPageResult: function(result, cb){
+  _handleApiPageResult: function(result, provider){
     var rentalScraper = this, 
         resultLength = result['result'].length,
         features = [];
@@ -100,7 +102,7 @@ rentalScraper = {
     rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb).then(
     function () { 
       console.log('NEXT');
-      cb();
+      rentalScraper._getNextListing(result,provider);
     },
     function (err) { 
       cb(err);
