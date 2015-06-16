@@ -96,13 +96,12 @@ rentalScraper = {
     };
     rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb)
     .then(function(){
-      console.log('Made it to then');
       deferred.resolve();
     });
     return deferred.promise();
   },
 
-  _mapSeries: function (arr, func) {
+  _map: function (arr, func) {
       return Q().then(function () {
         // inside a `then`, exceptions will be handled in next onRejected
         return arr.map(function (el) { return func(el) })
