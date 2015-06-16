@@ -86,7 +86,8 @@ rentalScraper = {
   
   _handleApiPageResult: function(result){
     var rentalScraper = this, 
-        resultLength = result['result'].length;
+        resultLength = result['result'].length,
+        features = [];
     for (var i = 0; i < result['result'].length; i += 1){
       var feature = rentalScraper._buildFeature(result['result'][i]);
       features.push(feature);
