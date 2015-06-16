@@ -201,8 +201,6 @@ rentalScraper = {
       }
     };
 
-    console.log('FEATURE PROPERTIES USER URL CHECK: ' + feature.properties.user)
-
     request(options, _getTotalUserListings);
 
     function _getTotalUserListings(error, response, html){
@@ -212,15 +210,17 @@ rentalScraper = {
         var $ = cheerio.load(html),
         rentalNumberParan = $('.row-space-3').find("small").text(),
         rentalNumberRegex = /\(([^\)]+)\)/.exec(rentalNumberParan);
-        if (rentalNumberParan !== undefined && rentalNumberRegex !== null ){
-          var rentalNumber = rentalNumberRegex[1];
-          feature.units = rentalNumber;
-          callback(feature); 
-          rentalTracker._numberOfUserProfilesCrawled += 1;
-          console.log('User profile ' + feature.properties.user + ' was succesfully scraped.');
-        } else {
-          console.log(feature.properties.user + ' was not scraped. Check to ensure that it still exists and contains a listings div.')
-        }
+        setTimeout(function() { 
+          if (rentalNumberParan !== undefined && rentalNumberRegex !== null ){
+            var rentalNumber = rentalNumberRegex[1];
+            feature.units = rentalNumber;
+            callback(feature); 
+            rentalTracker._numberOfUserProfilesCrawled += 1;
+            console.log('User profile ' + feature.properties.user + ' was succesfully scraped.');
+          } else {
+            console.log(feature.properties.user + ' was not scraped. Check to ensure that it still exists and contains a listings div.')
+          }
+        }, 300);
       }
     }
   },
