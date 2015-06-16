@@ -118,7 +118,13 @@ rentalScraper = {
       })
     })
     // group the results and return the group promise
-    return Q.all(promises)
+    return Q.all(promises).then(
+    function () { 
+      cb();
+    },
+    function (err) { 
+      cb(err);
+    })
   },
 
   _buildFeature: function(location){
