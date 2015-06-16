@@ -172,20 +172,22 @@ rentalScraper = {
     request(options, _getUserProfileUrl)
 
     function _getUserProfileUrl(error, response, html){
-      if (error){
-        console.log(error)
-      } else {
-        var $ = cheerio.load(html);
-        userDetails = $('#host-profile').find("a")[0];
-        if (userDetails !== undefined){
-          var href = $('#host-profile').find("a")[0]['attribs']['href'];
-          feature.properties['user'] = "http://airbnb.com" + href;
-          console.log(feature.properties.id + ' was succesfully scraped.')
+      setTimeout(function() { 
+        if (error){
+          console.log(error)
         } else {
-          console.log(feature.properties.id + ' was not scraped. Check to ensure it still exists.')
+          var $ = cheerio.load(html);
+          userDetails = $('#host-profile').find("a")[0];
+          if (userDetails !== undefined){
+            var href = $('#host-profile').find("a")[0]['attribs']['href'];
+            feature.properties['user'] = "http://airbnb.com" + href;
+            console.log(feature.properties.id + ' was succesfully scraped.')
+          } else {
+            console.log(feature.properties.id + ' was not scraped. Check to ensure it still exists.')
+          }
+          callback(feature);
         }
-        callback(feature);
-      }
+      }, 200);
     }
   },
 
@@ -198,6 +200,8 @@ rentalScraper = {
         'User-Agent': "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
       }
     };
+
+    console.log('FEATURE PROPERTIES USER URL CHECK: ' + feature.properties.user)
 
     request(options, _getTotalUserListings);
 
