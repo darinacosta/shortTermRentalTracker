@@ -99,14 +99,7 @@ rentalScraper = {
       var feature = rentalScraper._buildFeature(result['result'][i]);
       features.push(feature);
     };
-    rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb).then(
-    function () { 
-      console.log('NEXT');
-      rentalScraper._getNextListing(result,provider);
-    },
-    function (err) { 
-      cb(err);
-    })
+    rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb)
   },
 
   _map: function (arr, func) {
@@ -126,7 +119,14 @@ rentalScraper = {
       })
     })
     // group the results and return the group promise
-    return Q.all(promises);
+    return Q.all(promises).then(
+    function () { 
+      console.log('NEXT');
+      rentalScraper._getNextListing(result,provider);
+    },
+    function (err) { 
+      cb(err);
+    })
   },
 
   _buildFeature: function(location){
