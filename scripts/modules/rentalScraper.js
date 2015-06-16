@@ -206,7 +206,7 @@ rentalScraper = {
             console.log('User profile ' + feature.properties.user + ' was succesfully scraped.');
           }, 200);
         } else {
-          console.log(urls[i]['user'] + ' was not scraped. Check to ensure that it still exists and contains a listings div.')
+          console.log(feature.properties.user + ' was not scraped. Check to ensure that it still exists and contains a listings div.')
         }
       }
     }
