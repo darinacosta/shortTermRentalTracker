@@ -89,8 +89,29 @@ rentalScraper = {
         resultLength = result['result'].length;
     for (var i = 0; i < result['result'].length; i += 1){
       var feature = rentalScraper._buildFeature(result['result'][i]);
-      rentalScraper._writeFeatureToDb(feature);
-    }
+      features.push(feature);
+    };
+    rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb);
+  },
+
+  _mapSeries: function (arr, func) {
+      return Q().then(function () {
+        // inside a `then`, exceptions will be handled in next onRejected
+        return arr.map(function (el) { return func(el) })
+      }).all() // return group promise
+    },  
+
+  _mapSeries: function(arr, iterator) {
+    // create a empty promise to start our series (so we can use `then`)
+    var currentPromise = Q()
+    var promises = arr.map(function (el) {
+      return currentPromise = currentPromise.then(function () {
+        // execute the next function after the previous has resolved successfully
+        return iterator(el)
+      })
+    })
+    // group the results and return the group promise
+    return Q.all(promises)
   },
 
   _buildFeature: function(location){
@@ -120,6 +141,7 @@ rentalScraper = {
   },
 
   _writeFeatureToDb: function(feature){
+    var deferred = Q.defer;
     MongoClient.connect(rentaldb, function(e, db) {
       if (db === null){
         console.log('Bad database connection.')
@@ -133,6 +155,7 @@ rentalScraper = {
             console.log(feature.properties.id + ' added to features.');
             rentalScraper._numberOfFeaturesWritten += 1;
             db.close();
+            deferred.resolve();
           });
         };
         if (n === 0){
@@ -148,10 +171,12 @@ rentalScraper = {
           db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(e, obj){
             console.log(feature.properties.id + ' date updated.')
             db.close();
+            deferred.resolve();
           })
         };
       });
     })
+    return deferred.promise();
   },
 
 
