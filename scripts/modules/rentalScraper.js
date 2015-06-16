@@ -108,8 +108,8 @@ rentalScraper = {
   _mapSeries: function(arr, iterator, cb) {
     // create a empty promise to start our series (so we can use `then`)
     var currentPromise = Q();
-    console.log(arr);
     var promises = arr.map(function (el) {
+      console.log(el);
       return currentPromise = currentPromise.then(function () {
         // execute the next function after the previous has resolved successfully
         return iterator(el)
