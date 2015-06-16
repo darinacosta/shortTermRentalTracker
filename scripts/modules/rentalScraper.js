@@ -184,7 +184,7 @@ rentalScraper = {
         } else {
           console.log(feature.properties.id + ' was not scraped. Check to ensure it still exists.')
         }
-        setTimeout(function() { callback(feature); }, 200);
+        callback(feature);
       }
     }
   },
@@ -211,11 +211,9 @@ rentalScraper = {
         if (rentalNumberParan !== undefined && rentalNumberRegex !== null ){
           var rentalNumber = rentalNumberRegex[1];
           feature.units = rentalNumber;
-          setTimeout(function() { 
-            callback(feature); 
-            rentalTracker._numberOfUserProfilesCrawled += 1;
-            console.log('User profile ' + feature.properties.user + ' was succesfully scraped.');
-          }, 200);
+          callback(feature); 
+          rentalTracker._numberOfUserProfilesCrawled += 1;
+          console.log('User profile ' + feature.properties.user + ' was succesfully scraped.');
         } else {
           console.log(feature.properties.user + ' was not scraped. Check to ensure that it still exists and contains a listings div.')
         }
