@@ -125,15 +125,18 @@ rentalScraper = {
         assert.equal(e, null);
         function _addNewFeature(feature){
           db.collection('features').insert(feature, function(e, records) {
+            assert.equal(e, null);
+            console.log(feature.properties);
             console.log(feature.properties.id + ' added to features.');
             rentalScraper._numberOfFeaturesWritten += 1;
+            db.close();
           });
         };
         if (n === 0){
-          if (feature['properties']['id'].match(/air/g) !== null && feature['properties']['id'].match(/air/g)[0] === "air"){ 
+          if (feature['properties']['id'].match(/air/g) !== null && feature['properties']['id'].match(/air/g)[0] === "air" && feature.properties['user'] === undefined){ 
             rentalScraper._scrapeListing(feature, function(listingFeature){
               rentalScraper._scrapeUserProfile(listingFeature, function(userFeature){
-                _addNewFeature(userFeature)
+                _addNewFeature(userFeature);
               });
             });
           } else {
@@ -142,11 +145,19 @@ rentalScraper = {
         } else {
           db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(e, obj){
             console.log(feature.properties.id + ' date updated.')
+            db.close();
           })
         };
-        db.close();
       });
     })
+  },
+
+  _crawlAuxPages: function(feature){
+    rentalScraper._scrapeListing(feature, function(listingFeature){
+      rentalScraper._scrapeUserProfile(listingFeature, function(userFeature){
+        rentalScraper._writeFeatureToDb(userFeature);
+      });
+    });
   },
 
   _scrapeListing: function(feature, callback){
