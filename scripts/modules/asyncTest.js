@@ -25,7 +25,7 @@ mapSeries = function(arr, iterator, cb) {
 function delayLog(string){
   var deferred = Q.defer();
   setTimeout(function() {
-    deferred.resolve(string + " delayed.")
+    deferred.resolve(console.log(string + " delayed."))
   }, 500);
   return deferred.promise;
 }

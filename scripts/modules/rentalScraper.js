@@ -108,6 +108,7 @@ rentalScraper = {
   _mapSeries: function(arr, iterator, cb) {
     // create a empty promise to start our series (so we can use `then`)
     var currentPromise = Q();
+    console.log(arr.length);
     var promises = arr.map(function (el) {
       return currentPromise = currentPromise.then(function () {
         // execute the next function after the previous has resolved successfully
@@ -153,7 +154,6 @@ rentalScraper = {
   _writeFeatureToDb: function(feature){
     var deferred = Q.defer();
     MongoClient.connect(rentaldb, function(e, db) {
-      console.log(feature.properties.id + " made it")
       if (db === null){
         console.log('Bad database connection.')
         deferred.resolve();
