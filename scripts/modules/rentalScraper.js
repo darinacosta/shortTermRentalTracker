@@ -52,8 +52,7 @@ rentalScraper = {
       var parsedResult = JSON.parse(result.body);
       rentalScraper._apiPageTracker[provider] = rentalScraper._apiPageTracker[provider] + 1;
       rentalScraper._pageCount = rentalScraper._pageCount + 1;
-      rentalScraper._handleApiPageResult(parsedResult).then(function(testmessage){
-        console.log(testmessage);
+      rentalScraper._handleApiPageResult(parsedResult).then(function(){
         if (parsedResult['ids'].length > 0){
           rentalScraper._fetchListingsByProvider(provider)
         } else {
@@ -95,11 +94,8 @@ rentalScraper = {
       var feature = rentalScraper._buildFeature(result['result'][i]);
       features.push(feature);
     };
-    return rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb)
-    .then(function(output){
-      console.log(output)
-      deferred.resolve('test')
-    });
+    rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb)
+    deferred.resolve()
     return deferred.promise();
   },
 
