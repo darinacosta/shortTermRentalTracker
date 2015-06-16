@@ -134,9 +134,8 @@ rentalScraper = {
         if (n === 0){
           if (feature['properties']['id'].match(/air/g) !== null && feature['properties']['id'].match(/air/g)[0] === "air" && feature.properties['user'] === undefined){ 
             rentalScraper._scrapeListing(feature, function(listingFeature){
-              rentalScraper._scrapeUserProfile(listingFeature, function(userFeature){
-                _addNewFeature(userFeature);
-              });
+              _addNewFeature(listingFeature);
+              //TROUBLESHOOT AND THEN ADD USER PROFILE SCRAPER
             });
           } else {
             _addNewFeature(feature);
