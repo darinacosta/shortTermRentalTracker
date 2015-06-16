@@ -96,6 +96,7 @@ rentalScraper = {
     };
     rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb)
     .then(function(){
+      console.log('Made it to then');
       deferred.resolve();
     });
     return deferred.promise();
