@@ -52,7 +52,9 @@ rentalScraper = {
       var parsedResult = JSON.parse(result.body);
       rentalScraper._apiPageTracker[provider] = rentalScraper._apiPageTracker[provider] + 1;
       rentalScraper._pageCount = rentalScraper._pageCount + 1;
-      rentalScraper._handleApiPageResult(parsedResult).then(function(){
+      rentalScraper._handleApiPageResult(parsedResult, next)
+
+      function next(){  
         if (parsedResult['ids'].length > 0){
           rentalScraper._fetchListingsByProvider(provider)
         } else {
@@ -62,7 +64,7 @@ rentalScraper = {
             rentalScraper._writeToLog();
           }
         }
-      })
+      }
     })
   },
 
@@ -85,8 +87,7 @@ rentalScraper = {
     return scanComplete;
   },
   
-  _handleApiPageResult: function(result){
-    var deferred = Q.defer();
+  _handleApiPageResult: function(result, cb){
     var rentalScraper = this, 
         resultLength = result['result'].length,
         features = [];
@@ -94,11 +95,7 @@ rentalScraper = {
       var feature = rentalScraper._buildFeature(result['result'][i]);
       features.push(feature);
     };
-    rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb)
-    .then(function(){
-      deferred.resolve();
-    })
-    return deferred.promise;
+    rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb, cb)
   },
 
   _map: function (arr, func) {
@@ -108,7 +105,7 @@ rentalScraper = {
     }).all() // return group promise
   },  
 
-  _mapSeries: function(arr, iterator) {
+  _mapSeries: function(arr, iterator, cb) {
     // create a empty promise to start our series (so we can use `then`)
     var currentPromise = Q()
     var promises = arr.map(function (el) {
