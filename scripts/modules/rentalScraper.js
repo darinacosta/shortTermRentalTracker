@@ -8,6 +8,7 @@ var unirest = require('unirest'),
     assert = require('assert'),
     rentaldb = 'mongodb://localhost:27017/shorttermrentals',
     cheerio = require('cheerio'),
+    mapSeries = require('promise-map-series'),
     Q = require("q");
 
 rentalScraper = {
@@ -49,7 +50,7 @@ rentalScraper = {
     .header("X-Mashape-Key", config.mashape_key)
     .header("Accept", "application/json")
     .end(_getListing);
-
+    
     function _getListing(result){
       console.log('Scanning ' + provider + ' page ' + rentalScraper._apiPageTracker[provider] + '...')
       var parsedResult = JSON.parse(result.body);
@@ -96,29 +97,9 @@ rentalScraper = {
       var feature = rentalScraper._buildFeature(result['result'][i]);
       features.push(feature);
     };
-    rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb, cb)
-  },
-
-  _map: function (arr, func) {
-    return Q().then(function () {
-      // inside a `then`, exceptions will be handled in next onRejected
-      return arr.map(function (el) { return func(el) })
-    }).all() // return group promise
-  },  
-
-  _mapSeries: function(arr, iterator, cb) {
-    // create a empty promise to start our series (so we can use `then`)
-    var currentPromise = Q();
-    var promises = arr.map(function (el) {
-      return currentPromise = currentPromise.then(function () {
-        // execute the next function after the previous has resolved successfully
-        return iterator(el)
-      })
-    })
-    // group the results and return the group promise
-    return Q.all(promises).then(
+    mapSeries(features, rentalScraper._writeFeatureToDb)
+    .then(
     function () { 
-      console.log('NEXT');
       cb();
     },
     function (err) { 
@@ -173,8 +154,9 @@ rentalScraper = {
         if (n === 0){
           if (feature['properties']['id'].match(/air/g) !== null && feature['properties']['id'].match(/air/g)[0] === "air" && feature.properties['user'] === undefined){ 
             rentalScraper._scrapeListing(feature, function(listingFeature){
-              _addNewFeature(listingFeature);
-              //TROUBLESHOOT AND THEN ADD USER PROFILE SCRAPER
+              rentalScraper._scrapeUserProfile(listingFeature, function(userFeature){
+                _addNewFeature(userFeature)
+              });
             });
           } else {
             _addNewFeature(feature);
@@ -187,8 +169,8 @@ rentalScraper = {
           })
         };
       });
+      return deferred.promise;
     })
-    return deferred.promise();
   },
 
 

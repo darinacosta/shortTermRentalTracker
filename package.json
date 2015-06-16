@@ -15,6 +15,7 @@
     "geojson-utils": "^1.1.0",
     "gzippo": "^0.2.0",
     "method-override": "^2.3.3",
+    "promise-map-series": "^0.2.1",
     "q": "^1.4.1",
     "request": "^2.56.0",
     "unirest": "^0.4.2"

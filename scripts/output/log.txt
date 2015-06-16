@@ -3,3 +3,18 @@ Rental Scraper Log: Sun Jun 14 2015 23:37:09 GMT-0500 (CDT)
 Features collected: 0
 Calls to server:    171
 --------------------------
+--------------------------
+Rental Scraper Log: Tue Jun 16 2015 18:11:23 GMT-0500 (CDT)
+Features collected: 0
+Calls to server:    1
+--------------------------
+--------------------------
+Rental Scraper Log: Tue Jun 16 2015 18:12:06 GMT-0500 (CDT)
+Features collected: 0
+Calls to server:    1
+--------------------------
+--------------------------
+Rental Scraper Log: Tue Jun 16 2015 18:12:59 GMT-0500 (CDT)
+Features collected: 0
+Calls to server:    1
+--------------------------
