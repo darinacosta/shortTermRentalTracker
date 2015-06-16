@@ -94,9 +94,11 @@ rentalScraper = {
       var feature = rentalScraper._buildFeature(result['result'][i]);
       features.push(feature);
     };
-    rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb)
-    .then(deferred.resolve('test'););
-    return deferred.promise();
+    return rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb)
+    .then(function(){
+      deferred.resolve('test')
+      return deferred.promise();
+    });
   },
 
   _map: function (arr, func) {
