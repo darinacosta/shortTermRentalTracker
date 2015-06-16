@@ -55,21 +55,18 @@ rentalScraper = {
       var parsedResult = JSON.parse(result.body);
       rentalScraper._apiPageTracker[provider] = rentalScraper._apiPageTracker[provider] + 1;
       rentalScraper._pageCount = rentalScraper._pageCount + 1;
-      rentalScraper._handleApiPageResult(parsedResult, provider)
+      rentalScraper._handleApiPageResult(parsedResult, function(){
+        if (parsedResult['ids'].length > 0){
+          rentalScraper._fetchListingsByProvider(provider)
+        } else {
+          rentalScraper._apiPageTracker[provider] = "complete";
+          console.log(provider + ' scan complete.');
+          if (rentalScraper._detectScanCompletion() === true){
+            rentalScraper._writeToLog();
+          }
+        }
+      })
     };
-  },
-
-  _getNextListing: function(result, provider){
-    console.log("NEXT NEXT")
-    if (result['ids'].length > 0){
-      rentalScraper._fetchListingsByProvider(provider)
-    } else {
-      rentalScraper._apiPageTracker[provider] = "complete";
-      console.log(provider + ' scan complete.');
-      if (rentalScraper._detectScanCompletion() === true){
-        rentalScraper._writeToLog();
-      }
-    }
   },
 
   _detectScanCompletion: function(){
@@ -91,7 +88,7 @@ rentalScraper = {
     return scanComplete;
   },
   
-  _handleApiPageResult: function(result, provider){
+  _handleApiPageResult: function(result, cb){
     var rentalScraper = this, 
         resultLength = result['result'].length,
         features = [];
@@ -99,7 +96,7 @@ rentalScraper = {
       var feature = rentalScraper._buildFeature(result['result'][i]);
       features.push(feature);
     };
-    rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb, rentalScraper._getNextListing(result, provider))
+    rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb, cb)
   },
 
   _map: function (arr, func) {
@@ -121,6 +118,7 @@ rentalScraper = {
     // group the results and return the group promise
     return Q.all(promises).then(
     function () { 
+      console.log('NEXT');
       cb();
     },
     function (err) { 
