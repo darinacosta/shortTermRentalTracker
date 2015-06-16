@@ -142,7 +142,7 @@ rentalScraper = {
   },
 
   _writeFeatureToDb: function(feature){
-    var deferred = Q.defer;
+    var deferred = Q.defer();
     MongoClient.connect(rentaldb, function(e, db) {
       if (db === null){
         console.log('Bad database connection.')
