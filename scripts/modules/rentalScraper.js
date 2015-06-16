@@ -96,7 +96,8 @@ rentalScraper = {
       features.push(feature);
     };
     return rentalScraper._mapSeries(features, rentalScraper._writeFeatureToDb)
-    .then(function(){
+    .then(function(output){
+      console.log(output)
       deferred.resolve('test')
     });
     return deferred.promise();
