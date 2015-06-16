@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 var unirest = require('unirest'),
     fs = require('fs'),
     request = require('request'),
@@ -18,16 +16,18 @@ rentalScraper = {
 
   _logFile: path.join(__dirname, '../output/log.txt'),
 
-  _totPageCount: 1,
+  _totalApiPageCount: 1,
 
   _numberOfFeaturesWritten: 0,
 
-  _pageTracker: {},
+  _numberOfUserProfilesCrawled: 0,
+
+  _apiPageTracker: {},
 
   init: function(providers) { 
     var rentalScraper = this;
     providers.forEach(function(provider){
-      rentalScraper._pageTracker[provider] = 1;
+      rentalScraper._apiPageTracker[provider] = 1;
       rentalScraper._fetchListingsByProvider(provider);
     });
   },
@@ -42,21 +42,21 @@ rentalScraper = {
               "&nelatitude=" + nelatitude + "&nelongitude=" + nelongitude + 
               "&swlatitude=" + swlatitude + "&swlongitude=" + swlongitude + 
               "&&provider=" + provider + "&" +
-              "page=" + rentalScraper._pageTracker[provider];
+              "page=" + rentalScraper._apiPageTracker[provider];
     
     unirest.get(url)
     .header("X-Mashape-Key", config.mashape_key)
     .header("Accept", "application/json")
     .end(function (result) {
-      console.log('Scanning ' + provider + ' page ' + rentalScraper._pageTracker[provider] + '...')
+      console.log('Scanning ' + provider + ' page ' + rentalScraper._apiPageTracker[provider] + '...')
       var parsedResult = JSON.parse(result.body);
       rentalScraper._handleApiPageResult(parsedResult);
-      rentalScraper._pageTracker[provider] = rentalScraper._pageTracker[provider] + 1;
+      rentalScraper._apiPageTracker[provider] = rentalScraper._apiPageTracker[provider] + 1;
       rentalScraper._pageCount = rentalScraper._pageCount + 1;
       if (parsedResult['ids'].length > 0){
         rentalScraper._fetchListingsByProvider(provider)
       } else {
-        rentalScraper._pageTracker[provider] = "complete";
+        rentalScraper._apiPageTracker[provider] = "complete";
         console.log(provider + ' scan complete.');
         if (rentalScraper._detectScanCompletion() === true){
           rentalScraper._writeToLog();
@@ -66,7 +66,7 @@ rentalScraper = {
   },
 
   _detectScanCompletion: function(){
-    var pageTracker = rentalScraper._pageTracker;
+    var pageTracker = rentalScraper._apiPageTracker;
         resultList = [],
         scanComplete = true;
 
@@ -119,6 +119,99 @@ rentalScraper = {
     return feature;
   },
 
+  _writeFeatureToDb: function(feature){
+    MongoClient.connect(rentaldb, function(err, db) {
+      db.collection('features').find({"properties.id" : feature.properties.id}).count(function(e, n){
+        assert.equal(e, null);
+        function _addNewFeature(feature){
+          db.collection('features').insert(feature, function(e, records) {
+            console.log(feature.properties.id + ' added to features.');
+            rentalScraper._numberOfFeaturesWritten += 1;
+          });
+        };
+        if (n === 0){
+          if (feature['properties']['id'].match(/air/g) !== null && feature['properties']['id'].match(/air/g)[0] === "air"){ 
+            rentalScraper._scrapeListing(feature, function(listingFeature){
+              rentalScraper._scrapeUserProfile(listingFeature, function(userFeature){
+                _addNewFeature(userFeature)
+              });
+            });
+          } else {
+            _addNewFeature(feature);
+          }
+        } else {
+          db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(e, obj){
+            console.log(feature.properties.id + ' date updated.')
+          })
+        };
+        db.close();
+      });
+    })
+  },
+
+  _scrapeListing: function(feature, callback){
+
+    options = {
+      url: feature.properties.url,
+      headers: {
+        'User-Agent': "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+      }
+    };
+
+    request(options, _getUserProfileUrl)
+
+    function _getUserProfileUrl(error, response, html){
+      if (error){
+        console.log(error)
+      } else {
+        var $ = cheerio.load(html);
+        userDetails = $('#host-profile').find("a")[0];
+        if (userDetails !== undefined){
+          var href = $('#host-profile').find("a")[0]['attribs']['href'];
+          feature.properties['user'] = "http://airbnb.com" + href;
+          console.log(feature.properties.id + ' was succesfully scraped.')
+        } else {
+          console.log(feature.properties.id + ' was not scraped. Check to ensure it still exists.')
+        }
+        setTimeout(function() { callback(feature); }, 200);
+      }
+    }
+  },
+
+  _scrapeUserProfile: function(feature, callback){
+    var rentalTracker = this,
+
+    options = {
+      url: feature.properties.user,
+      headers: {
+        'User-Agent': "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+      }
+    };
+
+    request(options, _getTotalUserListings);
+
+    function _getTotalUserListings(error, response, html){
+      if (error){
+        console.log(error)
+      } else {
+        var $ = cheerio.load(html),
+        rentalNumberParan = $('.row-space-3').find("small").text(),
+        rentalNumberRegex = /\(([^\)]+)\)/.exec(rentalNumberParan);
+        if (rentalNumberParan !== undefined && rentalNumberRegex !== null ){
+          var rentalNumber = rentalNumberRegex[1];
+          feature.units = rentalNumber;
+          setTimeout(function() { 
+            callback(feature); 
+            rentalTracker._numberOfUserProfilesCrawled += 1;
+            console.log('User profile ' + feature.properties.user + ' was succesfully scraped.');
+          }, 200);
+        } else {
+          console.log(urls[i]['user'] + ' was not scraped. Check to ensure that it still exists and contains a listings div.')
+        }
+      }
+    }
+  },
+
   _getLocalFile: function(path) {
     var deferred  = Q.defer(),
         json = '';
@@ -136,75 +229,12 @@ rentalScraper = {
     return deferred.promise;
   },
 
-
-  _scrapeListing: function(feature){
-    var deferred  = Q.defer(),
-
-    options = {
-      url: feature.properties.url,
-      headers: {
-        'User-Agent': "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
-      }
-    };
-
-    request(options, _getUserProfileUrl);
-
-    return deferred.promise; 
-
-    function _getUserProfileUrl(error, response, html){
-      if (error){
-        console.log(error)
-      } else {
-        var $ = cheerio.load(html);
-        userDetails = $('#host-profile').find("a")[0];
-        if (userDetails !== undefined){
-          var href = $('#host-profile').find("a")[0]['attribs']['href'];
-          feature.properties['user'] = "http://airbnb.com" + href;
-          console.log(i + ': ' + urls[i] + ' belonging to user ' + href + ' was succesfully scraped.')
-        } else {
-          console.log(i + ': ' + urls[i] + ' was not scraped. Check to ensure it still exists.')
-          i++;
-        }
-        deferred.resolve(feature);
-      }
-    }
-  },
-
-  _writeFeatureToDb: function(feature){
-    MongoClient.connect(rentaldb, function(err, db) {
-      db.collection('features').find({"properties.id" : feature.properties.id}).count(function(e, n){
-        assert.equal(e, null);
-
-        function _addNewFeature(feature){
-          db.collection('features').insert(feature, function(e, records) {
-            console.log(feature.properties.id + ' added to features.');
-            rentalScraper._numberOfFeaturesWritten += 1;
-          });
-        };
-
-        if (n === 0){
-          if (feature['properties']['id'].match(/air/g) !== null){ 
-            rentalScraper._scrapeListing(feature)
-            .then(_addNewFeature(feature));
-          } else {
-            _addNewFeature(feature);
-          }
-        } else {
-          db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(e, obj){
-            console.log(feature.properties.id + ' date updated.')
-          })
-        };
-        db.close();
-      });
-    })
-  },
-
   _writeToLog: function(){
     var rentalScraper = this,
     logString = "--------------------------" + "\n" +
     "Rental Scraper Log: " + today + "\n" +
     "Features collected: " + rentalScraper._numberOfFeaturesWritten + "\n" +
-    "Calls to server:    " + rentalScraper._totalPageCount + "\n" +
+    "Calls to server:    " + rentalScraper._totalApiPageCount + "\n" +
     "--------------------------"+ "\n";
     console.log(logString);
     fs.appendFile(rentalScraper._logFile, logString);
