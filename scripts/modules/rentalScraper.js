@@ -126,7 +126,6 @@ rentalScraper = {
         function _addNewFeature(feature){
           db.collection('features').insert(feature, function(e, records) {
             assert.equal(e, null);
-            console.log(feature.properties);
             console.log(feature.properties.id + ' added to features.');
             rentalScraper._numberOfFeaturesWritten += 1;
             db.close();
@@ -152,13 +151,6 @@ rentalScraper = {
     })
   },
 
-  _crawlAuxPages: function(feature){
-    rentalScraper._scrapeListing(feature, function(listingFeature){
-      rentalScraper._scrapeUserProfile(listingFeature, function(userFeature){
-        rentalScraper._writeFeatureToDb(userFeature);
-      });
-    });
-  },
 
   _scrapeListing: function(feature, callback){
 
@@ -207,6 +199,9 @@ rentalScraper = {
       if (error){
         console.log(error)
       } else {
+        console.log('---------------------------------------------')
+        console.log(html);
+        console.log('---------------------------------------------')
         var $ = cheerio.load(html),
         rentalNumberParan = $('.row-space-3').find("small").text(),
         rentalNumberRegex = /\(([^\)]+)\)/.exec(rentalNumberParan);
