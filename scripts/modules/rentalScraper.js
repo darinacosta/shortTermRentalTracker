@@ -61,7 +61,7 @@ rentalScraper = {
 
   _getNextListing: function(result, provider){
     console.log("NEXT NEXT")
-    if (parsedResult['ids'].length > 0){
+    if (result['ids'].length > 0){
       rentalScraper._fetchListingsByProvider(provider)
     } else {
       rentalScraper._apiPageTracker[provider] = "complete";
