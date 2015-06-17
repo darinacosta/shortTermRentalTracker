@@ -198,9 +198,9 @@ rentalScraper = {
             var href = $('#host-profile').find("a")[0]['attribs']['href'];
             feature.properties['user'] = "http://airbnb.com" + href;
             console.log(feature.properties.id + ' was succesfully scraped.')
-          } /*else {
+          } else {
             console.log(feature.properties.id + ' was not scraped. Check to ensure it still exists.')
-          };*/
+          };
           callback(feature);
         }
       }, 300);
