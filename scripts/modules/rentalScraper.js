@@ -217,6 +217,10 @@ rentalScraper = {
       }
     };
 
+    if (feature.properties.user === undefined){
+      return;
+    }
+
     request(options, _getTotalUserListings);
 
     function _getTotalUserListings(error, response, html){
