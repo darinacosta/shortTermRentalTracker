@@ -239,6 +239,7 @@ rentalScraper = {
             console.log('User profile ' + feature.properties.user + ' was succesfully scraped.');
           } else {
             console.log(feature.properties.user + ' was not scraped. Check to ensure that it still exists and contains a listings div.')
+            return;
           }
         }, 900);
       }
