@@ -218,8 +218,9 @@ rentalScraper = {
     };
 
     if (feature.properties.user === undefined){
-      return;
-    }
+      console.log('Returning feature...')
+      return feature;
+    };
 
     request(options, _getTotalUserListings);
 
