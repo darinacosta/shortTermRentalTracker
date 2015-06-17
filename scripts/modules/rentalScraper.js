@@ -219,7 +219,7 @@ rentalScraper = {
 
     if (feature.properties.user === undefined){
       console.log('Returning feature...')
-      return feature;
+      callback(feature); 
     };
 
     request(options, _getTotalUserListings);
@@ -240,7 +240,7 @@ rentalScraper = {
             console.log('User profile ' + feature.properties.user + ' was succesfully scraped.');
           } else {
             console.log(feature.properties.user + ' was not scraped. Check to ensure that it still exists and contains a listings div.')
-            return;
+            callback(feature); 
           }
         }, 900);
       }
