@@ -49,15 +49,21 @@ rentalScraper = {
     unirest.get(url)
     .header("X-Mashape-Key", config.mashape_key)
     .header("Accept", "application/json")
-    .end(_getListing);
+    .end(_getListings);
     
-    function _getListing(result){
-      console.log('Scanning ' + provider + ' page ' + rentalScraper._apiPageTracker[provider] + '...')
-      var parsedResult = JSON.parse(result.body);
+    function _getListings(result){
+      var parsedResult;
+      console.log('Scanning ' + provider + ' page ' + rentalScraper._apiPageTracker[provider] + '...');
+      try {
+        parsedResult = JSON.parse(result.body);
+      } catch (e) {
+        console.log(e);
+        parsedResult = null;
+      }
       rentalScraper._apiPageTracker[provider] = rentalScraper._apiPageTracker[provider] + 1;
       rentalScraper._pageCount = rentalScraper._pageCount + 1;
       rentalScraper._handleApiPageResult(parsedResult, function(){
-        if (parsedResult['ids'].length > 0){
+        if (parsedResult === null || parsedResult['ids'].length > 0){
           rentalScraper._fetchListingsByProvider(provider)
         } else {
           rentalScraper._apiPageTracker[provider] = "complete";
