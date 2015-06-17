@@ -97,6 +97,7 @@ rentalScraper = {
       var feature = rentalScraper._buildFeature(result['result'][i]);
       features.push(feature);
     };
+
     mapSeries(features, rentalScraper._writeFeatureToDb)
     .then(
     function () { 
@@ -136,43 +137,44 @@ rentalScraper = {
   _writeFeatureToDb: function(feature){
     var deferred = Q.defer();
     MongoClient.connect(rentaldb, function(e, db) {
-      if (db === null){
-        console.log('Bad database connection.')
-        deferred.resolve();
-      }
-      db.collection('features').find({"properties.id" : feature.properties.id}).count(function(e, n){
-        assert.equal(e, null);
-        function _addNewFeature(feature){
-          db.collection('features').insert(feature, function(e, records) {
-            assert.equal(e, null);
-            console.log(feature.properties.id + ' added to features.');
-            rentalScraper._numberOfFeaturesWritten += 1;
-            db.close();
-            deferred.resolve();
-          });
-        };
-        if (n === 0){
-          if (feature['properties']['id'].match(/air/g) !== null && feature['properties']['id'].match(/air/g)[0] === "air" && feature.properties['user'] === undefined){ 
-            rentalScraper._scrapeListing(feature, function(listingFeature){
-              rentalScraper._scrapeUserProfile(listingFeature, function(userFeature){
-                _addNewFeature(userFeature)
-              });
+      setTimeout(function(){
+              if (db === null){
+          console.log('Bad database connection.')
+          deferred.resolve();
+        }
+        db.collection('features').find({"properties.id" : feature.properties.id}).count(function(e, n){
+          assert.equal(e, null);
+          function _addNewFeature(feature){
+            db.collection('features').insert(feature, function(e, records) {
+              assert.equal(e, null);
+              console.log(feature.properties.id + ' added to features.');
+              rentalScraper._numberOfFeaturesWritten += 1;
+              db.close();
+              deferred.resolve();
             });
+          };
+          if (n === 0){
+            if (feature['properties']['id'].match(/air/g) !== null && feature['properties']['id'].match(/air/g)[0] === "air" && feature.properties['user'] === undefined){ 
+              rentalScraper._scrapeListing(feature, function(listingFeature){
+                rentalScraper._scrapeUserProfile(listingFeature, function(userFeature){
+                  _addNewFeature(userFeature)
+                });
+              });
+            } else {
+              _addNewFeature(feature);
+            }
           } else {
-            _addNewFeature(feature);
-          }
-        } else {
-          db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(e, obj){
-            console.log(feature.properties.id + ' date updated.')
-            db.close();
-            deferred.resolve();
-          })
-        };
-      });
-      return deferred.promise;
+            db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(e, obj){
+              console.log(feature.properties.id + ' date updated.')
+              db.close();
+              deferred.resolve();
+            })
+          };
+        });
+      },300)
     })
+    return deferred.promise;
   },
-
 
   _scrapeListing: function(feature, callback){
 
