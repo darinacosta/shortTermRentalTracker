@@ -240,7 +240,7 @@ rentalScraper = {
         setTimeout(function() { 
           if (rentalNumberParan !== undefined && rentalNumberRegex !== null ){
             var rentalNumber = rentalNumberRegex[1];
-            feature.units = rentalNumber;
+            feature.properties['units'] = rentalNumber;
             callback(feature); 
             rentalTracker._numberOfUserProfilesCrawled += 1;
             console.log('User profile ' + feature.properties.user + ' was succesfully scraped.');
