@@ -65,7 +65,7 @@ app.factory("layerSvc", ['$http', 'layerHelpers', layerSvc]);
     } else {
       popup = '<h3>' + feature.properties.street + ' Rental (' + feature.properties.roomType + ')</h3>' +
               '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>';
-      if (feature.properties.id !== undefined && feature.properties.id.match(/air/g)[0] === "air"){
+      if (feature.properties.id !== undefined && feature.properties.id.match(/air/g) !== null && feature.properties.id.match(/air/g)[0] === "air"){
         popup += "<br><i>This listing has been recently removed."
       }
     }
@@ -107,9 +107,13 @@ app.factory("layerSvc", ['$http', 'layerHelpers', layerSvc]);
         return configureLicensedRentals(res.data)
       });
     },
-    getShortTermRentals: function(){
-      return $http.get("./layers/multiUnitRentals.json?v=0.03").then(function(res){
-        return configureShortTermRentalLayer(res.data);
+     getShortTermRentals: function(){
+      return $http.get("http://54.152.46.39/rentaltracker").then(function(res){
+        var geojson = {
+          "type": "FeatureCollection",
+          "features": res.data.body
+        };
+        return configureShortTermRentalLayer(geojson);
       });
     }
   }

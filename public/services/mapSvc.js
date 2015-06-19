@@ -2,8 +2,8 @@ app.factory("mapSvc", ['$http', mapSvc]);
 
 function mapSvc($http){
   mapAttributes = {
-    center: [29.9930, -90.0667],
-    zoom: 11,
+    center: [29.970996, -90.058537],
+    zoom: 12,
     zoomControl: false,
     scrollWheelZoom: false
   },
