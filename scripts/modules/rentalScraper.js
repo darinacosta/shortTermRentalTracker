@@ -124,17 +124,17 @@ rentalScraper = {
       },
       "properties":{
         "id": location['id'],
+        "provider": location['id'].replace(/[0-9]/g, ''),
         "url": location['provider']['url'],
-        "roomType": location['attr']['roomType']['text'],
+        "roomtype": location['attr']['roomType']['text'],
         "city": location['location']['city'],
         "neighborhood": location['location']['neighbourhood'],
         "street": location['location']['streetName'],
-        "nightlyPrice": location['price']['nightly'],
-        "monthlyPrice": location['price']['monthly'],
+        "nightlyprice": location['price']['nightly'],
+        "monthlyprice": location['price']['monthly'],
         //"description": location['attr']['description'],
         //"reviews" : location['reviews']['entries'],
-        "dateCollected": today,
-        "scraped": false
+        "datecollected": today
       }
     };
     return feature;
