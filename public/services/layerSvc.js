@@ -57,13 +57,13 @@ app.factory("layerSvc", ['$http', 'layerHelpers', layerSvc]);
       userUrl = feature.properties.user,
       userUrlArray = userUrl.split('/'),
       userId = userUrlArray[userUrlArray.length -1];
-      popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomType + '</small></h4>' +
+      popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomtype + '</small></h5>' +
               '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
               '<b>User Profile:</b> <a target="_blank" href="' + userUrl + '">' + userUrl + '</a><br>' + 
               '<b>User ID:</b> ' + userId + '<br><br>' + 
               '<b>This user has ' + feature.properties.units + ' ' + pluralListing + '.</b>'
     } else {
-      popup = '<h3>' + feature.properties.street + ' Rental (' + feature.properties.roomType + ')</h3>' +
+      popup = '<h3>' + feature.properties.street + ' Rental (' + feature.properties.roomtype + ')</h3>' +
               '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>';
       if (feature.properties.id !== undefined && feature.properties.id.match(/air/g) !== null && feature.properties.id.match(/air/g)[0] === "air"){
         popup += "<br><i>This listing has been recently removed."
