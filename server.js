@@ -14,8 +14,26 @@ var BSON = require('mongodb').BSON;
 app.get('/rentaltracker', function(req, res){
   res.setHeader('Content-Type', 'application/json'); 
   var urlParts = url.parse(req.url, true);
-  var queryObject = urlParts.query;
-  var query = queryObject.all === true ? {} : queryObject; 
+  var queryPost = urlParts.query;
+  var propertiesInt = ["monthlyprice","nightlyprice"];
+  var propertiesStr = ["city","id","roomtype","provider","user","url"];
+  var query = (function(){
+    var queryObject = {};
+    for (var property in queryPost){
+      if (propertiesInt.indexOf(property) > -1){
+        queryObject['properties.' + property] = parseInt(queryPost[property]); 
+      } else if (propertiesStr.indexOf(property) > -1){
+        queryObject['properties.' + property] = queryPost[property];
+      }
+     if (queryPost.pastweek === "true"){
+        var today = new Date();
+        var lastWeek = new Date(today.setDate(today.getDate() - 7));  
+        queryObject['properties.datecollected'] = {"$gte": lastWeek};
+      }
+    };
+    return queryObject;
+  })();
+  console.log(query);
   mdb.open(function(err, db){
      db.collection('features')
      .find(query)
