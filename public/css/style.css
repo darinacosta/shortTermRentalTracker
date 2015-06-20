@@ -10,7 +10,8 @@ body {
 }
 
 td{
-  padding: 2px 5px;
+  padding: 2px 2px;
+  font-size: 12px;
 }
 
 .infobar{

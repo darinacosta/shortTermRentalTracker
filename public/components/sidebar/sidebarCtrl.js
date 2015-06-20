@@ -46,25 +46,22 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
         if (feature['properties']['roomtype'] === ( 'Entire home/apt'||'Entire Place')){
           numEntireHomes += 1;
         };
-        /*if (numUnits > 1 && multiListingUsers.indexOf(feature['properties']['user']) === -1){
+        if (numUnits > 1){
           usersWithMultiListings += 1;
-          multiListingUsers.push(feature['properties']['user']);
+          multiListingUsers.push(userUrl);
         };
-        if (numUnits > mostListings){
+        /*if (numUnits > mostListings){
           mostListings = numUnits;
           highestUrl = userUrl;
         }; */
-        if (userUrl !== undefined && numUnits !== undefined && numUnits > 1){
-          multiListingUsers.push(userUrl);
-        };
-        if (feature.properties.id !== undefined && feature.properties.id.match(/air/g)[0] === "air" && feature.properties.user === undefined){
+        /*if (feature.properties.id !== undefined && feature.properties.id.match(/air/g)[0] === "air" && feature.properties.user === undefined){
           nolaTotal -= 1;
-        }
+        }*/
       }
     });
     maxRenterObj = mode(multiListingUsers);
     asyncHelper(function() {
-      $scope.mostListings = "<a href='" + maxRenterObj[maxEl] + "' target='_blank'>" + maxRenterObj[maxCount] + "</a>";
+      $scope.mostListings = "<a href='" + maxRenterObj['maxEl'] + "' target='_blank'>" + maxRenterObj['maxCount'] + "</a>";
       $scope.nolaTotal = nolaTotal;
       $scope.airbnbTotal = airbnbTotal;
       $scope.homeawayTotal = homeawayTotal;
