@@ -153,7 +153,7 @@ rentalScraper = {
           function _addNewFeature(feature){
             db.collection('features').insert(feature, function(e, records) {
               assert.equal(e, null);
-              console.log(feature.properties.id + ' added to features.');
+              //console.log(feature.properties.id + ' added to features.');
               rentalScraper._numberOfFeaturesWritten += 1;
               db.close();
               deferred.resolve();
@@ -171,7 +171,7 @@ rentalScraper = {
             }
           } else {
             db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(e, obj){
-              console.log(feature.properties.id + ' date updated.')
+              //console.log(feature.properties.id + ' date updated.')
               db.close();
               deferred.resolve();
             })
@@ -203,9 +203,9 @@ rentalScraper = {
           if (userDetails !== undefined){
             var href = $('#host-profile').find("a")[0]['attribs']['href'];
             feature.properties['user'] = "http://airbnb.com" + href;
-            console.log(feature.properties.id + ' was succesfully scraped.')
+            //console.log(feature.properties.id + ' was succesfully scraped.')
           } else {
-            console.log(feature.properties.id + ' was not scraped. Check to ensure it still exists.')
+            console.log(feature.properties.url + ' was not scraped. Check to ensure it still exists.')
           };
           callback(feature);
         }
@@ -243,7 +243,7 @@ rentalScraper = {
             feature.properties['units'] = rentalNumber;
             callback(feature); 
             rentalTracker._numberOfUserProfilesCrawled += 1;
-            console.log('User profile ' + feature.properties.user + ' was succesfully scraped.');
+            //console.log('User profile ' + feature.properties.user + ' was succesfully scraped.');
           } else {
             console.log(feature.properties.user + ' was not scraped. Check to ensure that it still exists and contains a listings div.')
             callback(feature); 
@@ -275,7 +275,6 @@ rentalScraper = {
     logString = "--------------------------" + "\n" +
     "Rental Scraper Log: " + today + "\n" +
     "Features collected: " + rentalScraper._numberOfFeaturesWritten + "\n" +
-    "Calls to server:    " + rentalScraper._totalApiPageCount + "\n" +
     "--------------------------"+ "\n";
     console.log(logString);
     fs.appendFile(rentalScraper._logFile, logString);
