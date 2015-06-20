@@ -27,36 +27,47 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
   function gatherStats (data){
     var nolaTotal = 0,
         numEntireHomes = 0,
+        airbnbTotal = 0,
+        homeawayTotal = 0,
         mostListings = 0,
         usersWithMultiListings = 0,
+        highestListing = 0,
         multiListingUsers = [],
-        highestUrl, mostListings;
+        highestUrl, mostListings, maxRenterObj;
 
     angular.forEach(data, function(feature){
       if (feature === null){return false};
+      airbnbTotal = feature.properties.provider === "airbnb" ? airbnbTotal + 1 : airbnbTotal ;
+      homeawayTotal = feature.properties.provider === "hma" || feature.properties.provider === "hmavb" ? homeawayTotal + 1 : homeawayTotal ; 
       numUnits = parseInt(feature['properties']['units']);
       userUrl = feature['properties']['user'];
-      if (feature['properties']['city'] === 'New Orleans'){
+      if (feature['properties']['city'].toLowerCase().replace(/ /g, '') === 'neworleans'){
         nolaTotal += 1;
         if (feature['properties']['roomtype'] === ( 'Entire home/apt'||'Entire Place')){
           numEntireHomes += 1;
         };
-        if (numUnits > 1 && multiListingUsers.indexOf(feature['properties']['user']) === -1){
+        /*if (numUnits > 1 && multiListingUsers.indexOf(feature['properties']['user']) === -1){
           usersWithMultiListings += 1;
           multiListingUsers.push(feature['properties']['user']);
         };
         if (numUnits > mostListings){
           mostListings = numUnits;
           highestUrl = userUrl;
-        }; 
+        }; */
+        if (userUrl !== undefined && numUnits !== undefined && numUnits > 1){
+          multiListingUsers.push(userUrl);
+        };
         if (feature.properties.id !== undefined && feature.properties.id.match(/air/g)[0] === "air" && feature.properties.user === undefined){
           nolaTotal -= 1;
         }
       }
     });
+    maxRenterObj = mode(multiListingUsers);
     asyncHelper(function() {
-      $scope.mostListings = "<a href='" + highestUrl + "' target='_blank'>" + mostListings + "</a>";
+      $scope.mostListings = "<a href='" + maxRenterObj[maxEl] + "' target='_blank'>" + maxRenterObj[maxCount] + "</a>";
       $scope.nolaTotal = nolaTotal;
+      $scope.airbnbTotal = airbnbTotal;
+      $scope.homeawayTotal = homeawayTotal;
       $scope.numEntireHomes = numEntireHomes;
       $scope.lastUpdate = dateSplit(data[0]['properties']['datecollected']);
       $scope.usersWithMultiListings = usersWithMultiListings;
@@ -97,15 +108,15 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
   function configureQueryRentalLayer(data, status) {
     var group; 
     queryLayer = L.geoJson(data, {
-      onEachFeature: shortTermRentalPopup,
-      pointToLayer: shortTermRentalPointStyle
+      onEachFeature: queryPopup,
+      pointToLayer: queryPointStyle
     });
     group = new L.featureGroup([queryLayer]);
     layerHelpers.hideAllLayers();
     map.addLayer(queryLayer);
     //layerControl.addOverlay(queryLayer, 'User Query');
     map.fitBounds(group.getBounds());
-  }
+  };
 
   $scope.clearSelection = function(){
     var clusterLayer = shortTermRentalClustersManager.getLayer();
@@ -130,7 +141,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
   });
 
 
-  function shortTermRentalPointStyle(feature, latlng) {
+  function queryPointStyle(feature, latlng) {
     return L.circleMarker(latlng, {
       radius: 6,
       fillColor: "yellow",
@@ -142,7 +153,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
     })
   };
 
-  function shortTermRentalPopup(feature, layer) {
+  function queryPopup(feature, layer) {
     var popup;
     if (feature.properties.user !== undefined){
       var pluralListing = feature.properties.units === '1' ? 'listing' : 'listings',
@@ -162,13 +173,34 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
   };
   
 
-  //create asyncSvc
+  //HELPER FUNCTIONS MOVE THESE TO A SERVICE
   function asyncHelper(callback){
     $timeout(function(){
       $scope.$apply(
         callback()
       )
     });
+  };
+
+  function mode(array){
+    if(array.length == 0)
+      return null;
+    var modeMap = {};
+    var maxEl = array[0], maxCount = 1;
+    for(var i = 0; i < array.length; i++)
+    {
+      var el = array[i];
+      if(modeMap[el] == null)
+        modeMap[el] = 1;
+      else
+        modeMap[el]++;  
+      if(modeMap[el] > maxCount)
+      {
+        maxEl = el;
+        maxCount = modeMap[el];
+      }
+    }
+    return {maxEl: maxEl, maxCount:maxCount};
   };
 
 }
