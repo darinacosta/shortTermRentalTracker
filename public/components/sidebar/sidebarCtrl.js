@@ -9,8 +9,8 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
       queryLayer = {},
       shortTermRentalClustersManager = new layerManager("Regional Short Term Rental Clusters");
 
-  $http.get("./layers/multiUnitRentals.json?v=0.03").success(function(data){
-      gatherStats(data)
+  $http.get("http://54.152.46.39/rentaltracker?pastweek=true").success(function(data){
+      gatherStats(data.body)
     }
   );
 
@@ -32,21 +32,23 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
         multiListingUsers = [],
         highestUrl, mostListings;
 
-    angular.forEach(data['features'], function(feature){
+    angular.forEach(data, function(feature){
       if (feature === null){return false};
       numUnits = parseInt(feature['properties']['units']);
       userUrl = feature['properties']['user'];
       if (feature['properties']['city'] === 'New Orleans'){
         nolaTotal += 1;
-        feature['properties']['roomType'] === 'Entire home/apt' ? numEntireHomes += 1 : numEntireHomes = numEntireHomes;
+        if (feature['properties']['roomtype'] === ( 'Entire home/apt'||'Entire Place')){
+          numEntireHomes += 1;
+        };
         if (numUnits > 1 && multiListingUsers.indexOf(feature['properties']['user']) === -1){
           usersWithMultiListings += 1;
           multiListingUsers.push(feature['properties']['user']);
-        }
+        };
         if (numUnits > mostListings){
           mostListings = numUnits;
           highestUrl = userUrl;
-        } 
+        }; 
         if (feature.properties.id !== undefined && feature.properties.id.match(/air/g)[0] === "air" && feature.properties.user === undefined){
           nolaTotal -= 1;
         }
@@ -56,7 +58,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
       $scope.mostListings = "<a href='" + highestUrl + "' target='_blank'>" + mostListings + "</a>";
       $scope.nolaTotal = nolaTotal;
       $scope.numEntireHomes = numEntireHomes;
-      $scope.lastUpdate = dateSplit(data['features'][0]['properties']['dateCollected']);
+      $scope.lastUpdate = dateSplit(data[0]['properties']['datecollected']);
       $scope.usersWithMultiListings = usersWithMultiListings;
     });
   };
