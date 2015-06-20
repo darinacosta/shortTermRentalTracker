@@ -39,7 +39,7 @@ rentalScraper = {
         nelatitude = 30.123749,
         nelongitude = -89.868164,
         swlatitude = 29.881137,
-        swlongitude = -90.557556,
+        swlongitude = -90.152435,
         url = "https://zilyo.p.mashape.com/search?isinstantbook=false" + 
               "&nelatitude=" + nelatitude + "&nelongitude=" + nelongitude + 
               "&swlatitude=" + swlatitude + "&swlongitude=" + swlongitude + 
