@@ -65,8 +65,8 @@ function layerSvc($http, layerHelpers){
     provider = feature.properties.provider;
     if (provider.substring(0,3) === "air"){
       return "#B32B2B";
-    } else if (provider.substring(0,1) === "hma") {
-      return "#2B5CB3";
+    } else if (provider.substring(0,3) === "hma") {
+      return "#ABA925";
     }
   };
   
@@ -77,7 +77,7 @@ function layerSvc($http, layerHelpers){
       userUrl = feature.properties.user,
       userUrlArray = userUrl.split('/'),
       userId = userUrlArray[userUrlArray.length -1];
-      popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomtype + '</small></h5>' +
+      popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomtype + ' | ' + feature.properties.reviews + ' reviews</small></h5>' +
               '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
               '<b>User Profile:</b> <a target="_blank" href="' + userUrl + '">' + userUrl + '</a><br>' + 
               '<b>User ID:</b> ' + userId + '<br><br>' + 
@@ -90,6 +90,27 @@ function layerSvc($http, layerHelpers){
       }
     }
     layer.bindPopup(popup);
+  };
+
+  /*Airbnb Layer*/ 
+  
+  function configureAirbnbs(geojson){
+    return L.geoJson(geojson, {
+      pointToLayer: airbnbPointStyle,
+      onEachFeature: shortTermRentalPopup
+    })
+  };
+
+  function airbnbPointStyle(feature, latlng) {
+    return L.circleMarker(latlng, {
+      radius: 4,
+      fillColor: colorAirbnbsConditionally(feature),
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8,
+      name: 'shortterm'
+    })
   };
 
   function colorAirbnbsConditionally(feature){
@@ -140,7 +161,6 @@ function layerSvc($http, layerHelpers){
           "type": "FeatureCollection",
           "features": res.data.body
         };
-        var airbnbGeojson
         return configureAirbnbs(geojson);
       });
     }

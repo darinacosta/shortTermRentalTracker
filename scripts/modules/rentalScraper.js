@@ -191,9 +191,9 @@ rentalScraper = {
       }
     };
 
-    request(options, _getUserProfileUrl)
+    request(options, _getListingData)
 
-    function _getUserProfileUrl(error, response, html){
+    function _getListingData(error, response, html){
       setTimeout(function() { 
         if (error){
           console.log(error)
@@ -201,8 +201,11 @@ rentalScraper = {
           var $ = cheerio.load(html);
           userDetails = $('#host-profile').find("a")[0];
           if (userDetails !== undefined){
-            var href = $('#host-profile').find("a")[0]['attribs']['href'];
+            var href = userDetails['attribs']['href'];
+            var numReviewsRegex = $('.star-rating').parent().text().split('Reviews')[0].replace(/ /g,'').match(/\n([0-9]+)$/);
+            var numReviews = $('.star-rating')[0] === undefined || numReviewsRegex === null ? 0 : parseInt(numReviewsRegex[1]);
             feature.properties['user'] = "http://airbnb.com" + href;
+            feature.properties['reviews'] = numReviews;
             //console.log(feature.properties.id + ' was succesfully scraped.')
           } else {
             console.log(feature.properties.url + ' was not scraped. Check to ensure it still exists.')
