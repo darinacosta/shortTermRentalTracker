@@ -144,7 +144,7 @@ rentalScraper = {
     var deferred = Q.defer();
     MongoClient.connect(rentaldb, function(e, db) {
       setTimeout(function(){
-              if (db === null){
+        if (db === null){
           console.log('Bad database connection.')
           deferred.resolve();
         }
@@ -199,20 +199,35 @@ rentalScraper = {
           console.log(error)
         } else {
           var $ = cheerio.load(html);
-          userDetails = $('#host-profile').find("a")[0];
-          if (userDetails !== undefined){
-            var href = userDetails['attribs']['href'];
-            var numReviewsRegex = $('.star-rating').parent().text().split('Reviews')[0].replace(/ /g,'').match(/\n([0-9]+)$/);
-            var numReviews = $('.star-rating')[0] === undefined || numReviewsRegex === null ? 0 : parseInt(numReviewsRegex[1]);
-            feature.properties['user'] = "http://airbnb.com" + href;
-            feature.properties['reviews'] = numReviews;
-            //console.log(feature.properties.id + ' was succesfully scraped.')
-          } else {
-            console.log(feature.properties.url + ' was not scraped. Check to ensure it still exists.')
-          };
-          callback(feature);
+          var scrapedFeature;
+          if (feature.properties.provider === "air"){
+	    scrapedFeature = _getAirbnbListingData($, feature);
+	  } else if (feature.properties.provider.substring(0,3) === "hma"){
+	    scrapedFeature = _getHomeawayListingData($, feature);  
+	  }	  
+	  callback(scrapedFeature);
         }
       }, 300);
+      
+      function _getAirbnbListingData($, feature){ 
+        userDetails = $('#host-profile').find("a")[0];
+        if (userDetails !== undefined){
+          var href = userDetails['attribs']['href'];
+          var numReviewsRegex = $('.star-rating').parent().text().split('Reviews')[0].replace(/ /g,'').match(/\n([0-9]+)$/);
+          var numReviews = $('.star-rating')[0] === undefined || numReviewsRegex === null ? 0 : parseInt(numReviewsRegex[1]);
+          feature.properties['user'] = "http://airbnb.com" + href;
+          feature.properties['reviews'] = numReviews;
+          //console.log(feature.properties.id + ' was succesfully scraped.')
+	} else {
+          console.log(feature.properties.url + ' was not scraped. Check to ensure it still exists.');
+        };
+        return feature;
+      };
+
+      function _getHomeawayListingData($, feature){
+        // Develop this function
+	return feature;
+      };
     }
   },
 
@@ -271,6 +286,25 @@ rentalScraper = {
       });
     });
     return deferred.promise;
+  },
+
+  _detectScanCompletion: function(){
+    var pageTracker = rentalScraper._apiPageTracker;
+        resultList = [],
+        scanComplete = true;
+
+    for (var provider in pageTracker) {
+      var result = pageTracker[provider];
+      resultList.push(result); 
+    };
+
+    for (var i = 0; i < resultList.length; i ++){
+      if (resultList[i] !== "complete"){
+        scanComplete = false;
+      }
+    };
+
+    return scanComplete;
   },
 
   _writeToLog: function(){
