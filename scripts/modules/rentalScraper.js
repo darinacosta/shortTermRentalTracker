@@ -226,7 +226,17 @@ rentalScraper = {
 
       function _getHomeawayListingData($, feature){
         // Develop this function
-	return feature;
+        var userNameDiv = $('.owner-name');
+	if (userNameDiv !== undefined){
+	  var numReviewsRegex = $('.review-summary').text().replace(/ /g,'').match(/([0-9]+)[a-zA-Z]/);
+	  var numReviews = $('.review-summary')[0] === undefined || numReviewsRegex === null ? 0 : parseInt(numReviewsRegex[1]);
+	  var user = userNameDiv.text().trim().match(/^([a-zA-Z ]+)\n/g)[0];
+          feature.properties['user'] = user;
+	  feature.properties['reviews'] = numReviews;
+	} else {
+          console.log(feature.properties.url + ' was not scraped. Check to ensure it still exists.');
+	}
+        return feature;
       };
     }
   },
