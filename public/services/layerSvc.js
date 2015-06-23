@@ -72,7 +72,7 @@ function layerSvc($http, layerHelpers){
   
   function shortTermRentalPopup(feature, layer) {
     var popup;
-    if (feature.properties.user !== undefined){
+    if (feature.properties.user !== undefined && feature.properties.provider === "air"){
       var pluralListing = feature.properties.units === '1' ? 'listing' : 'listings',
       userUrl = feature.properties.user,
       userUrlArray = userUrl.split('/'),
@@ -81,13 +81,16 @@ function layerSvc($http, layerHelpers){
               '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
               '<b>User Profile:</b> <a target="_blank" href="' + userUrl + '">' + userUrl + '</a><br>' + 
               '<b>User ID:</b> ' + userId + '<br><br>' + 
-              '<b>This user has ' + feature.properties.units + ' ' + pluralListing + '.</b>'
+              '<b>This user has ' + feature.properties.units + ' ' + pluralListing + '.</b>';
+    } else if (feature.properties.user !== undefined && feature.properties.provider === "hma"){ 
+      userName = feature.properties.user,
+      popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomtype + ' | ' + feature.properties.reviews + ' reviews</small></h5>' +
+              '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
+              '<b>Name provided by user:</b> ' + userName + '<br><br>'  
     } else {
       popup = '<h3>' + feature.properties.street + ' Rental<br> <small>(' + feature.properties.roomtype + ')</small></h3>' +
-              '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>';
-      if (feature.properties.id !== undefined && feature.properties.id.match(/air/g) !== null && feature.properties.id.match(/air/g)[0] === "air"){
-        popup += "<br><i>This listing has been recently removed."
-      }
+              '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
+              "<br><i>This listing has been recently removed.";
     }
     layer.bindPopup(popup);
   };
@@ -145,7 +148,7 @@ function layerSvc($http, layerHelpers){
     },
 
     getShortTermRentals: function(){
-      return $http.get("http://54.152.46.39/rentaltracker").then(function(res){
+      return $http.get("http://54.152.46.39/rentaltracker?pastweek=true&userexists=true&neworleans=true").then(function(res){
         var geojson = {
           "type": "FeatureCollection",
           "features": res.data.body
