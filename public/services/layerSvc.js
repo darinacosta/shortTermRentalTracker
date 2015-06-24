@@ -82,15 +82,14 @@ function layerSvc($http, layerHelpers){
               '<b>User Profile:</b> <a target="_blank" href="' + userUrl + '">' + userUrl + '</a><br>' + 
               '<b>User ID:</b> ' + userId + '<br><br>' + 
               '<b>This user has ' + feature.properties.units + ' ' + pluralListing + '.</b>';
-    } else if (feature.properties.user !== undefined && feature.properties.provider === "hma"){ 
+    } else if (feature.properties.reviews !== undefined && feature.properties.provider === "hma"){ 
       userName = feature.properties.user,
       popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomtype + ' | ' + feature.properties.reviews + ' reviews</small></h5>' +
               '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
               '<b>Name provided by user:</b> ' + userName + '<br><br>'  
     } else {
       popup = '<h3>' + feature.properties.street + ' Rental<br> <small>(' + feature.properties.roomtype + ')</small></h3>' +
-              '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
-              "<br><i>This listing has been recently removed.";
+              '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>';
     }
     layer.bindPopup(popup);
   };

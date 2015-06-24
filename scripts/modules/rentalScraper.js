@@ -124,7 +124,7 @@ rentalScraper = {
       },
       "properties":{
         "id": location['id'],
-        "provider": location['id'].replace(/[0-9]/g, ''),
+        "provider": location['id'].replace(/[0-9]/g, '').substring(0,3),
         "url": location['provider']['url'],
         "roomtype": location['attr']['roomType']['text'],
         "city": location['location']['city'],
@@ -150,6 +150,7 @@ rentalScraper = {
         }
         db.collection('features').find({"properties.id" : feature.properties.id}).count(function(e, n){
           assert.equal(e, null);
+          
           function _addNewFeature(feature){
             db.collection('features').insert(feature, function(e, records) {
               assert.equal(e, null);
@@ -159,16 +160,23 @@ rentalScraper = {
               deferred.resolve();
             });
           };
+
+          function _replaceFeature(feature){
+            db.collection('features').update({"properties.id" : feature.properties.id}, feature, function(e, records) {
+              assert.equal(e, null);
+              //console.log(feature.properties.id + ' added to features.');
+              rentalScraper._numberOfFeaturesWritten += 1;
+              db.close();
+              deferred.resolve();
+            });
+          };
+
           if (n === 0){
-            if (feature['properties']['id'].match(/air/g) !== null && feature['properties']['id'].match(/air/g)[0] === "air" && feature.properties['user'] === undefined){ 
-              rentalScraper._scrapeListing(feature, function(listingFeature){
-                rentalScraper._scrapeUserProfile(listingFeature, function(userFeature){
-                  _addNewFeature(userFeature)
-                });
+            rentalScraper._scrapeListing(feature, function(listingFeature){
+              rentalScraper._scrapeUserProfile(listingFeature, function(userFeature){
+	        _addNewFeature(userFeature);
               });
-            } else {
-              _addNewFeature(feature);
-            }
+            });
           } else {
             db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(e, obj){
               //console.log(feature.properties.id + ' date updated.')
@@ -225,13 +233,15 @@ rentalScraper = {
       };
 
       function _getHomeawayListingData($, feature){
-        // Develop this function
-        var userNameDiv = $('.owner-name');
-	if (userNameDiv !== undefined){
-	  var numReviewsRegex = $('.review-summary').text().replace(/ /g,'').match(/([0-9]+)[a-zA-Z]/);
-	  var numReviews = $('.review-summary')[0] === undefined || numReviewsRegex === null ? 0 : parseInt(numReviewsRegex[1]);
-	  var user = userNameDiv.text().trim().match(/^([a-zA-Z ]+)\n/g)[0];
-          feature.properties['user'] = user;
+        console.log('Scraping ' + feature.properties.url);
+        var userNameDiv = $('.contact-info-wrapper > .owner-name');
+	var numReviewsDiv = $('span[itemprop="reviewCount"]');
+	if (userNameDiv[0] !== undefined){
+	  var numReviewsRegex = numReviewsDiv.text().match(/^([0-9]+)[ a-zA-Z]/);
+	  var numReviews = numReviewsDiv === undefined || numReviewsRegex === null ? 0 : parseInt(numReviewsRegex[1]);
+	  var userRegex = userNameDiv.text().trim().match(/^([0-9\-a-zA-Z ]+)/)
+	  var user = userRegex === null ? "Unkown" : userRegex[1].replace(/\n/g,'');
+          feature.properties['user'] = userRegex;
 	  feature.properties['reviews'] = numReviews;
 	} else {
           console.log(feature.properties.url + ' was not scraped. Check to ensure it still exists.');
@@ -242,6 +252,8 @@ rentalScraper = {
   },
 
   _scrapeUserProfile: function(feature, callback){
+    if (feature.properties.provider === "hma" || feature.properties.user === undefined){callback(feature); return};
+
     var rentalTracker = this,
 
     options = {
@@ -249,11 +261,6 @@ rentalScraper = {
       headers: {
         'User-Agent': "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
       }
-    };
-
-    if (feature.properties.user === undefined){
-      console.log('Returning feature...')
-      callback(feature); 
     };
 
     request(options, _getTotalUserListings);
