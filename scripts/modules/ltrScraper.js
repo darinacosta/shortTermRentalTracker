@@ -16,6 +16,12 @@ var config = {
   feature: 0 
 };
 
+var counter = {
+  page: 0,
+  tier: 0,
+  feature: 0
+};
+
 function search(){
   
   var url = "http://search.3taps.com?" +
@@ -23,16 +29,16 @@ function search(){
 	    "&location.county=" + config.county +
 	    "&retvals=" + config.retvals + 
 	    "&category=RHFR" + 
-	    "&page=" + config.page + 
-	    "&tier=" + config.tier;
+	    "&page=" + counter.page + 
+	    "&tier=" + counter.tier;
 
   request(url, function(e,r,b){
     var res = JSON.parse(b);
     var postings = res.postings;  
     var features = [];
-    config.page += 1;
-    if (res.next_tier > config.tier){
-      config.tier += 1
+    counter.page += 1;
+    if (res.next_tier > counter.tier){
+      counter.tier += 1
     }
     for (var i = 0; i < postings.length; i++){
       var feature = buildFeature(postings[i]);
@@ -51,7 +57,7 @@ function writeToDb(feature){
   MongoClient.connect(ltrdb, function(e, db){
     setTimeout(function(){
       config.feature += 1;
-      console.log("Feature: " + config.feature + " | ID: " + feature.properties.id + " | Page: " + config.page + " | Tier: " + config.tier);  
+      console.log("Feature: " + counter.feature + " | ID: " + feature.properties.id + " | Page: " + counter.page + " | Tier: " + counter.tier);  
       db.collection('features').find({"properties.id": feature.properties['id']}).count(function(e,n){
         if (n === 0){
           db.collection('features').insert(feature, function(e, records){
