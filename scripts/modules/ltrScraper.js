@@ -14,7 +14,7 @@ var ltrScraper = {};
 var config = {
   token: "6467f98a0c3d0cf2abd6dc81e7d0817d",
   county: "USA-LA-ORL",
-  retvals: "id,heading,price,currency,location",
+  retvals: "id,heading,price,currency,location,external_url",
   page: 0,
   tier: 0,
   feature: 0 

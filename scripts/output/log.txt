@@ -44,3 +44,19 @@ Features collected: 1328
 Rental Scraper Log: Tue Jun 23 2015 03:55:31 GMT+0000 (UTC)
 Features collected: 772
 --------------------------
+--------------------------
+Rental Scraper Log: Sun Jun 28 2015 00:00:01 GMT+0000 (UTC)
+Features collected: 0
+--------------------------
+--------------------------
+Rental Scraper Log: Wed Jul 01 2015 00:00:01 GMT+0000 (UTC)
+Features collected: 0
+--------------------------
+--------------------------
+Rental Scraper Log: Sat Jul 04 2015 00:00:01 GMT+0000 (UTC)
+Features collected: 0
+--------------------------
+--------------------------
+Rental Scraper Log: Tue Jul 07 2015 00:00:01 GMT+0000 (UTC)
+Features collected: 0
+--------------------------

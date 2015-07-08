@@ -11,6 +11,29 @@ var BSON = require('mongodb').BSON;
 
 //Routing
 
+app.get('/longtermrentals', function(req, res){
+  res.setHeader('Content-Type', 'application/json');
+  var urlParts = url.parse(req.url, true);
+  var queryPost = urlParts.query;
+  var query = (function(){
+    var queryObject = {};
+    
+    if (queryPost.neighborhood){
+      queryObject['properties.neighborhood'] =  {'$regex': queryPost.neighborhood, '$options': 'i'}; 
+    };
+
+    return queryObject;
+  })();
+  console.log(query);
+  ltrdb.open(function(err, db){
+     db.collection('features')
+     .find(query)
+     .toArray(function(err,features){
+       res.send({body:features});
+       db.close()
+     });
+   });
+});
 
 app.get('/rentaltracker', function(req, res){
   res.setHeader('Content-Type', 'application/json'); 
