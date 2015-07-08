@@ -1,11 +1,11 @@
-var app = angular.module("app", ["ngRoute", "ngSanitize", "ui.bootstrap"]) //ngSanitize is require to use ng-bind-html
+var app = angular.module("app", ["ngRoute", "ngSanitize", "ui.bootstrap", "leaflet-directive"]) //ngSanitize is require to use ng-bind-html
   
 .config(function ($routeProvider) {
   $routeProvider
     .when("/home", {
-      controller: 'homeCtrl', 
-      controllerUrl: 'components/home/homeCtrl.js',
-      templateUrl: 'components/home/home.html'
+      controller: 'mapCtrl', 
+      controllerUrl: 'components/map/mapCtrl.js',
+      templateUrl: 'components/map/map.html'
     })
     .when("/treme", {
       controller: 'tremeCtrl', 

@@ -9,7 +9,6 @@ function mapSvc($http){
   },
   layers = [],
   map = L.map('map', mapAttributes),
-  layerControl = L.control.layers(),
   date = new Date(),
   current_hour = date.getHours(),
 
@@ -97,14 +96,12 @@ function mapSvc($http){
   // add the new control to the map
   var zoomHome = new L.Control.zoomHome();
   zoomHome.addTo(map);
-  layerControl.addTo(map);
 
   (function addBasemap(){
     map.addLayer(Esri_WorldGrayCanvas)
   })();
 
   mapSvc = {
-    layerControl: layerControl,
     map: map,
     mapAttributes: mapAttributes
   }

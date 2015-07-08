@@ -1,9 +1,12 @@
-app.controller('sidebarCtrl', ['$scope', '$q', '$timeout', 'mapSvc', 'layerSvc', 'layerHelpers', '$http', sidebarCtrl]);
+app.controller('sidebarCtrl', ['$scope', '$q', '$timeout', 'layerSvc', '$http', 'leafletData', sidebarCtrl]);
 
-function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http) {
+function sidebarCtrl($scope, $q, $timeout, layerSvc, $http, leafletData) {
   
-  var map = mapSvc.map,
-      layerControl = mapSvc.layerControl,
+  var map = function(){
+        return leafletData.getMap().then(function(map) {
+            return map;
+        });
+      },
       layerManager = layerHelpers.layerManager,
       shortTermRentalClusters = {},
       queryLayer = {},

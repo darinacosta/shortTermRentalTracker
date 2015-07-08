@@ -13,11 +13,8 @@
   <![endif]-->
 </head>
 <body ng-app="app">
-  <map></map>
   <sidebar></sidebar>
-  <div class="container">
-    <div style="display:none"  ng-view></div>
-  </div>
+  <div ng-view></div>
   
   <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -28,6 +25,8 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
   <script src="lib/angular-sanitize/angular-sanitize.js"></script>
   <script src="lib/angular-bootstrap/dist/ui-bootstrap.min.js"></script>
+  <script src="lib/angular-bootstrap/dist/ui-bootstrap.min.js"></script>
+  <script src="lib/angular-leaflet-directive/dist/angular-leaflet-directive.min.js"></script>
 
   <script src="app.js"></script>
   
@@ -43,10 +42,8 @@
 
   <!--Directives-->
   <script src="components/sidebar/sidebarDirective.js"></script>
-  <script src="components/map/mapDirective.js"></script>
 
   <!--Services-->
-  <script src="services/mapSvc.js"></script>
   <script src="services/layerSvc.js"></script>
   <script src="services/layerHelpers.js"></script>
   <script src="services/geojsonUtils.js"></script>

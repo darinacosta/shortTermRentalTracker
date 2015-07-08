@@ -1,24 +1,29 @@
-app.controller('mapCtrl', ['$scope', '$rootScope', '$q', '$timeout', 'mapSvc', 'layerSvc', 'layerHelpers', '$http', mapCtrl]);
+app.controller('mapCtrl', ['$scope', '$rootScope', '$q', '$timeout', '$http', mapCtrl]);
 
-function mapCtrl($scope, $rootScope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http) {
-  var map = mapSvc.map,
-    mapAttributes = mapSvc.mapAttributes,
-    layerControl = mapSvc.layerControl,
-    shortTermRentalLayer = {},
+function mapCtrl($scope, $rootScope, $q, $timeout, $http) {
+  var shortTermRentalLayer = {},
     shortTermRentalClusters = {};
     $scope.legend = "";
 
-  layerSvc.getShortTermRentals().then(function(rentalLayers){
-    layerHelpers.populateBaseLayerControl({
-      "Regional Short Term Rental Clusters": rentalLayers.shortTermRentalClusters, 
-      "Regional Short Term Rental Points": rentalLayers.shortTermRentalLayer
-    })
-    $rootScope.$broadcast('loadBaseLayers', 'complete');
-  })
+  Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+    maxZoom: 16
+  });
 
-  layerSvc.getLicensedRentals().then(function(licensedRentals){
-    layerHelpers.populateLayerControl({
-      "Orleans Parish Licensed Rentals": licensedRentals 
-    });
-  })
+  angular.extend($scope, {
+    defaults: {
+        tileLayer: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+        maxZoom: 14,
+        path: {
+            weight: 10,
+            color: '#800000',
+            opacity: 1
+        }
+    },
+    center: {
+      lat: 29.970996, 
+      lng: -90.058537,
+      zoom: 12
+    }
+  });
 }
