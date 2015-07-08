@@ -21,7 +21,10 @@
     "request": "^2.56.0",
     "unirest": "^0.4.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-zip-directories": "^0.1.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
