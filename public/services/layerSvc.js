@@ -1,14 +1,18 @@
-app.factory("layerSvc", ['$http', 'layerHelpers', layerSvc]);
+app.factory("layerSvc", ['$scope', '$http', 'leafletData', 'layerHelpers', layerSvc]);
 
-function layerSvc($http, layerHelpers){
+function layerSvc($scope, $http, 'leafletData', layerHelpers){
 
   /*LICENSED RENTALS*/
 
   function configureLicensedRentals(geojson){
-    return L.geoJson(geojson, {
+    var licensedRentals = L.geoJson(geojson, {
       pointToLayer: styleLicensedRentals,
       onEachFeature: licensedRentalPopup
-    })
+    });
+
+    leafletData.getMap().then(function(map) {
+      map.addLayer(licensedRentals);
+    });
   };
   
   function styleLicensedRentals(feature,latlng){
@@ -22,7 +26,7 @@ function layerSvc($http, layerHelpers){
       name: 'licensed'
     })
   };
-  
+    
   function licensedRentalPopup(feature, layer) {
     var popup = '<h4>' + feature.properties.Trade_Name + '<br> <small>' + feature.properties.Address + '</small></h4>';
     layer.bindPopup(popup);
@@ -42,11 +46,11 @@ function layerSvc($http, layerHelpers){
     });
     shortTermRentalClusters = new L.MarkerClusterGroup();
     shortTermRentalClusters.addLayer(shortTermRentalClusterLayer);
-    
-    return {
-      shortTermRentalClusters: shortTermRentalClusters, 
-      shortTermRentalLayer: shortTermRentalLayer
-    };
+     
+    leafletData.getMap().then(function(map) {
+      map.addLayer(shortTermRentalClusters);
+      map.addLayer(shortTermRentalLayer);
+    });
   };
   
   function shortTermRentalPointStyle(feature, latlng) {

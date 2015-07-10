@@ -1,6 +1,6 @@
-app.controller('mapCtrl', ['$scope', '$rootScope', '$q', '$timeout', '$http', mapCtrl]);
+app.controller('mapCtrl', ['$scope', '$rootScope', '$q', '$timeout', '$http', 'layerSvc', mapCtrl]);
 
-function mapCtrl($scope, $rootScope, $q, $timeout, $http) {
+function mapCtrl($scope, $rootScope, $q, $timeout, $http, 'layerSvc') {
   var shortTermRentalLayer = {},
     shortTermRentalClusters = {};
     $scope.legend = "";
@@ -12,13 +12,13 @@ function mapCtrl($scope, $rootScope, $q, $timeout, $http) {
 
   angular.extend($scope, {
     defaults: {
-        tileLayer: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
-        maxZoom: 14,
-        path: {
-            weight: 10,
-            color: '#800000',
-            opacity: 1
-        }
+      tileLayer: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+      maxZoom: 14,
+      path: {
+        weight: 10,
+        color: '#800000',
+        opacity: 1
+      }
     },
     center: {
       lat: 29.970996, 
@@ -26,4 +26,7 @@ function mapCtrl($scope, $rootScope, $q, $timeout, $http) {
       zoom: 12
     }
   });
+
+  layerSvc.getLicensedRentals();
+  layerSvc.getShortTermRentals();
 }
