@@ -1,6 +1,6 @@
 app.controller('mapCtrl', ['$scope', '$rootScope', '$q', '$timeout', '$http', 'layerSvc', mapCtrl]);
 
-function mapCtrl($scope, $rootScope, $q, $timeout, $http, 'layerSvc') {
+function mapCtrl($scope, $rootScope, $q, $timeout, $http, layerSvc) {
   var shortTermRentalLayer = {},
     shortTermRentalClusters = {};
     $scope.legend = "";

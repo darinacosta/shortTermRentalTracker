@@ -1,6 +1,6 @@
-app.factory("layerSvc", ['$scope', '$http', 'leafletData', 'layerHelpers', layerSvc]);
+app.factory("layerSvc", ['$http', 'leafletData', layerSvc]);
 
-function layerSvc($scope, $http, 'leafletData', layerHelpers){
+function layerSvc($http, leafletData){
 
   /*LICENSED RENTALS*/
 
@@ -9,9 +9,13 @@ function layerSvc($scope, $http, 'leafletData', layerHelpers){
       pointToLayer: styleLicensedRentals,
       onEachFeature: licensedRentalPopup
     });
-
-    leafletData.getMap().then(function(map) {
-      map.addLayer(licensedRentals);
+    
+    angular.extend($scope, {
+      layers: {
+        baselayers: {
+	  licensedRentals: licensedRentals
+	}
+      }
     });
   };
   
