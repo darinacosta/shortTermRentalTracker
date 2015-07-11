@@ -1,9 +1,15 @@
-app.controller('mapCtrl', ['$scope', '$rootScope', '$q', '$timeout', '$http', mapCtrl]);
+app.controller('mapCtrl', ['$scope', '$rootScope', '$q', '$timeout', '$http', 'leafletData', mapCtrl]);
 
-function mapCtrl($scope, $rootScope, $q, $timeout, $http) {
+function mapCtrl($scope, $rootScope, $q, $timeout, $http, leafletData) {
+
   var shortTermRentalLayer = {},
     shortTermRentalClusters = {};
-    $scope.legend = "";
+    $scope.legend = "",
+    layerControl = L.control.layers(); 
+
+  leafletData.getMap().then(function(map) {
+    layerControl.addTo(map);
+  });
 
   Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
@@ -49,12 +55,15 @@ function mapCtrl($scope, $rootScope, $q, $timeout, $http) {
       pointToLayer: shortTermRentalPointStyle
     });
     shortTermRentalClusters = new L.MarkerClusterGroup();
-    shortTermRentalClusters.addLayer(shortTermRentalClusterLayer);
-     
+    shortTermRentalClusters.addLayer(shortTermRentalClusterLayer); 
+
+    layerControl.addBaseLayer(shortTermRentalLayer, "Short Term Rental Points"); 
+    layerControl.addBaseLayer(shortTermRentalClusters, "Short Term Rental Clusters"); 
+        
     leafletData.getMap().then(function(map) {
       map.addLayer(shortTermRentalClusters);
-      map.addLayer(shortTermRentalLayer);
     });
+    
   };
   
   function shortTermRentalPointStyle(feature, latlng) {
@@ -145,16 +154,17 @@ function mapCtrl($scope, $rootScope, $q, $timeout, $http) {
   };
 
 
-  return layerSvc = {
-
-    getLicensedRentals: function(){
-      return $http.get("./layers/licensed-rentals.json")
+  var layerSvc = {
+ 
+    getLicensedRentals: (function(){
+      $http.get("./layers/licensed-rentals.json")
       .then(function(res){
-        return configureLicensedRentals(res.data)
+        var layer = configureLicensedRentals(res.data)
+        $scope.layers['licensedRentals'] = layer;
       });
-    },
+    })(),
 
-    getShortTermRentals: function(){
+    getShortTermRentals: (function(){
       return $http.get("http://54.152.46.39/rentaltracker?userexists=true&neworleans=true").then(function(res){
         var geojson = {
           "type": "FeatureCollection",
@@ -163,7 +173,7 @@ function mapCtrl($scope, $rootScope, $q, $timeout, $http) {
         var airbnbGeojson
         return configureShortTermRentalLayer(geojson);
       });
-    },
+    })(),
 
     getAirbnbs: function(){
       return $http.get("http://54.152.46.39/rentaltracker?provider=air").then(function(res){
@@ -191,11 +201,5 @@ function mapCtrl($scope, $rootScope, $q, $timeout, $http) {
       lng: -90.058537,
       zoom: 12
     },
-    layers: {
-      baselayers: {
-        licensedRentals: layerSvc.getLicensedRentals(),
-        shortTermRentals: layerSvc.getShortTermRentals()
-      }
-    }
   });
 }
