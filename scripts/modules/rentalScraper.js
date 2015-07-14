@@ -178,7 +178,7 @@ rentalScraper = {
               });
             });
           } else {
-            db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(e, obj){
+            db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.datecollected" : today}}, function(e, obj){
               //console.log(feature.properties.id + ' date updated.')
               db.close();
               deferred.resolve();

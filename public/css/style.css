@@ -40,8 +40,7 @@ td{
   padding: 30px 15px 15px 15px;
 }
 
-#map {
-  height:100%;
+.angular-leaflet-map {
   border-bottom: 2px solid #fff;
 }
 
