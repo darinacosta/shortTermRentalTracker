@@ -189,7 +189,7 @@ function mapCtrl($scope, $rootScope, $q, $timeout, $http, leafletData) {
   angular.extend($scope, {
     defaults: {
       tileLayer: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
-      maxZoom: 14,
+      maxZoom: 16,
       path: {
         weight: 10,
         color: '#800000',
