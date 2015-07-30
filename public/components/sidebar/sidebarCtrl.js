@@ -33,7 +33,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
         usersWithMultiListings = 0,
         highestListing = 0,
         multiListingUsers = [],
-        highestUrl, mostListings, maxRenterObj;
+        highestUrl, mostListings, maxRenterObj, recentDate;
 
     angular.forEach(data, function(feature){
       if (feature === null){return false};
@@ -41,6 +41,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
       homeawayTotal = feature.properties.provider === "hma" || feature.properties.provider === "hmavb" ? homeawayTotal + 1 : homeawayTotal ; 
       numUnits = parseInt(feature['properties']['units']);
       userUrl = feature['properties']['user'];
+      recentDate = feature['properties']['datecollected'] > recentDate || recentDate === undefined ? feature['properties']['datecollected'] : recentDate;
       if (feature['properties']['city'].toLowerCase().replace(/ /g, '') === 'neworleans'){
         nolaTotal += 1;
         if (feature['properties']['roomtype'] === ( 'Entire home/apt'||'Entire Place')){
@@ -66,7 +67,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
       $scope.airbnbTotal = airbnbTotal;
       $scope.homeawayTotal = homeawayTotal;
       $scope.numEntireHomes = numEntireHomes;
-      $scope.lastUpdate = dateSplit(data[0]['properties']['datecollected']);
+      $scope.lastUpdate = dateSplit(recentDate);
       $scope.usersWithMultiListings = usersWithMultiListings;
     });
   };
@@ -82,10 +83,11 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
     asyncHelper(function() {
       $scope.searchError = ''
     });
-    $http.get("./layers/multiUnitRentals.json?v=0.03").success(function(data){
+    $http.get("http://54.152.46.39/rentaltracker?userexists=true&neworleans=true").success(function(data){
       var filteredFeatures = [],
       queryValid;
-      data['features'].filter(function (feature) {
+      console.log(data);
+      data['body'].filter(function (feature) {
         if (feature.properties.user === userUrl){
           filteredFeatures.push(feature);
         } 
