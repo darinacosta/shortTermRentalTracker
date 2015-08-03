@@ -1,6 +1,7 @@
 /node_modules
 /bower_components
 /scripts/config.js
-/scripts/output
-/layers/multiUnitRentals.json
-*.pyc
+/scripts/output/
+/public/layers/
+/public/lib/
+.DS_Store

@@ -1,75 +1,122 @@
-#!/usr/bin/env node
-
 var unirest = require('unirest'),
     fs = require('fs'),
+    request = require('request'),
     path = require('path'),
     config = require('./../config'),
-    today = new Date();
+    today = new Date(),
+    MongoClient = require('mongodb').MongoClient,
+    assert = require('assert'),
+    rentaldb = 'mongodb://localhost:27017/shorttermrentals',
+    cheerio = require('cheerio'),
+    mapSeries = require('promise-map-series'),
+    Q = require("q");
 
 rentalScraper = {
+
   _rentalsGeoJsonPath: path.join(__dirname, '../../layers/rentals.json'),
+
   _logFile: path.join(__dirname, '../output/log.txt'),
-  _urlListFile: path.join(__dirname, '../output/urlList.json'),
-  _geoJson: { "type": "FeatureCollection",
-             "features": []},
-  _pageCount: 1,
+
+  _totalApiPageCount: 1,
+
   _numberOfFeaturesWritten: 0,
-  _urlList: {urls:[]},
-  fetchListings: function(pageNum) { 
-  	var rentalScraper = this,
+
+  _numberOfUserProfilesCrawled: 0,
+
+  _apiPageTracker: {},
+
+  init: function(providers) { 
+    var rentalScraper = this;
+    providers.forEach(function(provider){
+      rentalScraper._apiPageTracker[provider] = 1;
+      rentalScraper._fetchListingsByProvider(provider);
+    });
+  },
+
+  _fetchListingsByProvider: function(provider){
+
+    var rentalScraper = this,
         nelatitude = 30.123749,
         nelongitude = -89.868164,
         swlatitude = 29.881137,
-        swlongitude = -90.557556,
+        swlongitude = -90.152435,
         url = "https://zilyo.p.mashape.com/search?isinstantbook=false" + 
               "&nelatitude=" + nelatitude + "&nelongitude=" + nelongitude + 
               "&swlatitude=" + swlatitude + "&swlongitude=" + swlongitude + 
-              "&&provider=airbnb%2C+alwaysonvacation%2C+apartmentsapart%2C+bedycasa%2C+bookingpal%2C+citiesreference%2C+edomizil%2C+geronimo%2C+gloveler%2C+holidayvelvet%2C+homeaway%2C+homestay%2C+hostelworld%2C+housetrip%2C+interhome%2C+nflats%2C+roomorama%2C+stopsleepgo%2C+theotherhome%2C+travelmob%2C+vacationrentalpeople%2C+vaycayhero%2C+waytostay%2C+webchalet%2C+zaranga&" + 
-              "page=" + rentalScraper._pageCount;
+              "&&provider=" + provider + "&" +
+              "page=" + rentalScraper._apiPageTracker[provider];
     
-  	unirest.get(url)
-  	.header("X-Mashape-Key", config.mashape_key)
-  	.header("Accept", "application/json")
-  	.end(function (result) {
-      console.log('Scanning page ' + rentalScraper._pageCount + '...')
-  		var parsedResult = JSON.parse(result.body);
-      rentalScraper._handleResult(parsedResult);
-      rentalScraper._pageCount = rentalScraper._pageCount + 1;
-      if (parsedResult['ids'].length > 1 && pageNum === undefined){
-        rentalScraper.fetchListings()
-      }else if (pageNum !== undefined){
-        console.log(pageNum)
-        console.log(parsedResult['result'][1]['provider']['url'])
-      }else {
-        rentalScraper._writeGeojsonToFile();
+    unirest.get(url)
+    .header("X-Mashape-Key", config.mashape_key)
+    .header("Accept", "application/json")
+    .end(_getListings);
+    
+    function _getListings(result){
+      var parsedResult;
+      console.log('Scanning ' + provider + ' page ' + rentalScraper._apiPageTracker[provider] + '...');
+      try {
+        parsedResult = JSON.parse(result.body);
+      } catch (e) {
+        console.log(e);
+        parsedResult = null;
       }
-    });
+      rentalScraper._apiPageTracker[provider] = rentalScraper._apiPageTracker[provider] + 1;
+      rentalScraper._pageCount = rentalScraper._pageCount + 1;
+      rentalScraper._handleApiPageResult(parsedResult, function(){
+        if (parsedResult === null || parsedResult['ids'].length > 0){
+          rentalScraper._fetchListingsByProvider(provider)
+        } else {
+          rentalScraper._apiPageTracker[provider] = "complete";
+          console.log(provider + ' scan complete.');
+          if (rentalScraper._detectScanCompletion() === true){
+            rentalScraper._writeToLog();
+          }
+        }
+      })
+    };
+  },
+
+  _detectScanCompletion: function(){
+    var pageTracker = rentalScraper._apiPageTracker;
+        resultList = [],
+        scanComplete = true;
+
+    for (var provider in pageTracker) {
+      var result = pageTracker[provider];
+      resultList.push(result); 
+    };
+
+    for (var i = 0; i < resultList.length; i ++){
+      if (resultList[i] !== "complete"){
+        scanComplete = false;
+      }
+    };
+
+    return scanComplete;
   },
   
-  _handleResult: function(result){
+  _handleApiPageResult: function(result, cb){
     var rentalScraper = this, 
-        resultLength = result['result'].length;
-    rentalScraper._numberOfFeaturesWritten += resultLength;
+        resultLength = result['result'].length,
+        features = [];
     for (var i = 0; i < result['result'].length; i += 1){
-      rentalScraper._pushToGeoJson(result['result'][i]); 
-      rentalScraper._urlList['urls'].push(result['result'][i]['provider']['url']); 
-    }
+      var feature = rentalScraper._buildFeature(result['result'][i]);
+      features.push(feature);
+    };
+
+    mapSeries(features, rentalScraper._writeFeatureToDb)
+    .then(
+    function () { 
+      cb();
+    },
+    function (err) { 
+      cb(err);
+    })
   },
 
-  _writeGeojsonToFile: function(){
-    var geoJsonString = JSON.stringify(this._geoJson),
-        urlString = JSON.stringify(this._urlList);
-    fs.writeFile(this._rentalsGeoJsonPath, geoJsonString, function (err) {
-      if (err) throw err;
-    });
-    fs.writeFile(this._urlListFile, urlString);
-    this._writeToLog();
-    console.log('Complete.')
-  },
-
-  _pushToGeoJson: function(location){
+  _buildFeature: function(location){
     var latlng = switchLatLong(location['latLng']);
-    this._geoJson['features'].push({
+    var feature = {
       "type": "Feature",
       "geometry": {
         "type": "Point",
@@ -77,18 +124,204 @@ rentalScraper = {
       },
       "properties":{
         "id": location['id'],
+        "provider": location['id'].replace(/[0-9]/g, '').substring(0,3),
         "url": location['provider']['url'],
-        "roomType": location['attr']['roomType']['text'],
+        "roomtype": location['attr']['roomType']['text'],
         "city": location['location']['city'],
         "neighborhood": location['location']['neighbourhood'],
         "street": location['location']['streetName'],
-        "nightlyPrice": location['price']['nightly'],
-        "monthlyPrice": location['price']['monthly'],
+        "nightlyprice": location['price']['nightly'],
+        "monthlyprice": location['price']['monthly'],
         //"description": location['attr']['description'],
         //"reviews" : location['reviews']['entries'],
-        "dateCollected": today
+        "datecollected": today
       }
+    };
+    return feature;
+  },
+
+  _writeFeatureToDb: function(feature){
+    var deferred = Q.defer();
+    MongoClient.connect(rentaldb, function(e, db) {
+      setTimeout(function(){
+        if (db === null){
+          console.log('Bad database connection.')
+          deferred.resolve();
+        }
+        db.collection('features').find({"properties.id" : feature.properties.id}).count(function(e, n){
+          assert.equal(e, null);
+          
+          function _addNewFeature(feature){
+            db.collection('features').insert(feature, function(e, records) {
+              assert.equal(e, null);
+              //console.log(feature.properties.id + ' added to features.');
+              rentalScraper._numberOfFeaturesWritten += 1;
+              db.close();
+              deferred.resolve();
+            });
+          };
+
+          function _replaceFeature(feature){
+            db.collection('features').update({"properties.id" : feature.properties.id}, feature, function(e, records) {
+              assert.equal(e, null);
+              //console.log(feature.properties.id + ' added to features.');
+              rentalScraper._numberOfFeaturesWritten += 1;
+              db.close();
+              deferred.resolve();
+            });
+          };
+
+          if (n === 0){
+            rentalScraper._scrapeListing(feature, function(listingFeature){
+              rentalScraper._scrapeUserProfile(listingFeature, function(userFeature){
+	        _addNewFeature(userFeature);
+              });
+            });
+          } else {
+            db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(e, obj){
+              //console.log(feature.properties.id + ' date updated.')
+              db.close();
+              deferred.resolve();
+            })
+          };
+        });
+      },300)
     })
+    return deferred.promise;
+  },
+
+  _scrapeListing: function(feature, callback){
+
+    options = {
+      url: feature.properties.url,
+      headers: {
+        'User-Agent': "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+      }
+    };
+
+    request(options, _getListingData)
+
+    function _getListingData(error, response, html){
+      setTimeout(function() { 
+        if (error){
+          console.log(error)
+        } else {
+          var $ = cheerio.load(html);
+          var scrapedFeature;
+          if (feature.properties.provider === "air"){
+	    scrapedFeature = _getAirbnbListingData($, feature);
+	  } else if (feature.properties.provider.substring(0,3) === "hma"){
+	    scrapedFeature = _getHomeawayListingData($, feature);  
+	  }	  
+	  callback(scrapedFeature);
+        }
+      }, 300);
+      
+      function _getAirbnbListingData($, feature){ 
+        userDetails = $('#host-profile').find("a")[0];
+        if (userDetails !== undefined){
+          var href = userDetails['attribs']['href'];
+          var numReviewsRegex = $('.star-rating').parent().text().split('Reviews')[0].replace(/ /g,'').match(/\n([0-9]+)$/);
+          var numReviews = $('.star-rating')[0] === undefined || numReviewsRegex === null ? 0 : parseInt(numReviewsRegex[1]);
+          feature.properties['user'] = "http://airbnb.com" + href;
+          feature.properties['reviews'] = numReviews;
+          //console.log(feature.properties.id + ' was succesfully scraped.')
+	} else {
+          console.log(feature.properties.url + ' was not scraped. Check to ensure it still exists.');
+        };
+        return feature;
+      };
+
+      function _getHomeawayListingData($, feature){
+        console.log('Scraping ' + feature.properties.url);
+        var userNameDiv = $('.contact-info-wrapper > .owner-name');
+	var numReviewsDiv = $('span[itemprop="reviewCount"]');
+	if (userNameDiv[0] !== undefined){
+	  var numReviewsRegex = numReviewsDiv.text().match(/^([0-9]+)[ a-zA-Z]/);
+	  var numReviews = numReviewsDiv === undefined || numReviewsRegex === null ? 0 : parseInt(numReviewsRegex[1]);
+	  var userRegex = userNameDiv.text().trim().match(/^([0-9\-a-zA-Z ]+)/)
+	  var user = userRegex === null ? "Unkown" : userRegex[1].replace(/\n/g,'');
+          feature.properties['user'] = userRegex;
+	  feature.properties['reviews'] = numReviews;
+	} else {
+          console.log(feature.properties.url + ' was not scraped. Check to ensure it still exists.');
+	}
+        return feature;
+      };
+    }
+  },
+
+  _scrapeUserProfile: function(feature, callback){
+    if (feature.properties.provider === "hma" || feature.properties.user === undefined){callback(feature); return};
+
+    var rentalTracker = this,
+
+    options = {
+      url: feature.properties.user,
+      headers: {
+        'User-Agent': "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+      }
+    };
+
+    request(options, _getTotalUserListings);
+
+    function _getTotalUserListings(error, response, html){
+      if (error){
+        console.log(error)
+      } else {
+        var $ = cheerio.load(html),
+        rentalNumberParan = $('.row-space-3').find("small").text(),
+        rentalNumberRegex = /\(([^\)]+)\)/.exec(rentalNumberParan);
+        setTimeout(function() { 
+          if (rentalNumberParan !== undefined && rentalNumberRegex !== null ){
+            var rentalNumber = rentalNumberRegex[1];
+            feature.properties['units'] = rentalNumber;
+            callback(feature); 
+            rentalTracker._numberOfUserProfilesCrawled += 1;
+            //console.log('User profile ' + feature.properties.user + ' was succesfully scraped.');
+          } else {
+            console.log(feature.properties.user + ' was not scraped. Check to ensure that it still exists and contains a listings div.')
+            callback(feature); 
+          }
+        }, 900);
+      }
+    }
+  },
+
+  _getLocalFile: function(path) {
+    var deferred  = Q.defer(),
+        json = '';
+    http.get({
+      host: 'localhost',
+      path: path
+    }, function(response){
+        response.on('data', function(d) {
+        json += d;
+      });
+      response.on('end', function(){
+        deferred.resolve(json);
+      });
+    });
+    return deferred.promise;
+  },
+
+  _detectScanCompletion: function(){
+    var pageTracker = rentalScraper._apiPageTracker;
+        resultList = [],
+        scanComplete = true;
+
+    for (var provider in pageTracker) {
+      var result = pageTracker[provider];
+      resultList.push(result); 
+    };
+
+    for (var i = 0; i < resultList.length; i ++){
+      if (resultList[i] !== "complete"){
+        scanComplete = false;
+      }
+    };
+
+    return scanComplete;
   },
 
   _writeToLog: function(){
@@ -96,8 +329,8 @@ rentalScraper = {
     logString = "--------------------------" + "\n" +
     "Rental Scraper Log: " + today + "\n" +
     "Features collected: " + rentalScraper._numberOfFeaturesWritten + "\n" +
-    "Calls to server:    " + rentalScraper._pageCount + "\n" +
     "--------------------------"+ "\n";
+    console.log(logString);
     fs.appendFile(rentalScraper._logFile, logString);
   }
 };
