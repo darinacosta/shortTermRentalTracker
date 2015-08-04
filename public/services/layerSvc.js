@@ -147,7 +147,7 @@ function layerSvc($http, layerHelpers){
     },
 
     getShortTermRentals: function(){
-      return $http.get("http://54.152.46.39/rentaltracker?userexists=true&neworleans=true&pastweek=true").then(function(res){
+      return $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pastweek=true").then(function(res){
         var geojson = {
           "type": "FeatureCollection",
           "features": res.data.body
@@ -158,7 +158,7 @@ function layerSvc($http, layerHelpers){
     },
 
     getAirbnbs: function(){
-      return $http.get("http://54.152.46.39/rentaltracker?provider=air").then(function(res){
+      return $http.get("http://nolarentalreport.com/rentaltracker?provider=air").then(function(res){
         var geojson = {
           "type": "FeatureCollection",
           "features": res.data.body

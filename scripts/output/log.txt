@@ -60,3 +60,7 @@ Features collected: 0
 Rental Scraper Log: Tue Jul 07 2015 00:00:01 GMT+0000 (UTC)
 Features collected: 0
 --------------------------
+--------------------------
+Rental Scraper Log: Tue Aug 04 2015 00:00:02 GMT+0000 (UTC)
+Features collected: 0
+--------------------------

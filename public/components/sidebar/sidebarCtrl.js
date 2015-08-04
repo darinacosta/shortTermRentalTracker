@@ -9,7 +9,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
       queryLayer = {},
       shortTermRentalClustersManager = new layerManager("Regional Short Term Rental Clusters");
 
-  $http.get("http://52.6.179.131/rentaltracker?userexists=true&neworleans=true&pastweek=true").success(function(data){
+  $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pastweek=true").success(function(data){
       gatherStats(data.body)
     }
   );
