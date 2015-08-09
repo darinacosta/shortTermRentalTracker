@@ -83,10 +83,9 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
     asyncHelper(function() {
       $scope.searchError = ''
     });
-    $http.get("http://54.152.46.39/rentaltracker?userexists=true&neworleans=true").success(function(data){
+    $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true").success(function(data){
       var filteredFeatures = [],
       queryValid;
-      console.log(data);
       data['body'].filter(function (feature) {
         if (feature.properties.user === userUrl){
           filteredFeatures.push(feature);
