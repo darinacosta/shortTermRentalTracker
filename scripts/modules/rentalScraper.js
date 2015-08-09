@@ -178,7 +178,7 @@ rentalScraper = {
               });
             });
           } else {
-            db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.dateCollected" : feature.properties.dateCollected}}, function(e, obj){
+            db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.datecollected" : feature.properties.datecollected}}, function(e, obj){
               //console.log(feature.properties.id + ' date updated.')
               db.close();
               deferred.resolve();
@@ -328,7 +328,7 @@ rentalScraper = {
     var rentalScraper = this,
     logString = "--------------------------" + "\n" +
     "Rental Scraper Log: " + today + "\n" +
-    "Features collected: " + rentalScraper._numberOfFeaturesWritten + "\n" +
+    "New features collected: " + rentalScraper._numberOfFeaturesWritten + "\n" +
     "--------------------------"+ "\n";
     console.log(logString);
     fs.appendFile(rentalScraper._logFile, logString);

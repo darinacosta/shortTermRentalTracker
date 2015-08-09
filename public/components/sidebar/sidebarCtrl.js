@@ -9,7 +9,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
       queryLayer = {},
       shortTermRentalClustersManager = new layerManager("Regional Short Term Rental Clusters");
 
-  $http.get("http://54.152.46.39/rentaltracker?userexists=true&neworleans=true&pastweek=true").success(function(data){
+  $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pastweek=true").success(function(data){
       gatherStats(data.body)
     }
   );
@@ -83,10 +83,9 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
     asyncHelper(function() {
       $scope.searchError = ''
     });
-    $http.get("http://54.152.46.39/rentaltracker?userexists=true&neworleans=true").success(function(data){
+    $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true").success(function(data){
       var filteredFeatures = [],
       queryValid;
-      console.log(data);
       data['body'].filter(function (feature) {
         if (feature.properties.user === userUrl){
           filteredFeatures.push(feature);
@@ -124,6 +123,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
     layerHelpers.hideAllLayers();
     map.addLayer(clusterLayer);
     map.setView(mapSvc.mapAttributes.center, mapSvc.mapAttributes.zoom);
+    $scope.userUrl = "";
   }
 
   layerSvc.getLicensedRentals().then(function(licensedRentals){

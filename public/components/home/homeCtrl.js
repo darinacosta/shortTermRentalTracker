@@ -9,9 +9,4 @@ function homeCtrl($scope, mapSvc, layerHelpers, $http) {
     shortTermRentalClusters;
 
   map.setView(mapAttributes.center, mapAttributes.zoom);
-  $scope.$on('loadBaseLayers', function(){
-    shortTermRentalClusters = shortTermRentalClustersManager.getLayer();
-  	map.addLayer(shortTermRentalClusters);
-  })
-  
 }
