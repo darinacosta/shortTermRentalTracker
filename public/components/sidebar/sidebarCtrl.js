@@ -123,6 +123,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
     layerHelpers.hideAllLayers();
     map.addLayer(clusterLayer);
     map.setView(mapSvc.mapAttributes.center, mapSvc.mapAttributes.zoom);
+    $scope.userUrl = "";
   }
 
   layerSvc.getLicensedRentals().then(function(licensedRentals){

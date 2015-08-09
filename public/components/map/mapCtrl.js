@@ -13,6 +13,7 @@ function mapCtrl($scope, $rootScope, $q, $timeout, mapSvc, layerSvc, layerHelper
       "Regional Short Term Rental Clusters": rentalLayers.shortTermRentalClusters, 
       "Regional Short Term Rental Points": rentalLayers.shortTermRentalLayer
     })
+    map.addLayer(rentalLayers.shortTermRentalClusters);
     $rootScope.$broadcast('loadBaseLayers', 'complete');
   })
 
