@@ -4,6 +4,7 @@ var unirest = require('unirest'),
     path = require('path'),
     config = require('./../config'),
     today = new Date(),
+    past2weeks =  new Date(today.setDate(today.getDate() - 14)),
     MongoClient = require('mongodb').MongoClient,
     assert = require('assert'),
     rentaldb = 'mongodb://localhost:27017/shorttermrentals',
@@ -132,9 +133,8 @@ rentalScraper = {
         "street": location['location']['streetName'],
         "nightlyprice": location['price']['nightly'],
         "monthlyprice": location['price']['monthly'],
-        //"description": location['attr']['description'],
-        //"reviews" : location['reviews']['entries'],
-        "datecollected": today
+        "datecollected": today,
+        "updated": today
       }
     };
     return feature;
@@ -148,7 +148,7 @@ rentalScraper = {
           console.log('Bad database connection.')
           deferred.resolve();
         }
-        db.collection('features').find({"properties.id" : feature.properties.id}).count(function(e, n){
+        db.collection('features').find({"properties.id" : feature.properties.id}).toArray(function(e, docs){
           assert.equal(e, null);
           
           function _addNewFeature(feature){
@@ -171,18 +171,14 @@ rentalScraper = {
             });
           };
 
-          if (n === 0){
+          if (docs.length === 0){
             rentalScraper._scrapeListing(feature, function(listingFeature){
               rentalScraper._scrapeUserProfile(listingFeature, function(userFeature){
-	        _addNewFeature(userFeature);
+	              _addNewFeature(userFeature);
               });
             });
-          } else {
-            db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.datecollected" : feature.properties.datecollected}}, function(e, obj){
-              //console.log(feature.properties.id + ' date updated.')
-              db.close();
-              deferred.resolve();
-            })
+          } else if (docs[0].properties.updated < past2weeks) {
+            _replaceFeature(feature);
           };
         });
       },300)
