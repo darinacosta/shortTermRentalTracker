@@ -1,6 +1,6 @@
-app.controller('disclaimerCtrl', disclaimerCtrl);
+app.controller('aboutCtrl', aboutCtrl);
 
-function disclaimerCtrl() {
+function aboutCtrl() {
   
 
 }
