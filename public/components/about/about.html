@@ -1,3 +1,40 @@
 <h1>About the Nola Short Term Rental Report</h1>
 <p>The Nola Short Term Rental Report is a living document. The content and data is likely to improve as research and analysis continue. The listings featured on the map are collected using the <a href="https://zilyo.com/" target="_blank">Zilyo</a> API. After these listings are compiled, the individual listings in this compiled list are analyzed in order to collect additional data on the listings themselves and on user behavior. The data is updated every three days. For a more detailed analysis of data related specifically to Airbnb both in New Orleans and in many other cities, please visit <a href="http://insideairbnb.com/" target="_blank">Inside Airbnb</a>.</p>
+<h3>Get the Data</h3>
+<p>Our data is available for download as simicolon-delimited text files, or through our API. <b>If you use our data, we strongly encourage you to donate to our volunteer-run project in order to help keep our servers running.</b><p> 
+<p>Download the delimited text files here: <a href="http://nolarentalreport.com/assets/airbnb.txt" download>Airbnb</a> |  <a href="http://nolarentalreport.com/assets/homeaway.txt" download>HomeAway</a></p>
+<p>To access the data as geojson through our API, point your application to <a href="http://nolarentalreport.com/rentaltracker" target="_blank">nolarentalreport.com/rentaltracker</a> and pass the following query parameters:</p>
+<table class="table table-striped"> 
+  <thead>
+  <tr>
+    <th>Parameter</th>
+    <th>Arguments</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>provider</td>
+    <td>air, hma</td>
+    <td>"air" will return all Airbnb listings. "hma" will return all HomeAway listings.</td>
+  </tr>
+  <tr>
+    <td>pastweek</td>
+    <td>true</td>
+    <td>Set to true if you would only like to view listings that have been collected in the past week.</td>
+  </tr>
+  <tr>
+    <td>neworleans</td>
+    <td>true</td>
+    <td>Set to true if you would only like to retrieve New Orleans listings. Returns listings for Orleans and sorrounding parishes by default.</td>
+  </tr>
+  <tr>
+    <td>id</td>
+    <td><i>e.g. air79609, hma631004vb</i></td>
+    <td>Unique listing identifier</td>
+  </tr>
+  </tbody>
+</table>
+
+<h3>Disclaimer</h3>
 <p>Although the data featured in the report have been produced and processed from information that is publicly advertised on vacation rental websites, no warranty is made regarding accuracy, adequacy, completeness, legality, reliability or usefulness of any information. There is no gaurantee as to the spatial accuracy of individual vacation rental listings featured on the map. These spatial points are not associated with residential addresses, and are only intended to communicate the general area of the listing.</p>

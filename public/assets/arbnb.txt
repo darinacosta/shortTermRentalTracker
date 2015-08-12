@@ -1,0 +1,1 @@
+"ID";"Coordinates";"City";"Date Collected";"Nightly Price";"Monthly Price";"Neighborhood";"Room Type";"Street";"Units";"URL";"User URL"

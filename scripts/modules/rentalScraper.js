@@ -1,4 +1,5 @@
 var unirest = require('unirest'),
+    csvConverter = require('./csvConverter'),
     fs = require('fs'),
     request = require('request'),
     path = require('path'),
@@ -307,25 +308,6 @@ rentalScraper = {
       });
     });
     return deferred.promise;
-  },
-
-  _detectScanCompletion: function(){
-    var pageTracker = rentalScraper._apiPageTracker;
-        resultList = [],
-        scanComplete = true;
-
-    for (var provider in pageTracker) {
-      var result = pageTracker[provider];
-      resultList.push(result); 
-    };
-
-    for (var i = 0; i < resultList.length; i ++){
-      if (resultList[i] !== "complete"){
-        scanComplete = false;
-      }
-    };
-
-    return scanComplete;
   },
 
   _writeToLog: function(){
