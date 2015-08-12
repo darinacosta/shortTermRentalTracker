@@ -7,7 +7,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
       layerManager = layerHelpers.layerManager,
       shortTermRentalClusters = {},
       queryLayer = {},
-      shortTermRentalClustersManager = new layerManager("Regional Short Term Rental Clusters");
+      shortTermRentalClustersManager = new layerManager("Regional Short Term Rental Points");
 
   $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pastweek=true").success(function(data){
       gatherStats(data.body)
@@ -37,7 +37,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
 
     angular.forEach(data, function(feature){
       if (feature === null){return false};
-      airbnbTotal = feature.properties.provider === "airbnb" ? airbnbTotal + 1 : airbnbTotal ;
+      airbnbTotal = feature.properties.provider === "air" ? airbnbTotal + 1 : airbnbTotal ;
       homeawayTotal = feature.properties.provider === "hma" || feature.properties.provider === "hmavb" ? homeawayTotal + 1 : homeawayTotal ; 
       numUnits = parseInt(feature['properties']['units']);
       userUrl = feature['properties']['user'];
