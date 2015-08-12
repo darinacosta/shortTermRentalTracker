@@ -12,12 +12,9 @@ userListingsCounter.countUserListings = function(){
           users.push(cursor[i].properties.user);
         }
       };  
-      console.log(users.length);
       for (var k = 0; k < users.length; k ++){
-	console.log(users[k]);
         db.collection('features').find({"properties.user": users[k]}).count(function(e, n){
           db.collection('features').update({"properties.user": users[k]}, {$set: {"properties.units" : n}},{multi: true}, function(){
-            console.log(n);
 	    db.close();
           })
         })
@@ -27,4 +24,3 @@ userListingsCounter.countUserListings = function(){
 }
 
 module.exports = userListingsCounter;
-

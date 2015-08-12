@@ -10,6 +10,7 @@ var unirest = require('unirest'),
     MongoClient = require('mongodb').MongoClient,
     assert = require('assert'),
     rentaldb = 'mongodb://localhost:27017/shorttermrentals',
+    userListingsCounter = require('./userListingsCounter'),
     cheerio = require('cheerio'),
     mapSeries = require('promise-map-series'),
     Q = require("q");
@@ -72,7 +73,10 @@ rentalScraper = {
           rentalScraper._apiPageTracker[provider] = "complete";
           console.log(provider + ' scan complete.');
           if (rentalScraper._detectScanCompletion() === true){
-            rentalScraper._writeToLog();
+            userListingsCounter.countUserListings();
+	    csvConverter.convert2csv('air','airbnb.txt');
+	    csvConverter.convert2csv('hma','homeaway.txt');
+	    rentalScraper._writeToLog();
           }
         }
       })
