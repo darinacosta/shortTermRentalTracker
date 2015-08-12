@@ -16,13 +16,13 @@
   </ul>
   <hr>
   <div class="menu-area">
-    <h5>Summary (Orleans Parish)</h5>
+    <h5>Active Listing Summary*</h5>
   </div>
   <ul class="infobar">
     <table>
       <tr>
         <td>
-          Active AirBnB listings:
+          AirBnB:
         </td>
         <td>
           <span ng-bind="airbnbTotal"></span>
@@ -30,7 +30,7 @@
       </tr>
       <tr>
         <td>
-          Active Homeaway listings:
+          Homeaway:
 	</td>
 	<td>
           <span ng-bind="homeawayTotal"></span>
@@ -38,7 +38,7 @@
       </tr>
       <tr>
         <td>
-          "Entire home/apt" listings (AirBnB):
+          "Entire home/apt" (AirBnB):
         </td>
         <td>
           <span ng-bind="numEntireHomes"></span>
@@ -82,7 +82,11 @@
   </div>
   <div id="last-update">
     <small>
-      Featured data was last updated on <span ng-bind="lastUpdate"></span>.
+      Featured data was last updated on <b><span ng-bind="lastUpdate"></span></b>.
+    </small>
+    <br><br>  
+    <small>
+      *Though the analysis featured in our report references historical data, only active/currently available listings are featured on the map.
     </small>
   </div>
 </div>
