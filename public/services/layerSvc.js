@@ -13,9 +13,9 @@ function layerSvc($http, layerHelpers){
   
   function styleLicensedRentals(feature,latlng){
     return L.circleMarker(latlng, {
-      radius: 4,
-      fillColor: "lightblue",
-      color: "#000",
+      radius: 3,
+      fillColor: "green",
+      color: "green",
       weight: 1,
       opacity: 1,
       fillOpacity: 0.8,
@@ -51,9 +51,9 @@ function layerSvc($http, layerHelpers){
   
   function shortTermRentalPointStyle(feature, latlng) {
     return L.circleMarker(latlng, {
-      radius: 4,
+      radius: 3,
       fillColor: colorTotalPointsConditionally(feature),
-      color: "#000",
+      color: colorTotalPointsConditionally(feature),
       weight: 1,
       opacity: 1,
       fillOpacity: 0.8,
@@ -106,9 +106,9 @@ function layerSvc($http, layerHelpers){
 
   function airbnbPointStyle(feature, latlng) {
     return L.circleMarker(latlng, {
-      radius: 4,
+      radius: 3,
       fillColor: colorAirbnbsConditionally(feature),
-      color: "#000",
+      color: colorAirbnbsConditionally(feature),
       weight: 1,
       opacity: 1,
       fillOpacity: 0.8,
