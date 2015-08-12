@@ -124,6 +124,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
     map.addLayer(clusterLayer);
     map.setView(mapSvc.mapAttributes.center, mapSvc.mapAttributes.zoom);
     $scope.userUrl = "";
+    $scope.searchError = '';
   }
 
   layerSvc.getLicensedRentals().then(function(licensedRentals){
