@@ -3,7 +3,7 @@ app.factory("mapSvc", ['$http', mapSvc]);
 function mapSvc($http){
   mapAttributes = {
     center: [29.970996, -90.058537],
-    zoom: 12,
+    zoom: 13,
     zoomControl: false,
     scrollWheelZoom: false
   },
@@ -15,7 +15,7 @@ function mapSvc($http){
 
   Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
-    maxZoom: 16
+    maxZoom: 15
   });
 
   //Zoom Home Bar

@@ -72,8 +72,9 @@ function layerSvc($http, layerHelpers){
   
   function shortTermRentalPopup(feature, layer) {
     var popup;
+    var units = parseInt(feature.properties.units);
     if (feature.properties.user !== undefined && feature.properties.provider === "air"){
-      var pluralListing = feature.properties.units === '1' ? 'listing' : 'listings',
+      var pluralListing = units === 1 ? 'listing' : 'listings',
       userUrl = feature.properties.user,
       userUrlArray = userUrl.split('/'),
       userId = userUrlArray[userUrlArray.length -1];
@@ -83,7 +84,7 @@ function layerSvc($http, layerHelpers){
               '<b>User ID:</b> ' + userId + '<br><br>' + 
               '<b>This user has ' + feature.properties.units + ' ' + pluralListing + '.</b>';
     } else if (feature.properties.reviews !== undefined && feature.properties.provider === "hma"){ 
-      userName = feature.properties.user,
+      userName = typeof(feature.properties.user) === 'object' && feature.properties.user !== null ? feature['properties']['user'][0] : feature.properties.user,
       popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomtype + ' | ' + feature.properties.reviews + ' reviews</small></h5>' +
               '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
               '<b>Name provided by user:</b> ' + userName + '<br><br>'  
