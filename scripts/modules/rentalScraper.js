@@ -4,6 +4,8 @@ var unirest = require('unirest'),
     path = require('path'),
     config = require('./../config'),
     today = new Date(),
+    todayCalc = new Date(),
+    past2weeks =  new Date(todayCalc.setDate(todayCalc.getDate() - 14)),
     MongoClient = require('mongodb').MongoClient,
     assert = require('assert'),
     rentaldb = 'mongodb://localhost:27017/shorttermrentals',
@@ -132,9 +134,8 @@ rentalScraper = {
         "street": location['location']['streetName'],
         "nightlyprice": location['price']['nightly'],
         "monthlyprice": location['price']['monthly'],
-        //"description": location['attr']['description'],
-        //"reviews" : location['reviews']['entries'],
-        "datecollected": today
+        "datecollected": today,
+        "updated": today
       }
     };
     return feature;
@@ -148,10 +149,10 @@ rentalScraper = {
           console.log('Bad database connection.')
           deferred.resolve();
         }
-        db.collection('features').find({"properties.id" : feature.properties.id}).count(function(e, n){
+        db.collection('features').find({"properties.id" : feature.properties.id}).toArray(function(e, docs){
           assert.equal(e, null);
           
-          function _addNewFeature(feature){
+	  function _addNewFeature(feature){
             db.collection('features').insert(feature, function(e, records) {
               assert.equal(e, null);
               //console.log(feature.properties.id + ' added to features.');
@@ -171,19 +172,22 @@ rentalScraper = {
             });
           };
 
-          if (n === 0){
+          if (docs.length === 0){
             rentalScraper._scrapeListing(feature, function(listingFeature){
-              rentalScraper._scrapeUserProfile(listingFeature, function(userFeature){
-	        _addNewFeature(userFeature);
-              });
+	      console.log(feature.properties.id + ' has been created.');
+              _addNewFeature(listingFeature);
             });
-          } else {
-            db.collection('features').update({"properties.id" : feature.properties.id}, {$set: {"properties.datecollected" : feature.properties.datecollected}}, function(e, obj){
-              //console.log(feature.properties.id + ' date updated.')
-              db.close();
-              deferred.resolve();
-            })
-          };
+          } else if (docs[0].properties.updated < past2weeks || docs[0].properties.updated === undefined) {
+            rentalScraper._scrapeListing(feature, function(listingFeature){
+              console.log(feature.properties.id + ' has been updated.');
+	      _replaceFeature(listingFeature);
+	    });
+          } else { 
+            console.log('No action required on ' + feature.properties.id);
+	    db.close();
+	    deferred.resolve();
+	  }
+	  ;
         });
       },300)
     })
