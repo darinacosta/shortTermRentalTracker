@@ -73,7 +73,7 @@ function layerSvc($http, layerHelpers){
   function shortTermRentalPopup(feature, layer) {
     var popup;
     var units = parseInt(feature.properties.units);
-    if (feature.properties.user !== undefined && feature.properties.provider === "air"){
+    if (feature.properties.user !== undefined && feature.properties.provider === "air" && feature.properties.units !== undefined ){
       var pluralListing = units === 1 ? 'listing' : 'listings',
       userUrl = feature.properties.user,
       userUrlArray = userUrl.split('/'),

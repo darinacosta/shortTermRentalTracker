@@ -231,7 +231,7 @@ rentalScraper = {
 	  }	  
 	  callback(scrapedFeature);
         }
-      }, 5000);
+      }, 6500);
       
       function _getAirbnbListingData($, feature){ 
         userDetails = $('#host-profile.room-section').find("a")[0];
