@@ -73,7 +73,7 @@ function layerSvc($http, layerHelpers){
   function shortTermRentalPopup(feature, layer) {
     var popup;
     var units = parseInt(feature.properties.units);
-    if (feature.properties.user !== undefined && feature.properties.provider === "air" && feature.properties.units !== undefined ){
+    if (feature.properties.user !== undefined && feature.properties.provider === "air"){
       var pluralListing = units === 1 ? 'listing' : 'listings',
       userUrl = feature.properties.user,
       userUrlArray = userUrl.split('/'),
@@ -81,8 +81,10 @@ function layerSvc($http, layerHelpers){
       popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomtype + ' | ' + feature.properties.reviews + ' reviews</small></h5>' +
               '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
               '<b>User Profile:</b> <a target="_blank" href="' + userUrl + '">' + userUrl + '</a><br>' + 
-              '<b>User ID:</b> ' + userId + '<br><br>' + 
-              '<b>This user has ' + feature.properties.units + ' ' + pluralListing + '.</b>';
+              '<b>User ID:</b> ' + userId 
+      if (feature.properties.units !== undefined){
+        popup += '<br><br><b>This user has ' + feature.properties.units + ' ' + pluralListing + '.</b>';
+      }
     } else if (feature.properties.reviews !== undefined && feature.properties.provider === "hma"){ 
       userName = typeof(feature.properties.user) === 'object' && feature.properties.user !== null ? feature['properties']['user'][0] : feature.properties.user,
       popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomtype + ' | ' + feature.properties.reviews + ' reviews</small></h5>' +
