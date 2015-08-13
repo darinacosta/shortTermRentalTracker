@@ -15,10 +15,6 @@ var unirest = require('unirest'),
     mapSeries = require('promise-map-series'),
     Q = require("q");
 
-function generateRandomNumber(){
-  return Math.random() * 10;
-};
-
 rentalScraper = {
 
   _rentalsGeoJsonPath: path.join(__dirname, '../../layers/rentals.json'),
@@ -32,6 +28,14 @@ rentalScraper = {
   _numberOfUserProfilesCrawled: 0,
 
   _apiPageTracker: {},
+
+  _generateRandomNumber: function(){
+    var rentalScraper = this;
+    if (rentalScraper._apiPageTracker['airbnb']['start'] % 6 === 0){ 
+      return 150; 
+    };
+    return Math.random() * 10;
+  },
 
   init: function(providers, startPage, stopPage) { 
     var rentalScraper = this;
@@ -212,6 +216,7 @@ rentalScraper = {
   },
 
   _scrapeListing: function(feature, callback){
+    var rentalScraper = this;
     var targetUrl = feature.properties.url;
     options = {
       url: targetUrl,
@@ -236,7 +241,7 @@ rentalScraper = {
 	  }	  
 	  callback(scrapedFeature);
         }
-      }, 1000 * generateRandomNumber());
+      }, 1000 * rentalScraper._generateRandomNumber());
       
       function _getAirbnbListingData($, feature){ 
         userDetails = $('#host-profile.room-section').find("a")[0];
