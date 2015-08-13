@@ -15,6 +15,10 @@ var unirest = require('unirest'),
     mapSeries = require('promise-map-series'),
     Q = require("q");
 
+function generateRandomNumber(){
+  return Math.random() * 10;
+};
+
 rentalScraper = {
 
   _rentalsGeoJsonPath: path.join(__dirname, '../../layers/rentals.json'),
@@ -29,10 +33,10 @@ rentalScraper = {
 
   _apiPageTracker: {},
 
-  init: function(providers) { 
+  init: function(providers, startPage, stopPage) { 
     var rentalScraper = this;
     providers.forEach(function(provider){
-      rentalScraper._apiPageTracker[provider] = 1;
+      rentalScraper._apiPageTracker[provider] = {start: startPage, stop: stopPage};
       rentalScraper._fetchListingsByProvider(provider);
     });
   },
@@ -48,7 +52,7 @@ rentalScraper = {
               "&nelatitude=" + nelatitude + "&nelongitude=" + nelongitude + 
               "&swlatitude=" + swlatitude + "&swlongitude=" + swlongitude + 
               "&&provider=" + provider + "&" +
-              "page=" + rentalScraper._apiPageTracker[provider];
+              "page=" + rentalScraper._apiPageTracker[provider]['start'];
     
     unirest.get(url)
     .header("X-Mashape-Key", config.mashape_key)
@@ -57,20 +61,20 @@ rentalScraper = {
     
     function _getListings(result){
       var parsedResult;
-      console.log('Scanning ' + provider + ' page ' + rentalScraper._apiPageTracker[provider] + '...');
+      console.log('Scanning ' + provider + ' page ' + rentalScraper._apiPageTracker[provider]['start'] + ' of ' + rentalScraper._apiPageTracker[provider]['stop']);
       try {
         parsedResult = JSON.parse(result.body);
       } catch (e) {
         console.log(e);
         parsedResult = null;
       }
-      rentalScraper._apiPageTracker[provider] = rentalScraper._apiPageTracker[provider] + 1;
+      rentalScraper._apiPageTracker[provider]['start'] = rentalScraper._apiPageTracker[provider]['start'] + 1;
       rentalScraper._pageCount = rentalScraper._pageCount + 1;
       rentalScraper._handleApiPageResult(parsedResult, function(){
-        if (parsedResult === null || parsedResult['ids'].length > 0){
+     	if ((parsedResult === null || parsedResult['ids'].length > 0) && rentalScraper._apiPageTracker[provider]['start'] < rentalScraper._apiPageTracker[provider]['stop']){
           rentalScraper._fetchListingsByProvider(provider)
         } else {
-          rentalScraper._apiPageTracker[provider] = "complete";
+          rentalScraper._apiPageTracker[provider]['start'] = "complete";
           console.log(provider + ' scan complete.');
           if (rentalScraper._detectScanCompletion() === true){
             userListingsCounter.countUserListings();
@@ -89,7 +93,7 @@ rentalScraper = {
         scanComplete = true;
 
     for (var provider in pageTracker) {
-      var result = pageTracker[provider];
+      var result = pageTracker[provider]['start'];
       resultList.push(result); 
     };
 
@@ -186,6 +190,7 @@ rentalScraper = {
             rentalScraper._scrapeListing(feature, function(listingFeature){
 	      //If listing wasn't scraped, don't replace the feature
 	      if (listingFeature !== false){
+		feature.properties['units'] !== undefined ? listingFeature.properties['units'] = feature.properties['units'] : listingFeature.properties['units'] = 1;
 	        _replaceFeature(listingFeature);
                 console.log(feature.properties.id + ' has been updated.');
 	      } else {
@@ -231,7 +236,7 @@ rentalScraper = {
 	  }	  
 	  callback(scrapedFeature);
         }
-      }, 6500);
+      }, 1000 * generateRandomNumber());
       
       function _getAirbnbListingData($, feature){ 
         userDetails = $('#host-profile.room-section').find("a")[0];
