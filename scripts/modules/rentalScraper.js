@@ -184,11 +184,12 @@ rentalScraper = {
             });
           } else if (docs[0].properties.updated < past2weeks || docs[0].properties.updated === undefined) {
             rentalScraper._scrapeListing(feature, function(listingFeature){
-              console.log(feature.properties.id + ' has been updated.');
 	      //If listing wasn't scraped, don't replace the feature
 	      if (listingFeature !== false){
 	        _replaceFeature(listingFeature);
-	      } else { 
+                console.log(feature.properties.id + ' has been updated.');
+	      } else {
+		console.log(feature.properties.id + ' has not been updated.'); 
 	        db.close();
 	        deferred.resolve();
 	      }
@@ -230,11 +231,11 @@ rentalScraper = {
 	  }	  
 	  callback(scrapedFeature);
         }
-      }, 900);
+      }, 5000);
       
       function _getAirbnbListingData($, feature){ 
         userDetails = $('#host-profile.room-section').find("a")[0];
-	console.log($('body').text().slice(0,900).replace(/\s/g, ""));
+	console.log($('body').text().slice(0,300).replace(/\s/g, ""));
         if (userDetails !== undefined){
           var href = userDetails['attribs']['href'];
           var numReviewsRegex = $('span[itemprop="reviewCount"]').text();
