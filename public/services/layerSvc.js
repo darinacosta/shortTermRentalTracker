@@ -150,7 +150,7 @@ function layerSvc($http, layerHelpers){
     },
 
     getShortTermRentals: function(){
-      return $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pastweek=true").then(function(res){
+      return $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pasttwoweeks=true").then(function(res){
         var geojson = {
           "type": "FeatureCollection",
           "features": res.data.body

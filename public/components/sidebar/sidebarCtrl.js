@@ -9,7 +9,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
       queryLayer = {},
       shortTermRentalPointManager = new layerManager("Regional Short Term Rental Points");
 
-  $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pastweek=true").success(function(data){
+  $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pasttwoweeks=true").success(function(data){
       gatherStats(data.body)
     }
   );
@@ -83,7 +83,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
     asyncHelper(function() {
       $scope.searchError = ''
     });
-    $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true").success(function(data){
+    $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pasttwoweeks=true").success(function(data){
       var filteredFeatures = [],
       queryValid;
       data['body'].filter(function (feature) {

@@ -52,10 +52,10 @@ app.get('/rentaltracker', function(req, res){
       };
 
       //Query for active listings
-      if (queryPost.pastweek === "true"){
+      if (queryPost.pasttwoweeks === "true"){
         var today = new Date();
-        var lastWeek = new Date(today.setDate(today.getDate() - 7));  
-        queryObject['properties.datecollected'] = {"$gte": lastWeek};
+        var twoWeeks = new Date(today.setDate(today.getDate() - 28));  
+        queryObject['properties.updated'] = {"$gte": twoWeeks};
       };
 
       //Query for verified lisitings

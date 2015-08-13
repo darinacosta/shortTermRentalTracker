@@ -6,7 +6,7 @@ var unirest = require('unirest'),
     config = require('./../config'),
     today = new Date(),
     todayCalc = new Date(),
-    past2weeks =  new Date(todayCalc.setDate(todayCalc.getDate() - 0)),
+    past2weeks =  new Date(todayCalc.setDate(todayCalc.getDate() - 23)),//change days back to 14
     MongoClient = require('mongodb').MongoClient,
     assert = require('assert'),
     rentaldb = 'mongodb://localhost:27017/shorttermrentals',
@@ -31,10 +31,14 @@ rentalScraper = {
 
   _generateRandomNumber: function(){
     var rentalScraper = this;
+    var randomNumThreshold = Math.floor((Math.random() * 10) + 1);
     if (rentalScraper._apiPageTracker['airbnb']['start'] % 6 === 0){ 
-      return 150; 
+      return Math.random() * 12;
+    } else if (randomNumThreshold < 4){
+      return 30;
+    } else {
+      return Math.random() * 10;
     };
-    return Math.random() * 10;
   },
 
   init: function(providers, startPage, stopPage) { 
