@@ -6,7 +6,7 @@ var unirest = require('unirest'),
     config = require('./../config'),
     today = new Date(),
     todayCalc = new Date(),
-    past2weeks =  new Date(todayCalc.setDate(todayCalc.getDate() - 14)),
+    past2weeks =  new Date(todayCalc.setDate(todayCalc.getDate() - 0)),
     MongoClient = require('mongodb').MongoClient,
     assert = require('assert'),
     rentaldb = 'mongodb://localhost:27017/shorttermrentals',
@@ -185,7 +185,13 @@ rentalScraper = {
           } else if (docs[0].properties.updated < past2weeks || docs[0].properties.updated === undefined) {
             rentalScraper._scrapeListing(feature, function(listingFeature){
               console.log(feature.properties.id + ' has been updated.');
-	      _replaceFeature(listingFeature);
+	      //If listing wasn't scraped, don't replace the feature
+	      if (listingFeature !== false){
+	        _replaceFeature(listingFeature);
+	      } else { 
+	        db.close();
+	        deferred.resolve();
+	      }
 	    });
           } else { 
             console.log('No action required on ' + feature.properties.id);
@@ -200,9 +206,9 @@ rentalScraper = {
   },
 
   _scrapeListing: function(feature, callback){
-
+    var targetUrl = feature.properties.url;
     options = {
-      url: feature.properties.url,
+      url: targetUrl,
       headers: {
         'User-Agent': "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
       }
@@ -224,20 +230,22 @@ rentalScraper = {
 	  }	  
 	  callback(scrapedFeature);
         }
-      }, 300);
+      }, 900);
       
       function _getAirbnbListingData($, feature){ 
-        userDetails = $('#host-profile').find("a")[0];
+        userDetails = $('#host-profile.room-section').find("a")[0];
+	console.log($('body').text().slice(0,900).replace(/\s/g, ""));
         if (userDetails !== undefined){
           var href = userDetails['attribs']['href'];
-          var numReviewsRegex = $('.star-rating').parent().text().split('Reviews')[0].replace(/ /g,'').match(/\n([0-9]+)$/);
-          var numReviews = $('.star-rating')[0] === undefined || numReviewsRegex === null ? 0 : parseInt(numReviewsRegex[1]);
+          var numReviewsRegex = $('span[itemprop="reviewCount"]').text();
+          var numReviews = numReviewsRegex === undefined || numReviewsRegex === null ? 0 : parseInt(numReviewsRegex);
           feature.properties['user'] = "http://airbnb.com" + href;
           feature.properties['reviews'] = numReviews;
-          //console.log(feature.properties.id + ' was succesfully scraped.')
+          console.log(feature.properties.id + ' was succesfully scraped.')
 	} else {
           console.log(feature.properties.url + ' was not scraped. Check to ensure it still exists.');
-        };
+          feature = false;
+	};
         return feature;
       };
 
@@ -254,6 +262,7 @@ rentalScraper = {
 	  feature.properties['reviews'] = numReviews;
 	} else {
           console.log(feature.properties.url + ' was not scraped. Check to ensure it still exists.');
+	  feature = false;
 	}
         return feature;
       };
