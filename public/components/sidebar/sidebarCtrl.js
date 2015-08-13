@@ -7,7 +7,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
       layerManager = layerHelpers.layerManager,
       shortTermRentalClusters = {},
       queryLayer = {},
-      shortTermRentalClustersManager = new layerManager("Regional Short Term Rental Points");
+      shortTermRentalPointManager = new layerManager("Regional Short Term Rental Points");
 
   $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pastweek=true").success(function(data){
       gatherStats(data.body)
@@ -117,11 +117,11 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
   };
 
   $scope.clearSelection = function(){
-    var clusterLayer = shortTermRentalClustersManager.getLayer();
+    var pointLayer = shortTermRentalPointManager.getLayer();
     map.removeLayer(queryLayer);
     //map.removeOverlay(queryLayer);
     layerHelpers.hideAllLayers();
-    map.addLayer(clusterLayer);
+    map.addLayer(pointLayer);
     map.setView(mapSvc.mapAttributes.center, mapSvc.mapAttributes.zoom);
     $scope.userUrl = "";
     $scope.searchError = '';
