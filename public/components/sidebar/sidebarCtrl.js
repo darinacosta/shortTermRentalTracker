@@ -144,7 +144,7 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
   function queryPointStyle(feature, latlng) {
     return L.circleMarker(latlng, {
       radius: 6,
-      fillColor: "yellow",
+      fillColor: "red",
       color: "#000",
       weight: 1,
       opacity: 1,
@@ -156,17 +156,17 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
   function queryPopup(feature, layer) {
     var popup;
     if (feature.properties.user !== undefined){
-      var pluralListing = feature.properties.units === '1' ? 'listing' : 'listings',
+      var pluralListing = feature.properties.units === 1 ? 'listing' : 'listings',
       userUrl = feature.properties.user,
       userUrlArray = userUrl.split('/'),
       userId = userUrlArray[userUrlArray.length -1];
-      popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomType + '</small></h4>' +
+      popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomtype + '</small></h4>' +
               '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
               '<b>User Profile:</b> <a target="_blank" href="' + userUrl + '">' + userUrl + '</a><br>' + 
               '<b>User ID:</b> ' + userId + '<br><br>' + 
               '<b>This user has ' + feature.properties.units + ' ' + pluralListing + '.</b>'
     } else {
-      popup = '<h3>' + feature.properties.street + ' Rental (' + feature.properties.roomType + ')</h3>' +
+      popup = '<h3>' + feature.properties.street + ' Rental (' + feature.properties.roomtype + ')</h3>' +
               '<b>Rental:</b> <a target="_blank" href="' + userUrl + '">' + userUrl + '</a><br>';
     }
     layer.bindPopup(popup);
