@@ -25,7 +25,7 @@
           AirBnB:
         </td>
         <td>
-          <span ng-bind="airbnbTotal"></span>
+          <span ng-bind="airbnbTotal">----</span>
         </td>
       </tr>
       <tr>
@@ -33,7 +33,7 @@
           Homeaway:
 	</td>
 	<td>
-          <span ng-bind="homeawayTotal"></span>
+          <span ng-bind="homeawayTotal">----</span>
 	</td>
       </tr>
       <tr>
@@ -41,7 +41,7 @@
           "Entire home/apt" (AirBnB):
         </td>
         <td>
-          <span ng-bind="numEntireHomes"></span>
+          <span ng-bind="numEntireHomes">----</span>
         </td>
       </tr>
        <tr>
@@ -49,7 +49,7 @@
           Multiple-listing renters (AirBnB):
         </td>
         <td>
-          <span ng-bind="usersWithMultiListings"></span>
+          <span ng-bind="usersWithMultiListings">----</span>
         </td>
       </tr>
       <tr>
@@ -57,7 +57,7 @@
           Most N.O. listings by a single user (AirBnB):
         </td>
         <td>
-           <span ng-bind-html="mostListings"></span>
+           <span ng-bind-html="mostListings">----</span>
         </td>
       </tr>
       <tr>
@@ -65,7 +65,7 @@
           Licensed bed and breakfasts: 
         </td>
         <td>
-          <span ng-bind="licensedRentals"></span>
+          <span ng-bind="licensedRentals">----</span>
         </td>
       </tr>
     </table>
@@ -82,7 +82,7 @@
   </div>
   <div id="last-update">
     <small>
-      Featured data was last updated on <b><span ng-bind="lastUpdate"></span></b>.
+      Featured data was last updated on <b><span ng-bind="lastUpdate">--/--/----</span></b>.
     </small>
     <br><br>  
     <small>

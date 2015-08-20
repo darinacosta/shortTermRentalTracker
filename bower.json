@@ -17,6 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "leaflet.markercluster": "~0.4.0"
+    "leaflet.markercluster": "~0.4.0",
+    "angular-chart.js": "~0.7.3"
   }
 }

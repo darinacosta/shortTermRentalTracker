@@ -9,6 +9,16 @@ function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http
       queryLayer = {},
       shortTermRentalPointManager = new layerManager("Regional Short Term Rental Points");
 
+  $scope.mostListings = '----';
+  $scope.nolaTotal = '----';
+  $scope.airbnbTotal =  '----';
+  $scope.homeawayTotal = '----';
+  $scope.numEntireHomes = '----';
+  $scope.lastUpdate = '--/--/--';
+  $scope.usersWithMultiListings =  '----';
+  $scope.licensedRentals = '----';
+
+
   $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pasttwoweeks=true").success(function(data){
       gatherStats(data.body)
     }

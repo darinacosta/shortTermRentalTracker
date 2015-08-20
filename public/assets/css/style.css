@@ -14,6 +14,18 @@ td{
   font-size: 12px;
 }
 
+h4{
+ font-weight:bold;
+}
+
+.chart-content-container{
+  text-align: center;
+  border: 1px solid #8A8A8A;
+  background-color: #ECEAEA;
+  margin: 15px 0 15px 0;
+  padding-bottom: 5px;
+}
+
 .infobar{
   position: relative;
   display: block;
