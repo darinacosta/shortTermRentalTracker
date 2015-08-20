@@ -5,8 +5,16 @@
 
 <p>The primary issues related to short term rentals center around affordability and access. Reserving available housing stock strictly for tourists inflates the cost of housing while decreasing living options for long term residents. The unchecked conversion of residential housing into private commercial space threatens the communal fabric of neighborhoods and the very character of the city.</p>
 <br>
+<div class="col-lg-6 col-sm-12">
 <h4>The rental competition: transients vs. residents.</h4>
 <ul>
 <li>Tourists and residents are competing over a limited supply of housing stock. The lack of city-wide regulation of illegal short term rentals exacerbates this problem. STRs are affecting the housing market by constricting supply, increasing demand, and raising prices of long-term rentals.</li>
 <li>Competing with tourist dollars is particularly daunting  for residents living in neighborhoods with rising rents. The prospect of profit incentivizes short term rentals that allows a host to earn far more than a long-term renter would be willing or able to pay.</li>
 <li>Cost of living in New Orleans is rising, and wages are stagnant. While some operators are using Airbnb as a way to supplement their incomes and stay in their homes, overall the results are harmful to residents.</li>
+</div>
+<div class="col-lg-6 col-sm-12 chart-content-container" style="text-align:center">
+  <h4>Airbnb Room Types</h4>
+  <canvas id="doughnut" class="chart chart-doughnut" data="rentalTypeData" labels="rentalTypeLabels"></canvas>
+  <div class="caption">Airbnb listings by room type among <span ng-bind="airbnbTotal"></span> active and historic listings.</div>
+</div>
+
