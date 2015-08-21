@@ -4,9 +4,13 @@ var http = require('http');
 var path = require('path');
 var csvConverter = {};
 
-csvConverter.fields = ['properties.id','geometry.coordinates','properties.city','properties.updated','properties.nightlyprice','properties.monthlyprice','properties.neighborhood','properties.roomtype','properties.street','properties.units','properties.url','properties.user'];
+csvConverter.airFields = ['properties.id','geometry.coordinates','properties.city','properties.updated','properties.nightlyprice','properties.monthlyprice','properties.neighborhood','properties.roomtype','properties.street','properties.units','properties.url','properties.user'];
 
-csvConverter.fieldNames = ['ID', 'Coordinates', 'City', 'Date Collected', 'Nightly Price', 'Monthly Price', 'Neighborhood', 'Room Type', 'Street', 'Units', 'URL', 'User URL'];
+csvConverter.airFieldNames = ['ID', 'Coordinates', 'City', 'Date Collected', 'Nightly Price', 'Monthly Price', 'Neighborhood', 'Room Type', 'Street', 'Units', 'URL', 'User URL'];
+
+csvConverter.hmaFields = ['properties.id','geometry.coordinates','properties.city','properties.updated','properties.nightlyprice','properties.monthlyprice','properties.neighborhood','properties.roomtype','properties.street','properties.url','properties.user'];
+
+csvConverter.hmaFieldNames = ['ID', 'Coordinates', 'City', 'Date Collected', 'Nightly Price', 'Monthly Price', 'Neighborhood', 'Room Type', 'Street', 'URL', 'Name Provided'];
 
 csvConverter.convert2csv = function(provider, filename) {
   http.get({
@@ -22,8 +26,8 @@ csvConverter.convert2csv = function(provider, filename) {
     
       var csvOptions = {
         data: parsed.body,
-        fields: csvConverter.fields,
-        fieldNames: csvConverter.fieldNames,
+        fields: provider === "air" ? csvConverter.airFields : csvConverter.hmaFields,
+        fieldNames: provider === "air" ? csvConverter.airFieldNames : csvConverter.hmaFieldNames,
         nested: true,
         del: ';'
       };

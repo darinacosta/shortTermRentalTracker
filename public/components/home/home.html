@@ -1,3 +1,5 @@
+<div ng-model="stats">
+
 <div class="col-sm-12">
   <h1>New Orleans Short Term Rental Report</h1>
   <h4><i>Examining the effects of short term rentals on the New Orleans housing market.</i></h4>
@@ -13,11 +15,69 @@
 <div class="col-lg-4 col-sm-12 chart-content-container">
   <h4>Airbnb Room Types</h4>
   <canvas id="doughnut" class="chart chart-doughnut" data="rentalTypeData" labels="rentalTypeLabels"></canvas>
-  <div class="caption">Airbnb listings by room type among <span ng-bind="airbnbTotal"></span> active and historic listings.</div>
+  <div class="caption">Airbnb listings by room type among {{stats.listingTotals.air}} active and historic listings.</div>
 </div>
-<div class="col-lg-6 col-sm-12 chart-content-container">
+<div class="col-md-6 col-xs-12 chart-content-container">
    <h4>Average Nightly Price: Airbnb & HomeAway</h4>
    <canvas id="bar" class="chart chart-bar" data="averageNightlyData" labels="averageNightlyLabels" options="averageNightlyOptions"></canvas> 
    <br>
-   <div class="caption">Average nightly prices among <span ng-bind="combinedTotal"></span> active and historic listings.</div>
-</div>	
+   <div class="caption">Average nightly prices among {{stats.listingTotals.air + stats.listingTotals.hma}} active and historic listings.</div>
+</div>
+<div class="col-lg-4 col-sm-6 col-xs-12 chart-content-container">
+   <h4>Prices</h4>
+   <table class="table" ng-model="stats" style="text-align:left">
+     <thead>
+       <tr>
+	 <th>Airbnb</th>
+	 <th>Nightly</th>
+	 <th>Monthly</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td>Average entire home/apt</td>
+	 <td>{{stats.prices.air.averageEntirePlaceNight | currency}}</td>
+	 <td>{{stats.prices.air.averageEntirePlaceMonthly | currency}}</td>
+       </tr>
+       <tr>
+         <td>Average private room</td>
+	 <td>{{stats.prices.air.averagePrivateRoomNightly | currency}}</td>
+	 <td>{{stats.prices.air.averagePrivateRoomMonthly | currency}}</td>
+       </tr>
+       <tr>
+         <td>Average shared Room</td>
+	 <td>{{stats.prices.air.averageSharedRoomNightly | currency}}</td>
+	 <td>{{stats.prices.air.averageSharedRoomMonthly | currency}}</td>
+       </tr>
+       <tr>
+         <td>Maximum price</td>
+	 <td><a href="{{stats.prices.air.maxNightlyListing}}" target="_blank">{{stats.prices.air.maxNightlyPrice | currency}}</a></td>
+	 <td><a href="{{stats.prices.air.maxMonthlyListing}}" target="_blank">{{stats.prices.air.maxMonthlyPrice | currency}}</a></td>
+       </tr>
+     </tbody>
+   </thead>
+  </table>
+   <table class="table" ng-model="stats" style="text-align:left">
+     <thead>
+       <tr>
+	 <th>HomeAway</th>
+	 <th></th>
+	 <th></th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td>Average entire home/apt</td>
+	 <td>{{stats.prices.hma.averageTotalNightly | currency}}</td>
+	 <td>{{stats.prices.hma.averageTotalMonthly | currency}}</td>
+       </tr>
+       <tr>
+         <td>Maximum price</td>
+	 <td><a href="{{stats.prices.hma.maxNightlyListing}}" target="_blank">{{stats.prices.hma.maxNightlyPrice | currency}}</a></td>
+	 <td><a href="{{stats.prices.hma.maxMonthlyListing}}" target="_blank">{{stats.prices.hma.maxMonthlyPrice | currency}}</a></td>
+       </tr>
+     </tbody>
+   </table>
+</div>
+
+</div> <!--end model-->

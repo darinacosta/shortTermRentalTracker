@@ -87,7 +87,7 @@ strCalculator.buildUserList = function(listings){
   return userList;
 };
 
-strCalculator.calculateAveragePrice = function(listings){
+strCalculator.calculatePrices = function(listings){
   
   //combined
   var totalNightly = 0;
@@ -96,8 +96,8 @@ strCalculator.calculateAveragePrice = function(listings){
   //air
   var airNightly = 0;
   var airMonthly = 0;
-  var airEntirNightly = 0;
-  var airEntireMonthly = 0;
+  var airEntirePlaceNightly = 0;
+  var airEntirePlaceMonthly = 0;
   var airPrivateRoomNightly = 0;
   var airPrivateRoomMonthly= 0;
   var airSharedRoomNightly = 0;
@@ -120,7 +120,7 @@ strCalculator.calculateAveragePrice = function(listings){
   //counts
   var totalCount = 0;
   var airCount = 0;
-  var airEntireCount = 0;
+  var airEntirePlaceCount = 0;
   var airPrivateRoomCount = 0;
   var airSharedRoomCount = 0;
   var hmaCount = 0;
@@ -147,10 +147,6 @@ strCalculator.calculateAveragePrice = function(listings){
       airNightly += nightlyPrice;
       airMonthly += monthlyPrice;
 
-      //max prices
-      airMaxNightly = airMaxNightly < nightlyPrice ? nightlyPrice : airMaxNightly; 
-      airMaxMonthly = airMaxMonthly < monthlyPrice ? monthlyPrice : airMaxMonthly; 
-      
       //max price users
       airMaxNightlyUser = airMaxNightly < nightlyPrice ? user : airMaxNightlyUser;  
       airMaxMonthlyUser = airMaxMonthly < monthlyPrice ? user : airMaxMonthlyUser; 
@@ -158,6 +154,10 @@ strCalculator.calculateAveragePrice = function(listings){
       //max price listings 
       airMaxNightlyListing = airMaxNightly < nightlyPrice ? url : airMaxNightlyListing;  
       airMaxMonthlyListing = airMaxMonthly < monthlyPrice ? url : airMaxMonthlyListing; 
+      
+      //max prices
+      airMaxNightly = airMaxNightly < nightlyPrice ? nightlyPrice : airMaxNightly; 
+      airMaxMonthly = airMaxMonthly < monthlyPrice ? monthlyPrice : airMaxMonthly; 
       
       airCount += 1;
       
@@ -180,14 +180,14 @@ strCalculator.calculateAveragePrice = function(listings){
       hmaNightly += nightlyPrice;
       hmaMonthly += monthlyPrice;
      
+      //max price listings 
+      hmaMaxNightlyListing = hmaMaxNightly < nightlyPrice ? url : hmaMaxNightlyListing;  
+      hmaMaxMonthlyListing = hmaMaxMonthly < monthlyPrice ? url : hmaMaxMonthlyListing; 
+      
       //max prices
       hmaMaxNightly = hmaMaxNightly < nightlyPrice ? nightlyPrice : hmaMaxNightly; 
       hmaMaxMonthly = hmaMaxMonthly < monthlyPrice ? monthlyPrice : hmaMaxMonthly; 
       
-      //max price listings 
-      hmaMaxNightlyListing = hmaMaxNightly < nightlyPrice ? url : hmaMaxNightlyListing;  
-      hmaMaxMonthlyListing = hmaMaxMonthly < monthlyPrice ? url : hmaMaxMonthlyListing; 
-     
       hmaCount += 1;
     }
   });
@@ -220,6 +220,8 @@ strCalculator.calculateAveragePrice = function(listings){
 	        averagePrivateRoomMonthly: averageAirPrivateRoomMonthly,
 	        averageSharedRoomNightly: averageAirSharedRoomNightly,
 		averageSharedRoomMonthly: averageAirSharedRoomMonthly,
+		maxNightlyPrice: airMaxNightly,
+		maxMonthlyPrice: airMaxMonthly,
 		maxNightlyListing: airMaxNightlyListing,
 		maxMonthlyListing: airMaxMonthlyListing,
 		maxNightlyUser: airMaxNightlyUser,
@@ -227,6 +229,8 @@ strCalculator.calculateAveragePrice = function(listings){
 	  },
           hma: {averageTotalNightly: averageHmaNightly,
                 averageTotalMonthly: averageHmaMonthly,
+		maxNightlyPrice: hmaMaxNightly,
+		maxMonthlyPrice: hmaMaxMonthly,
 	        maxNightlyListing: hmaMaxNightlyListing,
 		maxMonthlyListing: hmaMaxMonthlyListing
 	  }
@@ -235,11 +239,17 @@ strCalculator.calculateAveragePrice = function(listings){
 
 strCalculator.buildMultiUnitHostIndex = function(listings, unitNumber){
   var userList = strCalculator.buildUserList(listings);
-  var multiUnitUsers = [];
+  var multiUnitUsers = {air: 0,
+	                hma: 0
+                       };
     userList.forEach(function(user){
       listings.forEach(function(listing){
         if (listing.properties.user === user && listing.properties.units > unitNumber - 1){
-	  multiUnitUsers.push(listing);
+	  if (listing.properties.provider === "air"){
+	    multiUnitUsers.air += 1;
+	  } else if (listing.properties.provider === "hma"){
+	    multiUnitUsers.hma += 1;
+	  }
 	}
       })
   });
@@ -248,9 +258,7 @@ strCalculator.buildMultiUnitHostIndex = function(listings, unitNumber){
 
 strCalculator.countMultiListingUsers = function(listings, unitNumber){
   var multiUnitUsers = strCalculator.buildMultiUnitHostIndex(listings, unitNumber);
-  return multiUnitUsers.length;
+  return multiUnitUsers;
 }
-
-strCalculator.getData();
 
 module.exports = strCalculator;

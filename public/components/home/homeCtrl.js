@@ -7,16 +7,11 @@ function homeCtrl($scope, mapSvc, layerHelpers, $http) {
     layerManager = layerHelpers.layerManager,
     shortTermRentalClustersManager = new layerManager("Regional Short Term Rental Clusters"),
     shortTermRentalClusters;
-
-  $scope.airbnbTotal = '----';
-  $scope.hmaTotal = '----';
-  $scope.combinedTotal = '----';
   
-  $http.get("../../assets/data/stats.json").success(function(data){
+  $http.get("assets/data/stats.json?v=2").success(function(data){
     console.log(data); 
-   
-    $scope.combinedTotal = data.listingTotals.air + data.listingTotals.hma; 
-    $scope.airbnbTotal = data.listingTotals.air;
+    
+    $scope.stats = data;  
 
     //Room Type Chart 
     $scope.rentalTypeLabels = ["Entire home/apt", "Shared Room", "Private Room"];
@@ -28,15 +23,9 @@ function homeCtrl($scope, mapSvc, layerHelpers, $http) {
         return label.label + ': ' + '$' + label.value;
       }
     }
-    $scope.averageNightlyLabels = ['Airbnb', 'HomeAway', 'Combined Average'];
+    $scope.averageNightlyLabels = ['Airbnb', 'HomeAway', 'Combined'];
     $scope.averageNightlyData = [
-      [data.averagePrices.airNightly, data.averagePrices.hmaNightly, data.averagePrices.totalNightly]  
-    ];
-
-    //Average Monthly Price Chart
-    $scope.averageMonthlyLabels = ['Average Nightly Price'];
-    $scope.averageMonthlyData = [
-      [data.averagePrices.airMonthly, data.averagePrices.hmaMonthly]	  
+      [data.prices.air.averageTotalNightly, data.prices.hma.averageTotalNightly, data.prices.total.averageNightly]  
     ];
 
     $scope.chartColors = [{
