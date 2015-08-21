@@ -1,23 +1,21 @@
-<h1>New Orleans Short Term Rental Report</h1>
-<h4><i>Examining the effects of short term rentals on the New Orleans housing market.</i></h4>
-<br>
-<p>Utilizing data that is <b>updated every 3 days</b> from Airbnb and HomeAway -- two major <b>short term rental (STR)</b> providers -- this website provides a framework for better understanding the impact of unpermitted short term rentals in the city of New Orleans. For a more detailed analysis of data related specifically to Airbnb both in New Orleans and in many other cities, please visit <b><a href="http://insideairbnb.com/" target="_blank">Inside Airbnb</a></b>.</p> 
-
-<p>The primary issues related to short term rentals center around affordability and access. Reserving available housing stock strictly for tourists inflates the cost of housing while decreasing living options for long term residents. The unchecked conversion of residential housing into private commercial space threatens the communal fabric of neighborhoods and the very character of the city.</p>
-<br>
+<div class="col-sm-12">
+  <h1>New Orleans Short Term Rental Report</h1>
+  <h4><i>Examining the effects of short term rentals on the New Orleans housing market.</i></h4>
+  <br>
+  <p>Utilizing data that is <b>updated biweekly</b> from Airbnb and HomeAway -- two major <b>short term rental (STR)</b> providers -- this website provides a framework for better understanding the impact of unpermitted short term rentals in the city of New Orleans. For a more detailed analysis of data related specifically to Airbnb both in New Orleans and in many other cities, please visit <b><a href="http://insideairbnb.com/" target="_blank">Inside Airbnb</a></b>.</p> 
+  <p>The primary issues related to short term rentals center around affordability and access. Reserving available housing stock strictly for tourists inflates the cost of housing while decreasing living options for long term residents. The unchecked conversion of residential housing into private commercial space threatens the communal fabric of neighborhoods and the very character of the city.</p>
+  <br>
+</div>
 <div class="col-lg-8 col-sm-12">
 <h4>The rental competition: transients vs. residents.</h4>
-<ul>
-<li>Tourists and residents are competing over a limited supply of housing stock. The lack of city-wide regulation of illegal short term rentals exacerbates this problem. STRs are affecting the housing market by constricting supply, increasing demand, and raising prices of long-term rentals.</li>
-<li>Competing with tourist dollars is particularly daunting  for residents living in neighborhoods with rising rents. The prospect of profit incentivizes short term rentals that allows a host to earn far more than a long-term renter would be willing or able to pay.</li>
-<li>Cost of living in New Orleans is rising, and wages are stagnant. While some operators are using Airbnb as a way to supplement their incomes and stay in their homes, overall the results are harmful to residents.</li>
+<p>Tourists and residents are competing over a limited supply of housing stock. The lack of city-wide regulation of illegal short term rentals exacerbates this problem. STRs are affecting the housing market by constricting supply, increasing demand, and raising prices of long-term rentals. Competing with tourist dollars is particularly daunting  for residents living in neighborhoods with rising rents. The prospect of profit incentivizes short term rentals that allows a host to earn far more than a long-term renter would be willing or able to pay. Cost of living in New Orleans is rising, and wages are stagnant. While some operators are using Airbnb as a way to supplement their incomes and stay in their homes, overall the results are harmful to residents.</p>
 </div>
 <div class="col-lg-4 col-sm-12 chart-content-container">
   <h4>Airbnb Room Types</h4>
   <canvas id="doughnut" class="chart chart-doughnut" data="rentalTypeData" labels="rentalTypeLabels"></canvas>
   <div class="caption">Airbnb listings by room type among <span ng-bind="airbnbTotal"></span> active and historic listings.</div>
 </div>
-<div class="col-lg-5 col-sm-12 chart-content-container" style="background-color:white">
+<div class="col-lg-6 col-sm-12 chart-content-container">
    <h4>Average Nightly Price: Airbnb & HomeAway</h4>
    <canvas id="bar" class="chart chart-bar" data="averageNightlyData" labels="averageNightlyLabels" options="averageNightlyOptions"></canvas> 
    <br>

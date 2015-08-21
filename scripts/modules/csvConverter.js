@@ -31,13 +31,13 @@ csvConverter.convert2csv = function(provider, filename) {
         if (err) console.log(err);
         fs.writeFile(path.join(__dirname, '../../public/assets/' + filename), csv, function(err){
           if (err) throw err;
-	  console.log('File saved.');
+	  console.log(filename + ' saved to ' + path.join(__dirname, '../../public/assets'));
         })
       })
     })
   })
 }
 
-module.exports = {csvConverter: csvConverter};
+module.exports = csvConverter;
 
 
