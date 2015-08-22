@@ -126,3 +126,14 @@ h4{
     top: 262px;
   }
 }
+
+@media (max-width: 420px){
+  th{
+    font-size: 11px;
+  }
+
+  table.table>tbody>tr>td{
+    padding: 3px;
+    font-size: 12px;
+  }
+}
