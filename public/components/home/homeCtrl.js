@@ -23,9 +23,9 @@ function homeCtrl($scope, mapSvc, layerHelpers, $http) {
         return label.label + ': ' + '$' + label.value;
       }
     }
-    $scope.averageNightlyLabels = ['Airbnb', 'HomeAway', 'Combined'];
+    $scope.averageNightlyLabels = ['Airbnb Entire Place', 'HomeAway Entire Place', 'All Listings'];
     $scope.averageNightlyData = [
-      [data.prices.air.averageTotalNightly, data.prices.hma.averageTotalNightly, data.prices.total.averageNightly]  
+      [data.prices.air.entirePlace.averageNightly, data.prices.hma.averageTotalNightly, data.prices.total.averageNightly]  
     ];
 
     $scope.chartColors = [{

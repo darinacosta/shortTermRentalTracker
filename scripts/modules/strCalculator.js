@@ -93,7 +93,7 @@ strCalculator.calculatePrices = function(listings){
   var totalNightly = 0;
   var totalMonthly = 0;
   
-  //air
+  //air - average prices - total
   var airNightly = 0;
   var airMonthly = 0;
   var airEntirePlaceNightly = 0;
@@ -102,12 +102,38 @@ strCalculator.calculatePrices = function(listings){
   var airPrivateRoomMonthly= 0;
   var airSharedRoomNightly = 0;
   var airSharedRoomMonthly = 0;
+  
+  //air - max prices - total
   var airMaxNightly = 0;
   var airMaxMonthly = 0;
   var airMaxNightlyUser = '';
   var airMaxMonthlyUser = '';
   var airMaxNightlyListing = '';
   var airMaxMonthlyListing = '';
+  
+  //air - max prices - entire place
+  var airMaxEntirePlaceNightlyPrice = 0;
+  var airMaxEntirePlaceMonthlyPrice = 0;
+  var airMaxEntirePlaceNightlyUser = '';
+  var airMaxEntirePlaceMonthlyUser = '';
+  var airMaxEntirePlaceNightlyListing = '';
+  var airMaxEntirePlaceMonthlyListing = '';
+
+  //air - max prices - private room
+  var airMaxPrivateRoomNightlyPrice = 0;
+  var airMaxPrivateRoomMonthlyPrice = 0;
+  var airMaxPrivateRoomNightlyUser = '';
+  var airMaxPrivateRoomMonthlyUser = '';
+  var airMaxPrivateRoomNightlyListing = '';
+  var airMaxPrivateRoomMonthlyListing = '';
+
+  //air - max prices - shared room
+  var airMaxSharedRoomNightlyPrice = 0;
+  var airMaxSharedRoomMonthlyPrice = 0;
+  var airMaxSharedRoomNightlyUser = '';
+  var airMaxSharedRoomMonthlyUser = '';
+  var airMaxSharedRoomNightlyListing = '';
+  var airMaxSharedRoomMonthlyListing = '';
   
   //hma
   var hmaNightly = 0;
@@ -143,35 +169,78 @@ strCalculator.calculatePrices = function(listings){
     //calculate air
     if (listing.properties.provider === "air"){
       
-      //cummulative prices	    
+      //air - cumulative prices - total	    
       airNightly += nightlyPrice;
       airMonthly += monthlyPrice;
 
-      //max price users
+      //air - max price users - total
       airMaxNightlyUser = airMaxNightly < nightlyPrice ? user : airMaxNightlyUser;  
       airMaxMonthlyUser = airMaxMonthly < monthlyPrice ? user : airMaxMonthlyUser; 
       
-      //max price listings 
+      //air - max price listings - total 
       airMaxNightlyListing = airMaxNightly < nightlyPrice ? url : airMaxNightlyListing;  
       airMaxMonthlyListing = airMaxMonthly < monthlyPrice ? url : airMaxMonthlyListing; 
       
-      //max prices
+      //air - max prices - total
       airMaxNightly = airMaxNightly < nightlyPrice ? nightlyPrice : airMaxNightly; 
       airMaxMonthly = airMaxMonthly < monthlyPrice ? monthlyPrice : airMaxMonthly; 
       
       airCount += 1;
       
       if (listing.properties.provider === "air" && listing.properties.roomtype === "Entire home/apt"){
-        airEntirePlaceNightly += nightlyPrice;
+        
+	//air - cumulative prices - entire place
+	airEntirePlaceNightly += nightlyPrice;
 	airEntirePlaceMonthly += monthlyPrice;
+        
+        //air - max price users - entire place
+        airMaxEntirePlaceNightlyUser = airMaxEntirePlaceNightlyPrice < nightlyPrice ? user : airMaxEntirePlaceNightlyUser;  
+        airMaxEntirePlaceMonthlyUser = airMaxEntirePlaceMonthlyPrice < monthlyPrice ? user : airMaxEntirePlaceMonthlyUser; 
+
+	//air - max price listings - entire place
+	airMaxEntirePlaceNightlyListing = airMaxEntirePlaceNightlyPrice < nightlyPrice ? url : airMaxEntirePlaceNightlyListing;  
+        airMaxEntirePlaceMonthlyListing = airMaxEntirePlaceMonthlyPrice < monthlyPrice ? url : airMaxEntirePlaceMonthlyListing; 
+
+        //air - max prices
+        airMaxEntirePlaceNightlyPrice = airMaxEntirePlaceNightlyPrice < nightlyPrice ? nightlyPrice : airMaxEntirePlaceNightlyPrice; 
+        airMaxEntirePlaceMonthlyPrice = airMaxEntirePlaceMonthlyPrice < monthlyPrice ? monthlyPrice : airMaxEntirePlaceMonthlyPrice; 
+
 	airEntirePlaceCount += 1
       } else if (listing.properties.provider === "air" && listing.properties.roomtype === "Private room"){ 
-        airPrivateRoomNightly += nightlyPrice;
+	//air - cumulative prices - private room
+	airPrivateRoomNightly += nightlyPrice;
 	airPrivateRoomMonthly += monthlyPrice;
-	airPrivateRoomCount += 1 
+        
+        //air - max price users - private room
+        airMaxPrivateRoomNightlyUser = airMaxPrivateRoomNightlyPrice < nightlyPrice ? user : airMaxPrivateRoomNightlyUser;  
+        airMaxPrivateRoomMonthlyUser = airMaxPrivateRoomMonthlyPrice < monthlyPrice ? user : airMaxPrivateRoomMonthlyUser; 
+
+	//air - max price listings - private room
+	airMaxPrivateRoomNightlyListing = airMaxPrivateRoomNightlyPrice < nightlyPrice ? url : airMaxPrivateRoomNightlyListing;  
+        airMaxPrivateRoomMonthlyListing = airMaxPrivateRoomMonthlyPrice < monthlyPrice ? url : airMaxPrivateRoomMonthlyListing; 
+	
+        //air - max prices
+        airMaxPrivateRoomNightlyPrice = airMaxPrivateRoomNightlyPrice < nightlyPrice ? nightlyPrice : airMaxPrivateRoomNightlyPrice; 
+        airMaxPrivateRoomMonthlyPrice = airMaxPrivateRoomMonthlyPrice < monthlyPrice ? monthlyPrice : airMaxPrivateRoomMonthlyPrice; 
+
+	airPrivateRoomCount += 1
       } else if (listing.properties.provider === "air" && listing.properties.roomtype === "Shared room"){ 
-        airSharedRoomNightly += nightlyPrice;
+	//air - cumulative prices - shared room
+	airSharedRoomNightly += nightlyPrice;
 	airSharedRoomMonthly += monthlyPrice;
+        
+        //air - max price users - shared room
+        airMaxSharedRoomNightlyUser = airMaxSharedRoomNightlyPrice < nightlyPrice ? user : airMaxSharedRoomNightlyUser;  
+        airMaxSharedRoomMonthlyUser = airMaxSharedRoomMonthlyPrice < monthlyPrice ? user : airMaxSharedRoomMonthlyUser; 
+
+	//air - max price listings - shared room
+	airMaxSharedRoomNightlyListing = airMaxSharedRoomNightlyPrice < nightlyPrice ? url : airMaxSharedRoomNightlyListing;  
+        airMaxSharedRoomMonthlyListing = airMaxSharedRoomMonthlyPrice < monthlyPrice ? url : airMaxSharedRoomMonthlyListing; 
+	
+        //air - max prices
+        airMaxSharedRoomNightlyPrice = airMaxSharedRoomNightlyPrice < nightlyPrice ? nightlyPrice : airMaxSharedRoomNightlyPrice; 
+        airMaxSharedRoomMonthlyPrice = airMaxSharedRoomMonthlyPrice < monthlyPrice ? monthlyPrice : airMaxSharedRoomMonthlyPrice; 
+	
 	airSharedRoomCount += 1
       }
 
@@ -196,7 +265,7 @@ strCalculator.calculatePrices = function(listings){
   averageNightly = Math.round(totalNightly/totalCount); 
   averageMonthly = Math.round(totalMonthly/totalCount);
 
-  //air averages
+  //air averages 
   averageAirNightly = Math.round(airNightly / airCount);
   averageAirMonthly = Math.round(airMonthly / airCount);
   averageAirEntirePlaceNightly = Math.round(airEntirePlaceNightly / airEntirePlaceCount);
@@ -211,21 +280,45 @@ strCalculator.calculatePrices = function(listings){
   averageHmaMonthly = Math.round(hmaMonthly/hmaCount);
 
   return {total: {averageNightly: averageNightly,
-	          averageMonthly: averageMonthly},
-          air: {averageTotalNightly: averageAirNightly,
-                averageTotalMonthly: averageAirMonthly,
-	        averageEntirePlaceNight: averageAirEntirePlaceNightly,
-	        averageEntirePlaceMonthly: averageAirEntirePlaceMonthly,
-	        averagePrivateRoomNightly: averageAirPrivateRoomNightly,
-	        averagePrivateRoomMonthly: averageAirPrivateRoomMonthly,
-	        averageSharedRoomNightly: averageAirSharedRoomNightly,
-		averageSharedRoomMonthly: averageAirSharedRoomMonthly,
-		maxNightlyPrice: airMaxNightly,
-		maxMonthlyPrice: airMaxMonthly,
-		maxNightlyListing: airMaxNightlyListing,
-		maxMonthlyListing: airMaxMonthlyListing,
-		maxNightlyUser: airMaxNightlyUser,
-		maxMonthlyUser: airMaxMonthlyUser
+	          averageMonthly: averageMonthly,
+                  maxNightly: airMaxNightly,
+                  maxMonthly: airMaxMonthly,
+                  maxNightlyUser: airMaxNightlyUser,
+                  maxMonthlyUser: airMaxMonthlyUser,
+                  maxNightlyListing: airMaxNightlyListing,
+                  maxMonthlyListing: airMaxMonthlyListing},
+          air: {total: {averageNightly: averageAirNightly,
+                        averageMonthly: averageAirMonthly,
+	                maxNightly: airMaxNightly,
+	                maxMonthly: airMaxMonthly,
+			maxNightlyListing: airMaxNightlyListing,
+			maxMonthlyListing: airMaxMonthlyListing,
+	                maxNightlyUser: airMaxNightlyUser,
+	                maxMonthlyUser: airMaxMonthlyUser},
+	        entirePlace: {averageNightly: averageAirEntirePlaceNightly,
+                        averageMonthly: averageAirEntirePlaceMonthly,
+	                maxNightly: airMaxEntirePlaceNightlyPrice,
+	                maxMonthly: airMaxEntirePlaceMonthlyPrice,
+			maxNightlyListing: airMaxEntirePlaceNightlyListing,
+	                maxMonthlyListing: airMaxEntirePlaceMonthlyListing,
+			maxNightlyUser: airMaxEntirePlaceNightlyUser,
+	                maxMonthlyUser: airMaxEntirePlaceMonthlyUser},             
+	        privateRoom: {averageNightly: averageAirPrivateRoomNightly,
+                        averageMonthly: averageAirPrivateRoomMonthly,
+	                maxNightly: airMaxPrivateRoomNightlyPrice,
+	                maxMonthly: airMaxPrivateRoomMonthlyPrice,
+			maxNightlyListing: airMaxPrivateRoomNightlyListing,
+	                maxMonthlyListing: airMaxPrivateRoomMonthlyListing,
+			maxNightlyUser: airMaxPrivateRoomNightlyUser,
+	                maxMonthlyUser: airMaxPrivateRoomMonthlyUser},	     
+	        sharedRoom: {averageNightly: averageAirSharedRoomNightly,
+                        averageMonthly: averageAirSharedRoomMonthly,
+	                maxNightly: airMaxSharedRoomNightlyPrice,
+	                maxMonthly: airMaxSharedRoomMonthlyPrice,
+			maxNightlyListing: airMaxSharedRoomNightlyListing,
+	                maxMonthlyListing: airMaxSharedRoomMonthlyListing,
+			maxNightlyUser: airMaxSharedRoomNightlyUser,
+	                maxMonthlyUser: airMaxSharedRoomMonthlyUser},
 	  },
           hma: {averageTotalNightly: averageHmaNightly,
                 averageTotalMonthly: averageHmaMonthly,

@@ -23,57 +23,60 @@
    <br>
    <div class="caption">Average nightly prices among {{stats.listingTotals.air + stats.listingTotals.hma}} active and historic listings.</div>
 </div>
-<div class="col-lg-4 col-sm-6 col-xs-12 chart-content-container">
+<div class="col-lg-6 col-sm-12 chart-content-container">
    <h4>Prices</h4>
    <table class="table" ng-model="stats" style="text-align:left">
      <thead>
        <tr>
 	 <th>Airbnb</th>
-	 <th>Nightly</th>
-	 <th>Monthly</th>
+	 <th>Nightly Average</th>
+	 <th>Nightly Maximum</th>
+	 <th>Monthly Average</th>
+	 <th>Monthly Maximum</th>
        </tr>
      </thead>
      <tbody>
-       <tr>
-         <td>Average entire home/apt</td>
-	 <td>{{stats.prices.air.averageEntirePlaceNight | currency}}</td>
-	 <td>{{stats.prices.air.averageEntirePlaceMonthly | currency}}</td>
+       </tr>
+         <td>Total</td>
+	 <td>{{stats.prices.air.total.averageNightly | currency}}</td>
+	 <td><a href="{{stats.prices.air.total.maxNightlyListing}}" target="_blank">{{stats.prices.air.total.maxNightly | currency}}</a></td>
+	 <td>{{stats.prices.air.total.averageMonthly | currency}}</td>
+	 <td><a href="{{stats.prices.air.total.maxMonthlyListing}}" target="_blank">{{stats.prices.air.total.maxMonthly | currency}}</a></td>
        </tr>
        <tr>
-         <td>Average private room</td>
-	 <td>{{stats.prices.air.averagePrivateRoomNightly | currency}}</td>
-	 <td>{{stats.prices.air.averagePrivateRoomMonthly | currency}}</td>
+         <td>Entire home/apt</td>
+	 <td>{{stats.prices.air.entirePlace.averageNightly | currency}}</td>
+	 <td><a href="{{stats.prices.air.entirePlace.maxNightlyListing}}" target="_blank">{{stats.prices.air.entirePlace.maxNightly | currency}}</a></td>
+	 <td>{{stats.prices.air.entirePlace.averageMonthly | currency}}</td>
+	 <td><a href="{{stats.prices.air.entirePlace.maxMonthlyListing}}" target="_blank">{{stats.prices.air.entirePlace.maxMonthly | currency}}</a></td>
        </tr>
        <tr>
-         <td>Average shared Room</td>
-	 <td>{{stats.prices.air.averageSharedRoomNightly | currency}}</td>
-	 <td>{{stats.prices.air.averageSharedRoomMonthly | currency}}</td>
+         <td>Private room</td>
+	 <td>{{stats.prices.air.privateRoom.averageNightly | currency}}</td>
+	 <td><a href="{{stats.prices.air.privateRoom.maxNightlyListing}}" target="_blank">{{stats.prices.air.privateRoom.maxNightly | currency}}</a></td>
+	 <td>{{stats.prices.air.privateRoom.averageMonthly | currency}}</td>
+	 <td><a href="{{stats.prices.air.privateRoom.maxMonthlyListing}}" target="_blank">{{stats.prices.air.privateRoom.maxMonthly | currency}}</a></td>
        </tr>
        <tr>
-         <td>Maximum price</td>
-	 <td><a href="{{stats.prices.air.maxNightlyListing}}" target="_blank">{{stats.prices.air.maxNightlyPrice | currency}}</a></td>
-	 <td><a href="{{stats.prices.air.maxMonthlyListing}}" target="_blank">{{stats.prices.air.maxMonthlyPrice | currency}}</a></td>
-       </tr>
-     </tbody>
-   </thead>
-  </table>
-   <table class="table" ng-model="stats" style="text-align:left">
-     <thead>
+       <tr>
+         <td>Shared room</td>
+	 <td>{{stats.prices.air.sharedRoom.averageNightly | currency}}</td>
+	 <td><a href="{{stats.prices.air.sharedRoom.maxNightlyListing}}" target="_blank">{{stats.prices.air.sharedRoom.maxNightly | currency}}</a></td>
+	 <td>{{stats.prices.air.sharedRoom.averageMonthly | currency}}</td>
+	 <td><a href="{{stats.prices.air.sharedRoom.maxMonthlyListing}}" target="_blank">{{stats.prices.air.sharedRoom.maxMonthly | currency}}</a></td>
        <tr>
 	 <th>HomeAway</th>
 	 <th></th>
 	 <th></th>
+	 <th></th>
        </tr>
      </thead>
      <tbody>
        <tr>
-         <td>Average entire home/apt</td>
+         <td>Entire home/apt</td>
 	 <td>{{stats.prices.hma.averageTotalNightly | currency}}</td>
-	 <td>{{stats.prices.hma.averageTotalMonthly | currency}}</td>
-       </tr>
-       <tr>
-         <td>Maximum price</td>
 	 <td><a href="{{stats.prices.hma.maxNightlyListing}}" target="_blank">{{stats.prices.hma.maxNightlyPrice | currency}}</a></td>
+	 <td>{{stats.prices.hma.averageTotalMonthly | currency}}</td>
 	 <td><a href="{{stats.prices.hma.maxMonthlyListing}}" target="_blank">{{stats.prices.hma.maxMonthlyPrice | currency}}</a></td>
        </tr>
      </tbody>
