@@ -1,6 +1,6 @@
-app.controller('homeCtrl', ['$scope', 'mapSvc', 'layerHelpers', '$http', homeCtrl]);
+app.controller('homeCtrl', ['$scope', 'layerHelpers', '$http', homeCtrl]);
 
-function homeCtrl($scope, mapSvc, layerHelpers, $http) {
+function homeCtrl($scope, layerHelpers, $http) {
   var map = mapSvc.map,
     mapAttributes = mapSvc.mapAttributes,
     layerControl = mapSvc.layerControl,

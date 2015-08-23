@@ -1,5 +1,4 @@
-var mapSvc = function(){
-  mapAttributes = {
+mapAttributes = {
     center: [29.970996, -90.058537],
     zoom: 13,
     zoomControl: false,
@@ -106,6 +105,3 @@ var mapSvc = function(){
     map: map,
     mapAttributes: mapAttributes
   }
-
-  return mapSvc;
-}

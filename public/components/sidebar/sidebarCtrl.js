@@ -1,4 +1,4 @@
-app.controller('sidebarCtrl', ['$scope', '$q', '$timeout', 'mapSvc', 'layerSvc', 'layerHelpers', '$http', sidebarCtrl]);
+app.controller('sidebarCtrl', ['$scope', '$q', '$timeout', 'layerSvc', 'layerHelpers', '$http', sidebarCtrl]);
 
 function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http) {
   

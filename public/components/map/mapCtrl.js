@@ -1,6 +1,6 @@
-app.controller('mapCtrl', ['$scope', '$rootScope', '$q', '$timeout', 'mapSvc', 'layerSvc', 'layerHelpers', '$http', mapCtrl]);
+app.controller('mapCtrl', ['$scope', '$rootScope', '$q', '$timeout','layerSvc', 'layerHelpers', '$http', mapCtrl]);
 
-function mapCtrl($scope, $rootScope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http) {
+function mapCtrl($scope, $rootScope, $q, $timeout, layerSvc, layerHelpers, $http) {
   var map = mapSvc.map,
     mapAttributes = mapSvc.mapAttributes,
     layerControl = mapSvc.layerControl,

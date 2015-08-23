@@ -1,6 +1,6 @@
-app.factory("layerHelpers", ['mapSvc', layerHelpers]);
+app.factory("layerHelpers", [layerHelpers]);
 
-function layerHelpers(mapSvc){
+function layerHelpers(){
 
   var layerControlList = [],
     layerControl = mapSvc.layerControl,
