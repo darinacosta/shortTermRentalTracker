@@ -1,4 +1,4 @@
-var mapSvc = function(){
+var mapSvc = (function(){
   mapAttributes = {
     center: [29.970996, -90.058537],
     zoom: 13,
@@ -101,11 +101,13 @@ var mapSvc = function(){
     map.addLayer(Esri_WorldGrayCanvas)
   })();
 
-  mapSvc = {
+  svc = {
     layerControl: layerControl,
     map: map,
     mapAttributes: mapAttributes
   }
 
-  return mapSvc;
-}
+  return svc;
+})();
+
+console.log(mapSvc);

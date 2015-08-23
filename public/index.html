@@ -14,8 +14,9 @@
   <![endif]-->
 </head>
 <body ng-app="app">
-  <map></map>
-  <div id="map"></div>
+  <div ng-controller="mapCtrl">
+    <div id="map"></div>
+  </div>
   <sidebar></sidebar>
   <div class="container">
     <div ng-view></div>
@@ -33,17 +34,17 @@
   <script src="lib/angular-bootstrap/dist/ui-bootstrap.min.js"></script>
   <script src="lib/Chart.js/Chart.js"></script>
   <script src="lib/angular-chart.js/dist/angular-chart.js"></script>
-  
-  <script src="services/mapService.js"></script>
+ 
+  <!--globalize map svc for now--> 
+  <script src="services/mapSvc.js"></script>
   
   <script src="app.js"></script>
 
   <!--Directives-->
   <script src="components/sidebar/sidebarDirective.js"></script>
-  <script src="components/map/mapDirective.js"></script>
+  <!--script src="components/map/mapDirective.js"></script-->
   
   <!--Services-->
-  <script src="services/mapSvc.js"></script>
   <script src="services/layerSvc.js"></script>
   <script src="services/layerHelpers.js"></script>
   <script src="services/geojsonUtils.js"></script>
@@ -52,8 +53,6 @@
   <script src="components/map/mapCtrl.js?v=0.02"></script>
   <script src="components/sidebar/sidebarCtrl.js"></script>
   <script src="components/home/homeCtrl.js"></script>
-  <script src="components/treme/tremeCtrl.js"></script>
-  <script src="components/bywater/bywaterCtrl.js"></script>
   <script src="components/donate/donateCtrl.js"></script>
   <script src="components/about/aboutCtrl.js"></script>
 

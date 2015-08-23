@@ -1,6 +1,6 @@
 app.controller('sidebarCtrl', ['$scope', '$q', '$timeout', 'layerSvc', 'layerHelpers', '$http', sidebarCtrl]);
 
-function sidebarCtrl($scope, $q, $timeout, mapSvc, layerSvc, layerHelpers, $http) {
+function sidebarCtrl($scope, $q, $timeout, layerSvc, layerHelpers, $http) {
   
   var map = mapSvc.map,
       layerControl = mapSvc.layerControl,
