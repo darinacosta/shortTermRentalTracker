@@ -1,7 +1,23 @@
 <h1>Bibliography</h1>
 <br>
-<div ng-scope="resources">
-  <div data-ng-repeat="resource in resources">
+<div id = "keyword-collection" ng-scope="keywords">
+  <h4>View sources by keyword:</h4>
+  <form name="keyword-form" ng-click="evalCheckbox()">
+    <div class="row">
+      <div class="col-md-3 col-sm-4 col-xs-6" data-ng-repeat="keyword in keywords">
+        <label>
+          <small>
+	    <input type="checkbox" ng-model="checkboxModel[keyword]">
+            {{keyword}} 
+          </small>
+        </label>
+       </div>
+     </div>
+  </form>
+</div>
+<hr>
+<div class="row" ng-scope="resources" style="min-height:800px">
+  <div class="col-md-6 col-sm-12" data-ng-repeat="resource in resources">
     <h4><a href="{{resource.url}}" target="_blank">{{resource.title}}</a></h4>
     {{resource.author}}. {{resource.publication}}. {{resource.pubdate | date : format : shortDate}}.
     <br>
