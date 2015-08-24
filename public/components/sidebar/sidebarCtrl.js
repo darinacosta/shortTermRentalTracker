@@ -1,6 +1,6 @@
-app.controller('sidebarCtrl', ['$scope', '$q', '$timeout', 'layerSvc', 'layerHelpers', '$http', sidebarCtrl]);
+app.controller('sidebarCtrl', ['$scope', '$q', '$timeout', 'asyncHelper', 'layerSvc', 'layerHelpers', '$http', sidebarCtrl]);
 
-function sidebarCtrl($scope, $q, $timeout, layerSvc, layerHelpers, $http) {
+function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, $http) {
   
   var map = mapSvc.map,
       layerControl = mapSvc.layerControl,
@@ -182,16 +182,6 @@ function sidebarCtrl($scope, $q, $timeout, layerSvc, layerHelpers, $http) {
     layer.bindPopup(popup);
   };
   
-
-  //HELPER FUNCTIONS MOVE THESE TO A SERVICE
-  function asyncHelper(callback){
-    $timeout(function(){
-      $scope.$apply(
-        callback()
-      )
-    });
-  };
-
   function mode(array){
     if(array.length == 0)
       return null;

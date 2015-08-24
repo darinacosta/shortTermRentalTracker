@@ -1,0 +1,11 @@
+<h1>Bibliography</h1>
+<br>
+<div ng-scope="resources">
+  <div data-ng-repeat="resource in resources">
+    <h4><a href="{{resource.url}}" target="_blank">{{resource.title}}</a></h4>
+    {{resource.author}}. {{resource.publication}}. {{resource.pubdate | date : format : shortDate}}.
+    <br>
+    <small>keywords: <i>{{resource.keywords}}</i></small>
+    <hr>
+  </div>
+</div>

@@ -17,6 +17,11 @@ var app = angular.module("app", ["ngRoute", "ngSanitize", "ui.bootstrap", "chart
       controllerUrl: 'components/about/aboutCtrl.js',
       templateUrl: 'components/about/about.html'
     })
+    .when("/resources", {
+      controller: 'resourcesCtrl', 
+      controllerUrl: 'components/resources/resourcesCtrl.js',
+      templateUrl: 'components/resources/resources.html'
+    })
     .otherwise({redirectTo: "/home"})
 })
 

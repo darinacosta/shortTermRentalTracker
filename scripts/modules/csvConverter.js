@@ -43,9 +43,9 @@ csvConverter.convert2csv = function(provider, filename) {
 
       json2csv(csvOptions, function(err, csv){
         if (err) console.log(err);
-        fs.writeFile(path.join(__dirname, '../../public/assets/' + filename), csv, function(err){
+        fs.writeFile(path.join(__dirname, '../../public/assets/data/' + filename), csv, function(err){
           if (err) throw err;
-	  console.log(filename + ' saved to ' + path.join(__dirname, '../../public/assets'));
+	  console.log(filename + ' saved to ' + path.join(__dirname, '../../public/assets/data'));
         })
       })
     })
