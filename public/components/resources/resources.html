@@ -18,10 +18,21 @@
 <hr>
 <div class="row" ng-scope="resources" style="min-height:800px">
   <div class="col-md-6 col-sm-12" data-ng-repeat="resource in resources">
-    <h4><a href="{{resource.url}}" target="_blank">{{resource.title}}</a></h4>
-    {{resource.author}}. {{resource.publication}}. {{resource.pubdate | date : format : shortDate}}.
+    <b><a href="{{resource.url}}" target="_blank">{{resource.title}}</a></b>
     <br>
-    <small>keywords: <i>{{resource.keywords}}</i></small>
+    <span ng-if="resource.author!=undefined">
+      {{resource.author}}.
+    </span>
+    <span ng-if="resource.publication!=undefined">
+      {{resource.publication}}.
+    </span>
+    <span ng-if="resource.pubdate!=undefined">
+      {{resource.pubdate | date : format : shortDate}}.
+    </span>
+    <span ng-if="resource.keywords!=undefined">
+      <br>
+      <small>keywords: <i>{{resource.keywords}}</i></small>
+    </span>
     <hr>
   </div>
 </div>
