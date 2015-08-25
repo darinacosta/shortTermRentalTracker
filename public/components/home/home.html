@@ -1,90 +1,102 @@
 <div ng-model="stats">
-  <h1>New Orleans Short Term Rental Report</h1>
-  <h4><i>Examining the effects of short term rentals on the New Orleans housing market.</i></h4>
+  <div style="text-align:center">
+    <h1>New Orleans Short Term Rental Report</h1>
+    <h4><i>Examining the effects of short term rentals on the New Orleans housing market.</i></h4>
+  </div>
   <br>
   <p>Utilizing data that is <b>updated biweekly</b> from Airbnb and HomeAway -- two major <b>short term rental (STR)</b> providers -- this website provides a framework for better understanding the impact of unpermitted short term rentals in the city of New Orleans. For a more detailed analysis of data related specifically to Airbnb both in New Orleans and in many other cities, please visit <b><a href="http://insideairbnb.com/" target="_blank">Inside Airbnb</a></b>.</p> 
-  <p>The primary issues related to short term rentals center around affordability and access. Reserving available housing stock strictly for tourists inflates the cost of housing while decreasing living options for long term residents. The unchecked conversion of residential housing into private commercial space threatens the communal fabric of neighborhoods and the very character of the city.</p>
+  <p>We consider the most important issues related to short term rentals to be centered around affordability and access. Our analysis on the effects of short term rentals on the New Orleans housing market is separated into six parts: (1) The Rental Competition: Transients Vs. Residents, (2) Myths and Reality, (3) Bad Actors, (4) Poverty, Discrimination, and Racial Bias, (5) Lack of Renter’s Rights, and (6) Just Because You Can, Doesn’t Mean You Should.</p>
   <br>
   <div class="row">
-    <div class="col-lg-8 col-sm-12">
-      <h4>The rental competition: transients vs. residents.</h4>
-      <p>Tourists and residents are competing over a limited supply of housing stock. The lack of city-wide regulation of illegal short term rentals exacerbates this problem. STRs are affecting the housing market by constricting supply, increasing demand, and raising prices of long-term rentals. Competing with tourist dollars is particularly daunting  for residents living in neighborhoods with rising rents. The prospect of profit incentivizes short term rentals that allows a host to earn far more than a long-term renter would be willing or able to pay. Cost of living in New Orleans is rising, and wages are stagnant. While some operators are using Airbnb as a way to supplement their incomes and stay in their homes, overall the results are harmful to residents.</p>
-    </div> <!--content div-->
-    <div class="col-lg-4 col-sm-12">
+    <div class="col-md-6 col-sm-12"><!--begin transients v residents-->
+      <h4>The Rental Competition: Transients vs. Residents.</h4>
+      <p><b>Long term residents are competing with tourists over a limited supply of affordable housing stock.</b></p>
+      <p>The unchecked conversion of residential housing into what is essentially commercial space impacts the housing market by constricting supply and increasing demand. Less supply and more demand means higher rent for long term residents in one of the <a href="http://www.bestofneworleans.com/gambit/new-orleans-one-of-the-worst-us-cities-for-renters/Content?oid=2609106" target="_blank">worst U.S. cities for renters</a>. <b>Short term rentals reduce the amount of available housing for long term residents while making the housing that is still available more expensive</b>. New Orleans has a serious <a href="https://nextcity.org/features/view/10-years-after-katrina-new-orleans-public-housing-still-in-limbo-iberville" target="_blank">affordable housing problem</a>. We don’t believe short term rentals created this problem. However, they have made it worse.</p>
+      <p>Over the past decade, <a href="http://www.nola.com/business/baton-rouge/index.ssf/2013/08/louisiana_unemployment_wages_r.html" target="_blank">wages have remained stagnant</a> while the cost of living has increased. These factors have coincided with a <a href="http://nlihc.org/oor/louisiana" target="_blank">demographic shift in the city of New Orleans towards a wealthier, whiter population</a>. Residents being forced to keep pace with out-of-town dollars for basic amenities like housing exacerbates <a href="http://www.nytimes.com/2015/08/23/magazine/why-new-orleans-black-residents-are-still-under-water-after-katrina.html?_r=1" target="_blank">this ongoing conflict</a>. <b>The average listing advertised as “entire home/apartment” on Airbnb goes for {{stats.prices.air.entirePlace.averageNightly | currency}} per night. The fair market rent for a one bedroom is $767.00 per month, which on average is equal to $26.00 per night.</b>
+    </div> <!--end transients v residents-->
+    <div class="col-md-6 col-sm-12"><!--begin price table column-->
+      <div class="chart-content-container">
+        <h4>Prices</h4>
+        <table class="table" ng-model="stats" style="text-align:left">
+          <thead>
+            <tr>
+              <th>Airbnb</th>
+              <th>Nightly Average</th>
+              <th>Nightly Maximum</th>
+              <th>Monthly Average</th>
+              <th>Monthly Maximum</th>
+            </tr>
+          </thead>
+          <tbody>
+            </tr>
+              <td>Total</td>
+              <td>{{stats.prices.air.total.averageNightly | currency}}</td>
+              <td><a href="{{stats.prices.air.total.maxNightlyListing}}" target="_blank">{{stats.prices.air.total.maxNightly | currency}}</a></td>
+              <td>{{stats.prices.air.total.averageMonthly | currency}}</td>
+              <td><a href="{{stats.prices.air.total.maxMonthlyListing}}" target="_blank">{{stats.prices.air.total.maxMonthly | currency}}</a></td>
+            </tr>
+            <tr>
+              <td>Entire home/apt</td>
+              <td>{{stats.prices.air.entirePlace.averageNightly | currency}}</td>
+              <td><a href="{{stats.prices.air.entirePlace.maxNightlyListing}}" target="_blank">{{stats.prices.air.entirePlace.maxNightly | currency}}</a></td>
+              <td>{{stats.prices.air.entirePlace.averageMonthly | currency}}</td>
+              <td><a href="{{stats.prices.air.entirePlace.maxMonthlyListing}}" target="_blank">{{stats.prices.air.entirePlace.maxMonthly | currency}}</a></td>
+            </tr>
+            <tr>
+              <td>Private room</td>
+              <td>{{stats.prices.air.privateRoom.averageNightly | currency}}</td>
+              <td><a href="{{stats.prices.air.privateRoom.maxNightlyListing}}" target="_blank">{{stats.prices.air.privateRoom.maxNightly | currency}}</a></td>
+              <td>{{stats.prices.air.privateRoom.averageMonthly | currency}}</td>
+              <td><a href="{{stats.prices.air.privateRoom.maxMonthlyListing}}" target="_blank">{{stats.prices.air.privateRoom.maxMonthly | currency}}</a></td>
+            </tr>
+            <tr>
+            <tr>
+              <td>Shared room</td>
+              <td>{{stats.prices.air.sharedRoom.averageNightly | currency}}</td>
+              <td><a href="{{stats.prices.air.sharedRoom.maxNightlyListing}}" target="_blank">{{stats.prices.air.sharedRoom.maxNightly | currency}}</a></td>
+               <td>{{stats.prices.air.sharedRoom.averageMonthly | currency}}</td>
+               <td><a href="{{stats.prices.air.sharedRoom.maxMonthlyListing}}" target="_blank">{{stats.prices.air.sharedRoom.maxMonthly | currency}}</a></td>
+            <tr>
+               <th>HomeAway</th>
+               <th></th>
+               <th></th>
+               <th></th>
+                  </tr>
+               </thead>
+               <tbody>
+            <tr>
+              <td>Entire home/apt</td>
+              <td>{{stats.prices.hma.averageTotalNightly | currency}}</td>
+              <td><a href="{{stats.prices.hma.maxNightlyListing}}" target="_blank">{{stats.prices.hma.maxNightlyPrice | currency}}</a></td>
+              <td>{{stats.prices.hma.averageTotalMonthly | currency}}</td>
+              <td><a href="{{stats.prices.hma.maxMonthlyListing}}" target="_blank">{{stats.prices.hma.maxMonthlyPrice | currency}}</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div><!--end price table column-->
+    <div class="col-md-12"><!--begin transients v residents 2-->
+      <p>We’ve now entered into a housing market that incentives the prioritization of transients over long term residents. Hosts renting to tourists are able to earn far more than a long term renter would be willing or able to pay for the same space. <b>The population of New Orleans in 2014 was an <a href="http://www.infoplease.com/ipa/A0108567.html" target="_blank">estimated 384,320</a>. The number of tourists who visited in the same year was <a href="http://www.neworleansonline.com/pr/releases/releases/2014%20Visitation%20Release.pdf" target="_blank">9.52 million</a></b>. With the limited availability of quality housing stock, a deregulated short term rental market, and weak protections extended towards renters, <a href="http://www.theatlantic.com/business/archive/2015/08/new-orleans-blight-hurricane-katrina/401843/?utm_source=SFTwitter" target="_blank">New Orleans’ current housing crisis has the potential to grow even worse</a>. In a city where visitors displace the residents, who actually lives here?</p>
+    </div><!--end transients v residents 2-->
+    <div class="col-md-6 col-sm-12"><!--begin room type chart column-->
       <div class="chart-content-container">
         <h4>Airbnb Room Types</h4>
         <canvas id="doughnut" class="chart chart-doughnut" data="rentalTypeData" labels="rentalTypeLabels"></canvas>
         <div class="caption">Airbnb listings by room type among {{stats.listingTotals.air}} active and historic listings.</div>
       </div>
     </div> <!--end room type chart column-->
-    <div class="col-md-6 col-xs-12">
+    <div class="col-md-6 col-sm-12"><!--begin myth v reality-->
+      <h4>Myth vs. Reality</h4>
+      Websites like Airbnb are <a href="http://sfist.com/2015/04/27/planning_department_wont_force_airb.php" target="_blank">intentionally opaque</a>. <b>During our data collection, Airbnb became increasingly less transparent with their information.</b> In mid-August of 2015, Airbnb removed a feature from its site that exhibited the number of rentals belonging to individual hosts. Whereas a user profile had previously included a sidebar panel with the number of listings for the individual user along with links to their rental listings, that information is now no longer available.</p>
+      <p>This removal of information is part of a wider transparency issue. Short term rental websites like Airbnb are the public faces of large corporations that tightly control their data.  Airbnb and other short term rental websites intentionally withhold <a href="http://techcrunch.com/2015/06/11/airbnb-and-the-problem-of-data/" target="_blank">comprehensive sets of user data</a>—like statistics regarding the number of units available in a particular city or the frequency of bookings for any listing—that would help residents, consumers, and policymakers easily understand the impacts of short term rentals on a city’s housing market.</p>
+    </div><!--end myth vs reality-->
+    <div class="col-md-6 col-sm-12"><!--begin average nightly chart column-->
       <div class="chart-content-container">
         <h4>Average Nightly Price: Airbnb & HomeAway</h4>
-        <canvas id="bar" class="chart chart-bar" data="averageNightlyData" labels="averageNightlyLabels" options="averageNightlyOptions"></canvas> 
+        <canvas id="bar" class="chart chart-bar" data="averageNightlyData" labels="averageNightlyLabels" options="averageNightlyOptions"></canvas>
         <br>
         <div class="caption">Average nightly prices among {{stats.listingTotals.air + stats.listingTotals.hma}} active and historic listings.</div>
       </div>
     </div> <!--end average nightly chart column-->
-    <div class="col-lg-6 col-xs-12">
-      <div class="chart-content-container">
-        <h4>Prices</h4>
-        <table class="table" ng-model="stats" style="text-align:left">
-          <thead>
-            <tr>
-        	    <th>Airbnb</th>
-        	    <th>Nightly Average</th>
-        	    <th>Nightly Maximum</th>
-        	    <th>Monthly Average</th>
-        	    <th>Monthly Maximum</th>
-            </tr>
-          </thead>
-          <tbody>
-            </tr>
-              <td>Total</td>
-          	  <td>{{stats.prices.air.total.averageNightly | currency}}</td>
-           	  <td><a href="{{stats.prices.air.total.maxNightlyListing}}" target="_blank">{{stats.prices.air.total.maxNightly | currency}}</a></td>
-            	<td>{{stats.prices.air.total.averageMonthly | currency}}</td>
-            	<td><a href="{{stats.prices.air.total.maxMonthlyListing}}" target="_blank">{{stats.prices.air.total.maxMonthly | currency}}</a></td>
-            </tr>
-            <tr>
-              <td>Entire home/apt</td>
-            	<td>{{stats.prices.air.entirePlace.averageNightly | currency}}</td>
-            	<td><a href="{{stats.prices.air.entirePlace.maxNightlyListing}}" target="_blank">{{stats.prices.air.entirePlace.maxNightly | currency}}</a></td>
-           	  <td>{{stats.prices.air.entirePlace.averageMonthly | currency}}</td>
-            	<td><a href="{{stats.prices.air.entirePlace.maxMonthlyListing}}" target="_blank">{{stats.prices.air.entirePlace.maxMonthly | currency}}</a></td>
-            </tr>
-            <tr>
-              <td>Private room</td>
-            	<td>{{stats.prices.air.privateRoom.averageNightly | currency}}</td>
-            	<td><a href="{{stats.prices.air.privateRoom.maxNightlyListing}}" target="_blank">{{stats.prices.air.privateRoom.maxNightly | currency}}</a></td>
-           	  <td>{{stats.prices.air.privateRoom.averageMonthly | currency}}</td>
-            	<td><a href="{{stats.prices.air.privateRoom.maxMonthlyListing}}" target="_blank">{{stats.prices.air.privateRoom.maxMonthly | currency}}</a></td>
-            </tr>
-            <tr>
-            <tr>
-              <td>Shared room</td>
-            	<td>{{stats.prices.air.sharedRoom.averageNightly | currency}}</td>
-            	<td><a href="{{stats.prices.air.sharedRoom.maxNightlyListing}}" target="_blank">{{stats.prices.air.sharedRoom.maxNightly | currency}}</a></td>
-           	   <td>{{stats.prices.air.sharedRoom.averageMonthly | currency}}</td>
-            	 <td><a href="{{stats.prices.air.sharedRoom.maxMonthlyListing}}" target="_blank">{{stats.prices.air.sharedRoom.maxMonthly | currency}}</a></td>
-            <tr>
-            	 <th>HomeAway</th>
-            	 <th></th>
-            	 <th></th>
-            	 <th></th>
-                  </tr>
-               </thead>
-               <tbody>
-            <tr>
-              <td>Entire home/apt</td>
-          	  <td>{{stats.prices.hma.averageTotalNightly | currency}}</td>
-          	  <td><a href="{{stats.prices.hma.maxNightlyListing}}" target="_blank">{{stats.prices.hma.maxNightlyPrice | currency}}</a></td>
-          	  <td>{{stats.prices.hma.averageTotalMonthly | currency}}</td>
-          	  <td><a href="{{stats.prices.hma.maxMonthlyListing}}" target="_blank">{{stats.prices.hma.maxMonthlyPrice | currency}}</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div><!--end price table column-->
   </div><!--end row-->
 </div> <!--end model-->
