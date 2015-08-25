@@ -145,7 +145,8 @@ reviewScraper = {
         "monthlyprice": location['price']['monthly'],
         "description": location['attr']['description'],
 	"datecollected": today,
-        "updated": today
+        "reviewentries": location['reviews']['entries'],
+	"updated": today
       }
     };
     return feature;
@@ -252,7 +253,7 @@ reviewScraper = {
           console.log(feature.properties.id + ' was succesfully scraped.')
 	} else {
           console.log(feature.properties.url + ' was not scraped. Check to ensure it still exists.');
-          feature = false;
+          //feature = false;
 	};
         return feature;
       };
@@ -270,7 +271,7 @@ reviewScraper = {
 	  feature.properties['reviews'] = numReviews;
 	} else {
           console.log(feature.properties.url + ' was not scraped. Check to ensure it still exists.');
-	  feature = false;
+	  //feature = false;
 	}
         return feature;
       };
