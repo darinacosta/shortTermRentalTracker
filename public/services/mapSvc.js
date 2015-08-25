@@ -100,6 +100,33 @@ var mapSvc = (function(){
   (function addBasemap(){
     map.addLayer(Esri_WorldGrayCanvas)
   })();
+  
+  var legend = L.control({position: 'bottomright'});
+  
+  legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend'),
+        categories = [/*{"name": "Orlean Parish Licensed Rentals",
+		       "color": "green"},*/
+	              {"name":"Airbnb",
+			"color":"#B32B2B"},
+		      {"name":"HomeAway",
+		       "color":"#ABA925"}];
+
+    for (var i = 0; i < categories.length; i ++){
+      
+      var color = categories[i].color;
+      var name = categories[i].name;
+
+      div.innerHTML +=
+        '<i class="circle" style="background:' + color + ';color:' + color + '">.....</i> ' + 
+	(categories[i] ? categories[i].name + '<br>' : '+');
+
+    };
+
+    return div;
+  };
+
+  legend.addTo(map);
 
   svc = {
     layerControl: layerControl,
