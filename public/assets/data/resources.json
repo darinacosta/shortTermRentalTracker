@@ -201,7 +201,7 @@
         "url": "Gawker",
         "pubdate": "http://truestories.gawker.com/destroy-and-rebuild-a-q-a-with-one-of-new-orleans-bigg-1684973590",
         "description": "2015-02-16T06:00:00.000Z",
-        "undefined": "gentrification, affordable housing, new orleans, racial inequality, pres kabacoff"
+        "undefined": "gentrification, affordable housing, new orleans, racial inequality"
     },
     {
         "author": "New Orleans bounce music evokes a powerful, poignant sense of place",
@@ -319,111 +319,97 @@
         "author": "Inside Airbnb",
         "publication": "Murray Cox",
         "url": "Inside Airbnb",
-        "pubdate": "http://insideairbnb.com/new-orleans/",
-        "undefined": "airbnb"
+        "pubdate": "http://insideairbnb.com/new-orleans/"
     },
     {
         "author": "Anti-eviction Mapping Project",
         "publication": "Anti-eviction Mapping Project",
         "url": "antievictionmap.com",
-        "pubdate": "http://www.antievictionmap.squarespace.com/",
-        "undefined": "affordable housing, gentrification, renter's rights"
+        "pubdate": "http://www.antievictionmap.squarespace.com/"
     },
     {
         "author": "More Guests, Empty Houses",
         "publication": "Rachel Monroe",
         "url": "Slate.com",
         "pubdate": "http://www.slate.com/articles/business/moneybox/2014/02/airbnb_gentrification_how_the_sharing_economy_drives_up_housing_prices.html",
-        "description": "2015-02-13T06:00:00.000Z",
-        "undefined": "Airbnb, displacement, affordable housing"
+        "description": "2015-02-13T06:00:00.000Z"
     },
     {
         "author": "Airbnb is thriving. Hotels are thriving. How is that possible?",
         "publication": "Alison Griswold",
         "url": "Slate.com",
         "pubdate": "http://www.slate.com/articles/business/moneybox/2015/07/airbnb_disrupting_hotels_it_hasn_t_happened_yet_and_both_are_thriving_what.html",
-        "description": "2015-07-06T05:00:00.000Z",
-        "undefined": "Airbnb, short term rentals"
+        "description": "2015-07-06T05:00:00.000Z"
     },
     {
         "author": "Room versus board",
         "publication": "Brendan O'Connor",
         "url": "theawl.com",
         "pubdate": "http://www.theawl.com/2015/07/room-versus-board",
-        "description": "2015-07-09T05:00:00.000Z",
-        "undefined": "Airbnb, displacement, short term rentals"
+        "description": "2015-07-09T05:00:00.000Z"
     },
     {
         "author": "Boom and Backlash",
         "publication": "Staff Writer",
         "url": "The Economist",
         "pubdate": "http://www.economist.com/news/business/21601254-consumers-and-investors-are-delighted-startups-offering-spare-rooms-or-rides-across-town",
-        "description": "2015-04-26T05:00:00.000Z",
-        "undefined": "Airbnb, short term rentals"
+        "description": "2015-04-26T05:00:00.000Z"
     },
     {
         "author": "I made $41,879 as an AirBNB host",
         "publication": "Kelly Kampen",
         "url": "medium.com",
         "pubdate": "https://medium.com/airbnb-superhosting/i-made-41-879-as-an-airbnb-host-8c33423cd5b6",
-        "description": "2015-05-30T05:00:00.000Z",
-        "undefined": "Airbnb, profiteering"
+        "description": "2015-05-30T05:00:00.000Z"
     },
     {
         "author": "Crazy Money': Airbnb valued at over $25 billion",
         "publication": "Staff Writer",
         "url": "money.cnn.com",
         "pubdate": "http://money.cnn.com/2015/06/27/technology/airbnb-funding-valuation-update/",
-        "description": "2015-06-27T05:00:00.000Z",
-        "undefined": "Airbnb"
+        "description": "2015-06-27T05:00:00.000Z"
     },
     {
         "author": "Pima County Airbnb owners surprised by new taxes",
         "publication": "Patrick McNamara",
         "url": "tuscon.com",
         "pubdate": "http://tucson.com/news/local/govt-and-politics/pima-county-airbnb-owners-surprised-by-new-taxes/article_b3efb530-237f-5533-8cce-03a7dec4eb63.html",
-        "description": "2015-08-22T05:00:00.000Z",
-        "undefined": "Airbnb, regulation"
+        "description": "2015-08-22T05:00:00.000Z"
     },
     {
         "author": "Homeless on the steps of Airbnb: the faces of San Francisco's other story",
         "publication": "Roy Carroll,",
         "url": "thegardian.com",
         "pubdate": "https://www.google.com/url?q=http%3A%2F%2Fwww.theguardian.com%2Ftechnology%2F2015%2Fmar%2F05%2Fhomeless-steps-airbnb-san-francisco",
-        "description": "2015-03-05T06:00:00.000Z",
-        "undefined": "airbnb, affordable housing"
+        "description": "2015-03-05T06:00:00.000Z"
     },
     {
         "author": "Latest AirBnB Backlash: San Fran May Offer Cash to Snitch on Neighbors",
         "publication": "Ashley Powell",
         "url": "lawstreetmedia.com",
         "pubdate": "https://www.google.com/url?q=http%3A%2F%2Flawstreetmedia.com%2Fnews%2Flegal-battle-day-currently-opposing-airbnb%2F",
-        "description": "2004-05-15T05:00:00.000Z",
-        "undefined": "airbnb, regulation"
+        "description": "2004-05-15T05:00:00.000Z"
     },
     {
         "author": "New York State Office of the Attorney General: Airbnb in the city",
         "publication": "Eric T Schneiderman",
         "url": "ag.ny.gov",
         "pubdate": "https://www.google.com/url?q=http%3A%2F%2Fwww.ag.ny.gov%2Fpdfs%2FAirbnb%2520report.pdf",
-        "description": "2014-08-01T05:00:00.000Z",
-        "undefined": "airbnb, regulation"
+        "description": "2014-08-01T05:00:00.000Z"
     },
     {
         "author": "City and County of San Francisco: Budget and Lesislative Anaylsis on short term rentals",
         "publication": "City and County of San Francisco\nBoard of Supervisors\n",
         "url": "sfbos.org",
         "pubdate": "https://www.google.com/url?q=http%3A%2F%2Fwww.sfbos.org%2FModules%2FShowDocument.aspx%3Fdocumentid%3D52601",
-        "description": "2015-05-13T05:00:00.000Z",
-        "undefined": "airbnb, regulation"
+        "description": "2015-05-13T05:00:00.000Z"
     },
     {
         "author": "San Francisco and New York Weigh Airbnb’s Effect on Rent",
         "publication": "Nicole Gelinas",
         "url": "The New York Times",
         "pubdate": "http://www.nytimes.com/roomfordebate/2015/06/16/san-francisco-and-new-york-weigh-airbnbs-effect-on-rent/airbnb-is-a-problem-for-cities-like-new-york-and-san-francisco",
-        "description": "2015-06-16T05:00:00.000Z",
-        "undefined": "airbnb, affordable housing"
+        "description": "2015-06-16T05:00:00.000Z"
     },
     {
         "author": "‘Scraped’ Airbnb data shows 58% of listings possibly illegal",
@@ -437,32 +423,28 @@
         "publication": "Roy Samaan",
         "url": "LANNE",
         "pubdate": "https://www.google.com/url?q=http%3A%2F%2Fwww.laane.org%2Fwp-content%2Fuploads%2F2015%2F03%2FAirBnB-Final.pdf",
-        "description": "2015-03-01T06:00:00.000Z",
-        "undefined": "airbnb, affordable housing"
+        "description": "2015-03-01T06:00:00.000Z"
     },
     {
         "author": "Meet LA's Most Prolific Airbnb Host, With 78 Units For Rent",
         "publication": "Adrian Glick Kudler",
         "url": "Curbed Los Angeles",
         "pubdate": "http://la.curbed.com/archives/2015/03/airbnb_los_angeles_most_prolific_host_ghc.php",
-        "description": "2015-03-12T05:00:00.000Z",
-        "undefined": "airbnb"
+        "description": "2015-03-12T05:00:00.000Z"
     },
     {
         "author": "L.A. proposal would block Airbnb hosts from creating 'rogue hotels'",
         "publication": "Emily Alpert Reyes",
         "url": "Los Angeles Times",
         "pubdate": "http://www.latimes.com/local/lanow/la-me-ln-airbnb-regulation-20150602-story.html",
-        "description": "2015-06-02T05:00:00.000Z",
-        "undefined": "airbnb, regulation"
+        "description": "2015-06-02T05:00:00.000Z"
     },
     {
         "author": "In Silver Lake, some have reservations about vacation rental website",
         "publication": "Walter Hamilton",
         "url": "Los Angeles Times",
         "pubdate": "http://articles.latimes.com/2013/sep/02/business/la-fi-airbnb-economy-20130903",
-        "description": "2013-08-02T05:00:00.000Z",
-        "undefined": "airbnb, short term rentals"
+        "description": "2013-08-02T05:00:00.000Z"
     },
     {
         "author": "Lookin' at you, Airbnb",
