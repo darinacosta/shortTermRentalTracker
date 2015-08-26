@@ -38,9 +38,9 @@ h4{
   list-style-type: none;
 }
 
-.leaflet-control-attribution{
+/*.leaflet-control-attribution{
   display:none;
-}
+}*/
 
 div.info.legend.leaflet-control{
   background-color: rgba(212, 212, 212, 0.52);
