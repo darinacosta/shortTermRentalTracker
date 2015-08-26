@@ -1,90 +1,572 @@
-{
- "body":[
-	     {
-		            "title": "New Orleans one of the worst U.S. cities for renters",
-			           "author": "Alex Woodward",
-				          "publication": "New Olreans Gambit",
-					         "url": "http://www.bestofneworleans.com/gambit/new-orleans-one-of-the-worst-us-ci ties-for-renters/Content?oid=2609106",
-						        "pubdate": "2015-03-30T05:00:00.000Z",
-						               "keywords": "affordable housing, new orleans"
-							           },
+{"body": [
     {
-	          "title": "10 Years After Katrina, New Orleans Public Housing Still in Limbo",
-		        "author": "Katy Reckdahl",
-		              "publication": "Next City",
-		              "url": "https://nextcity.org/features/view/10-years-after-katrina-new-orleans-public-housing-still-in-limbo-iberville",
-		        "pubdate": "2015-06-15T05:00:00.000Z",
-	          "keywords": "public housing, affordable housing, new orleans"
-	      },
+        "author": "New Orleans one of the worst U.S. cities for renters",
+        "publication": "Alex Woodward",
+        "url": "New Orleans Gambit",
+        "pubdate": "http://www.bestofneworleans.com/gambit/new-orleans-one-of-the-worst-us-ci ties-for-renters/Content?oid=2609106",
+        "description": "2015-03-30T05:00:00.000Z",
+        "undefined": "affordable housing, new orleans"
+    },
     {
-	        "title": "Louisiana wages stagnant, gap persistent, study says",
-	            "author": "Lauren McGaughy",
-	            "publication": "NOLA.com | The Times Picayune ",
-	        "url": "http://www.nola.com/business/baton-rouge/index.ssf/2013/08/louisiana_unemployment_wages_r.html",
-            "pubdate": "2013-08-29T05:00:00.000Z",
-        "keywords": "wages, economy, louisiana"
-        },
+        "author": "10 Years After Katrina, New Orleans Public Housing Still in Limbo",
+        "publication": "Katy Reckdahl",
+        "url": "Next City",
+        "pubdate": "https://nextcity.org/features/view/10-years-after-katrina-new-orleans-public-housing-still-in-limbo-iberville",
+        "description": "2015-06-15T05:00:00.000Z",
+        "undefined": "public housing, affordable housing, new orleans"
+    },
     {
-	        "title": "Out of Reach 2015: Louisiana",
-	            "author": "National Low Income Housing Coalition",
-	            "publication": "nlihc.org",
-	        "url": "http://nlihc.org/oor/louisiana"
-	        },
+        "author": "Louisiana wages stagnant, gap persistent, study says",
+        "publication": "Lauren McGaughy",
+        "url": "NOLA.com | The Times Picayune ",
+        "pubdate": "http://www.nola.com/business/baton-rouge/index.ssf/2013/08/louisiana_unemployment_wages_r.html",
+        "description": "2013-08-29T05:00:00.000Z",
+        "undefined": "wages, economy, louisiana"
+    },
     {
-	        "title": "Census Finds Post-Katrina New Orleans Richer, Whiter, Emptier",
-	            "author": "Bloomberg Staff",
-	            "publication": "Bloomberg Business",
-	        "url": "http://www.bloomberg.com/news/articles/2011-02-04/census-finds-post-katrina-new-orleans-richer-whiter-emptier",
-            "pubdate": "2011-02-03T06:00:00.000Z",
-        "keywords": "gentrification, new orleans"
-        },
+        "author": "Out of Reach 2015: Louisiana",
+        "publication": "National Low Income Housing Coalition",
+        "url": "nlihc.org",
+        "pubdate": "http://nlihc.org/oor/louisiana"
+    },
     {
-	        "title": "Why New Orleans’s Black Residents Are Still Underwater After Katrina",
-	            "author": "Gary Rivlin",
-	            "publication": "The New York Times Magazine",
-	        "url": "http://www.nytimes.com/2015/08/23/magazine/why-new-orleans-black-residents-are-still-under-water-after-katrina.html?_r=1",
-            "pubdate": "2015-08-18T05:00:00.000Z",
-        "keywords": "racial inequality, new orleans"
-        },
+        "author": "Census Finds Post-Katrina New Orleans Richer, Whiter, Emptier",
+        "publication": "Bloomberg Staff",
+        "url": "Bloomberg Business",
+        "pubdate": "http://www.bloomberg.com/news/articles/2011-02-04/census-finds-post-katrina-new-orleans-richer-whiter-emptier",
+        "description": "2011-02-03T06:00:00.000Z",
+        "undefined": "gentrification, new orleans"
+    },
     {
-	        "title": "A Housing Crisis Amid Tens of Thousands of Abandoned Homes",
-	            "author": "Gillian White",
-	            "publication": "The Atlantic",
-	        "url": "http://www.theatlantic.com/business/archive/2015/08/new-orleans-blight-hurricane-katrina/401843/?utm_source=SFTwitter",
-            "pubdate": "2015-08-20T05:00:00.000Z",
-        "keywords": "affordable housing, new orleans"
-        },
+        "author": "Why New Orleans’s Black Residents Are Still Underwater After Katrina",
+        "publication": "Gary Rivlin",
+        "url": "The New York Times",
+        "pubdate": "http://www.nytimes.com/2015/08/23/magazine/why-new-orleans-black-residents-are-still-under-water-after-katrina.html?_r=1",
+        "description": "2015-08-18T05:00:00.000Z",
+        "undefined": "racial inequality, new orleans"
+    },
     {
-	        "title": "Planning Department Won't Force Airbnb To Share Records",
-	            "author": "Caleb Pershan",
-	            "publication": "sfist.com",
-	        "url": "http://sfist.com/",
-            "pubdate": "2015-04-27T05:00:00.000Z",
-        "keywords": "airbnb, short term rentals"
-        },
+        "author": "A Housing Crisis Amid Tens of Thousands of Abandoned Homes",
+        "publication": "Gillian White",
+        "url": "The Atlantic",
+        "pubdate": "http://www.theatlantic.com/business/archive/2015/08/new-orleans-blight-hurricane-katrina/401843/?utm_source=SFTwitter",
+        "description": "2015-08-20T05:00:00.000Z",
+        "undefined": "affordable housing, new orleans"
+    },
     {
-	        "title": "Airbnb says this man does not exist. So I had coffee with him",
-	            "author": "Cale Weissman",
-	            "publication": "pando.com",
-	        "url": "https://pando.com/2013/12/08/airbnb-says-this-man-does-not-exist-so-i-had-coffee-with-him/",
-            "pubdate": "2013-12-08T06:00:00.000Z",
-        "keywords": "airbnb, short term rentals"
-        },
+        "author": "Planning Department Won't Force Airbnb To Share Records",
+        "publication": "Caleb Pershan",
+        "url": "sfist.com",
+        "pubdate": "http://sfist.com/",
+        "description": "2015-04-27T05:00:00.000Z",
+        "undefined": "airbnb, short term rentals"
+    },
     {
-	        "title": "What’s good for renters is good for New Orleans",
-	            "author": "Kate Scott",
-	            "publication": "Uptown Messenger",
-	        "url": "http://uptownmessenger.com/2015/02/guest-column-whats-good-for-renters-is-good-for-new-orleans/",
-            "pubdate": "2015-02-11T06:00:00.000Z",
-        "keywords": "affordable housing, new orleans"
-        },
+        "author": "Airbnb says this man does not exist. So I had coffee with him",
+        "publication": "Cale Weissman",
+        "url": "pando.com",
+        "pubdate": "https://pando.com/2013/12/08/airbnb-says-this-man-does-not-exist-so-i-had-coffee-with-him/",
+        "description": "2013-12-08T06:00:00.000Z",
+        "undefined": "airbnb, short term rentals"
+    },
     {
-	        "title": "Lawsuit kills rare prosecution of Airbnb-style rentals in New Orleans",
-	            "author": "Robert McClendon",
-	            "publication": "NOLA.com | The Times Picayune ",
-	        "url": "http://www.nola.com/politics/index.ssf/2015/06/lawsuit_kills_rare_prosecution.html",
-            "pubdate": "2015-06-15T05:00:00.000Z",
-        "keywords": "short term rentals, new orleans"
-        }
-]  
-}
+        "author": "What’s good for renters is good for New Orleans",
+        "publication": "Kate Scott",
+        "url": "Uptown Messenger",
+        "pubdate": "http://uptownmessenger.com/2015/02/guest-column-whats-good-for-renters-is-good-for-new-orleans/",
+        "description": "2015-02-11T06:00:00.000Z",
+        "undefined": "affordable housing, new orleans"
+    },
+    {
+        "author": "Lawsuit kills rare prosecution of Airbnb-style rentals in New Orleans",
+        "publication": "Robert McClendon",
+        "url": "NOLA.com | The Times Picayune ",
+        "pubdate": "http://www.nola.com/politics/index.ssf/2015/06/lawsuit_kills_rare_prosecution.html",
+        "description": "2015-06-15T05:00:00.000Z",
+        "undefined": "short term rentals, new orleans"
+    },
+    {
+        "author": "New Orleans' tourism industry booms but income inequality remains entrenched",
+        "publication": "Robert McClendon",
+        "url": "NOLA.com | The Times Picayune ",
+        "pubdate": "http://www.nola.com/politics/index.ssf/2014/10/new_orleans_tourism_industry_b.html",
+        "description": "2014-10-28T05:00:00.000Z",
+        "undefined": "wages, economy, inequality, new orleans, tourism"
+    },
+    {
+        "author": "For Rent: Unsafe, Overpriced Home for the Holidays",
+        "publication": "Greater New Orleans Fair Housing Action Center",
+        "url": "Greater New Orleans Fair Housing Action Center",
+        "pubdate": "http://www.gnofairhousing.org/wp-content/uploads/2014/12/Unsafe-Overpriced-Home-for-the-Holidays-FINAL.pdf",
+        "description": "2015-12-03T06:00:00.000Z",
+        "undefined": "affordable housing, new orleans, substandard housing"
+    },
+    {
+        "author": "Census shows digital divide closely linked to household incomes",
+        "publication": "Bill Callahan",
+        "url": "National Digital Inclusion Alliance",
+        "pubdate": "http://www.digitalinclusionalliance.org/blog/2015/5/26/census-shows-digital-divide-closely-linked-to-household-incomes",
+        "description": "2015-05-26T05:00:00.000Z",
+        "undefined": "internet access, inqeuality, income"
+    },
+    {
+        "author": "Where Opportunity Knocks, the Doors are Locked",
+        "publication": "Greater New Orleans Fair Housing Action Center",
+        "url": "Greater New Orleans Fair Housing Action Center",
+        "pubdate": "http://www.gnofairhousing.org/wp-content/uploads/2014/11/11-06-14-Where-Opp-Knocks-FINAL.pdf",
+        "description": "2014-11-06T06:00:00.000Z",
+        "undefined": "affordable housing, new orleans, racial discrimination, housing discrimination"
+    },
+    {
+        "author": "Digital Discrimination: The Case of Airbnb.com",
+        "publication": "Benjamin Edelman, Michael Luca",
+        "url": "Harvard Business School",
+        "pubdate": "http://www.hbs.edu/faculty/Publication%20Files/14-054_e3c04a43-c0cf-4ed8-91bf-cb0ea4ba59c6.pdf",
+        "description": "2014-01-10T06:00:00.000Z",
+        "undefined": "racial discrimination, airbnb, short term rentals"
+    },
+    {
+        "author": "Who Lives in New Orleans and Metro Parishes Now?",
+        "publication": "Nihal Shrinath, Vicki Mack, Allison Plyer",
+        "url": "The Data Center",
+        "pubdate": "http://www.datacenterresearch.org/data-resources/who-lives-in-new-orleans-now/",
+        "description": "2014-10-16T05:00:00.000Z",
+        "undefined": "demographics, new orleans, income"
+    },
+    {
+        "author": "The Myth of New Orleans' Affordability",
+        "publication": "Gillian White",
+        "url": "The Atlantic",
+        "pubdate": "https://docs.google.com/document/d/1gX7eLY7Rn1v8XlU2tKv0IBIkKAr_ADhxtGDe8Kmo2ns/edit#heading=h.pta6z3k93wot",
+        "description": "2015-07-28T05:00:00.000Z",
+        "undefined": "affordable housing, housing discrimination, income, new orleans"
+    },
+    {
+        "author": "Higher housing costs puts pinch on local workforce",
+        "publication": "Ryan Kelly",
+        "url": "City Business",
+        "pubdate": "http://www.larryschedler.com/higher-housing-costs-put-pinch-local-workforce/",
+        "description": "2015-08-14T05:00:00.000Z",
+        "undefined": "affordable housing, gentrification, new orleans"
+    },
+    {
+        "author": "Where will working poor live in future New Orleans, if gentrification continues?",
+        "publication": "Robert McClendon",
+        "url": "NOLA.com | The Times Picayune ",
+        "pubdate": "http://www.nola.com/futureofneworleans/2015/07/where_will_the_working_poor_li.html",
+        "description": "2015-07-30T05:00:00.000Z",
+        "undefined": "affordable housing, gentrification, income, new orleans"
+    },
+    {
+        "author": "10 Things You Need to Know About Renting in New Orleans",
+        "publication": "Lauren LaBorde",
+        "url": "Curbed",
+        "pubdate": "http://nola.curbed.com/archives/2015/06/04/10-things-you-need-to-know-about-renting-in-new-orleans.php",
+        "description": "2015-06-04T05:00:00.000Z",
+        "undefined": "renter's rights, new orleans, evictions"
+    },
+    {
+        "author": "New Orleans will need 33,000 new housing units over the next 10 years, study finds",
+        "publication": "Robert McClendon",
+        "url": "NOLA.com | The Times Picayune ",
+        "pubdate": "http://www.nola.com/politics/index.ssf/2015/08/new_orleans_will_need_33000_ne.html#incart_2box_nola_river_orleans_news",
+        "description": "2015-08-21T05:00:00.000Z",
+        "undefined": "affordable housing, housing costs, gentrification, new orleans"
+    },
+    {
+        "author": "Unfairbnb: What Unliscenced Short-Term Rentals Mean for New Orleans",
+        "publication": "Jules Bentley",
+        "url": "Antigravity Magazine",
+        "pubdate": "http://www.antigravitymagazine.com/2014/03/unfairbnb-what-unlicensed-short-term-rentals-mean-for-new-orleans/",
+        "description": "2014-03-01T06:00:00.000Z",
+        "undefined": "airbnb, gentrification, new orleans"
+    },
+    {
+        "author": "Two Cities: New Orleans",
+        "publication": "Jazeera Clips",
+        "url": "Jazeera Clips",
+        "pubdate": "https://vimeo.com/user20438593",
+        "undefined": "new orleans"
+    },
+    {
+        "author": "Hurricane Katrina didn't kill New Orleans- but it almost did",
+        "publication": "Laura Flanders and Jordan Flaherty",
+        "pubdate": "http://www.thenation.com/article/video-hurricane-katrina-didnt-kill-new-orleans-but-it-almost-did/",
+        "description": "2015-08-14T05:00:00.000Z",
+        "undefined": "new orleans"
+    },
+    {
+        "author": "Destroy and Rebuild: A Q&A With One of New Orleans' Biggest Developers",
+        "publication": "Peter Moskowitz",
+        "url": "Gawker",
+        "pubdate": "http://truestories.gawker.com/destroy-and-rebuild-a-q-a-with-one-of-new-orleans-bigg-1684973590",
+        "description": "2015-02-16T06:00:00.000Z",
+        "undefined": "gentrification, affordable housing, new orleans, racial inequality, pres kabacoff"
+    },
+    {
+        "author": "New Orleans bounce music evokes a powerful, poignant sense of place",
+        "publication": "Alison Fensterstock",
+        "url": "NOLA.com | The Times Picayune",
+        "pubdate": "http://www.nola.com/neighborhoods/2015/06/new_orleans_bounce_music_evoke.html",
+        "description": "2015-06-04T05:00:00.000Z",
+        "undefined": "gentrification, redevelopment"
+    },
+    {
+        "author": "Gentrification and Its Discontents: Notes from New Orleans",
+        "publication": "Richard Campanella",
+        "url": "New Geography",
+        "pubdate": "http://www.newgeography.com/content/003526-gentrification-and-its-discontents-notes-new-orleans",
+        "description": "2013-03-01T06:00:00.000Z",
+        "undefined": "gentrification"
+    },
+    {
+        "author": "Who needs neighbors when we've got brunch?",
+        "publication": "Alex Woodward",
+        "url": "New Orleans Gambit",
+        "pubdate": "http://www.bestofneworleans.com/blogofneworleans/archives/2015/05/28/who-needs-neighbors-when-weve-got-brunch-new-orleans-artists-respond-to-airbnb",
+        "description": "2015-05-28T05:00:00.000Z",
+        "undefined": "airbnb, new orleans"
+    },
+    {
+        "author": "Is Airbnb a blight on Bywater? A resident artists thinks so",
+        "publication": "Doug McCash",
+        "url": "NOLA.com | The Times Picayune",
+        "pubdate": "http://www.nola.com/arts/index.ssf/2015/05/is_airbnb_a_blight_on_bywater.html",
+        "description": "2015-05-29T05:00:00.000Z",
+        "undefined": "airbnb, new orleans"
+    },
+    {
+        "author": "What's the average Airbnb host making in New Orleans? A data miner finds out",
+        "publication": "Robert McClendon",
+        "url": "NOLA.com | The Times Picayune",
+        "pubdate": "http://www.nola.com/politics/index.ssf/2015/06/unauthorized_web_scrape_purpor.html",
+        "description": "2015-06-23T05:00:00.000Z",
+        "undefined": "airbnb, new orleans"
+    },
+    {
+        "author": "New Orleans City Council to request short term rental study",
+        "publication": "Alex Woodward",
+        "url": "New Orleans Gambit",
+        "pubdate": "http://m.bestofneworleans.com/blogofneworleans/archives/2015/08/18/new-orleans-city-council-to-request-short-term-rental-study",
+        "description": "2015-08-18T05:00:00.000Z",
+        "undefined": "airbnb, new orleans, city government, regulation"
+    },
+    {
+        "author": "Stacy Head proposes legalizing, taxing short-term rentals for homeowners",
+        "publication": "Robert Morris",
+        "url": "The Uptown Messenger",
+        "pubdate": "http://uptownmessenger.com/2015/01/stacy-head-proposes-legalizing-taxing-short-term-rentals-for-homeowners/",
+        "description": "2015-01-22T06:00:00.000Z",
+        "undefined": "airbnb, new orleans, city government, regulation"
+    },
+    {
+        "author": "New Orleans hotel tax revenue soars, raising collection questions",
+        "publication": "Jennifer Larino",
+        "url": "NOLA.com | The Times Picayune",
+        "pubdate": "http://www.nola.com/business/index.ssf/2015/06/new_orleans_hotel_tax_hits_hig.html",
+        "description": "2015-06-15T05:00:00.000Z",
+        "undefined": "tourism, new orleans"
+    },
+    {
+        "author": "Is New Orleans for residents or tourists? Short-term rental debate heads to City Council",
+        "publication": "Robert McClendon",
+        "url": "NOLA.com | The Times Picayune",
+        "pubdate": "http://www.nola.com/politics/index.ssf/2014/12/is_new_orleans_for_residents_o.html",
+        "description": "2014-12-17T06:00:00.000Z",
+        "undefined": "airbnb, new orleans, city government, regulation"
+    },
+    {
+        "author": "Site of deadly 9th Ward fire is now an Airbnb camp",
+        "publication": "Alex Woodward",
+        "url": "New Orleans Gambit",
+        "pubdate": "http://www.nola.com/politics/index.ssf/2014/12/is_new_orleans_for_residents_o.html",
+        "description": "2015-06-15T05:00:00.000Z",
+        "undefined": "airbnb, new orleans"
+    },
+    {
+        "author": "New Orleans' Airbnb prosecutions are unconstitutional, lawyer says",
+        "publication": "Robert McClendon",
+        "url": "NOLA.com | The Times Picayune",
+        "pubdate": "http://www.nola.com/politics/index.ssf/2015/06/lawyer_citys_airbnb_prosecutio.html",
+        "description": "2015-06-17T05:00:00.000Z",
+        "undefined": "airbnb, new orleans, city government, regulation"
+    },
+    {
+        "author": "Resident: City 'caved' on prosecution of Airbnb-style rentals",
+        "publication": "Robert McClendon",
+        "url": "NOLA.com | The Times Picayune",
+        "pubdate": "http://www.nola.com/politics/index.ssf/2015/06/resident_city_caved_on_prosecu.html",
+        "description": "2015-06-16T05:00:00.000Z",
+        "undefined": "airbnb, new orleans, city government, regulation"
+    },
+    {
+        "author": "New Orleans explores affordable housing options as demand grows",
+        "publication": "Richard A. Webster",
+        "url": "NOLA.com | The Times Picayune",
+        "pubdate": "http://www.nola.com/katrina/index.ssf/2015/08/new_orleans_explores_affordabl.html",
+        "description": "2015-08-20T05:00:00.000Z",
+        "undefined": "affordable housing, new orleans, gentrification"
+    },
+    {
+        "author": "New Orleans councilwoman says she will not be party to 'sucking the efforts of city government' over short-term rentals, recommends turning issue over to Planning Commission",
+        "publication": "Jeff Adelson",
+        "url": "The New Orleans Advocate",
+        "pubdate": "http://www.theneworleansadvocate.com/news/politics/13223516-172/councilwoman-throws-up-hands-recommends",
+        "description": "2015-08-20T05:00:00.000Z",
+        "undefined": "airbnb, new orleans, city government, regulation"
+    },
+    {
+        "author": "Inside Airbnb",
+        "publication": "Murray Cox",
+        "url": "Inside Airbnb",
+        "pubdate": "http://insideairbnb.com/new-orleans/",
+        "undefined": "airbnb"
+    },
+    {
+        "author": "Anti-eviction Mapping Project",
+        "publication": "Anti-eviction Mapping Project",
+        "url": "antievictionmap.com",
+        "pubdate": "http://www.antievictionmap.squarespace.com/",
+        "undefined": "affordable housing, gentrification, renter's rights"
+    },
+    {
+        "author": "More Guests, Empty Houses",
+        "publication": "Rachel Monroe",
+        "url": "Slate.com",
+        "pubdate": "http://www.slate.com/articles/business/moneybox/2014/02/airbnb_gentrification_how_the_sharing_economy_drives_up_housing_prices.html",
+        "description": "2015-02-13T06:00:00.000Z",
+        "undefined": "Airbnb, displacement, affordable housing"
+    },
+    {
+        "author": "Airbnb is thriving. Hotels are thriving. How is that possible?",
+        "publication": "Alison Griswold",
+        "url": "Slate.com",
+        "pubdate": "http://www.slate.com/articles/business/moneybox/2015/07/airbnb_disrupting_hotels_it_hasn_t_happened_yet_and_both_are_thriving_what.html",
+        "description": "2015-07-06T05:00:00.000Z",
+        "undefined": "Airbnb, short term rentals"
+    },
+    {
+        "author": "Room versus board",
+        "publication": "Brendan O'Connor",
+        "url": "theawl.com",
+        "pubdate": "http://www.theawl.com/2015/07/room-versus-board",
+        "description": "2015-07-09T05:00:00.000Z",
+        "undefined": "Airbnb, displacement, short term rentals"
+    },
+    {
+        "author": "Boom and Backlash",
+        "publication": "Staff Writer",
+        "url": "The Economist",
+        "pubdate": "http://www.economist.com/news/business/21601254-consumers-and-investors-are-delighted-startups-offering-spare-rooms-or-rides-across-town",
+        "description": "2015-04-26T05:00:00.000Z",
+        "undefined": "Airbnb, short term rentals"
+    },
+    {
+        "author": "I made $41,879 as an AirBNB host",
+        "publication": "Kelly Kampen",
+        "url": "medium.com",
+        "pubdate": "https://medium.com/airbnb-superhosting/i-made-41-879-as-an-airbnb-host-8c33423cd5b6",
+        "description": "2015-05-30T05:00:00.000Z",
+        "undefined": "Airbnb, profiteering"
+    },
+    {
+        "author": "Crazy Money': Airbnb valued at over $25 billion",
+        "publication": "Staff Writer",
+        "url": "money.cnn.com",
+        "pubdate": "http://money.cnn.com/2015/06/27/technology/airbnb-funding-valuation-update/",
+        "description": "2015-06-27T05:00:00.000Z",
+        "undefined": "Airbnb"
+    },
+    {
+        "author": "Pima County Airbnb owners surprised by new taxes",
+        "publication": "Patrick McNamara",
+        "url": "tuscon.com",
+        "pubdate": "http://tucson.com/news/local/govt-and-politics/pima-county-airbnb-owners-surprised-by-new-taxes/article_b3efb530-237f-5533-8cce-03a7dec4eb63.html",
+        "description": "2015-08-22T05:00:00.000Z",
+        "undefined": "Airbnb, regulation"
+    },
+    {
+        "author": "Homeless on the steps of Airbnb: the faces of San Francisco's other story",
+        "publication": "Roy Carroll,",
+        "url": "thegardian.com",
+        "pubdate": "https://www.google.com/url?q=http%3A%2F%2Fwww.theguardian.com%2Ftechnology%2F2015%2Fmar%2F05%2Fhomeless-steps-airbnb-san-francisco",
+        "description": "2015-03-05T06:00:00.000Z",
+        "undefined": "airbnb, affordable housing"
+    },
+    {
+        "author": "Latest AirBnB Backlash: San Fran May Offer Cash to Snitch on Neighbors",
+        "publication": "Ashley Powell",
+        "url": "lawstreetmedia.com",
+        "pubdate": "https://www.google.com/url?q=http%3A%2F%2Flawstreetmedia.com%2Fnews%2Flegal-battle-day-currently-opposing-airbnb%2F",
+        "description": "2004-05-15T05:00:00.000Z",
+        "undefined": "airbnb, regulation"
+    },
+    {
+        "author": "New York State Office of the Attorney General: Airbnb in the city",
+        "publication": "Eric T Schneiderman",
+        "url": "ag.ny.gov",
+        "pubdate": "https://www.google.com/url?q=http%3A%2F%2Fwww.ag.ny.gov%2Fpdfs%2FAirbnb%2520report.pdf",
+        "description": "2014-08-01T05:00:00.000Z",
+        "undefined": "airbnb, regulation"
+    },
+    {
+        "author": "City and County of San Francisco: Budget and Lesislative Anaylsis on short term rentals",
+        "publication": "City and County of San Francisco\nBoard of Supervisors\n",
+        "url": "sfbos.org",
+        "pubdate": "https://www.google.com/url?q=http%3A%2F%2Fwww.sfbos.org%2FModules%2FShowDocument.aspx%3Fdocumentid%3D52601",
+        "description": "2015-05-13T05:00:00.000Z",
+        "undefined": "airbnb, regulation"
+    },
+    {
+        "author": "San Francisco and New York Weigh Airbnb’s Effect on Rent",
+        "publication": "Nicole Gelinas",
+        "url": "The New York Times",
+        "pubdate": "http://www.nytimes.com/roomfordebate/2015/06/16/san-francisco-and-new-york-weigh-airbnbs-effect-on-rent/airbnb-is-a-problem-for-cities-like-new-york-and-san-francisco",
+        "description": "2015-06-16T05:00:00.000Z",
+        "undefined": "airbnb, affordable housing"
+    },
+    {
+        "author": "‘Scraped’ Airbnb data shows 58% of listings possibly illegal",
+        "publication": "Ryan Hutchins,Bill Mahoney",
+        "url": "Politico New York",
+        "pubdate": "http://www.capitalnewyork.com/article/city-hall/2015/02/8562038/scraped-airbnb-data-shows-58-listings-possibly-illegal",
+        "description": "2015-02-10T06:00:00.000Z"
+    },
+    {
+        "author": "Airbnb, Rising Rent, and The Housing crisis in Los Angeles",
+        "publication": "Roy Samaan",
+        "url": "LANNE",
+        "pubdate": "https://www.google.com/url?q=http%3A%2F%2Fwww.laane.org%2Fwp-content%2Fuploads%2F2015%2F03%2FAirBnB-Final.pdf",
+        "description": "2015-03-01T06:00:00.000Z",
+        "undefined": "airbnb, affordable housing"
+    },
+    {
+        "author": "Meet LA's Most Prolific Airbnb Host, With 78 Units For Rent",
+        "publication": "Adrian Glick Kudler",
+        "url": "Curbed Los Angeles",
+        "pubdate": "http://la.curbed.com/archives/2015/03/airbnb_los_angeles_most_prolific_host_ghc.php",
+        "description": "2015-03-12T05:00:00.000Z",
+        "undefined": "airbnb"
+    },
+    {
+        "author": "L.A. proposal would block Airbnb hosts from creating 'rogue hotels'",
+        "publication": "Emily Alpert Reyes",
+        "url": "Los Angeles Times",
+        "pubdate": "http://www.latimes.com/local/lanow/la-me-ln-airbnb-regulation-20150602-story.html",
+        "description": "2015-06-02T05:00:00.000Z",
+        "undefined": "airbnb, regulation"
+    },
+    {
+        "author": "In Silver Lake, some have reservations about vacation rental website",
+        "publication": "Walter Hamilton",
+        "url": "Los Angeles Times",
+        "pubdate": "http://articles.latimes.com/2013/sep/02/business/la-fi-airbnb-economy-20130903",
+        "description": "2013-08-02T05:00:00.000Z",
+        "undefined": "airbnb, short term rentals"
+    },
+    {
+        "author": "Lookin' at you, Airbnb",
+        "publication": "Marty Graham",
+        "url": "San Diego Reader",
+        "pubdate": "http://www.sandiegoreader.com/news/2015/feb/19/stringers-airbnb-backlash/",
+        "description": "2015-02-19T06:00:00.000Z"
+    },
+    {
+        "author": "Santa Monica comes down hard on Airbnb; will crackdown spread?",
+        "publication": "Tim Logan",
+        "url": "Los Angeles Times",
+        "pubdate": "http://www.latimes.com/business/realestate/la-fi-santa-monica-council-oks-tough-rental-regs-20150512-story.html",
+        "description": "2015-05-13T05:00:00.000Z"
+    },
+    {
+        "author": "Santa Monica Just Banned Airbnb's Biggest Moneymakers",
+        "publication": "Bianca Barragan",
+        "url": "Curbed Los Angeles",
+        "pubdate": "http://la.curbed.com/archives/2015/05/santa_monica_just_banned_airbnbs_biggest_moneymakers.php",
+        "description": "2015-05-13T05:00:00.000Z"
+    },
+    {
+        "author": "A San Diego Woman Renting Rooms Through Airbnb Was Fined $25K",
+        "publication": "Ron Lieber",
+        "url": "Vice",
+        "pubdate": "https://news.vice.com/article/san-diego-woman-renting-rooms-through-airbnb-is-fined-25000",
+        "description": "2015-08-14T05:00:00.000Z"
+    },
+    {
+        "author": "Asheville to push back against short-term rentals, Airbnb",
+        "publication": "Joel Burgess",
+        "url": "Citizen Times",
+        "pubdate": "https://www.google.com/url?q=http%3A%2F%2Fwww.citizen-times.com%2Fstory%2Fnews%2Flocal%2F2015%2F05%2F13%2Fasheville-airbnb-short-term-rental-downtown-city-council-home-apartment-condominium-tourist-visit-enforcement-fine%2F27233777%2F",
+        "description": "2015-05-13T05:00:00.000Z"
+    },
+    {
+        "author": "Startup pitch: Misterbnb, an Airbnb alternative for gay travel, raises $2 million",
+        "publication": "Sean O' Niel",
+        "url": "tnooz",
+        "pubdate": "http://www.tnooz.com/article/misterbnb-the-airbnb-clone-for-gay-men-raises-2-million/",
+        "description": "2015-05-04T05:00:00.000Z"
+    },
+    {
+        "author": "Airbnb fined €30,000 for illegal tourist lets in Barcelona",
+        "publication": "Ashifa Kassam",
+        "url": "The Guardian ",
+        "pubdate": "http://www.theguardian.com/technology/2014/jul/07/airbnb-fined-illegal-tourist-lets-barcelona-catalonia",
+        "description": "2014-07-07T05:00:00.000Z"
+    },
+    {
+        "author": "Barcelona just declared war on Airbnb",
+        "publication": "Don Quijones, Wolf Street",
+        "url": "Business Insider",
+        "pubdate": "http://www.businessinsider.com/barcelona-just-declared-war-on-airbnb-2015-8#ixzz3jCZ1TjtW",
+        "description": "2015-08-11T05:00:00.000Z"
+    },
+    {
+        "author": "Eviction doesn't scare Berlin Airbnb hosts",
+        "publication": "The Local",
+        "url": "The Local",
+        "pubdate": "http://www.thelocal.de/20150219/airbnb-subletters-unp",
+        "description": "2015-02-19T06:00:00.000Z"
+    },
+    {
+        "author": "Two thirds of Berlin's tourist flats now illegal",
+        "publication": "The Local",
+        "url": "The Local",
+        "pubdate": "http://www.thelocal.de/20140801/two-thirds-of-berlins-tourist-flats-now-illegal",
+        "description": "2014-08-01T05:00:00.000Z"
+    },
+    {
+        "author": "The holiday rental crackdown",
+        "publication": "Lúcia Vicente",
+        "url": "Exberliner",
+        "pubdate": "http://www.exberliner.com/features/lifestyle/the-holiday-rental-crackdown/",
+        "description": "2013-07-24T05:00:00.000Z"
+    },
+    {
+        "author": "Airbnb Finally Gets In the Game and Starts Poaching Politicos",
+        "publication": "Nitasha Tiku",
+        "url": "Valley Wag",
+        "pubdate": "http://valleywag.gawker.com/airbnb-finally-gets-in-the-game-and-starts-poaching-pol-1609224287",
+        "description": "2014-07-22T05:00:00.000Z"
+    },
+    {
+        "author": "Woman Utterly Pillaged via Airbnb",
+        "publication": "Ryan Tate",
+        "url": "Gawker",
+        "pubdate": "http://gawker.com/5825262/woman-utterly-pillaged-via-airbnb",
+        "description": "2011-07-22T05:00:00.000Z"
+    },
+    {
+        "author": "Airbnb Horror Story Points to Need for Precautions",
+        "publication": "Ron Lieber",
+        "url": "The New York Times",
+        "pubdate": "http://www.nytimes.com/2015/08/15/your-money/airbnb-horror-story-points-to-need-for-precautions.html?mabReward=A5&moduleDetail=recommendations-0&action=click&contentCollection=U.S.&region=Footer&module=WhatsNext&version=WhatsNext&contentID=WhatsNext&src=recg&pgtype=article",
+        "description": "2014-08-14T05:00:00.000Z"
+    },
+    {
+        "author": "Airbnb Isn't Much Help When Your Guests Turn Into Squatters",
+        "publication": "Kevin Montgomery",
+        "url": "Valley Wag",
+        "pubdate": "valleywag.gawker.com/airbnb-isnt-much-help-when-your-guests-turn-into-squatt-1608324043",
+        "description": "2014-07-21T05:00:00.000Z"
+    }
+]}
