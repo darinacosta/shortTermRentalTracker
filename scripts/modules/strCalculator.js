@@ -355,7 +355,8 @@ strCalculator.calculatePrices = function(listings){
 
 strCalculator.buildMultiUnitHostIndex = function(listings, unitNumber){
   var userList = strCalculator.buildUserList(listings);
-  var multiUnitUsers = {twoplus: 0,
+  var multiUnitUsers = {total: userList.length,
+	                twoplus: 0,
                         fiveplus: 0};
     userList.forEach(function(user){
       listings.forEach(function(listing){
