@@ -8,13 +8,13 @@
   <p>We consider the most important issues related to short term rentals to be centered around affordability and access. Our analysis on the effects of short term rentals on the New Orleans housing market is separated into six parts: (1) The Rental Competition: Transients Vs. Residents, (2) Myths and Reality, (3) Bad Actors, (4) Poverty, Discrimination, and Racial Bias, (5) Lack of Renter’s Rights, and (6) Just Because You Can, Doesn’t Mean You Should.</p>
   <br>
   <div class="row">
-    <div class="col-md-6 col-sm-12"><!--begin transients v residents-->
+    <div class="col-lg-6 col-md-12"><!--begin transients v residents-->
       <h4>The Rental Competition: Transients vs. Residents</h4>
       <p><b>Long term residents are competing with tourists over a limited supply of affordable housing stock.</b></p>
       <p>The unchecked conversion of residential housing into what is essentially commercial space impacts the housing market by constricting supply and increasing demand. Less supply and more demand means higher rent for long term residents in one of the <a href="http://www.bestofneworleans.com/gambit/new-orleans-one-of-the-worst-us-cities-for-renters/Content?oid=2609106" target="_blank">worst U.S. cities for renters</a>. <b>Short term rentals reduce the amount of available housing for long term residents while making the housing that is still available more expensive</b>. New Orleans has a serious <a href="https://nextcity.org/features/view/10-years-after-katrina-new-orleans-public-housing-still-in-limbo-iberville" target="_blank">affordable housing problem</a>. We don’t believe short term rentals created this problem. However, they have made it worse.</p>
       <p>Over the past decade, <a href="http://www.nola.com/business/baton-rouge/index.ssf/2013/08/louisiana_unemployment_wages_r.html" target="_blank">wages have remained stagnant</a> while the cost of living has increased. These factors have coincided with a <a href="http://nlihc.org/oor/louisiana" target="_blank">demographic shift in the city of New Orleans towards a wealthier, whiter population</a>. Residents being forced to keep pace with out-of-town dollars for basic amenities like housing exacerbates <a href="http://www.nytimes.com/2015/08/23/magazine/why-new-orleans-black-residents-are-still-under-water-after-katrina.html?_r=1" target="_blank">this ongoing conflict</a>. <b>The average listing advertised as “entire home/apartment” on Airbnb goes for {{stats.prices.air.entirePlace.averageNightly | currency}} per night. The fair market rent for a one bedroom is <a href="http://www.huduser.org/portal/datasets/fmr/fmrs/fy2015_code/2015summary.odn?inputname=METRO35380M35380*Orleans%20Parish&county_select=yes&state_name=Louisiana&statefp=22&data=2015&fmrtype=Final" target="_blank">$767.00 per month</a>, which on average is equal to $26.00 per night.</b>
     </div> <!--end transients v residents-->
-    <div class="col-md-6 col-sm-12"><!--begin price table column-->
+    <div class="col-lg-6 col-md-12"><!--begin price table column-->
       <div class="chart-content-container">
         <h4>Prices</h4>
         <table class="table" ng-model="stats" style="text-align:left">
@@ -90,8 +90,8 @@
       Websites like Airbnb are <a href="http://sfist.com/2015/04/27/planning_department_wont_force_airb.php" target="_blank">intentionally opaque</a>. <b>During our data collection, Airbnb became increasingly less transparent with their information.</b> In mid-August of 2015, Airbnb removed a feature from its site that exhibited the number of rentals belonging to individual hosts. Whereas a user profile had previously included a sidebar panel with the number of listings for the individual user along with links to their rental listings, that information is now no longer available.</p>
       <p>This removal of information is part of a wider transparency issue. Short term rental websites like Airbnb are the public faces of large corporations that tightly control their data.  Airbnb and other short term rental websites intentionally withhold <a href="http://techcrunch.com/2015/06/11/airbnb-and-the-problem-of-data/" target="_blank">comprehensive sets of user data</a>—like statistics regarding the number of units available in a particular city or the frequency of bookings for any listing—that would help residents, consumers, and policymakers easily understand the impacts of short term rentals on a city’s housing market.</p>
     </div><!--end myth vs reality-->
-    <div class="col-md-6 col-sm-12"><!--begin average nightly chart column-->
-      <div class="chart-content-container">
+    <div class="col-md-12"><!--begin average nightly chart column-->
+      <div class="chart-content-container" style="max-width:718px; margin:auto;">
         <h4>Average Nightly Price: Airbnb & HomeAway</h4>
         <canvas id="bar" class="chart chart-bar" data="averageNightlyData" labels="averageNightlyLabels" options="averageNightlyOptions"></canvas>
         <br>
