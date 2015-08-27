@@ -6,7 +6,7 @@ html, body {
 body {
   padding: 50px 0 0 0;
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "jaf-bernino-sans","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -22,6 +22,10 @@ h4{
  font-weight:bold;
 }
 
+.main-body{
+ line-height:22px;
+}
+
 .chart-content-container{
   text-align: center;
   border: 1px solid #8A8A8A;
@@ -33,9 +37,13 @@ h4{
 .infobar{
   position: relative;
   display: block;
-  padding: 10px 15px;
+  padding: 2px 15px;
   text-decoration: none;
   list-style-type: none;
+}
+
+.infobar td{
+  font-size: 10px;
 }
 
 /*.leaflet-control-attribution{
@@ -64,7 +72,7 @@ div.info.legend.leaflet-control{
 
 #last-update{
   font-style: italic;
-  padding: 30px 15px 15px 15px;
+  padding: 0px 15px 15px 15px;
 }
 
 #map{

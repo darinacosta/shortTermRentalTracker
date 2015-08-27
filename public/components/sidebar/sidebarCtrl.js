@@ -14,7 +14,7 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
   $scope.airbnbTotal =  '----';
   $scope.homeawayTotal = '----';
   $scope.numEntireHomes = '----';
-  $scope.lastUpdate = '--/--/--';
+  $scope.lastUpdate = '--/--/----';
   $scope.usersWithMultiListings =  '----';
   $scope.licensedRentals = '----';
 
@@ -61,13 +61,6 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
           usersWithMultiListings += 1;
           multiListingUsers.push(userUrl);
         };
-        /*if (numUnits > mostListings){
-          mostListings = numUnits;
-          highestUrl = userUrl;
-        }; */
-        /*if (feature.properties.id !== undefined && feature.properties.id.match(/air/g)[0] === "air" && feature.properties.user === undefined){
-          nolaTotal -= 1;
-        }*/
       }
     });
     maxRenterObj = mode(multiListingUsers);
@@ -107,7 +100,7 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
         configureQueryRentalLayer(data)
       } else {
         asyncHelper(function() {
-          $scope.searchError = 'Unable retrieve listings for requested user ID.'
+          $scope.searchError = 'Unable to retrieve listings for requested ID.'
         });
       }
     });

@@ -10,7 +10,7 @@
   <div class="menu-area">
     <h5>Active Listing Summary</h5>
   </div>
-  <ul class="infobar">
+  <ul id="sidebar-stats" class="infobar">
     <table>
       <tr>
         <td>
@@ -67,17 +67,20 @@
     <h5>Search <b>Airbnb</b> listings by user ID:</h5>
     <form>
       <input id="user-search-bar" type="text" ng-model="userUrl">
-      <input ng-click="queryByUserUrl(userUrl)" type="submit" value="Search">
-      <input ng-click="clearSelection()" type="submit" value="Clear Map">
+      <input ng-click="queryByUserUrl(userUrl)" class="btn-success" type="submit" value="Map">
+      <input ng-click="clearSelection()" class="btn-default" type="submit" value="Clear">
     </form>
-    <small><i><span ng-bind="searchError"></span></i></small>
+    <div style="height:12px;color:red">
+      <small><i><span ng-bind="searchError"></span></i></small>
+    </div>
   </div>
+  <hr>
   <div id="last-update">
     <small>
-      Featured data was last updated on <b><span ng-bind="lastUpdate">--/--/----</span></b>.
+      Data updated: <b><span ng-bind="lastUpdate">--/--/----</span></b>.
     </small>
     <br><br>
-    <!--div style="height:20px" class="addthis_native_toolbox"></div--> 
+    <div style="height:20px" class="addthis_native_toolbox"></div> 
     <br>  
   </div>
 </div>
