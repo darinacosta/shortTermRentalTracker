@@ -88,7 +88,7 @@ strCalculator.countReviews = function(listings){
     var roomType = listing.properties['roomtype'];
     var reviews = listing.properties['reviews'];
 
-    if (listing.properties.provider === "air" && roomtype !== undefined && reviews !== undefined){
+    if (listing.properties.provider === "air" && roomType !== undefined && reviews !== undefined){
       entireHome = roomType === "Entire home/apt" ? entireHome + reviews : entireHome;
       sharedRoom = roomType === "Shared room" ? sharedRoom + reviews : sharedRoom;
       privateRoom = roomType === "Private room" ? privateRoom + reviews : privateRoom;
