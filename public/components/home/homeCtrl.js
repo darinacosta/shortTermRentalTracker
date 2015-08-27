@@ -1,6 +1,6 @@
-app.controller('homeCtrl', ['$scope', 'layerHelpers', '$http', homeCtrl]);
+app.controller('homeCtrl', ['$scope', 'layerHelpers', 'asyncHelper', '$http', homeCtrl]);
 
-function homeCtrl($scope, layerHelpers, $http) {
+function homeCtrl($scope, layerHelpers, asyncHelper, $http) {
   var map = mapSvc.map,
     mapAttributes = mapSvc.mapAttributes,
     layerControl = mapSvc.layerControl,
@@ -12,6 +12,7 @@ function homeCtrl($scope, layerHelpers, $http) {
     console.log(data); 
     
     $scope.stats = data;  
+    $scope.entireRoomPercent = Math.round((data.roomTypeTotals.entireHome/data.listingTotals.air) * 100);
 
     //Room Type Chart 
     $scope.rentalTypeLabels = ["Entire home/apt", "Shared Room", "Private Room"];

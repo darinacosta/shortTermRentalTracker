@@ -11,7 +11,7 @@
     <h5>Active Listing Summary</h5>
   </div>
   <ul id="sidebar-stats" class="infobar">
-    <table class="table">
+    <table>
       <tr>
         <td>
           Airbnb:
@@ -23,10 +23,10 @@
       <tr>
         <td>
           HomeAway:
-	</td>
-	<td>
+	      </td>
+	      <td>
           <span ng-bind="homeawayTotal">----</span>
-	</td>
+	      </td>
       </tr>
       <tr>
         <td>
@@ -68,7 +68,7 @@
     <form>
       <input id="user-search-bar" type="text" ng-model="userUrl" class="form-control">
       <input ng-click="queryByUserUrl(userUrl)" class="btn-success btn" type="submit" value="Map">
-      <input ng-click="clearSelection()" class="btn-default" type="submit btn" value="Clear">
+      <input ng-click="clearSelection()" class="btn-default btn" type="submit" value="Clear">
     </form>
     <div style="height:12px;color:red">
       <small><i><span ng-bind="searchError"></span></i></small>

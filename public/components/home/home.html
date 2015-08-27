@@ -88,15 +88,15 @@
         <b>The average listing advertised as “entire home/apartment” on Airbnb goes for {{stats.prices.air.entirePlace.averageNightly | currency}} per night. The fair market rent for a one bedroom is <a href="http://www.huduser.org/portal/datasets/fmr/fmrs/fy2015_code/2015summary.odn?inputname=METRO35380M35380*Orleans%20Parish&county_select=yes&state_name=Louisiana&statefp=22&data=2015&fmrtype=Final" target="_blank">$767.00 per month</a>, which on average is equal to $26.00 per night.</b> This disparity in pricing incentives the prioritization of transients over long term residents. Hosts renting to tourists are able to earn far more than a long term renter would be willing or able to pay for the same space. <b>The population of New Orleans in 2014 was an <a href="http://www.infoplease.com/ipa/A0108567.html" target="_blank">estimated 384,320</a>. The number of tourists who visited in the same year was <a href="http://www.neworleansonline.com/pr/releases/releases/2014%20Visitation%20Release.pdf" target="_blank">9.52 million</a></b>. The spread of short term rentals has resulted in an influx of these visitors staying within the city's residential neighborhoods. With the limited availability of quality housing stock and weak protections extended towards renters, <a href="http://www.theatlantic.com/business/archive/2015/08/new-orleans-blight-hurricane-katrina/401843/?utm_source=SFTwitter" target="_blank">New Orleans’ current housing crisis has the potential to grow even worse</a>.
       </p>
     </div><!--end transients v residents 2-->
-    <div class="col-md-6 col-sm-12"><!--begin average nightly chart column-->
-      <div class="chart-content-container">
+    <div class="col-lg-6 col-md-12"><!--begin average nightly chart column-->
+      <div class="chart-content-container" style="max-width:718px; margin:auto;">
         <h4>Average Nightly Price: Airbnb & HomeAway</h4>
         <canvas id="bar" class="chart chart-bar" data="averageNightlyData" labels="averageNightlyLabels" options="averageNightlyOptions"></canvas>
         <br>
         <div class="caption"><small>Average nightly prices among {{stats.listingTotals.air + stats.listingTotals.hma}} active and historic listings. Airbnb and HomeAway data represent 'entire place' listings, while 'All Listings' represent the combined average among all Airbnb and HomeAway listings.</small></div>
       </div>
     </div> <!--end average nightly chart column-->
-    <div class="col-md-6 col-sm-12"><!--begin myth v reality-->
+    <div class="col-lg-6 col-md-12"><!--begin myth v reality-->
       <h4>Myth vs. Reality</h4>
       Websites like Airbnb are <a href="http://sfist.com/2015/04/27/planning_department_wont_force_airb.php" target="_blank">intentionally opaque</a>. <b>During our data collection, Airbnb became increasingly less transparent with their information.</b> In mid-August of 2015, Airbnb removed a feature from its site that exhibited the number of rentals belonging to individual hosts. Whereas a user profile had previously included a sidebar panel with the number of listings for the individual user along with links to their rental listings, that information is now no longer available.</p>
       <p>This removal of information is part of a wider transparency issue. Short term rental websites like Airbnb are the public faces of large corporations that tightly control their data.  Airbnb and other short term rental websites intentionally withhold <a href="http://techcrunch.com/2015/06/11/airbnb-and-the-problem-of-data/" target="_blank">comprehensive sets of user data</a>—like statistics regarding the number of units available in a particular city or the frequency of bookings for any listing—that would help residents, consumers, and policymakers easily understand the impacts of short term rentals on a city’s housing market.</p>
@@ -106,15 +106,16 @@
         <b>In other words: Short term rentals reduce the amount of available housing for long term residents while making the housing that is still available more expensive</b>. 
       </p>
       <p>
-        One of the talking points of short term rental advocates is that websites like Airbnb allow homeowners to subsidize their housing expenses by occasionally renting out an extra room. In reality, the majority of short term rental listings are for entire homes or apartments. <b>Of the 1,358 Airbnb listings tracked between June and August of 2015, 70% were listed as “entire home/apartment.”</b>
+        One of the talking points of short term rental advocates is that websites like Airbnb allow homeowners to subsidize their housing expenses by occasionally renting out an extra room. In reality, the majority of short term rental listings are for entire homes or apartments. <b>Of the {{stats.listingTotals.air}} Airbnb listings tracked between June of 2015 and today, <span ng-bind="entireRoomPercent"></span>% were listed as “entire home/apartment.”</b>
       </p>
     </div>
-    <div class="col-md-8 col-sm-12"><!--begin myth v reality prt 2-->
+    <div class="col-lg-8 col-md-12"><!--begin myth v reality prt 2-->
       <p>
         While the density of short term listings is remarkable, the intensity of use varies between listings. Not every listing on Airbnb is being rented on a regular basis. Rather, the listings most likely to be rented at the highest frequency are those reserved strictly for short term purposes. These types of rentals are operated as businesses, commonly by hosts with multiple listings. 
       </p>
+      <p>
     </div><!--end myth v reality prt 2-->
-    <div class="col-md-4 col-sm-12"><!--begin room type chart column-->
+    <div class="col-lg-4 col-md-12"><!--begin room type chart column-->
       <div class="chart-content-container">
         <h4>Airbnb Room Types</h4>
         <canvas id="doughnut" class="chart chart-doughnut" data="rentalTypeData" labels="rentalTypeLabels"></canvas>
