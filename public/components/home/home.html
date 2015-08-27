@@ -1,15 +1,14 @@
 <div ng-model="stats">
   <div style="text-align:center">
     <h1>New Orleans Short Term Rental Report</h1>
-    <h4><i>Examining the effects of short term rentals on the City of New Orleans</i></h4>
+    <h4><i>Examining the effects of short term rentals on the city of New Orleans</i></h4>
   </div>
   <br>
-  <p>Utilizing data that is <b>updated every two weeks</b> from Airbnb and HomeAway -- two major <b>short term rental (STR)</b> providers -- this website provides a framework for better understanding the impact of unpermitted short term rentals in the city of New Orleans. For a more detailed analysis of data related specifically to Airbnb both in New Orleans and in many other cities, please visit <b><a href="http://insideairbnb.com/" target="_blank">Inside Airbnb</a></b>.</p> 
-  <p>We consider the most important issues related to short term rentals to be centered around affordability and access. Our analysis on the effects of short term rentals on the New Orleans housing market is separated into six parts: (1) The Rental Competition: Transients Vs. Residents, (2) Myths and Reality, (3) Bad Actors, (4) Poverty, Discrimination, and Racial Bias, (5) Lack of Renter’s Rights, and (6) Just Because You Can, Doesn’t Mean You Should.</p>
+  <p>Utilizing data that is <b>updated every two weeks</b> from Airbnb and HomeAway -- two major <b>short term rental (STR)</b> providers -- this website provides a framework for better understanding the impact of unpermitted short term rentals in the city of New Orleans. We consider the most important issues related to short term rentals to be centered around affordability and access. Our analysis on the effects of short term rentals on the New Orleans housing market is separated into six parts: (1) The Rental Competition: Transients Vs. Residents, (2) Myths and Reality, (3) Bad Actors, (4) Poverty, Discrimination, and Racial Bias, (5) Lack of Renter’s Rights, and (6) Just Because You Can, Doesn’t Mean You Should.</p>
   <br>
   <div class="row">
     <div class="col-lg-6 col-md-12"><!--begin transients v residents-->
-      <h4>The Rental Competition: Transients vs. Residents</h4>
+      <h4>THE RENTAL COMPETITION: TRANSIENTS VS. RESIDENTS</h4>
       <p>
         <b>Long term residents are competing with tourists over a limited supply of affordable housing stock.</b>
       </p>
@@ -97,13 +96,17 @@
       </div>
     </div> <!--end average nightly chart column-->
     <div class="col-lg-6 col-md-12"><!--begin myth v reality-->
-      <h4>Myth vs. Reality</h4>
-      Websites like Airbnb are <a href="http://sfist.com/2015/04/27/planning_department_wont_force_airb.php" target="_blank">intentionally opaque</a>. <b>During our data collection, Airbnb became increasingly less transparent with their information.</b> In mid-August of 2015, Airbnb removed a feature from its site that exhibited the number of rentals belonging to individual hosts. Whereas a user profile had previously included a sidebar panel with the number of listings for the individual user along with links to their rental listings, that information is now no longer available.</p>
-      <p>This removal of information is part of a wider transparency issue. Short term rental websites like Airbnb are the public faces of large corporations that tightly control their data.  Airbnb and other short term rental websites intentionally withhold <a href="http://techcrunch.com/2015/06/11/airbnb-and-the-problem-of-data/" target="_blank">comprehensive sets of user data</a>—like statistics regarding the number of units available in a particular city or the frequency of bookings for any listing—that would help residents, consumers, and policymakers easily understand the impacts of short term rentals on a city’s housing market.</p>
+      <h4>MYTH VS. REALITY</h4>
+      <p>
+        Websites like Airbnb are <a href="http://sfist.com/2015/04/27/planning_department_wont_force_airb.php" target="_blank">intentionally opaque</a>. <b>During our data collection, Airbnb became increasingly less transparent with their information.</b> In mid-August of 2015, Airbnb removed a feature from its site that exhibited the number of rentals belonging to individual hosts. Whereas a user profile had previously included a sidebar panel with the number of listings for the individual user along with links to their rental listings, that information is now no longer available.
+      </p>
+      <p>
+        This removal of information is part of a wider transparency issue. Short term rental websites like Airbnb are the public faces of large corporations that tightly control their data.  Airbnb and other short term rental websites intentionally withhold <a href="http://techcrunch.com/2015/06/11/airbnb-and-the-problem-of-data/" target="_blank">comprehensive sets of user data</a>—like statistics regarding the number of units available in a particular city or the frequency of bookings for any listing—that would help residents, consumers, and policymakers easily understand the impacts of short term rentals on a city’s housing market.
+      </p>
     </div><!--end myth vs reality-->
     <div class="col-md-12">
       <p class="custom-callout">
-        <b>In other words: Short term rentals reduce the amount of available housing for long term residents while making the housing that is still available more expensive</b>. 
+        <b>Concealing this information protects a major short term rental myth that can be dispelled through data: <a href="https://pando.com/2013/12/08/airbnb-says-this-man-does-not-exist-so-i-had-coffee-with-him/" target="_blank">the myth of the spare bedroom</a>.</b>
       </p>
       <p>
         One of the talking points of short term rental advocates is that websites like Airbnb allow homeowners to subsidize their housing expenses by occasionally renting out an extra room. In reality, the majority of short term rental listings are for entire homes or apartments. <b>Of the {{stats.listingTotals.air}} Airbnb listings tracked between June of 2015 and today, <span ng-bind="entireRoomPercent"></span>% were listed as “entire home/apartment.”</b>
@@ -113,7 +116,12 @@
       <p>
         While the density of short term listings is remarkable, the intensity of use varies between listings. Not every listing on Airbnb is being rented on a regular basis. Rather, the listings most likely to be rented at the highest frequency are those reserved strictly for short term purposes. These types of rentals are operated as businesses, commonly by hosts with multiple listings. 
       </p>
+      <p class="custom-callout">
+        <b>Of the {{stats.listingTotals.air}} Airbnb listings that we have tracked, there are only {{stats.multiListingUsers.total}} hosts. {{stats.multiListingUsers.twoplus}} hosts have 2 or more properties. {{stats.multiListingUsers.fiveplus}} have 5 or more properties.</b>
+      </p>
       <p>
+        <b>If renting out a spare room could be considered to be a side hustle, renting out multiple entire apartments or homes should be considered a full on business.</b> 
+      </p>
     </div><!--end myth v reality prt 2-->
     <div class="col-lg-4 col-md-12"><!--begin room type chart column-->
       <div class="chart-content-container">
@@ -122,5 +130,11 @@
         <div class="caption">Airbnb listings by room type among {{stats.listingTotals.air}} active and historic listings.</div>
       </div>
     </div> <!--end room type chart column-->
+    <div class="col-lg-12"><!--begin bad actors-->
+      <h4>BAD ACTORS</h4>
+      <p>
+        We call the particularly egregious hosts “bad actors.” <b>Bad actors are hosts with multiple listings that are primarily used for short term rentals.</b> This intensity of use contributes to <a href="http://uptownmessenger.com/2015/02/guest-column-whats-good-for-renters-is-good-for-new-orleans/" target="_blank">a housing market that puts renters at a disadvantage</a> and capitalizes on a <a href="http://www.nola.com/politics/index.ssf/2015/06/lawsuit_kills_rare_prosecution.html" target="_blank">lack of regulation on illegal short term rentals</a>. <b>By renting out multiple properties, bad actors maximize profits while having the largest negative impact on the overall housing market.</b> Limiting the bad actors’ ability to operate could potentially transform the effects of short term rentals on the city.
+      </p>
+    </div><!--end bad actors-->
   </div><!--end row-->
 </div> <!--end model-->
