@@ -27,8 +27,8 @@ h4{
 }
 
 .custom-callout{
-  line-height:28px;
-  font-size:16px;
+  line-height:30px;
+  font-size:20px;
 }
 
 .chart-content-container{
@@ -37,7 +37,9 @@ h4{
   background-color: #F3F3F3;
   margin: 0px 0 30px 0;
   padding-bottom: 5px;
+  box-shadow: 0px 7px 9px #9A9A9A;
 }
+
 
 .infobar{
   position: relative;

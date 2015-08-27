@@ -1,6 +1,6 @@
-app.controller('homeCtrl', ['$scope', 'layerHelpers', 'asyncHelper', '$http', homeCtrl]);
+app.controller('homeCtrl', ['$scope', 'layerHelpers', 'asyncHelper', '$http', '$location', '$anchorScroll', homeCtrl]);
 
-function homeCtrl($scope, layerHelpers, asyncHelper, $http) {
+function homeCtrl($scope, layerHelpers, asyncHelper, $http, $location, $anchorScroll) {
   var map = mapSvc.map,
     mapAttributes = mapSvc.mapAttributes,
     layerControl = mapSvc.layerControl,
@@ -10,7 +10,13 @@ function homeCtrl($scope, layerHelpers, asyncHelper, $http) {
   
   $http.get("assets/data/stats.json?v=2").success(function(data){
     console.log(data); 
-    
+ 
+    $scope.scrollTo = function(id){
+      $location.hash(id);
+      $anchorScroll();
+      $location.hash('');
+    };
+
     //body variables  
     $scope.stats = data;  
     $scope.entireRoomPercent = Math.round((data.roomTypeTotals.entireHome/data.listingTotals.air) * 100);
