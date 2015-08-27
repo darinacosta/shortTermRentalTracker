@@ -21,16 +21,18 @@ var requestCallback = function(response){
 
   response.on('end', function(){
     console.log('Response received');
-    var listings = JSON.parse(str)['body'];
-    var listingTotals = strCalculator.countListings(listings);
+    var listings          = JSON.parse(str)['body'];
+    var listingTotals     = strCalculator.countListings(listings);
     var multiListingUsers = strCalculator.countMultiListingUsers(listings, 2);
-    var prices = strCalculator.calculatePrices(listings);
-    var roomTypeTotals = strCalculator.countRoomTypes(listings);
+    var prices            = strCalculator.calculatePrices(listings);
+    var roomTypeTotals    = strCalculator.countRoomTypes(listings);
+    var reviews           = strCalculator.countReviews(listings);
     var stats = {
       listingTotals: listingTotals,
       roomTypeTotals: roomTypeTotals,
       multiListingUsers: multiListingUsers,
-      prices: prices 
+      prices: prices,
+      reviews: reviews
     };
     statsString = JSON.stringify(stats);
     fs.writeFile(output, statsString, function(){
@@ -75,7 +77,28 @@ strCalculator.countRoomTypes = function(listings){
   return {entireHome: entireHome,
 	  sharedRoom: sharedRoom,
 	  privateRoom:privateRoom};
-}
+};
+
+strCalculator.countReviews = function(listings){
+  var entireHome = 0;
+  var sharedRoom = 0;
+  var privateRoom = 0;
+
+  listings.forEach(function(listing){
+    var roomType = listing.properties['roomtype'];
+    var reviews = listing.properties['reviews'];
+
+    if (listing.properties.provider === "air" && roomType !== undefined && reviews !== undefined){
+      entireHome = roomType === "Entire home/apt" ? entireHome + reviews : entireHome;
+      sharedRoom = roomType === "Shared room" ? sharedRoom + reviews : sharedRoom;
+      privateRoom = roomType === "Private room" ? privateRoom + reviews : privateRoom;
+    }
+  });
+
+  return {entireHome: entireHome,
+    sharedRoom: sharedRoom,
+    privateRoom:privateRoom};
+};
 
 strCalculator.buildUserList = function(listings){
   var userList = [];

@@ -22,8 +22,13 @@ h4{
  font-weight:bold;
 }
 
-.main-body{
- line-height:22px;
+#main-body{
+ line-height:25px;
+}
+
+.custom-callout{
+  line-height:37px;
+  font-size:20px;
 }
 
 .chart-content-container{
