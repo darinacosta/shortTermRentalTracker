@@ -35,7 +35,7 @@ h4{
   text-align: center;
   border: 1px solid #8A8A8A;
   background-color: #F3F3F3;
-  margin: 5px 0 25px 0;
+  margin: 10px 0 10px 0;
   padding-bottom: 5px;
 }
 
@@ -133,6 +133,9 @@ div.info.legend.leaflet-control{
   float: left;
   margin-left: 15px;
 }
+
+/* form style adjustments */
+.navmenu .form-control{display: inline-block;}
 
 @media (min-width: 1px) {
   .navbar-toggle {
