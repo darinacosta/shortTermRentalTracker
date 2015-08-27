@@ -22,6 +22,7 @@
       </p>
     </div> <!--end transients v residents-->
     <div class="col-lg-6 col-md-12"><!--begin price table column-->
+
       <div class="chart-content-container">
         <h4>Prices</h4>
         <table class="table" ng-model="stats" style="text-align:left">
@@ -64,6 +65,7 @@
                <td>{{stats.prices.air.sharedRoom.averageMonthly | currency}}</td>
                <td><a href="{{stats.prices.air.sharedRoom.maxMonthlyListing}}" target="_blank">{{stats.prices.air.sharedRoom.maxMonthly | currency}}</a></td>
             <tr>
+	      <thead>
                <th>HomeAway</th>
                <th></th>
                <th></th>
@@ -139,5 +141,46 @@
     <div class="col-lg-12"><!--begin bad actors 2-->
 
     </div><!--end bad actors-->
+    <div class="col-lg-6 col-md-12"><!--begin top ten neighborhood table-->
+      <div class="chart-content-container">
+	<h4>Neighborhoods With the Greatest & Least Listings</h4>
+        <table class="table" style="text-align:left">
+	  <thead style="font-size:12px">
+	    <tr>
+              <th>Top 5</th>
+	      <th>Total Listings</th>
+	      <th>Total Entire Home/Apt</th>
+	      <th>Average Price for Entire Place</th>
+	      <th>Average # of Reviews Per Listing (All listings)</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  <tr ng-repeat="n in topFiveNeighborhoods">
+	    <td>{{n.name}}</td>
+	    <td>{{n.total}}</td>
+	    <td>{{n.entirePlace}}</td>
+	    <td>{{n.aggregateEntirePlaceNightlyPrice/n.entirePlace | currency}}</td>
+	    <td>{{n.totalReviews/n.total | number: 0}}</td>
+	  </tr>
+            <tr>
+	      <thead>
+               <th>Bottom 5</th>
+               <th></th>
+               <th></th>
+               <th></th>
+               <th></th>
+                  </tr>
+               </thead>
+	  <tr ng-repeat="n in bottomFiveNeighborhoods">
+	    <td>{{n.name}}</td>
+	    <td>{{n.total}}</td>
+	    <td>{{n.entirePlace}}</td>
+	    <td>{{n.aggregateEntirePlaceNightlyPrice/n.entirePlace | currency}}</td>
+	    <td>{{n.totalReviews/n.total | number: 0}}</td>
+	  </tr>
+	  </tbody>
+        </table>
+      </div>
+    </div><!--end top ten neighborhood table-->
   </div><!--end row-->
 </div> <!--end model-->

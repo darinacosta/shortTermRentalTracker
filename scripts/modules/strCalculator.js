@@ -27,12 +27,14 @@ var requestCallback = function(response){
     var prices            = strCalculator.calculatePrices(listings);
     var roomTypeTotals    = strCalculator.countRoomTypes(listings);
     var reviews           = strCalculator.countReviews(listings);
+    var neighborhoodStats = strCalculator.gatherDataByNeighborhood(listings);
     var stats = {
       listingTotals: listingTotals,
       roomTypeTotals: roomTypeTotals,
       multiListingUsers: multiListingUsers,
       prices: prices,
-      reviews: reviews
+      reviews: reviews,
+      neighborhoodStats: neighborhoodStats
     };
     statsString = JSON.stringify(stats);
     fs.writeFile(output, statsString, function(){
@@ -351,6 +353,41 @@ strCalculator.calculatePrices = function(listings){
 		maxMonthlyListing: hmaMaxMonthlyListing
 	  }
   };
+};
+
+strCalculator.gatherDataByNeighborhood = function(listings){
+  var neighborhoodNames = [];
+  var neighborhoodsData = [];
+
+  listings.forEach(function(listing){
+    if (neighborhoodNames.indexOf(listing.properties['neighborhood']) === -1 && listing.properties.provider === "air" && listing.properties['neighborhood'] !== "" && listing.properties['neighborhood'] !== "Marigny"){
+      neighborhoodNames.push(listing.properties['neighborhood']);
+      neighborhoodsData.push({"name": listing.properties['neighborhood'],
+	                      "total": 0,
+                              "entirePlace": 0,
+                              "totalReviews": 0,
+                              "aggregateTotalNightlyPrice": 0,
+                              "aggregateEntirePlaceNightlyPrice": 0});
+    }
+  });
+
+  listings.forEach(function(listing){
+    neighborhoodsData.forEach(function(neighborhood){
+      if (listing.properties['neighborhood'] === neighborhood.name){
+        neighborhood.total += 1;
+	neighborhood.aggregateTotalNightlyPrice += listing.properties.nightlyprice;
+        if (listing.properties['reviews'] !== undefined){  
+	  neighborhood.totalReviews += listing.properties['reviews'];
+	};
+	if (listing.properties.roomtype === "Entire home/apt"){
+	  neighborhood.aggregateEntirePlaceNightlyPrice += listing.properties.nightlyprice;
+	  neighborhood.entirePlace += 1;
+	}
+      };
+    }); 
+  });
+
+  return neighborhoodsData;
 };
 
 strCalculator.buildMultiUnitHostIndex = function(listings, unitNumber){

@@ -11,6 +11,7 @@ function homeCtrl($scope, layerHelpers, asyncHelper, $http) {
   $http.get("assets/data/stats.json?v=2").success(function(data){
     console.log(data); 
     
+    //body variables  
     $scope.stats = data;  
     $scope.entireRoomPercent = Math.round((data.roomTypeTotals.entireHome/data.listingTotals.air) * 100);
 
@@ -18,12 +19,7 @@ function homeCtrl($scope, layerHelpers, asyncHelper, $http) {
     $scope.rentalTypeLabels = ["Entire home/apt", "Shared Room", "Private Room"];
     $scope.rentalTypeData = [data.roomTypeTotals.entireHome, data.roomTypeTotals.sharedRoom, data.roomTypeTotals.privateRoom];
 
-    //Average Nightly Price Chart
-    /*$scope.averageNightlyOptions = {
-      tooltipTemplate: function(label){
-        return label.label + ': ' + '$' + label.value;
-      }
-    }*/
+    //Total Reviews Chart
     $scope.averageNightlyLabels = ['Entire Place', 'Private Room', 'Shared Room'];
     $scope.averageNightlyData = [
       //[data.prices.air.entirePlace.averageNightly, data.prices.hma.averageTotalNightly, data.prices.total.averageNightly] 
@@ -36,6 +32,34 @@ function homeCtrl($scope, layerHelpers, asyncHelper, $http) {
       highlightFill: 'grey',
       highlightStroke: 'grey'
     }];
+
+    //neighborhood chart
+    var sortedTopNeighborhoods = data.neighborhoodStats;
+    sortedTopNeighborhoods.sort(function(a,b){
+      if (a.total < b.total) {
+        return 1;
+      }
+      if (a.total > b.total) {
+	return -1;
+      }
+      return 0;
+    });
+
+    $scope.topFiveNeighborhoods = sortedTopNeighborhoods.slice(0,5);
+    
+    var sortedBottomNeighborhoods = data.neighborhoodStats
+    sortedBottomNeighborhoods.sort(function(a,b){
+      if (a.total > b.total) {
+        return 1;
+      }
+      if (a.total < b.total) {
+	return -1;
+      }
+      return 0;
+    });
+    
+    $scope.bottomFiveNeighborhoods = sortedBottomNeighborhoods.slice(0,5);
+
   });
 
   map.setView(mapAttributes.center, mapAttributes.zoom);
