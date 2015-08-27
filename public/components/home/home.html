@@ -88,15 +88,15 @@
         <b>The average listing advertised as “entire home/apartment” on Airbnb goes for {{stats.prices.air.entirePlace.averageNightly | currency}} per night. The fair market rent for a one bedroom is <a href="http://www.huduser.org/portal/datasets/fmr/fmrs/fy2015_code/2015summary.odn?inputname=METRO35380M35380*Orleans%20Parish&county_select=yes&state_name=Louisiana&statefp=22&data=2015&fmrtype=Final" target="_blank">$767.00 per month</a>, which on average is equal to $26.00 per night.</b> This disparity in pricing incentives the prioritization of transients over long term residents. Hosts renting to tourists are able to earn far more than a long term renter would be willing or able to pay for the same space. <b>The population of New Orleans in 2014 was an <a href="http://www.infoplease.com/ipa/A0108567.html" target="_blank">estimated 384,320</a>. The number of tourists who visited in the same year was <a href="http://www.neworleansonline.com/pr/releases/releases/2014%20Visitation%20Release.pdf" target="_blank">9.52 million</a></b>. The spread of short term rentals has resulted in an influx of these visitors staying within the city's residential neighborhoods. With the limited availability of quality housing stock and weak protections extended towards renters, <a href="http://www.theatlantic.com/business/archive/2015/08/new-orleans-blight-hurricane-katrina/401843/?utm_source=SFTwitter" target="_blank">New Orleans’ current housing crisis has the potential to grow even worse</a>.
       </p>
     </div><!--end transients v residents 2-->
-    <div class="col-lg-6 col-md-12"><!--begin review number chart-->
-      <div class="chart-content-container" style="max-width:718px; margin:auto;">
-        <h4>Number of Airbnb Reviews by Room Type</h4>
-        <canvas id="bar" class="chart chart-bar" data="averageNightlyData" labels="averageNightlyLabels" options="averageNightlyOptions"></canvas>
-        <br>
-        <div class="caption"><small>Total number of reviews among {{stats.listingTotals.air}} active and historic Airbnb listings.</small></div>
+    <div class="col-lg-4 col-md-12"><!--begin room type chart column-->
+      <div class="chart-content-container">
+        <h4>Airbnb Room Types</h4>
+        <canvas id="doughnut" class="chart chart-doughnut" data="rentalTypeData" labels="rentalTypeLabels"></canvas>
+        <div class="caption">Airbnb listings by room type among {{stats.listingTotals.air}} active and historic listings.</div>
       </div>
-    </div> <!--end average nightly chart column-->
-    <div class="col-lg-6 col-md-12"><!--begin myth v reality-->
+    </div> <!--end room type chart column-->
+
+    <div class="col-lg-8 col-md-12"><!--begin myth v reality-->
       <h4>MYTH VS. REALITY</h4>
       <p>
         Websites like Airbnb are <a href="http://sfist.com/2015/04/27/planning_department_wont_force_airb.php" target="_blank">intentionally opaque</a>. <b>During our data collection, Airbnb became increasingly less transparent with their information.</b> In mid-August of 2015, Airbnb removed a feature from its site that exhibited the number of rentals belonging to individual hosts. Whereas a user profile had previously included a sidebar panel with the number of listings for the individual user along with links to their rental listings, that information is now no longer available.
@@ -128,18 +128,16 @@
         We call the particularly egregious hosts “bad actors.” <b>Bad actors are hosts with multiple listings that are primarily used for short term rentals.</b> This intensity of use contributes to <a href="http://uptownmessenger.com/2015/02/guest-column-whats-good-for-renters-is-good-for-new-orleans/" target="_blank">a housing market that puts renters at a disadvantage</a> and capitalizes on a <a href="http://www.nola.com/politics/index.ssf/2015/06/lawsuit_kills_rare_prosecution.html" target="_blank">lack of regulation on illegal short term rentals</a>. <b>By renting out multiple properties, bad actors maximize profits while having the largest negative impact on the overall housing market.</b> Limiting the bad actors’ ability to operate could potentially transform the effects of short term rentals on the city.
       </p>
     </div><!--end myth v reality prt 2-->
-    <div class="col-lg-4 col-md-12"><!--begin room type chart column-->
-      <div class="chart-content-container">
-        <h4>Airbnb Room Types</h4>
-        <canvas id="doughnut" class="chart chart-doughnut" data="rentalTypeData" labels="rentalTypeLabels"></canvas>
-        <div class="caption">Airbnb listings by room type among {{stats.listingTotals.air}} active and historic listings.</div>
+    <div class="col-lg-4 col-md-12"><!--begin review number chart-->
+      <div class="chart-content-container" style="max-width:718px; margin:auto;">
+        <h4>Number of Airbnb Reviews by Room Type</h4>
+        <canvas id="bar" class="chart chart-bar" data="averageNightlyData" labels="averageNightlyLabels" options="averageNightlyOptions"></canvas>
+        <br>
+        <div class="caption"><small>Total number of reviews among {{stats.listingTotals.air}} active and historic Airbnb listings.</small></div>
       </div>
-    </div> <!--end room type chart column-->
-    <div class="col-lg-12"><!--begin bad actors-->
-      <h4>BAD ACTORS</h4>
-      <p>
-        We call the particularly egregious hosts “bad actors.” <b>Bad actors are hosts with multiple listings that are primarily used for short term rentals.</b> This intensity of use contributes to <a href="http://uptownmessenger.com/2015/02/guest-column-whats-good-for-renters-is-good-for-new-orleans/" target="_blank">a housing market that puts renters at a disadvantage</a> and capitalizes on a <a href="http://www.nola.com/politics/index.ssf/2015/06/lawsuit_kills_rare_prosecution.html" target="_blank">lack of regulation on illegal short term rentals</a>. <b>By renting out multiple properties, bad actors maximize profits while having the largest negative impact on the overall housing market.</b> Limiting the bad actors’ ability to operate could potentially transform the effects of short term rentals on the city.
-      </p>
+    </div> <!--end review number chart-->
+    <div class="col-lg-12"><!--begin bad actors 2-->
+
     </div><!--end bad actors-->
   </div><!--end row-->
 </div> <!--end model-->
