@@ -19,14 +19,15 @@ function homeCtrl($scope, layerHelpers, asyncHelper, $http) {
     $scope.rentalTypeData = [data.roomTypeTotals.entireHome, data.roomTypeTotals.sharedRoom, data.roomTypeTotals.privateRoom];
 
     //Average Nightly Price Chart
-    $scope.averageNightlyOptions = {
+    /*$scope.averageNightlyOptions = {
       tooltipTemplate: function(label){
         return label.label + ': ' + '$' + label.value;
       }
-    }
-    $scope.averageNightlyLabels = ['Airbnb', 'HomeAway', 'All Listings'];
+    }*/
+    $scope.averageNightlyLabels = ['Entire Place', 'Private Room', 'Shared Room'];
     $scope.averageNightlyData = [
-      [data.prices.air.entirePlace.averageNightly, data.prices.hma.averageTotalNightly, data.prices.total.averageNightly]  
+      //[data.prices.air.entirePlace.averageNightly, data.prices.hma.averageTotalNightly, data.prices.total.averageNightly] 
+      [data.reviews.entireHome, data.reviews.privateRoom, data.reviews.sharedRoom] 
     ];
 
     $scope.chartColors = [{
