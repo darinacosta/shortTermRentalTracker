@@ -103,7 +103,7 @@ strCalculator.countReviews = function(listings){
 strCalculator.buildUserList = function(listings){
   var userList = [];
   listings.forEach(function(listing){
-    if (userList.indexOf(listing.properties['user']) === -1){
+    if (userList.indexOf(listing.properties['user']) === -1 && listing.properties.provider === "air"){
       userList.push(listing.properties['user'])
     }
   })
