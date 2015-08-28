@@ -64,9 +64,9 @@ function layerSvc($http, layerHelpers){
   function colorTotalPointsConditionally(feature){
     provider = feature.properties.provider;
     if (provider.substring(0,3) === "air"){
-      return "#B32B2B";
+      return "#404040";  //"#B32B2B";
     } else if (provider.substring(0,3) === "hma") {
-      return "#ABA925";
+      return "rgb(154, 55, 55)"; //"#ABA925";
     }
   };
   

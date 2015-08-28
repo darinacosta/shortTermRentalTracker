@@ -108,9 +108,9 @@ var mapSvc = (function(){
         categories = [/*{"name": "Orlean Parish Licensed Rentals",
 		       "color": "green"},*/
 	              {"name":"Airbnb",
-			"color":"#B32B2B"},
+			"color":"#404040"},
 		      {"name":"HomeAway",
-		       "color":"#ABA925"}];
+		       "color":"rgb(154, 55, 55)"}];
 
     for (var i = 0; i < categories.length; i ++){
       
