@@ -9,22 +9,37 @@ body {
   font-family: "jaf-bernino-sans","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
 }
 
-a{
-  color: rgb(110, 54, 54);
+a, a:active{
+  color: rgb(154, 55, 55);
+  cursor: pointer;
 }
 
-a:hover{
-  color: rgb(154, 55, 55);
+a:hover, a:visited{
+  color: rgb(168, 83, 83);
   text-decoration: none;
 }
 
 .top-scroll-wrapper{
+  text-decoration:underline;
   text-align:right;
   font-size:small;
 }
 
+.top-scroll-wrapper a{
+  color:#858585;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lato', sans-serif;
+}
+
+.home-header{
+  color:#E2E2E2;
+  text-align: center;
+  background-color: #404040;
+  padding: 1px 0px;
+  border-bottom: 1px solid #FFFCFC;
+  margin-bottom:10px;
 }
 
 td{
@@ -34,6 +49,7 @@ td{
 
 h4{
  font-weight:bold;
+ color:#404040;
 }
 
 #main-body{
@@ -66,10 +82,6 @@ h4{
 .infobar td{
   font-size: 10px;
 }
-
-/*.leaflet-control-attribution{
-  display:none;
-}*/
 
 div.info.legend.leaflet-control{
   background-color: rgba(212, 212, 212, 0.52);

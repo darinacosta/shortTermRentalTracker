@@ -1,13 +1,21 @@
 <div ng-model="stats">
-  <div style="text-align:center">
-    <h1>New Orleans Short Term Rental Report</h1>
-    <h3><i>Examining the effects of short term rentals on the city of New Orleans</i></h3>
+  <div class="home-header">
+      <h1>The New Orleans Short Term Rental Report</h1>
+      <h3><i>Examining the effects of short term rentals on the city of New Orleans</i></h3>
   </div>
   <br>
-  <p>Utilizing data that is <b>updated every two weeks</b> from Airbnb and HomeAway — two major <b>short term rental (STR)</b> providers — this website provides a framework for better understanding the impact of unpermitted short term rentals on the city of New Orleans. We consider the most important issues related to short term rentals to be centered around affordability and access. Our analysis on the effects of short term rentals on the New Orleans housing market is separated into six parts: (1) <a ng-click="scrollTo('rentalCompetition')">The Rental Competition: Transients Vs. Residents</a>, (2) <a ng-click="scrollTo('mythVsReality')">Myths vs. Reality</a>, (3) <a ng-click="scrollTo('badActors')">Bad Actors</a>, (4) <a ng-cick="scrollTo('poverty')">Poverty, Discrimination, and Racial Bias</a>, (5) <a ng-click="scrollTo('lackOfRentersRights')">Lack of Renter’s Rights</a>, and (6) Just Because You Can, Doesn’t Mean You Should.</p>
+  <p>
+    Utilizing data that is <b>updated every two weeks</b> from Airbnb and HomeAway — two major <b>short term rental (STR)</b> providers — this website provides a framework for better understanding the impact of unpermitted short term rentals on the city of New Orleans. We consider the most important issues related to short term rentals to be centered around affordability and access. Our analysis on the effects of short term rentals on the New Orleans housing market is separated into six parts: 
+    (1) <a ng-click="scrollTo('rentalCompetition')">The Rental Competition: Transients Vs. Residents</a>, 
+    (2) <a ng-click="scrollTo('mythVsReality')">Myths vs. Reality</a>, 
+    (3) <a ng-click="scrollTo('badActors')">Bad Actors</a>, 
+    (4) <a ng-click="scrollTo('racialBias')">Poverty, Discrimination, and Racial Bias</a>, 
+    (5) <a ng-click="scrollTo('lackOfRentersRights')">Lack of Renter’s Rights</a>, and 
+    (6) Just Because You Can, Doesn’t Mean You Should.
+  </p>
   <br>
-  <div class="row">
-    <div class="col-lg-6 col-md-12"><!--begin transients v residents-->
+  <div class="row">                  <!--begin row-->
+    <div class="col-lg-6 col-md-12"> <!--begin transients v residents-->
       <hr>
       <h3 id="rentalCompetition">THE RENTAL COMPETITION: TRANSIENTS VS. RESIDENTS</h3>
       <p>
@@ -21,8 +29,8 @@
       <p>
         New Orleans has a serious <a href="https://nextcity.org/features/view/10-years-after-katrina-new-orleans-public-housing-still-in-limbo-iberville" target="_blank">affordable housing problem</a>. We don’t believe short term rentals created this problem. However, they have made it worse. Over the past decade, <a href="http://www.nola.com/business/baton-rouge/index.ssf/2013/08/louisiana_unemployment_wages_r.html" target="_blank">wages have remained stagnant</a> while the cost of living has increased. These factors have coincided with a <a href="http://nlihc.org/oor/louisiana" target="_blank">demographic shift in the city of New Orleans towards a wealthier, whiter population</a>. Residents being forced to keep pace with out-of-town dollars for basic amenities like housing exacerbates <a href="http://www.nytimes.com/2015/08/23/magazine/why-new-orleans-Black-residents-are-still-under-water-after-katrina.html?_r=1" target="_blank">this ongoing conflict</a>. 
       </p>
-    </div> <!--end transients v residents-->
-    <div class="col-lg-6 col-md-12"><!--begin price table column-->
+    </div>                           <!--end transients v residents-->
+    <div class="col-lg-6 col-md-12"> <!--begin price table column-->
       <div class="chart-content-container">
         <h4>Prices</h4>
         <table class="table" ng-model="stats" style="text-align:left">
@@ -84,23 +92,23 @@
         </table>
         <div class="caption"><small>Price data is collected from {{stats.listingTotals.air}} active and historic Airbnb listings and {{stats.listingTotals.hma}} HomeAway listings. If maximum-price users provide a price range, the average is given.</small></div>
       </div>
-    </div><!--end price table column-->
-    <div class="col-md-12"><!--begin transients v residents 2-->
+    </div>                           <!--end price table column-->
+    <div class="col-md-12">          <!--begin transients v residents 2-->
       <p>
         <b>The average listing advertised as “entire home/apartment” on Airbnb goes for {{stats.prices.air.entirePlace.averageNightly | currency}} per night. The fair market rent for a one bedroom is <a href="http://www.huduser.org/portal/datasets/fmr/fmrs/fy2015_code/2015summary.odn?inputname=METRO35380M35380*Orleans%20Parish&county_select=yes&state_name=Louisiana&statefp=22&data=2015&fmrtype=Final" target="_blank">$767.00 per month</a>, which on average is equal to $26.00 per night.</b> This disparity in pricing incentives the prioritization of transients over long term residents. Hosts renting to tourists are able to earn far more than a long term renter would be willing or able to pay for the same space. <b>The population of New Orleans in 2014 was an <a href="http://www.infoplease.com/ipa/A0108567.html" target="_blank">estimated 384,320</a>. The number of tourists who visited in the same year was <a href="http://www.neworleansonline.com/pr/releases/releases/2014%20Visitation%20Release.pdf" target="_blank">9.52 million</a></b>. The spread of short term rentals has resulted in an influx of these visitors staying within the city's residential neighborhoods. With the limited availability of quality housing stock and weak protections extended towards renters, <a href="http://www.theatlantic.com/business/archive/2015/08/new-orleans-blight-hurricane-katrina/401843/?utm_source=SFTwitter" target="_blank">New Orleans’ current housing crisis has the potential to grow even worse</a>.
       </p>
       <p class="top-scroll-wrapper">
           <a ng-click="scrollToTop()">Scroll to top</a>
       </p>
-    </div><!--end transients v residents 2-->
-    <div class="col-lg-4 col-md-12"><!--begin room type chart column-->
+    </div>                           <!--end transients v residents 2-->
+    <div class="col-lg-4 col-md-12"> <!--begin room type chart column-->
       <div class="chart-content-container">
         <h4>Airbnb Room Types</h4>
         <canvas id="doughnut" class="chart chart-doughnut" data="rentalTypeData" labels="rentalTypeLabels"></canvas>
         <div class="caption">Airbnb listings by room type among {{stats.listingTotals.air}} active and historic listings.</div>
       </div>
-    </div> <!--end room type chart column-->
-    <div class="col-lg-8 col-md-12"><!--begin myth v reality-->
+    </div>                           <!--end room type chart column-->
+    <div class="col-lg-8 col-md-12"> <!--begin myth v reality-->
       <hr>
       <h3 id="mythVsReality">MYTH VS. REALITY</h3>
       <p>
@@ -109,16 +117,16 @@
       <p>
         This removal of information is part of a wider transparency issue. Short term rental websites like Airbnb are the public faces of large corporations that tightly control their data.  Airbnb and other short term rental websites intentionally withhold <a href="http://techcrunch.com/2015/06/11/airbnb-and-the-problem-of-data/" target="_blank">comprehensive sets of user data</a> — like statistics regarding the number of units available in a particular city or the frequency of bookings for any listing — that would help residents, consumers, and policymakers easily understand the impacts of short term rentals on a city’s housing market.
       </p>
-    </div><!--end myth vs reality 1-->
-    <div class="col-md-12">
+    </div>                           <!--end myth vs reality 1-->
+    <div class="col-md-12">          <!--begin myth vs reality 2-->
       <p>
         <b>Concealing this information protects a major short term rental myth that can be dispelled through data: <a href="https://pando.com/2013/12/08/airbnb-says-this-man-does-not-exist-so-i-had-coffee-with-him/" target="_blank">the myth of the spare bedroom</a>.</b>
       </p>
       <p>
         One of the talking points of short term rental advocates is that websites like Airbnb allow homeowners to subsidize their housing expenses by occasionally renting out an extra room. In reality, the majority of short term rental listings are for entire homes or apartments. <b>Of the {{stats.listingTotals.air}} Airbnb listings tracked between June of 2015 and today, <span ng-bind="entireRoomPercent"></span>% were listed as “entire home/apartment.”</b>
       </p>
-    </div>
-    <div class="col-lg-8 col-md-12"><!--begin myth v reality prt 2-->
+    </div>                           <!--end myth vs reality 2-->
+    <div class="col-lg-8 col-md-12"> <!--begin myth v reality prt 2-->
       <p>
         While the density of short term listings is remarkable, the intensity of use varies between listings. Not every listing on Airbnb is being rented on a regular basis. Rather, the listings most likely to be rented at the highest frequency are those reserved strictly for short term purposes. These types of rentals are operated as businesses, commonly by hosts with multiple listings. 
       </p>
@@ -136,16 +144,16 @@
       <p>
         We call the particularly egregious hosts “bad actors.” <b>Bad actors are hosts with multiple listings that are primarily used for short term rentals.</b> This intensity of use contributes to <a href="http://uptownmessenger.com/2015/02/guest-column-whats-good-for-renters-is-good-for-new-orleans/" target="_blank">a housing market that puts renters at a disadvantage</a> and capitalizes on a <a href="http://www.nola.com/politics/index.ssf/2015/06/lawsuit_kills_rare_prosecution.html" target="_blank">lack of regulation on illegal short term rentals</a>.
       </p>
-    </div><!--end myth v reality prt 2-->
-    <div class="col-lg-4 col-md-12"><!--begin review number chart-->
+    </div>                           <!--end myth v reality prt 2-->
+    <div class="col-lg-4 col-md-12"> <!--begin review number chart-->
       <div class="chart-content-container" style="max-width:718px;">
         <h4>Number of Airbnb Reviews by Room Type</h4>
         <canvas id="bar" class="chart chart-bar" data="averageNightlyData" labels="averageNightlyLabels" options="averageNightlyOptions"></canvas>
         <br>
         <div class="caption"><small>Total number of reviews among {{stats.listingTotals.air}} active and historic Airbnb listings.</small></div>
       </div>
-    </div> <!--end review number chart-->
-    <div class="col-lg-12"><!--begin bad actors 2-->
+    </div>                           <!--end review number chart-->
+    <div class="col-lg-12">          <!--begin bad actors 2-->
       <p>
         <b>By renting out multiple properties, bad actors maximize profits while having the largest negative impact on the overall housing market.</b> Limiting the bad actors’ ability to operate could potentially transform the effects of short term rentals on the city.
       </p>
@@ -153,60 +161,63 @@
         <a ng-click="scrollToTop()">Scroll to top</a>
       </p>
       <hr>
-    </div><!--end bad actors-->
-    <div class="col-lg-12"><!--begin poverty-->
-      <h3><span id="poverty">POVERTY, DISCRIMINATION, AND RACIAL BIAS</span></h3>
+    </div>                           <!--end bad actors-->
+    <div class="col-lg-12">          <!--begin poverty-->
+      <h3 id="racialBias">POVERTY, DISCRIMINATION, AND RACIAL BIAS</h3>
       <p>
         New Orleans’ <a href="http://www.nola.com/politics/index.ssf/2014/10/new_orleans_tourism_industry_b.html" target="_blank">economy relies on tourism, and the vast majority of jobs created by tourism lie within the service industry</a>. These jobs tend be low wage. 
       </p>
       <p>
         Some argue that Airbnb is a way for more people to be able to make money off of tourists, dispersing tourist dollars into more communities. Unfortunately, short term rentals don’t equal a more equitable tourist economy. Rather, they’re only profitable for those with assets, such as a house (or houses) in a desirable neighborhood and reliable access to the internet.       
       </p>
-    </div><!--end poverty-->
-
-    <div class="col-lg-6 col-md-12"><!--begin top ten neighborhood table-->
+    </div>                           <!--end poverty-->
+    <div class="col-lg-6 col-md-12"> <!--begin top ten neighborhood table-->
       <div class="chart-content-container">
-	<h4>Neighborhoods With the Greatest & Least Airbnb Listings</h4>
+    	  <h4>Neighborhoods With the Greatest & Least Airbnb Listings</h4>
         <table class="table" style="text-align:left">
-	  <thead style="font-size:12px">
-	    <tr>
+    	    <thead style="font-size:12px">
+      	    <tr>
               <th>Top 5</th>
-	      <th>Total Listings</th>
-	      <th>Total Entire Home/Apt</th>
-	      <th>Average Price for Entire Place</th>
-	      <th>Average # of Reviews Per Listing (All listings)</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	  <tr ng-repeat="n in topFiveNeighborhoods">
-	    <td>{{n.name}}</td>
-	    <td>{{n.total}}</td>
-	    <td>{{n.entirePlace}}</td>
-	    <td>{{n.aggregateEntirePlaceNightlyPrice/n.entirePlace | currency}}</td>
-	    <td>{{n.totalReviews/n.total | number: 0}}</td>
-	  </tr>
+      	      <th>Total Listings</th>
+      	      <th>Total Entire Home/Apt</th>
+      	      <th>Average Price for Entire Place</th>
+      	      <th>Average # of Reviews Per Listing (All listings)</th>
+      	    </tr>
+      	  </thead>
+      	  <tbody>
+      	  <tr ng-repeat="n in topFiveNeighborhoods">
+      	    <td>{{n.name}}</td>
+      	    <td>{{n.total}}</td>
+      	    <td>{{n.entirePlace}}</td>
+      	    <td>{{n.aggregateEntirePlaceNightlyPrice/n.entirePlace | currency}}</td>
+      	    <td>{{n.totalReviews/n.total | number: 0}}</td>
+      	  </tr>
+      	  <thead>
             <tr>
-	      <thead>
-               <th>Bottom 5</th>
-               <th></th>
-               <th></th>
-               <th></th>
-               <th></th>
-                  </tr>
-               </thead>
-	  <tr ng-repeat="n in bottomFiveNeighborhoods">
-	    <td>{{n.name}}</td>
-	    <td>{{n.total}}</td>
-	    <td>{{n.entirePlace}}</td>
-	    <td>{{n.aggregateEntirePlaceNightlyPrice/n.entirePlace | currency}}</td>
-	    <td>{{n.totalReviews/n.total | number: 0}}</td>
-	  </tr>
-	  </tbody>
+              <th>Bottom 5</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+      	  <tr ng-repeat="n in bottomFiveNeighborhoods">
+      	    <td>{{n.name}}</td>
+      	    <td>{{n.total}}</td>
+      	    <td>{{n.entirePlace}}</td>
+      	    <td>{{n.aggregateEntirePlaceNightlyPrice/n.entirePlace | currency}}</td>
+      	    <td>{{n.totalReviews/n.total | number: 0}}</td>
+      	  </tr>
+      	  </tbody>
         </table>
-	<div class="caption"><small>Calculated based on {{stats.listingTotals.air}} active and historic Airbnb listings.</small></div>
+        <div class="caption">
+          <small>
+            Calculated based on {{stats.listingTotals.air}} active and historic Airbnb listings.
+          </small>
+        </div>
       </div>
-    </div><!--end top ten neighborhood table-->
-    <div class="col-lg-6 col-md-12"><!--begin poverty 2-->
+    </div>                           <!--end top ten neighborhood table-->
+    <div class="col-lg-6 col-md-12"> <!--begin poverty 2-->
       <p>
       <b>In a city where <a href="http://www.gnofairhousing.org/wp-content/uploads/2014/12/Unsafe-Overpriced-Home-for-the-Holidays-FINAL.pdf" target="_blank">a large majority of renters live in substandard housing</a>, and <a href="http://www.digitalinclusionalliance.org/blog/2015/5/26/census-shows-digital-divide-closely-linked-to-household-incomes" target="_blank">nearly a third of houses do not have internet access</a>, much of the population is unlikely to be able to participate in or benefit from the short term rental market.</b>  
       </p>
@@ -226,17 +237,19 @@
       <p>
       New Orleans’ residents, particularly low income Black people, <a href="http://www.nola.com/futureofneworleans/2015/07/where_will_the_working_poor_li.html" target="_blank">are being pushed out of the city’s historic core and into substandard housing</a>. It’s <a href="http://nola.curbed.com/archives/2015/06/04/10-things-you-need-to-know-about-renting-in-new-orleans.php" target="_blank">a difficult place to be a renter</a>. Other cities have enacted legal protections for renters. These protections include <a href="http://www.policylink.info/EDTK/JustCause/" target="_blank">just cause for evictions</a>, meaning there is a set list of reasons why a tenant can legally be evicted. Some cities limit the amount rents can be raised annually. 
       </p>
-    </div><!--end poverty 2-->
-    <div class="col-lg-12"><!--begin poverty 3-->
+    </div>                           <!--end poverty 2-->
+    <div class="col-lg-12">          <!--begin poverty 3-->
       <p>
         New Orleans doesn’t have rent control; it also doesn’t have just cause eviction protection. This effectively allows landlords to dispose of undesirable tenants by waiting until the expiration of the lease—many of which are month-to-month—and refusing to renew the lease. This leaves renters vulnerable to expulsion for any reason, <a href="http://www.orleanscdc.com/forms/fcc/fcc_eviction_brochure.pdf" target="_blank">with notice being as short as five days</a>. 
       </p>
       <p>
-        Without adequate renter’s rights, there is nothing standing in the way of landlords kicking out their long term renters to <a href="https://www.youtube.com/watch?v=MpLi0c5M3FA" target="_blank">make way for tourists</a>.      
+        Without adequate renter’s rights, there is nothing standing in the way of landlords kicking out their long term renters to <a href="https://www.youtube.com/watch?v=MpLi0c5M3FA" target="_blank">make way for tourists</a>.  
       </p>
       <p class="top-scroll-wrapper">
         <a ng-click="scrollToTop()">Scroll to top</a>
       </p>  
-    </div><!--end poverty 3-->
-  </div><!--end row-->
-</div> <!--end model-->
+    </div>                           <!--end renters rights-->
+    <div class="col-lg-12">          <!--begin just because-->
+    </div>                           <!--end just because-->
+  </div>                             <!--end row-->
+</div>                               <!--end model-->
