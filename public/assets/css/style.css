@@ -9,7 +9,7 @@ body {
   font-family: "jaf-bernino-sans","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
 }
 
-a, a:active{
+a, a:active, a:active{
   color: rgb(154, 55, 55);
   cursor: pointer;
 }
@@ -27,6 +27,11 @@ a:hover, a:visited{
 
 .top-scroll-wrapper a{
   color:#858585;
+}
+
+.btn-success, .btn-success:hover, .btn-success:active {
+  background-color: #404040;
+  border-color: #404040;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -92,6 +97,10 @@ div.info.legend.leaflet-control{
   width: 10px;
   height: 10px;
   margin-top: 8px;
+}
+
+.leaflet-bar a{
+  color: black;
 }
 
 #loader {
