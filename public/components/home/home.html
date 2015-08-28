@@ -1,9 +1,9 @@
 <div ng-model="stats">
   <div class="home-header">
       <h1>The New Orleans Short Term Rental Report</h1>
-      <h3><i>Examining the effects of short term rentals on the city of New Orleans</i></h3>
   </div>
   <br>
+  <h3>EXAMINING THE EFFECTS OF SHORT TERM RENTALS ON THE CITY OF NEW ORLEANS</h3>
   <p>
     Utilizing data that is <b>updated every two weeks</b> from Airbnb and HomeAway — two major <b>short term rental (STR)</b> providers — this website provides a framework for better understanding the impact of unpermitted short term rentals on the city of New Orleans. We consider the most important issues related to short term rentals to be centered around affordability and access. Our analysis on the effects of short term rentals on the New Orleans housing market is separated into six parts: 
     (1) <a ng-click="scrollTo('rentalCompetition')">The Rental Competition: Transients vs. Residents</a>, 
@@ -193,24 +193,24 @@
         <table class="table" style="text-align:left">
     	    <thead style="font-size:12px">
       	    <tr>
-              <th>Top 5</th>
-      	      <th>Total Listings</th>
-      	      <th>Total Entire Home/Apt</th>
-      	      <th>Average Price for Entire Place</th>
-      	      <th>Average # of Reviews Per Listing (All listings)</th>
+              <th>TOP 5</th>
+      	      <th style="text-align:center">Total Listings</th>
+      	      <th style="text-align:center">Total Entire Home/Apt</th>
+      	      <th style="text-align:center">Average Price for Entire Place</th>
+      	      <th style="text-align:center">Average # of Reviews Per Listing (All listings)</th>
       	    </tr>
       	  </thead>
       	  <tbody>
       	  <tr ng-repeat="n in topFiveNeighborhoods">
-      	    <td>{{n.name}}</td>
-      	    <td>{{n.total}}</td>
-      	    <td>{{n.entirePlace}}</td>
-      	    <td>{{n.aggregateEntirePlaceNightlyPrice/n.entirePlace | currency}}</td>
-      	    <td>{{n.totalReviews/n.total | number: 0}}</td>
+	    <td><b>{{n.name}}</b></td>
+      	    <td style="text-align:center">{{n.total}}</td>
+      	    <td style="text-align:center">{{n.entirePlace}}</td>
+      	    <td style="text-align:center">{{n.aggregateEntirePlaceNightlyPrice/n.entirePlace | currency}}</td>
+      	    <td style="text-align:center">{{n.totalReviews/n.total | number: 0}}</td>
       	  </tr>
       	  <thead>
             <tr>
-              <th>Bottom 5</th>
+              <th>BOTTOM 5</th>
               <th></th>
               <th></th>
               <th></th>
@@ -218,11 +218,11 @@
             </tr>
           </thead>
       	  <tr ng-repeat="n in bottomFiveNeighborhoods">
-      	    <td>{{n.name}}</td>
-      	    <td>{{n.total}}</td>
-      	    <td>{{n.entirePlace}}</td>
-      	    <td>{{n.aggregateEntirePlaceNightlyPrice/n.entirePlace | currency}}</td>
-      	    <td>{{n.totalReviews/n.total | number: 0}}</td>
+	    <td><b>{{n.name}}</b></td>
+      	    <td style="text-align:center">{{n.total}}</td>
+      	    <td style="text-align:center">{{n.entirePlace}}</td>
+      	    <td style="text-align:center">{{n.aggregateEntirePlaceNightlyPrice/n.entirePlace | currency}}</td>
+      	    <td style="text-align:center">{{n.totalReviews/n.total | number: 0}}</td>
       	  </tr>
       	  </tbody>
         </table>
