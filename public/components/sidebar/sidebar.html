@@ -65,13 +65,13 @@
   <hr>
   <div class="menu-area">
     <h5>Search <b>Airbnb</b> listings by user ID:</h5>
-    <form>
+    <form class="form-container">
       <input id="user-search-bar" type="text" ng-model="userUrl" class="form-control">
       <input ng-click="queryByUserUrl(userUrl)" class="btn-success btn" type="submit" value="Map">
       <input ng-click="clearSelection()" class="btn-default btn" type="submit" value="Clear">
     </form>
-    <div style="height:12px;color:red">
-      <small><i><span ng-bind="searchError"></span></i></small>
+    <div style="height:40px; margin-top:7px;color:rgb(168, 83, 83);">
+      <small><i><span ng-bind="searchOutput"></span></i></small>
     </div>
   </div>
   <hr>

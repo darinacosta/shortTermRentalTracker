@@ -29,9 +29,12 @@ a:hover, a:visited{
   color:#858585;
 }
 
-.btn-success, .btn-success:hover, .btn-success:active {
+.form-container .btn {
   background-color: #404040;
   border-color: #404040;
+  color: white;
+  -webkit-transition: background linear 3350ms;
+  -moz-transition: background linear 3350ms;
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -82,9 +82,16 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
 
   $scope.queryByUserUrl = function(userId){
     var userUrl = 'http://airbnb.com/users/show/' + userId;
+    var userSummary = {
+      "total"      : 0,
+      "entirePlace": 0,
+      "privateRoom": 0,
+      "sharedRoom" : 0,
+      "streets": []
+    };
     map.removeLayer(queryLayer);
     asyncHelper(function() {
-      $scope.searchError = ''
+      $scope.searchOutput = ''
     });
     $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pasttwoweeks=true").success(function(data){
       var filteredFeatures = [],
@@ -94,13 +101,67 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
           filteredFeatures.push(feature);
         } 
       });
+     
+      for (var i = 0; i < filteredFeatures.length; i ++){
+        var feature = filteredFeatures[i];
+        
+        userSummary.total += 1;
+
+	if (userSummary.streets.indexOf(feature.properties.street) === -1){
+	  userSummary.streets.push(feature.properties.street);
+	};
+
+	if (feature.properties.roomtype === "Entire home/apt"){
+          userSummary.entirePlace += 1; 
+        } else if (feature.properties.roomtype === "Private room"){
+          userSummary.privateRoom += 1;
+        } else if (feature.properties.roomtype === "Shared room"){
+	  userSummary.sharedRoom += 1;
+	};
+
+      };
+
       queryValid = filteredFeatures.length > 0 ? true : false;
       data['features'] = filteredFeatures;
+      
       if (queryValid === true){
-        configureQueryRentalLayer(data)
+	var street = userSummary.streets.length !== 1 ? "streets" : "street";	
+	var listing = userSummary.total.length !== 1 ? "listings" : "listing";
+	var entireHomeListing = userSummary.entirePlace !== 1 ? "listings" : "listing";
+
+	var ofWhich = (function(){
+	  if (userSummary.entirePlace === userSummary.total && userSummary.total > 2){
+	    return ', of which all are listed as "Entire home/apt". ';
+	  } else if (userSummary.entirePlace < userSummary.total && userSummary.entirePlace === 1) {
+	    return ', and one is listed as "Entire home/apt". ';
+	  } else if (userSummary.entirePlace === userSummary.total && userSummary.total === 2) {
+	    return ', and both are listed as "Entire home/apt". ';
+	  } else if (userSummary.entirePlace === 0){
+	    return '. ';
+	  } else { 
+	    return ', of which ' + userSummary.entirePlace  + ' are listed as "Entire home/apt". ';
+	  }
+	})(); 
+
+	var distributed = (function(){
+	  if (userSummary.streets.length > 1){
+	    return "The listings are distributed across " + userSummary.streets.length + " " + street + '.';;
+	  }else{
+	    return "All the listings are located on " + userSummary.streets[0] + ".";
+	  }
+	})();
+
+        console.log(userSummary);
+	configureQueryRentalLayer(data);
+	
+	$scope.searchOutput = 'This user has ' + userSummary.total + " " +  listing + ofWhich + distributed;
+        $scope.searchOutput = userSummary.entirePlace === 1 && userSummary.total === 1 ? 'This user has 1 listing: an "Entire home/apt" on ' 
+		                                                                         + userSummary.streets[0] + '.' : $scope.searchOutput;
+        $scope.searchOutput = userSummary.entirePlace === 0 && userSummary.total === 1 ? 'This user has 1 listing, located on '  
+		                                                                         + userSummary.streets[0] + '.' : $scope.searchOutput;
       } else {
         asyncHelper(function() {
-          $scope.searchError = 'Unable to retrieve listings for requested ID.'
+          $scope.searchOutput = 'Unable to retrieve listings for requested ID.'
         });
       }
     });
@@ -127,7 +188,7 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
     map.addLayer(pointLayer);
     map.setView(mapSvc.mapAttributes.center, mapSvc.mapAttributes.zoom);
     $scope.userUrl = "";
-    $scope.searchError = '';
+    $scope.searchOutput = '';
   }
 
   layerSvc.getLicensedRentals().then(function(licensedRentals){
