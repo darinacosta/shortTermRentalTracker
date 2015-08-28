@@ -103,6 +103,10 @@ div.info.legend.leaflet-control{
   color: black;
 }
 
+.leaflet-popup-content a{
+  color: rgb(154, 55, 55);
+}
+
 #loader {
   position: fixed;
   top: 43%;
