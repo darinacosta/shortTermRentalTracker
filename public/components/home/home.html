@@ -32,7 +32,9 @@
     </div>                           <!--end transients v residents-->
     <div class="col-lg-6 col-md-12"> <!--begin price table column-->
       <div class="chart-content-container">
-        <h4>Prices</h4>
+        <div class="home-header">
+          <h4>Prices</h4>
+        </div>
         <table class="table" ng-model="stats" style="text-align:left">
           <thead>
             <tr>
@@ -90,7 +92,11 @@
             </tr>
           </tbody>
         </table>
-        <div class="caption"><small>Price data is collected from {{stats.listingTotals.air}} active and historic Airbnb listings and {{stats.listingTotals.hma}} HomeAway listings. If maximum-price users provide a price range, the average is given.</small></div>
+      </div>
+      <div class="caption">
+        <small>
+          Price data is collected from {{stats.listingTotals.air}} active and historic Airbnb listings and {{stats.listingTotals.hma}} HomeAway listings. If maximum-price users provide a price range, the average is given.
+        </small>
       </div>
     </div>                           <!--end price table column-->
     <div class="col-md-12">          <!--begin transients v residents 2-->
@@ -103,9 +109,15 @@
     </div>                           <!--end transients v residents 2-->
     <div class="col-lg-4 col-md-12"> <!--begin room type chart column-->
       <div class="chart-content-container">
-        <h4>Airbnb Room Types</h4>
+        <div class="home-header">
+          <h4>Airbnb Room Types</h4>
+        </div>
         <canvas id="doughnut" class="chart chart-doughnut" data="rentalTypeData" labels="rentalTypeLabels"></canvas>
-        <div class="caption">Airbnb listings by room type among {{stats.listingTotals.air}} active and historic listings.</div>
+      </div>
+      <div class="caption">
+        <small>
+          Airbnb listings by room type among {{stats.listingTotals.air}} active and historic listings.
+        </small>
       </div>
     </div>                           <!--end room type chart column-->
     <div class="col-lg-8 col-md-12"> <!--begin myth v reality-->
@@ -147,11 +159,13 @@
     </div>                           <!--end myth v reality prt 2-->
     <div class="col-lg-4 col-md-12"> <!--begin review number chart-->
       <div class="chart-content-container" style="max-width:718px;">
-        <h4>Number of Airbnb Reviews by Room Type</h4>
+        <div class="home-header">
+          <h4>Number of Airbnb Reviews by Room Type</h4>
+        </div>
         <canvas id="bar" class="chart chart-bar" data="averageNightlyData" labels="averageNightlyLabels" options="averageNightlyOptions"></canvas>
         <br>
-        <div class="caption"><small>Total number of reviews among {{stats.listingTotals.air}} active and historic Airbnb listings.</small></div>
       </div>
+      <div class="caption"><small>Total number of reviews among {{stats.listingTotals.air}} active and historic Airbnb listings.</small></div>
     </div>                           <!--end review number chart-->
     <div class="col-lg-12">          <!--begin bad actors 2-->
       <p>
@@ -173,7 +187,9 @@
     </div>                           <!--end poverty-->
     <div class="col-lg-6 col-md-12"> <!--begin top ten neighborhood table-->
       <div class="chart-content-container">
-    	  <h4>Neighborhoods With the Greatest & Least Airbnb Listings</h4>
+        <div class="home-header">
+    	    <h4>Neighborhoods With the Greatest & Least Airbnb Listings</h4>
+        </div>
         <table class="table" style="text-align:left">
     	    <thead style="font-size:12px">
       	    <tr>
@@ -210,11 +226,11 @@
       	  </tr>
       	  </tbody>
         </table>
-        <div class="caption">
-          <small>
-            Calculated based on {{stats.listingTotals.air}} active and historic Airbnb listings.
-          </small>
-        </div>
+      </div>
+      <div class="caption">
+        <small>
+          Neighborhood listings calculated based on {{stats.listingTotals.air}} active and historic Airbnb listings.
+        </small>
       </div>
     </div>                           <!--end top ten neighborhood table-->
     <div class="col-lg-6 col-md-12"> <!--begin poverty 2-->
