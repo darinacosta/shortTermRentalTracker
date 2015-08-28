@@ -17,6 +17,10 @@ function homeCtrl($scope, layerHelpers, asyncHelper, $http, $location, $anchorSc
       $location.hash('');
     };
 
+    $scope.scrollToTop = function(){
+      $('body').scrollTop(0);
+    }
+
     //body variables  
     $scope.stats = data;  
     $scope.entireRoomPercent = Math.round((data.roomTypeTotals.entireHome/data.listingTotals.air) * 100);

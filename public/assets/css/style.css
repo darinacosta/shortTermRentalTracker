@@ -9,6 +9,20 @@ body {
   font-family: "jaf-bernino-sans","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
 }
 
+a{
+  color: rgb(110, 54, 54);
+}
+
+a:hover{
+  color: rgb(154, 55, 55);
+  text-decoration: none;
+}
+
+.top-scroll-wrapper{
+  text-align:right;
+  font-size:small;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lato', sans-serif;
 }
