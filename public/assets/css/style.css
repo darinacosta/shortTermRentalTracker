@@ -121,6 +121,10 @@ div.info.legend.leaflet-control{
   color: rgb(154, 55, 55);
 }
 
+.navmenu-brand{
+  padding: 0px 15px;
+}
+
 #loader {
   position: fixed;
   top: 43%;
@@ -132,7 +136,7 @@ div.info.legend.leaflet-control{
 
 #last-update{
   font-style: italic;
-  padding: 0px 15px 15px 15px;
+  padding: 0px 15px 1px 15px;
 }
 
 #map{
