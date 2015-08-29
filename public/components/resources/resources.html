@@ -18,8 +18,8 @@
   </form>
 </div>
 <hr>
-<div class="row" ng-scope="resources" style="min-height:800px">
-  <div class="col-md-6 col-sm-12" data-ng-repeat="resource in resources">
+<div class="row" id="resources" ng-scope="resources" style="min-height:800px">
+  <div class="col-md-6 col-sm-12 bib-resource" data-ng-repeat="resource in resources">
     <b><a href="{{resource.url}}" target="_blank">{{resource.title}}</a></b>
     <br>
     <span ng-if="resource.author!=undefined">

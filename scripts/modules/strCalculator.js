@@ -21,17 +21,19 @@ var requestCallback = function(response){
 
   response.on('end', function(){
     console.log('Response received');
-    var listings          = JSON.parse(str)['body'];
-    var listingTotals     = strCalculator.countListings(listings);
-    var multiListingUsers = strCalculator.countMultiListingUsers(listings, 2);
-    var prices            = strCalculator.calculatePrices(listings);
-    var roomTypeTotals    = strCalculator.countRoomTypes(listings);
-    var reviews           = strCalculator.countReviews(listings);
-    var neighborhoodStats = strCalculator.gatherDataByNeighborhood(listings);
+    var listings                         = JSON.parse(str)['body'];
+    var listingTotals                    = strCalculator.countListings(listings);
+    var multiListingUsers                = strCalculator.countMultiListingUsers(listings, 2);
+    var multiListingEntirePlaceUserStats = strCalculator. countMultiUnitEntirePlacesByUser(listings);
+    var prices                           = strCalculator.calculatePrices(listings);
+    var roomTypeTotals                   = strCalculator.countRoomTypes(listings);
+    var reviews                          = strCalculator.countReviews(listings);
+    var neighborhoodStats                = strCalculator.gatherDataByNeighborhood(listings);
     var stats = {
       listingTotals: listingTotals,
       roomTypeTotals: roomTypeTotals,
       multiListingUsers: multiListingUsers,
+      multiListingEntirePlaceUserStats: multiListingEntirePlaceUserStats,
       prices: prices,
       reviews: reviews,
       neighborhoodStats: neighborhoodStats
@@ -110,6 +112,16 @@ strCalculator.buildUserList = function(listings){
     }
   })
   return userList;
+};
+
+strCalculator.buildMultiUnitUserIndex = function(listings){
+  var userIndex = {};
+  listings.forEach(function(listing){
+    if (userList.indexOf(listing.properties['user']) === -1 && listing.properties.provider === "air" && listing.property['units'] > 1){
+      userIndex[listing.properties['user']] = [];
+    }
+  })
+  return userIndex;
 };
 
 strCalculator.calculatePrices = function(listings){
@@ -409,6 +421,37 @@ strCalculator.buildMultiUnitHostIndex = function(listings, unitNumber){
   });
   return multiUnitUsers;
 }
+
+strCalculator.countMultiUnitEntirePlacesByUser = function(listings){
+  var userIndex = {};
+  var stats = {
+    users: 0,
+    entirePlaceListings: 0,
+    extraEntirePlaceListings: 0
+  };
+  
+  //build multi-unit user index
+  listings.forEach(function(listing){
+    if (listing.properties.provider === "air" && listing.properties['user'] !== undefined && listing.properties['roomtype'] === "Entire home/apt"){
+      if (userIndex[listing.properties['user']] === undefined){
+        userIndex[listing.properties['user']] = 0
+      };
+      userIndex[listing.properties['user']] += 1;
+    }
+  });
+  
+  //calculate stats
+  for (var user in userIndex){
+    if (userIndex[user] > 1){
+      stats.users += 1;
+      stats.entirePlaceListings += userIndex[user];
+      stats.extraEntirePlaceListings += userIndex[user] - 1;
+    }
+  };
+
+  return stats;
+  
+};
 
 strCalculator.countMultiListingUsers = function(listings, unitNumber){
   var multiUnitUsers = strCalculator.buildMultiUnitHostIndex(listings, unitNumber);
