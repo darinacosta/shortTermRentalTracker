@@ -21,7 +21,7 @@ a:hover, a:visited{
 
 .bib-resource:nth-child(odd) {
   clear: left;
-};
+}
 
 .top-scroll-wrapper{
   text-decoration:underline;
