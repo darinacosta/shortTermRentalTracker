@@ -7,7 +7,8 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
       layerManager = layerHelpers.layerManager,
       shortTermRentalClusters = {},
       queryLayer = {},
-      shortTermRentalPointManager = new layerManager("Regional Short Term Rental Points");
+      shortTermRentalPointManager = new layerManager("Regional Short Term Rental Points"),
+      defaultSearchOutput = 'To search a user by ID, click an <b>Airbnb point</b> on the map, <b>copy the "User ID"</b> from the popup, <b>paste</b> it into the search bar, and <b>click "Map"</b>.';
 
   $scope.mostListings = '----';
   $scope.nolaTotal = '----';
@@ -17,7 +18,7 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
   $scope.lastUpdate = '--/--/----';
   $scope.usersWithMultiListings =  '----';
   $scope.licensedRentals = '----';
-  $scope.searchOutput = 'To search a user by ID, click an <b>Airbnb point</b> in the map, <b>copy the "User ID"</b> from the popup, <b>paste</b> it into the search bar, and <b>click "Map"</b>.'
+  $scope.searchOutput = defaultSearchOutput; 
   $scope.scrollTo = scrollHelper.scrollTo;
   $scope.scrollToTop = scrollHelper.scrollToTop;
   
@@ -190,7 +191,7 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
     map.addLayer(pointLayer);
     map.setView(mapSvc.mapAttributes.center, mapSvc.mapAttributes.zoom);
     $scope.userUrl = "";
-    $scope.searchOutput = 'To search a user by ID, click an <b>Airbnb point</b> in the map, <b>copy the "User ID"</b> from the popup, <b>paste</b> it into the search bar, and <b>click "Map"</b>.'
+    $scope.searchOutput = defaultSearchOutput; 
   }
 
   layerSvc.getLicensedRentals().then(function(licensedRentals){
