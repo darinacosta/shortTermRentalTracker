@@ -1,6 +1,6 @@
 app.controller('homeCtrl', ['$scope', 'layerHelpers', 'asyncHelper', '$http', 'scrollHelper', homeCtrl]);
 
-function homeCtrl($scope, layerHelpers, asyncHelper, $http, $location, $anchorScroll) {
+function homeCtrl($scope, layerHelpers, asyncHelper, $http, scrollHelper) {
   var map = mapSvc.map,
     mapAttributes = mapSvc.mapAttributes,
     layerControl = mapSvc.layerControl,
