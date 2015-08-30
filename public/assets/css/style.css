@@ -67,7 +67,16 @@ h3{
   color: #555555;
   text-align: center;
   padding: 1px 0px;
-  margin-bottom:10px;
+}
+
+#footer{
+  background-color: #B9B9B9;
+  color: #555555;
+  font-size: small;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px 0px;
+  height: 40px;
 }
 
 .home-header h4{
