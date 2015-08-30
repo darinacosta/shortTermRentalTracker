@@ -29,9 +29,7 @@ function resourcesCtrl($scope, $http, asyncHelper, scrollHelper) {
       for (var key in $scope.checkboxModel){
         if ($scope.checkboxModel.hasOwnProperty(key)){
           if ($scope.checkboxModel[key] == true){
-	    console.log('pushing key ' + key);
 	    keys.push(key);
-	    console.log('keys length: ' + keys.length);
 	  }
 	}
       };
@@ -57,7 +55,6 @@ function buildKeywordSet(keywords, data){
     
     if (keywords.length === 0){ return data };
 
-    console.log('Building keyword set with ' +keywords.length + ' keys.'); 
     for (var i = 0; i < data.length; i ++){
       if (data[i]['keywordArray'] !== undefined){
         outEntries.push(data[i]);

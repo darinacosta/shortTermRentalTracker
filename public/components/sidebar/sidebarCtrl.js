@@ -17,12 +17,10 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
   $scope.lastUpdate = '--/--/----';
   $scope.usersWithMultiListings =  '----';
   $scope.licensedRentals = '----';
-
+  $scope.searchOutput = 'To search a user by ID, click an <b>Airbnb point</b> in the map, <b>copy the "User ID"</b> from the popup, <b>paste</b> it into the search bar, and <b>click "Map"</b>.'
   $scope.scrollTo = scrollHelper.scrollTo;
   $scope.scrollToTop = scrollHelper.scrollToTop;
-
-  console.log($scope.scrollTo)
-
+  
   $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pasttwoweeks=true").success(function(data){
       gatherStats(data.body)
     }
@@ -95,7 +93,7 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
     };
     map.removeLayer(queryLayer);
     asyncHelper(function() {
-      $scope.searchOutput = 'To search a user by ID, click an Airbnb point in the map, copy the "User ID" from the popup, paste it into the search bar, and click "Map".'
+      //$scope.searchOutput = 'To search a user by ID, click an Airbnb point in the map, copy the "User ID" from the popup, paste it into the search bar, and click "Map".'
     });
     $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pasttwoweeks=true").success(function(data){
       var filteredFeatures = [],
@@ -158,14 +156,14 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
         console.log(userSummary);
 	configureQueryRentalLayer(data);
 	
-	$scope.searchOutput = 'This user has ' + userSummary.total + " " +  listing + ofWhich + distributed;
-        $scope.searchOutput = userSummary.entirePlace === 1 && userSummary.total === 1 ? 'This user has 1 listing: an "Entire home/apt" on ' 
+	$scope.searchOutput = 'This user has <b>' + userSummary.total + " " +  listing + '</b>' + ofWhich + distributed;
+        $scope.searchOutput = userSummary.entirePlace === 1 && userSummary.total === 1 ? 'This user has <b>1 listing</b>: an "Entire home/apt" on ' 
 		                                                                         + userSummary.streets[0] + '.' : $scope.searchOutput;
-        $scope.searchOutput = userSummary.entirePlace === 0 && userSummary.total === 1 ? 'This user has 1 listing, located on '  
+        $scope.searchOutput = userSummary.entirePlace === 0 && userSummary.total === 1 ? 'This user has <b>1 listing</b>, located on '  
 		                                                                         + userSummary.streets[0] + '.' : $scope.searchOutput;
       } else {
         asyncHelper(function() {
-          $scope.searchOutput = 'Unable to retrieve listings for requested ID.'
+          $scope.searchOutput = '<b>Unable to retrieve listings for requested ID.</b>'
         });
       }
     });
@@ -192,7 +190,7 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
     map.addLayer(pointLayer);
     map.setView(mapSvc.mapAttributes.center, mapSvc.mapAttributes.zoom);
     $scope.userUrl = "";
-    $scope.searchOutput = '';
+    $scope.searchOutput = 'To search a user by ID, click an <b>Airbnb point</b> in the map, <b>copy the "User ID"</b> from the popup, <b>paste</b> it into the search bar, and <b>click "Map"</b>.'
   }
 
   layerSvc.getLicensedRentals().then(function(licensedRentals){

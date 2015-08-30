@@ -72,17 +72,17 @@
       <input ng-click="queryByUserUrl(userUrl)" class="btn-success btn" type="submit" value="Map">
       <input ng-click="clearSelection()" class="btn-default btn" type="submit" value="Clear">
     </form>
-    <div style="height:40px; margin-top:7px;color:rgb(168, 83, 83);">
-      <small><span ng-bind="searchOutput"></span></small>
+    <div style="height:65px; margin-top:7px">
+	    <small><span ng-bind-html="searchOutput"></span></small>
     </div>
   </div>
   <hr>
+  <div style="height:40px;margin-left:10px;" class="addthis_native_toolbox"></div> 
   <div id="last-update">
     <small>
       Data updated: <b><span ng-bind="lastUpdate">--/--/----</span></b>.
     </small>
     <br><br>
-    <div style="height:20px" class="addthis_native_toolbox"></div> 
     <br>  
   </div>
 </div>

@@ -137,4 +137,3 @@ var mapSvc = (function(){
   return svc;
 })();
 
-console.log(mapSvc);
