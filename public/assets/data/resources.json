@@ -60,7 +60,7 @@
         "publication": "sfist.com",
         "url": "http://sfist.com/",
         "pubdate": "2015-04-27T05:00:00.000Z",
-        "keywords": "airbnb, short term rentals"
+        "keywords": "airbnb"
     },
     {
         "title": "Airbnb says this man does not exist. So I had coffee with him",
@@ -68,7 +68,7 @@
         "publication": "pando.com",
         "url": "https://pando.com/2013/12/08/airbnb-says-this-man-does-not-exist-so-i-had-coffee-with-him/",
         "pubdate": "2013-12-08T06:00:00.000Z",
-        "keywords": "airbnb, short term rentals"
+        "keywords": "airbnb"
     },
     {
         "title": "What’s good for renters is good for New Orleans",
@@ -84,7 +84,7 @@
         "publication": "NOLA.com | The Times Picayune ",
         "url": "http://www.nola.com/politics/index.ssf/2015/06/lawsuit_kills_rare_prosecution.html",
         "pubdate": "2015-06-15T05:00:00.000Z",
-        "keywords": "short term rentals, new orleans"
+        "keywords": "airbnb, new orleans"
     },
     {
         "title": "New Orleans' tourism industry booms but income inequality remains entrenched",
@@ -92,7 +92,7 @@
         "publication": "NOLA.com | The Times Picayune ",
         "url": "http://www.nola.com/politics/index.ssf/2014/10/new_orleans_tourism_industry_b.html",
         "pubdate": "2014-10-28T05:00:00.000Z",
-        "keywords": "economy, inequality, new orleans, tourism"
+        "keywords": "economy, new orleans, tourism"
     },
     {
         "title": "For Rent: Unsafe, Overpriced Home for the Holidays",
@@ -108,7 +108,7 @@
         "publication": "National Digital Inclusion Alliance",
         "url": "http://www.digitalinclusionalliance.org/blog/2015/5/26/census-shows-digital-divide-closely-linked-to-household-incomes",
         "pubdate": "2015-05-26T05:00:00.000Z",
-        "keywords": "internet access, inequality, economy"
+        "keywords": "economy"
     },
     {
         "title": "Where Opportunity Knocks, the Doors are Locked",
@@ -116,7 +116,7 @@
         "publication": "Greater New Orleans Fair Housing Action Center",
         "url": "http://www.gnofairhousing.org/wp-content/uploads/2014/11/11-06-14-Where-Opp-Knocks-FINAL.pdf",
         "pubdate": "2014-11-06T06:00:00.000Z",
-        "keywords": "housing, new orleans, race, housing discrimination"
+        "keywords": "housing, new orleans, race"
     },
     {
         "title": "Digital Discrimination: The Case of Airbnb.com",
@@ -124,7 +124,7 @@
         "publication": "Harvard Business School",
         "url": "http://www.hbs.edu/faculty/Publication%20Files/14-054_e3c04a43-c0cf-4ed8-91bf-cb0ea4ba59c6.pdf",
         "pubdate": "2014-01-10T06:00:00.000Z",
-        "keywords": "race, airbnb, short term rentals"
+        "keywords": "race, airbnb"
     },
     {
         "title": "Who Lives in New Orleans and Metro Parishes Now?",
@@ -140,7 +140,7 @@
         "publication": "The Atlantic",
         "url": "http://www.theatlantic.com/business/archive/2015/07/cities-housing-rental-affordability-new-orleans/399695/",
         "pubdate": "2015-07-28T05:00:00.000Z",
-        "keywords": "housing, race, income, new orleans"
+        "keywords": "housing, race, economy, new orleans"
     },
     {
         "title": "Higher housing costs puts pinch on local workforce",
@@ -156,7 +156,7 @@
         "publication": "NOLA.com | The Times Picayune ",
         "url": "http://www.nola.com/futureofneworleans/2015/07/where_will_the_working_poor_li.html",
         "pubdate": "2015-07-30T05:00:00.000Z",
-        "keywords": "housing, gentrification, income, new orleans"
+        "keywords": "housing, gentrification, economy, new orleans"
     },
     {
         "title": "10 Things You Need to Know About Renting in New Orleans",
@@ -164,7 +164,7 @@
         "publication": "Curbed",
         "url": "http://nola.curbed.com/archives/2015/06/04/10-things-you-need-to-know-about-renting-in-new-orleans.php",
         "pubdate": "2015-06-04T05:00:00.000Z",
-        "keywords": "renter's rights, new orleans, evictions"
+        "keywords": "new orleans, housing"
     },
     {
         "title": "New Orleans will need 33,000 new housing units over the next 10 years, study finds",
@@ -172,7 +172,7 @@
         "publication": "NOLA.com | The Times Picayune ",
         "url": "http://www.nola.com/politics/index.ssf/2015/08/new_orleans_will_need_33000_ne.html#incart_2box_nola_river_orleans_news",
         "pubdate": "2015-08-21T05:00:00.000Z",
-        "keywords": "housing, housing costs, gentrification, new orleans"
+        "keywords": "housing, gentrification, new orleans"
     },
     {
         "title": "Unfairbnb: What Unliscenced Short-Term Rentals Mean for New Orleans",
@@ -210,7 +210,7 @@
         "publication": "NOLA.com | The Times Picayune",
         "url": "http://www.nola.com/neighborhoods/2015/06/new_orleans_bounce_music_evoke.html",
         "pubdate": "2015-06-04T05:00:00.000Z",
-        "keywords": "gentrification, redevelopment"
+        "keywords": "gentrification"
     },
     {
         "title": "Gentrification and Its Discontents: Notes from New Orleans",
@@ -352,7 +352,7 @@
         "publication": "theawl.com",
         "url": "http://www.theawl.com/2015/07/room-versus-board",
         "pubdate": "2015-07-09T05:00:00.000Z",
-        "keywords": "airbnb, economy, housing, inequality"
+        "keywords": "airbnb, economy, housing"
     },
     {
         "title": "Boom and Backlash",
@@ -392,7 +392,7 @@
         "publication": "thegardian.com",
         "url": "https://www.google.com/url?q=http%3A%2F%2Fwww.theguardian.com%2Ftechnology%2F2015%2Fmar%2F05%2Fhomeless-steps-airbnb-san-francisco",
         "pubdate": "2015-03-05T06:00:00.000Z",
-        "keywords": "airbnb, economy, inequality"
+        "keywords": "airbnb, economy, housing"
     },
     {
         "title": "Latest AirBnB Backlash: San Fran May Offer Cash to Snitch on Neighbors",
@@ -439,7 +439,7 @@
         "publication": "LANNE",
         "url": "https://www.google.com/url?q=http%3A%2F%2Fwww.laane.org%2Fwp-content%2Fuploads%2F2015%2F03%2FAirBnB-Final.pdf",
         "pubdate": "2015-03-01T06:00:00.000Z",
-        "keywords": "airbnb, regulation, housing costs, gentrification"
+        "keywords": "airbnb, regulation, housing, gentrification"
     },
     {
         "title": "Meet LA's Most Prolific Airbnb Host, With 78 Units For Rent",
@@ -527,7 +527,7 @@
         "publication": "The Local",
         "url": "http://www.thelocal.de/20150219/airbnb-subletters-unp",
         "pubdate": "2015-02-19T06:00:00.000Z",
-        "keywords": "airbnb, regulation, eviction"
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "Two thirds of Berlin's tourist flats now illegal",
