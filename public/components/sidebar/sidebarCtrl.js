@@ -95,7 +95,7 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
     };
     map.removeLayer(queryLayer);
     asyncHelper(function() {
-      $scope.searchOutput = ''
+      $scope.searchOutput = 'To search a user by ID, click an Airbnb point in the map, copy the "User ID" from the popup, paste it into the search bar, and click "Map".'
     });
     $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pasttwoweeks=true").success(function(data){
       var filteredFeatures = [],

@@ -5,7 +5,7 @@
         "publication": "New Orleans Gambit",
         "url": "http://www.bestofneworleans.com/gambit/new-orleans-one-of-the-worst-us-ci ties-for-renters/Content?oid=2609106",
         "pubdate": "2015-03-30T05:00:00.000Z",
-        "keywords": "affordable housing, new orleans"
+        "keywords": "housing, new orleans"
     },
     {
         "title": "10 Years After Katrina, New Orleans Public Housing Still in Limbo",
@@ -13,7 +13,7 @@
         "publication": "Next City",
         "url": "https://nextcity.org/features/view/10-years-after-katrina-new-orleans-public-housing-still-in-limbo-iberville",
         "pubdate": "2015-06-15T05:00:00.000Z",
-        "keywords": "public housing, affordable housing, new orleans"
+        "keywords": "housing, housing, new orleans"
     },
     {
         "title": "Louisiana wages stagnant, gap persistent, study says",
@@ -21,13 +21,14 @@
         "publication": "NOLA.com | The Times Picayune ",
         "url": "http://www.nola.com/business/baton-rouge/index.ssf/2013/08/louisiana_unemployment_wages_r.html",
         "pubdate": "2013-08-29T05:00:00.000Z",
-        "keywords": "wages, economy, louisiana"
+        "keywords": "economy, louisiana"
     },
     {
         "title": "Out of Reach 2015: Louisiana",
         "author": "National Low Income Housing Coalition",
         "publication": "nlihc.org",
-        "url": "http://nlihc.org/oor/louisiana"
+        "url": "http://nlihc.org/oor/louisiana",
+        "keywords": "new orleans, louisiana, economy, housing"
     },
     {
         "title": "Census Finds Post-Katrina New Orleans Richer, Whiter, Emptier",
@@ -43,7 +44,7 @@
         "publication": "The New York Times",
         "url": "http://www.nytimes.com/2015/08/23/magazine/why-new-orleans-black-residents-are-still-under-water-after-katrina.html?_r=1",
         "pubdate": "2015-08-18T05:00:00.000Z",
-        "keywords": "racial inequality, new orleans"
+        "keywords": "race, new orleans"
     },
     {
         "title": "A Housing Crisis Amid Tens of Thousands of Abandoned Homes",
@@ -51,7 +52,7 @@
         "publication": "The Atlantic",
         "url": "http://www.theatlantic.com/business/archive/2015/08/new-orleans-blight-hurricane-katrina/401843/?utm_source=SFTwitter",
         "pubdate": "2015-08-20T05:00:00.000Z",
-        "keywords": "affordable housing, new orleans"
+        "keywords": "housing, new orleans"
     },
     {
         "title": "Planning Department Won't Force Airbnb To Share Records",
@@ -75,7 +76,7 @@
         "publication": "Uptown Messenger",
         "url": "http://uptownmessenger.com/2015/02/guest-column-whats-good-for-renters-is-good-for-new-orleans/",
         "pubdate": "2015-02-11T06:00:00.000Z",
-        "keywords": "affordable housing, new orleans"
+        "keywords": "housing, new orleans"
     },
     {
         "title": "Lawsuit kills rare prosecution of Airbnb-style rentals in New Orleans",
@@ -91,7 +92,7 @@
         "publication": "NOLA.com | The Times Picayune ",
         "url": "http://www.nola.com/politics/index.ssf/2014/10/new_orleans_tourism_industry_b.html",
         "pubdate": "2014-10-28T05:00:00.000Z",
-        "keywords": "wages, economy, inequality, new orleans, tourism"
+        "keywords": "economy, inequality, new orleans, tourism"
     },
     {
         "title": "For Rent: Unsafe, Overpriced Home for the Holidays",
@@ -99,7 +100,7 @@
         "publication": "Greater New Orleans Fair Housing Action Center",
         "url": "http://www.gnofairhousing.org/wp-content/uploads/2014/12/Unsafe-Overpriced-Home-for-the-Holidays-FINAL.pdf",
         "pubdate": "2015-12-03T06:00:00.000Z",
-        "keywords": "affordable housing, new orleans, substandard housing"
+        "keywords": "housing, new orleans, housing"
     },
     {
         "title": "Census shows digital divide closely linked to household incomes",
@@ -107,7 +108,7 @@
         "publication": "National Digital Inclusion Alliance",
         "url": "http://www.digitalinclusionalliance.org/blog/2015/5/26/census-shows-digital-divide-closely-linked-to-household-incomes",
         "pubdate": "2015-05-26T05:00:00.000Z",
-        "keywords": "internet access, inqeuality, income"
+        "keywords": "internet access, inequality, economy"
     },
     {
         "title": "Where Opportunity Knocks, the Doors are Locked",
@@ -115,7 +116,7 @@
         "publication": "Greater New Orleans Fair Housing Action Center",
         "url": "http://www.gnofairhousing.org/wp-content/uploads/2014/11/11-06-14-Where-Opp-Knocks-FINAL.pdf",
         "pubdate": "2014-11-06T06:00:00.000Z",
-        "keywords": "affordable housing, new orleans, racial discrimination, housing discrimination"
+        "keywords": "housing, new orleans, race, housing discrimination"
     },
     {
         "title": "Digital Discrimination: The Case of Airbnb.com",
@@ -123,7 +124,7 @@
         "publication": "Harvard Business School",
         "url": "http://www.hbs.edu/faculty/Publication%20Files/14-054_e3c04a43-c0cf-4ed8-91bf-cb0ea4ba59c6.pdf",
         "pubdate": "2014-01-10T06:00:00.000Z",
-        "keywords": "racial discrimination, airbnb, short term rentals"
+        "keywords": "race, airbnb, short term rentals"
     },
     {
         "title": "Who Lives in New Orleans and Metro Parishes Now?",
@@ -131,15 +132,15 @@
         "publication": "The Data Center",
         "url": "http://www.datacenterresearch.org/data-resources/who-lives-in-new-orleans-now/",
         "pubdate": "2014-10-16T05:00:00.000Z",
-        "keywords": "demographics, new orleans, income"
+        "keywords": "race, new orleans, economy"
     },
     {
         "title": "The Myth of New Orleans' Affordability",
         "author": "Gillian White",
         "publication": "The Atlantic",
-        "url": "https://docs.google.com/document/d/1gX7eLY7Rn1v8XlU2tKv0IBIkKAr_ADhxtGDe8Kmo2ns/edit#heading=h.pta6z3k93wot",
+        "url": "http://www.theatlantic.com/business/archive/2015/07/cities-housing-rental-affordability-new-orleans/399695/",
         "pubdate": "2015-07-28T05:00:00.000Z",
-        "keywords": "affordable housing, housing discrimination, income, new orleans"
+        "keywords": "housing, race, income, new orleans"
     },
     {
         "title": "Higher housing costs puts pinch on local workforce",
@@ -147,7 +148,7 @@
         "publication": "City Business",
         "url": "http://www.larryschedler.com/higher-housing-costs-put-pinch-local-workforce/",
         "pubdate": "2015-08-14T05:00:00.000Z",
-        "keywords": "affordable housing, gentrification, new orleans"
+        "keywords": "housing, gentrification, new orleans"
     },
     {
         "title": "Where will working poor live in future New Orleans, if gentrification continues?",
@@ -155,7 +156,7 @@
         "publication": "NOLA.com | The Times Picayune ",
         "url": "http://www.nola.com/futureofneworleans/2015/07/where_will_the_working_poor_li.html",
         "pubdate": "2015-07-30T05:00:00.000Z",
-        "keywords": "affordable housing, gentrification, income, new orleans"
+        "keywords": "housing, gentrification, income, new orleans"
     },
     {
         "title": "10 Things You Need to Know About Renting in New Orleans",
@@ -171,7 +172,7 @@
         "publication": "NOLA.com | The Times Picayune ",
         "url": "http://www.nola.com/politics/index.ssf/2015/08/new_orleans_will_need_33000_ne.html#incart_2box_nola_river_orleans_news",
         "pubdate": "2015-08-21T05:00:00.000Z",
-        "keywords": "affordable housing, housing costs, gentrification, new orleans"
+        "keywords": "housing, housing costs, gentrification, new orleans"
     },
     {
         "title": "Unfairbnb: What Unliscenced Short-Term Rentals Mean for New Orleans",
@@ -201,7 +202,7 @@
         "publication": "Gawker",
         "url": "http://truestories.gawker.com/destroy-and-rebuild-a-q-a-with-one-of-new-orleans-bigg-1684973590",
         "pubdate": "2015-02-16T06:00:00.000Z",
-        "keywords": "gentrification, affordable housing, new orleans, racial inequality"
+        "keywords": "gentrification, housing, new orleans, race"
     },
     {
         "title": "New Orleans bounce music evokes a powerful, poignant sense of place",
@@ -305,7 +306,7 @@
         "publication": "NOLA.com | The Times Picayune",
         "url": "http://www.nola.com/katrina/index.ssf/2015/08/new_orleans_explores_affordabl.html",
         "pubdate": "2015-08-20T05:00:00.000Z",
-        "keywords": "affordable housing, new orleans, gentrification"
+        "keywords": "housing, new orleans, gentrification"
     },
     {
         "title": "New Orleans councilwoman says she will not be party to 'sucking the efforts of city government' over short-term rentals, recommends turning issue over to Planning Commission",
@@ -319,97 +320,111 @@
         "title": "Inside Airbnb",
         "author": "Murray Cox",
         "publication": "Inside Airbnb",
-        "url": "http://insideairbnb.com/new-orleans/"
+        "url": "http://insideairbnb.com/new-orleans/",
+        "keywords": "airbnb, data"
     },
     {
         "title": "Anti-eviction Mapping Project",
         "author": "Anti-eviction Mapping Project",
         "publication": "antievictionmap.com",
-        "url": "http://www.antievictionmap.squarespace.com/"
+        "url": "http://www.antievictionmap.squarespace.com/",
+        "keywords": "airbnb, data"
     },
     {
         "title": "More Guests, Empty Houses",
         "author": "Rachel Monroe",
         "publication": "Slate.com",
         "url": "http://www.slate.com/articles/business/moneybox/2014/02/airbnb_gentrification_how_the_sharing_economy_drives_up_housing_prices.html",
-        "pubdate": "2015-02-13T06:00:00.000Z"
+        "pubdate": "2015-02-13T06:00:00.000Z",
+        "keywords": "airbnb, housing"
     },
     {
         "title": "Airbnb is thriving. Hotels are thriving. How is that possible?",
         "author": "Alison Griswold",
         "publication": "Slate.com",
         "url": "http://www.slate.com/articles/business/moneybox/2015/07/airbnb_disrupting_hotels_it_hasn_t_happened_yet_and_both_are_thriving_what.html",
-        "pubdate": "2015-07-06T05:00:00.000Z"
+        "pubdate": "2015-07-06T05:00:00.000Z",
+        "keywords": "airbnb, economy"
     },
     {
         "title": "Room versus board",
         "author": "Brendan O'Connor",
         "publication": "theawl.com",
         "url": "http://www.theawl.com/2015/07/room-versus-board",
-        "pubdate": "2015-07-09T05:00:00.000Z"
+        "pubdate": "2015-07-09T05:00:00.000Z",
+        "keywords": "airbnb, economy, housing, inequality"
     },
     {
         "title": "Boom and Backlash",
         "author": "Staff Writer",
         "publication": "The Economist",
         "url": "http://www.economist.com/news/business/21601254-consumers-and-investors-are-delighted-startups-offering-spare-rooms-or-rides-across-town",
-        "pubdate": "2015-04-26T05:00:00.000Z"
+        "pubdate": "2015-04-26T05:00:00.000Z",
+        "keywords": "airbnb, economy, regulation"
     },
     {
         "title": "I made $41,879 as an AirBNB host",
         "author": "Kelly Kampen",
         "publication": "medium.com",
         "url": "https://medium.com/airbnb-superhosting/i-made-41-879-as-an-airbnb-host-8c33423cd5b6",
-        "pubdate": "2015-05-30T05:00:00.000Z"
+        "pubdate": "2015-05-30T05:00:00.000Z",
+        "keywords": "airbnb, economy, profiteering"
     },
     {
         "title": "Crazy Money': Airbnb valued at over $25 billion",
         "author": "Staff Writer",
         "publication": "money.cnn.com",
         "url": "http://money.cnn.com/2015/06/27/technology/airbnb-funding-valuation-update/",
-        "pubdate": "2015-06-27T05:00:00.000Z"
+        "pubdate": "2015-06-27T05:00:00.000Z",
+        "keywords": "airbnb, economy "
     },
     {
         "title": "Pima County Airbnb owners surprised by new taxes",
         "author": "Patrick McNamara",
         "publication": "tuscon.com",
         "url": "http://tucson.com/news/local/govt-and-politics/pima-county-airbnb-owners-surprised-by-new-taxes/article_b3efb530-237f-5533-8cce-03a7dec4eb63.html",
-        "pubdate": "2015-08-22T05:00:00.000Z"
+        "pubdate": "2015-08-22T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "Homeless on the steps of Airbnb: the faces of San Francisco's other story",
         "author": "Roy Carroll,",
         "publication": "thegardian.com",
         "url": "https://www.google.com/url?q=http%3A%2F%2Fwww.theguardian.com%2Ftechnology%2F2015%2Fmar%2F05%2Fhomeless-steps-airbnb-san-francisco",
-        "pubdate": "2015-03-05T06:00:00.000Z"
+        "pubdate": "2015-03-05T06:00:00.000Z",
+        "keywords": "airbnb, economy, inequality"
     },
     {
         "title": "Latest AirBnB Backlash: San Fran May Offer Cash to Snitch on Neighbors",
         "author": "Ashley Powell",
         "publication": "lawstreetmedia.com",
         "url": "https://www.google.com/url?q=http%3A%2F%2Flawstreetmedia.com%2Fnews%2Flegal-battle-day-currently-opposing-airbnb%2F",
-        "pubdate": "2004-05-15T05:00:00.000Z"
+        "pubdate": "2004-05-15T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "New York State Office of the Attorney General: Airbnb in the city",
         "author": "Eric T Schneiderman",
         "publication": "ag.ny.gov",
         "url": "https://www.google.com/url?q=http%3A%2F%2Fwww.ag.ny.gov%2Fpdfs%2FAirbnb%2520report.pdf",
-        "pubdate": "2014-08-01T05:00:00.000Z"
+        "pubdate": "2014-08-01T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
-        "title": "City and County of San Francisco: Budget and Lesislative Anaylsis on short term rentals",
+        "title": "City and County of San Francisco: Budget and Legislative Anaylsis on short term rentals",
         "author": "City and County of San Francisco\nBoard of Supervisors\n",
         "publication": "sfbos.org",
         "url": "https://www.google.com/url?q=http%3A%2F%2Fwww.sfbos.org%2FModules%2FShowDocument.aspx%3Fdocumentid%3D52601",
-        "pubdate": "2015-05-13T05:00:00.000Z"
+        "pubdate": "2015-05-13T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "San Francisco and New York Weigh Airbnb’s Effect on Rent",
         "author": "Nicole Gelinas",
         "publication": "The New York Times",
         "url": "http://www.nytimes.com/roomfordebate/2015/06/16/san-francisco-and-new-york-weigh-airbnbs-effect-on-rent/airbnb-is-a-problem-for-cities-like-new-york-and-san-francisco",
-        "pubdate": "2015-06-16T05:00:00.000Z"
+        "pubdate": "2015-06-16T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "‘Scraped’ Airbnb data shows 58% of listings possibly illegal",
@@ -423,132 +438,143 @@
         "author": "Roy Samaan",
         "publication": "LANNE",
         "url": "https://www.google.com/url?q=http%3A%2F%2Fwww.laane.org%2Fwp-content%2Fuploads%2F2015%2F03%2FAirBnB-Final.pdf",
-        "pubdate": "2015-03-01T06:00:00.000Z"
+        "pubdate": "2015-03-01T06:00:00.000Z",
+        "keywords": "airbnb, regulation, housing costs, gentrification"
     },
     {
         "title": "Meet LA's Most Prolific Airbnb Host, With 78 Units For Rent",
         "author": "Adrian Glick Kudler",
         "publication": "Curbed Los Angeles",
         "url": "http://la.curbed.com/archives/2015/03/airbnb_los_angeles_most_prolific_host_ghc.php",
-        "pubdate": "2015-03-12T05:00:00.000Z"
+        "pubdate": "2015-03-12T05:00:00.000Z",
+        "keywords": "airbnb, regulation, profiteering"
     },
     {
         "title": "L.A. proposal would block Airbnb hosts from creating 'rogue hotels'",
         "author": "Emily Alpert Reyes",
         "publication": "Los Angeles Times",
         "url": "http://www.latimes.com/local/lanow/la-me-ln-airbnb-regulation-20150602-story.html",
-        "pubdate": "2015-06-02T05:00:00.000Z"
+        "pubdate": "2015-06-02T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "In Silver Lake, some have reservations about vacation rental website",
         "author": "Walter Hamilton",
         "publication": "Los Angeles Times",
         "url": "http://articles.latimes.com/2013/sep/02/business/la-fi-airbnb-economy-20130903",
-        "pubdate": "2013-08-02T05:00:00.000Z"
-    },
-    {
-        "title": "Lookin' at you, Airbnb",
-        "author": "Marty Graham",
-        "publication": "San Diego Reader",
-        "url": "http://www.sandiegoreader.com/news/2015/feb/19/stringers-airbnb-backlash/",
-        "pubdate": "2015-02-19T06:00:00.000Z"
+        "pubdate": "2013-08-02T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "Santa Monica comes down hard on Airbnb; will crackdown spread?",
         "author": "Tim Logan",
         "publication": "Los Angeles Times",
         "url": "http://www.latimes.com/business/realestate/la-fi-santa-monica-council-oks-tough-rental-regs-20150512-story.html",
-        "pubdate": "2015-05-13T05:00:00.000Z"
+        "pubdate": "2015-05-13T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "Santa Monica Just Banned Airbnb's Biggest Moneymakers",
         "author": "Bianca Barragan",
         "publication": "Curbed Los Angeles",
         "url": "http://la.curbed.com/archives/2015/05/santa_monica_just_banned_airbnbs_biggest_moneymakers.php",
-        "pubdate": "2015-05-13T05:00:00.000Z"
+        "pubdate": "2015-05-13T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "A San Diego Woman Renting Rooms Through Airbnb Was Fined $25K",
         "author": "Ron Lieber",
         "publication": "Vice",
         "url": "https://news.vice.com/article/san-diego-woman-renting-rooms-through-airbnb-is-fined-25000",
-        "pubdate": "2015-08-14T05:00:00.000Z"
+        "pubdate": "2015-08-14T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "Asheville to push back against short-term rentals, Airbnb",
         "author": "Joel Burgess",
         "publication": "Citizen Times",
         "url": "https://www.google.com/url?q=http%3A%2F%2Fwww.citizen-times.com%2Fstory%2Fnews%2Flocal%2F2015%2F05%2F13%2Fasheville-airbnb-short-term-rental-downtown-city-council-home-apartment-condominium-tourist-visit-enforcement-fine%2F27233777%2F",
-        "pubdate": "2015-05-13T05:00:00.000Z"
+        "pubdate": "2015-05-13T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "Startup pitch: Misterbnb, an Airbnb alternative for gay travel, raises $2 million",
         "author": "Sean O' Niel",
         "publication": "tnooz",
         "url": "http://www.tnooz.com/article/misterbnb-the-airbnb-clone-for-gay-men-raises-2-million/",
-        "pubdate": "2015-05-04T05:00:00.000Z"
+        "pubdate": "2015-05-04T05:00:00.000Z",
+        "keywords": "airbnb"
     },
     {
         "title": "Airbnb fined €30,000 for illegal tourist lets in Barcelona",
         "author": "Ashifa Kassam",
         "publication": "The Guardian ",
         "url": "http://www.theguardian.com/technology/2014/jul/07/airbnb-fined-illegal-tourist-lets-barcelona-catalonia",
-        "pubdate": "2014-07-07T05:00:00.000Z"
+        "pubdate": "2014-07-07T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "Barcelona just declared war on Airbnb",
         "author": "Don Quijones, Wolf Street",
         "publication": "Business Insider",
         "url": "http://www.businessinsider.com/barcelona-just-declared-war-on-airbnb-2015-8#ixzz3jCZ1TjtW",
-        "pubdate": "2015-08-11T05:00:00.000Z"
+        "pubdate": "2015-08-11T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "Eviction doesn't scare Berlin Airbnb hosts",
         "author": "The Local",
         "publication": "The Local",
         "url": "http://www.thelocal.de/20150219/airbnb-subletters-unp",
-        "pubdate": "2015-02-19T06:00:00.000Z"
+        "pubdate": "2015-02-19T06:00:00.000Z",
+        "keywords": "airbnb, regulation, eviction"
     },
     {
         "title": "Two thirds of Berlin's tourist flats now illegal",
         "author": "The Local",
         "publication": "The Local",
         "url": "http://www.thelocal.de/20140801/two-thirds-of-berlins-tourist-flats-now-illegal",
-        "pubdate": "2014-08-01T05:00:00.000Z"
+        "pubdate": "2014-08-01T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "The holiday rental crackdown",
         "author": "Lúcia Vicente",
         "publication": "Exberliner",
         "url": "http://www.exberliner.com/features/lifestyle/the-holiday-rental-crackdown/",
-        "pubdate": "2013-07-24T05:00:00.000Z"
+        "pubdate": "2013-07-24T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "Airbnb Finally Gets In the Game and Starts Poaching Politicos",
         "author": "Nitasha Tiku",
         "publication": "Valley Wag",
         "url": "http://valleywag.gawker.com/airbnb-finally-gets-in-the-game-and-starts-poaching-pol-1609224287",
-        "pubdate": "2014-07-22T05:00:00.000Z"
+        "pubdate": "2014-07-22T05:00:00.000Z",
+        "keywords": "airbnb, regulation"
     },
     {
         "title": "Woman Utterly Pillaged via Airbnb",
         "author": "Ryan Tate",
         "publication": "Gawker",
         "url": "http://gawker.com/5825262/woman-utterly-pillaged-via-airbnb",
-        "pubdate": "2011-07-22T05:00:00.000Z"
+        "pubdate": "2011-07-22T05:00:00.000Z",
+        "keywords": "airbnb"
     },
     {
         "title": "Airbnb Horror Story Points to Need for Precautions",
         "author": "Ron Lieber",
         "publication": "The New York Times",
         "url": "http://www.nytimes.com/2015/08/15/your-money/airbnb-horror-story-points-to-need-for-precautions.html?mabReward=A5&moduleDetail=recommendations-0&action=click&contentCollection=U.S.&region=Footer&module=WhatsNext&version=WhatsNext&contentID=WhatsNext&src=recg&pgtype=article",
-        "pubdate": "2014-08-14T05:00:00.000Z"
+        "pubdate": "2014-08-14T05:00:00.000Z",
+        "keywords": "airbnb"
     },
     {
         "title": "Airbnb Isn't Much Help When Your Guests Turn Into Squatters",
         "author": "Kevin Montgomery",
         "publication": "Valley Wag",
         "url": "valleywag.gawker.com/airbnb-isnt-much-help-when-your-guests-turn-into-squatt-1608324043",
-        "pubdate": "2014-07-21T05:00:00.000Z"
+        "pubdate": "2014-07-21T05:00:00.000Z",
+        "keywords": "airbnb"
     }
 ]}
