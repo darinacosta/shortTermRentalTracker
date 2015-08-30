@@ -105,13 +105,13 @@ h4{
 .infobar{
   position: relative;
   display: block;
-  padding: 2px 15px;
+  padding: 0px 0px;
   text-decoration: none;
   list-style-type: none;
 }
 
 .infobar td{
-  font-size: 10px;
+  font-size: 11px;
 }
 
 div.info.legend.leaflet-control{
