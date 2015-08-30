@@ -62,11 +62,15 @@ h3{
   margin-bottom:10px;
 }
 
-.sidebar-subtitle-wrapper{
+.sidebar-subtitle-wrapper, .subtitle-wrapper{
   background-color: #B9B9B9;
   color: #555555;
   text-align: center;
   padding: 1px 0px;
+}
+
+.subtitle-wrapper{
+  margin-bottom: 15px;
 }
 
 #footer{
@@ -75,6 +79,7 @@ h3{
   font-size: small;
   font-weight: bold;
   text-align: center;
+  border-top:2px solid #fff;
   padding: 12px 0px;
   height: 40px;
 }
