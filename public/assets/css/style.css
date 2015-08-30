@@ -23,6 +23,10 @@ a:hover, a:visited{
   clear: left;
 }
 
+.caption{
+  margin-bottom:10px;
+}
+
 .top-scroll-wrapper{
   text-decoration:underline;
   text-align:right;
@@ -55,6 +59,14 @@ h3{
   background-color: #404040;
   padding: 1px 0px;
   border-bottom: 1px solid #FFFCFC;
+  margin-bottom:10px;
+}
+
+.sidebar-subtitle-wrapper{
+  background-color: #B9B9B9;
+  color: #555555;
+  text-align: center;
+  padding: 1px 0px;
   margin-bottom:10px;
 }
 

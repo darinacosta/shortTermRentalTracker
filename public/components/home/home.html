@@ -38,7 +38,7 @@
         <div class="home-header">
           <h4>Prices</h4>
         </div>
-        <table class="table" ng-model="stats" style="text-align:left">
+        <table class="table table-striped" ng-model="stats" style="text-align:left">
           <thead>
             <tr>
               <th>Airbnb</th>
@@ -144,7 +144,7 @@
         One of the talking points of short term rental advocates is that websites like Airbnb allow homeowners to subsidize their housing expenses by occasionally renting out an extra room. In reality, the majority of short term rental listings are for entire homes or apartments. <b>Of the {{stats.listingTotals.air}} Airbnb listings tracked between June of 2015 and today, <span ng-bind="entireRoomPercent"></span>% were listed as “entire home/apartment.”</b>
       </p>
     </div>                           <!--end myth vs reality 2-->
-    <div class="col-lg-8 col-md-12"> <!--begin myth v reality prt 2-->
+    <div class="col-lg-12"> <!--begin myth v reality prt 2-->
       <p>
         While the density of short term listings is remarkable, the intensity of use varies between listings. Not every listing on Airbnb is being rented on a regular basis. Rather, the listings most likely to be rented at the highest frequency are those reserved strictly for short term purposes. These types of rentals are operated as businesses, commonly by hosts with multiple listings. 
       </p>
@@ -163,16 +163,6 @@
         We call the particularly egregious hosts “bad actors.” <b>Bad actors are hosts with multiple listings that are primarily used for short term rentals.</b> This intensity of use contributes to <a href="http://uptownmessenger.com/2015/02/guest-column-whats-good-for-renters-is-good-for-new-orleans/" target="_blank">a housing market that puts renters at a disadvantage</a> and capitalizes on a <a href="http://www.nola.com/politics/index.ssf/2015/06/lawsuit_kills_rare_prosecution.html" target="_blank">lack of regulation on illegal short term rentals</a>.
       </p>
     </div>                           <!--end myth v reality prt 2-->
-    <div class="col-lg-4 col-md-12"> <!--begin review number chart-->
-      <div class="chart-content-container" style="max-width:718px;">
-        <div class="home-header">
-          <h4>Number of Airbnb Reviews by Room Type</h4>
-        </div>
-        <canvas id="bar" class="chart chart-bar" data="averageNightlyData" labels="averageNightlyLabels" options="averageNightlyOptions"></canvas>
-        <br>
-      </div>
-      <div class="caption"><small>Total number of reviews among {{stats.listingTotals.air}} active and historic Airbnb listings.</small></div>
-    </div>                           <!--end review number chart-->
     <div class="col-lg-12">          <!--begin bad actors 2-->
       <p>
         <b>By renting out multiple properties, bad actors maximize profits while having the largest negative impact on the overall housing market.</b>
@@ -196,7 +186,7 @@
         <div class="home-header">
     	    <h4>Neighborhoods With the Most & Least Airbnb Listings</h4>
         </div>
-        <table class="table" style="text-align:left">
+        <table class="table table-striped" style="text-align:left">
     	    <thead style="font-size:12px">
       	    <tr>
               <th>TOP 5</th>
@@ -291,5 +281,40 @@
         <a ng-click="scrollToTop()">Scroll to top</a>
       </p>  
     </div>                           <!--end just because-->
-  </div>                             <!--end row-->
+  </div>                             <!--end row; END HOME SECTION-->
+  <div id="about">                              <!--BEGIN ABOUT SECTION--> 
+    <div class="home-header">
+      <h1>About</h1>
+    </div>
+    <p>
+      The Nola Short Term Rental Report is a living document. The content and data is likely to improve as research and analysis continue. The featured data is collected in part using the <a href="https://zilyo.com/" target="_blank">Zilyo</a> API. For a more detailed analysis of data related specifically to Airbnb both in New Orleans and in many other cities, please visit <a href="http://insideairbnb.com/" target="_blank">Inside Airbnb</a>.
+    </p>
+    <p>
+      <a href="http://www.andruokun.com/" target="_blank">Andru Okun</a> and Breonne DeDecker do the research and write the content. <a href="http://darinacosta.com/" target="_blank">Darin Acosta</a> writes the code. Special thanks to Elizabeth Williams, Jeffrey Goodman, Annie, Daniel Murphy, Amelia Bowers, Murray Cox, Amitai Heller, Irina Vinnitskaya and anyone else who we pestered along the way.
+    </p>  
+      
+    <h3>GET THE DATA</h3>
+    <p>Our data is available for download as comma-seperated text files. <b>If you use our data, please consider <a href="#/donate">donating</a> to our volunteer-run project in order to help keep our servers running.</b><p> 
+    <p>Download the delimited text files here: <a href="assets/data/airbnb.csv" download>Airbnb</a> |  <a href="assets/data/homeaway.csv" download>HomeAway</a></p>    
+
+    <h3>DISCLAIMER</h3>
+    <p><b>The coordinates of the data points featured on the map are provided by the short term rental listing websites, and the spatial accuracy is not precise</b>. They are not associated with specific addresses, and are only intended to communicate the general area of the listing. Although both the spatial and non-spatial data featured across the site have been produced and processed from information that is publicly advertised on vacation rental websites, no warranty is made regarding accuracy, adequacy, completeness, legality, reliability or usefulness of the data.</p>
+
+    <h3>HELP SUPPORT THIS PROJECT</h3>
+    <p>We are a small volunteer group. We're not affiliated with any neighborhood organizations, short term rental websites, or hotels. Your donations will help support community tools such as this one.</p>    
+
+    <div mstyle="text-align:center">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+          <input type="hidden" name="cmd" value="_s-xclick">
+          <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+          ">
+          <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+          <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+      </form>
+      <p class="top-scroll-wrapper">
+        <a ng-click="scrollToTop()">Scroll to top</a>
+      </p> 
+      <br>
+      <br>
+  </div>                             <!--END ABOUT SECTION--> 
 </div>                               <!--end model-->

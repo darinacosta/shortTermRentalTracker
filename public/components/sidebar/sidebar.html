@@ -1,17 +1,18 @@
 <div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
-  <a class="navmenu-brand visible-md visible-lg" href="#/"><h4>New Orleans Short Term<br> Rental Report</h4></a>
+  <!--a class="navmenu-brand visible-md visible-lg" href="#/"></a-->
+  <a href="#/"><div class="home-header visible-md visible-lg"> 
+    <h4>New Orleans Short Term<br> Rental Report</h4>
+  </div></a>
   <ul class="nav navmenu-nav" ng-click="clearSelection()">
-    <li><a href="#/home">Home</a></li>
-    <li><a href="#/about">About</a></li> 
+    <li><a href="#/" >Home</a></li>
+    <li><a href="#/#about">About</a></li> 
     <li><a href="#/resources">Bibliography</a></li>
-    <li><a href="#/donate">Donate</a></li>
   </ul>
-  <hr>
-  <div class="menu-area">
-    <h5>Active Listing Summary</h5>
+  <div class="sidebar-subtitle-wrapper">
+    <h5>Summary of featured listings</h5>
   </div>
   <ul id="sidebar-stats" class="infobar">
-    <table>
+    <table class="table table-striped table-bordered">
       <tr>
         <td>
           Airbnb:
@@ -62,9 +63,10 @@
       </tr>
     </table>
   </ul>
-  <hr>
+  <div class="sidebar-subtitle-wrapper">
+    <h5>Search <b>Airbnb</b> listings by user ID</h5>
+  </div>
   <div class="menu-area">
-    <h5>Search <b>Airbnb</b> listings by user ID:</h5>
     <form class="form-container">
       <input id="user-search-bar" type="text" ng-model="userUrl" class="form-control">
       <input ng-click="queryByUserUrl(userUrl)" class="btn-success btn" type="submit" value="Map">

@@ -1,6 +1,6 @@
-app.controller('sidebarCtrl', ['$scope', '$q', '$timeout', 'asyncHelper', 'layerSvc', 'layerHelpers', '$http', sidebarCtrl]);
+app.controller('sidebarCtrl', ['$scope', '$q', '$timeout', 'asyncHelper', 'layerSvc', 'layerHelpers', 'scrollHelper', '$http', sidebarCtrl]);
 
-function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, $http) {
+function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, scrollHelper, $http) {
   
   var map = mapSvc.map,
       layerControl = mapSvc.layerControl,
@@ -18,6 +18,10 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
   $scope.usersWithMultiListings =  '----';
   $scope.licensedRentals = '----';
 
+  $scope.scrollTo = scrollHelper.scrollTo;
+  $scope.scrollToTop = scrollHelper.scrollToTop;
+
+  console.log($scope.scrollTo)
 
   $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pasttwoweeks=true").success(function(data){
       gatherStats(data.body)

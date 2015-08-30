@@ -1,4 +1,4 @@
-app.controller('homeCtrl', ['$scope', 'layerHelpers', 'asyncHelper', '$http', '$location', '$anchorScroll', homeCtrl]);
+app.controller('homeCtrl', ['$scope', 'layerHelpers', 'asyncHelper', '$http', 'scrollHelper', homeCtrl]);
 
 function homeCtrl($scope, layerHelpers, asyncHelper, $http, $location, $anchorScroll) {
   var map = mapSvc.map,
@@ -8,18 +8,11 @@ function homeCtrl($scope, layerHelpers, asyncHelper, $http, $location, $anchorSc
     shortTermRentalClustersManager = new layerManager("Regional Short Term Rental Clusters"),
     shortTermRentalClusters;
   
-  $http.get("assets/data/stats.json?v=2").success(function(data){
-    console.log(data); 
- 
-    $scope.scrollTo = function(id){
-      $location.hash(id);
-      $anchorScroll();
-      $location.hash('');
-    };
-
-    $scope.scrollToTop = function(){
-      $('body').scrollTop(0);
-    }
+  $http.get("assets/data/stats.json?v=2").success(function(data){ 
+    
+    //helpers
+    $scope.scrollTo = scrollHelper.scrollTo;
+    $scope.scrollToTop = scrollHelper.scrollToTop;
 
     //body variables  
     $scope.stats = data;  
@@ -50,7 +43,7 @@ function homeCtrl($scope, layerHelpers, asyncHelper, $http, $location, $anchorSc
         return 1;
       }
       if (a.total > b.total) {
-	return -1;
+	      return -1;
       }
       return 0;
     });
@@ -63,7 +56,7 @@ function homeCtrl($scope, layerHelpers, asyncHelper, $http, $location, $anchorSc
         return 1;
       }
       if (a.total < b.total) {
-	return -1;
+	      return -1;
       }
       return 0;
     });

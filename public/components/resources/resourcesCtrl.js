@@ -1,6 +1,6 @@
-app.controller('resourcesCtrl', ['$scope', '$http', 'asyncHelper',  resourcesCtrl]);
+app.controller('resourcesCtrl', ['$scope', '$http', 'asyncHelper', 'scrollHelper', resourcesCtrl]);
 
-function resourcesCtrl($scope, $http, asyncHelper) {
+function resourcesCtrl($scope, $http, asyncHelper, scrollHelper) {
   $http.get("assets/data/resources.json").success(function(data){
     $scope.keywords = [];
     $scopeActiveKeywords = [];
@@ -48,7 +48,8 @@ function resourcesCtrl($scope, $http, asyncHelper) {
       $scope.keywords = keywords;
     })
   });
-
+  
+  //scrollHelper.scrollTo('bibliography');
 };
 
 function buildKeywordSet(keywords, data){

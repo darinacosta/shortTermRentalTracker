@@ -2,27 +2,17 @@ var app = angular.module("app", ["ngRoute", "ngSanitize", "ui.bootstrap", "chart
   
 .config(function ($routeProvider) {
   $routeProvider
-    .when("/home", {
+    .when("/", {
       controller: 'homeCtrl', 
       controllerUrl: 'components/home/homeCtrl.js',
       templateUrl: 'components/home/home.html'
-    })
-    .when("/donate", {
-      controller: 'donateCtrl', 
-      controllerUrl: 'components/donate/donateCtrl.js',
-      templateUrl: 'components/donate/donate.html'
-    })
-    .when("/about", {
-      controller: 'aboutCtrl', 
-      controllerUrl: 'components/about/aboutCtrl.js',
-      templateUrl: 'components/about/about.html'
     })
     .when("/resources", {
       controller: 'resourcesCtrl', 
       controllerUrl: 'components/resources/resourcesCtrl.js',
       templateUrl: 'components/resources/resources.html'
     })
-    .otherwise({redirectTo: "/home"})
+    .otherwise({redirectTo: "/"})
 })
 
 
