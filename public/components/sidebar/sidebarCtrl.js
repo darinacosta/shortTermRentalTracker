@@ -68,7 +68,7 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
     });
     maxRenterObj = mode(multiListingUsers);
     asyncHelper(function() {
-      $scope.mostListings = "<a href='" + maxRenterObj['maxEl'] + "' target='_blank'>" + maxRenterObj['maxCount'] + "</a>";
+      $scope.mostListings = maxRenterObj === null ? "----" : "<a href='" + maxRenterObj['maxEl'] + "' target='_blank'>" + maxRenterObj['maxCount'] + "</a>";
       $scope.nolaTotal = nolaTotal;
       $scope.airbnbTotal = airbnbTotal;
       $scope.homeawayTotal = homeawayTotal;
