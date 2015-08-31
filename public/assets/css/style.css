@@ -73,6 +73,13 @@ h3{
   margin-bottom: 15px;
 }
 
+#social-container{
+ position: absolute;
+ width: 175px;
+ height: 30px; 
+ right:15px;
+}
+
 #footer{
   background-color: #B9B9B9;
   color: #555555;

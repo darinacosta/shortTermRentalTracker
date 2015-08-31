@@ -67,17 +67,17 @@
     <h5>Search <b>Airbnb</b> listings by user ID</h5>
   </div>
   <div class="menu-area">
+    <br>
     <form class="form-container" style="margin-top:6px">
       <input id="user-search-bar" type="text" ng-model="userUrl" class="form-control">
       <input ng-click="queryByUserUrl(userUrl)" class="btn-success btn" type="submit" value="Map">
       <input ng-click="clearSelection()" class="btn-default btn" type="submit" value="Clear">
     </form>
-    <div style="height:65px; margin-top:7px">
+    <div style="height:65px; margin-top:15px">
 	    <small><span ng-bind-html="searchOutput"></span></small>
     </div>
   </div>
   <hr>
-  <div style="height:40px;margin-left:10px;" class="addthis_native_toolbox"></div> 
   <div id="last-update">
     <small>
       Data updated: <b><span ng-bind="lastUpdate">--/--/----</span></b>.
