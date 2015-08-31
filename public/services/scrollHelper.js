@@ -12,7 +12,8 @@ function scrollHelper($location, $anchorScroll){
   };
 
   svc.scrollToTop = function(){
-    $('body').scrollTop(0);
+    $('body, html').animate({scrollTop: 0}, "slow");
+    return false;
   };
 
   return svc;
