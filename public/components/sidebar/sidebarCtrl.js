@@ -8,7 +8,7 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
       shortTermRentalClusters = {},
       queryLayer = {},
       shortTermRentalPointManager = new layerManager("Regional Short Term Rental Points"),
-      defaultSearchOutput = 'To search a user by ID, click an <b>Airbnb point</b> on the map, <b>copy the "User ID"</b> from the popup, <b>paste</b> it into the search bar, and <b>click "Map"</b>.';
+      defaultSearchOutput = 'To search multiple listings advertised by a single user, <b>click an Airbnb point</b> on the map, <b>copy the "User ID"</b> from the popup, <b>paste</b> it into the search bar, and <b>click "Map"</b>.';
 
   $scope.mostListings = '----';
   $scope.nolaTotal = '----';
