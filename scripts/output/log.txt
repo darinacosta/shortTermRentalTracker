@@ -84,3 +84,7 @@ New features collected: 244
 Rental Scraper Log: Mon Aug 31 2015 01:15:01 GMT-0500 (CDT)
 New features collected: 464
 --------------------------
+--------------------------
+Rental Scraper Log: Tue Sep 01 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 428
+--------------------------
