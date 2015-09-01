@@ -13,6 +13,7 @@ var app = angular.module("app", ["ngRoute", "ngSanitize", "ui.bootstrap", "chart
       templateUrl: 'components/resources/resources.html'
     })
     .otherwise({redirectTo: "/"})
+
 })
 
 
