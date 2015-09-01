@@ -211,8 +211,8 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
   function queryPointStyle(feature, latlng) {
     return L.circleMarker(latlng, {
       radius: 6,
-      fillColor: "red",
-      color: "#000",
+      fillColor: "#404040",
+      color: "#404040",
       weight: 1,
       opacity: 1,
       fillOpacity: 0.8,
