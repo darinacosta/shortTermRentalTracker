@@ -19,7 +19,7 @@ function mapCtrl($scope, $rootScope, $q, $timeout, layerSvc, layerHelpers, $http
 
   layerSvc.getLicensedRentals().then(function(licensedRentals){
     layerHelpers.populateLayerControl({
-      "Orleans Parish Licensed Rentals": licensedRentals 
+      'Orleans Parish Licensed "Bed & Breakfasts"': licensedRentals 
     });
   })
 }

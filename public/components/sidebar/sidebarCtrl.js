@@ -196,9 +196,6 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
 
   layerSvc.getLicensedRentals().then(function(licensedRentals){
     var layerNumber = 0;
-    layerHelpers.populateLayerControl({
-      "Orleans Parish Licensed Rentals": licensedRentals 
-    });
     for (x in licensedRentals._layers){
       layerNumber ++;
     };
