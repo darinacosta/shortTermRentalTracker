@@ -405,13 +405,18 @@ strCalculator.gatherDataByNeighborhood = function(listings){
 strCalculator.buildMultiUnitHostIndex = function(listings, unitNumber){
   var userList = strCalculator.buildUserList(listings);
   var multiUnitUsers = {total: userList.length,
+	                one: 0,
 	                twoplus: 0,
                         fiveplus: 0};
     userList.forEach(function(user){
       listings.forEach(function(listing){
         if (listing.properties.user === user && listing.properties.units > 1 && listing.properties.provider === "air"){
-	        multiUnitUsers.twoplus += 1;
-	      };
+	   multiUnitUsers.twoplus += 1;
+	};
+
+        if (listing.properties.user === user && listing.properties.units === 1 && listing.properties.provider === "air"){
+         multiUnitUsers.one += 1
+       	};
 
         if (listing.properties.user === user && listing.properties.units > 4 && listing.properties.provider === "air"){
           multiUnitUsers.fiveplus += 1;
