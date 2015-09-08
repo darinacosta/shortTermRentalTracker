@@ -6,6 +6,7 @@ var http = require('http');
 var Q = require('q');
 var path = require('path');
 var output = path.join(__dirname, '../../public/assets/data/stats.json');
+var today = Date();
 
 var options = {
   host: 'nolarentalreport.com',
@@ -36,7 +37,8 @@ var requestCallback = function(response){
       multiListingEntirePlaceUserStats: multiListingEntirePlaceUserStats,
       prices: prices,
       reviews: reviews,
-      neighborhoodStats: neighborhoodStats
+      neighborhoodStats: neighborhoodStats,
+      datecollected: today
     };
     statsString = JSON.stringify(stats);
     fs.writeFile(output, statsString, function(){
