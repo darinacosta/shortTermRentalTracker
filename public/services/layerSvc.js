@@ -79,10 +79,15 @@ function layerSvc($http, layerHelpers){
       userUrl = feature.properties.user,
       userUrlArray = userUrl.split('/'),
       userId = userUrlArray[userUrlArray.length -1];
-      popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomtype + ' | ' + reviews + ' reviews</small></h5>' +
-              '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
-              '<b>User Profile:</b> <a target="_blank" href="' + userUrl + '">' + userUrl + '</a><br>' + 
-              '<b>User ID:</b> ' + userId 
+      popup = '<h4>' + feature.properties.street + ' Rental<br> <small>' + feature.properties.roomtype; 
+      if (reviews !== 0){
+        popup += ' | ' + reviews + ' reviews</small></h4>';
+      } else {
+        popup += '</small></h4>';
+      };
+      popup += '<b>Rental:</b> <a target="_blank" href="' + feature.properties.url + '">' + feature.properties.url + '</a><br>' +
+               '<b>User Profile:</b> <a target="_blank" href="' + userUrl + '">' + userUrl + '</a><br>' + 
+               '<b>User ID:</b> ' + userId 
       if (feature.properties.units !== undefined){
         popup += '<br><br><b>This user has ' + feature.properties.units + ' ' + pluralListing + '.</b>';
       }

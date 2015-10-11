@@ -79,7 +79,7 @@ app.get('/rentaltracker', function(req, res){
       //Query for active listings
       if (queryPost.pasttwoweeks === "true"){
         var today = new Date();
-        var twoWeeks = new Date(today.setDate(today.getDate() - 28));  
+        var twoWeeks = new Date(today.setDate(today.getDate() - 75));  
         queryObject['properties.updated'] = {"$gte": twoWeeks};
       };
 

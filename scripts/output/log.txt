@@ -104,3 +104,91 @@ New features collected: 2
 Rental Scraper Log: Tue Sep 08 2015 01:15:01 GMT-0500 (CDT)
 New features collected: 4
 --------------------------
+--------------------------
+Rental Scraper Log: Wed Sep 09 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 72
+--------------------------
+--------------------------
+Rental Scraper Log: Thu Sep 10 2015 01:15:02 GMT-0500 (CDT)
+New features collected: 51
+--------------------------
+--------------------------
+Rental Scraper Log: Sun Sep 13 2015 01:15:02 GMT-0500 (CDT)
+New features collected: 2
+--------------------------
+--------------------------
+Rental Scraper Log: Mon Sep 14 2015 01:15:02 GMT-0500 (CDT)
+New features collected: 456
+--------------------------
+--------------------------
+Rental Scraper Log: Tue Sep 15 2015 01:15:02 GMT-0500 (CDT)
+New features collected: 421
+--------------------------
+--------------------------
+Rental Scraper Log: Wed Sep 16 2015 01:15:02 GMT-0500 (CDT)
+New features collected: 194
+--------------------------
+--------------------------
+Rental Scraper Log: Thu Sep 17 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 65
+--------------------------
+--------------------------
+Rental Scraper Log: Sun Sep 20 2015 01:15:02 GMT-0500 (CDT)
+New features collected: 332
+--------------------------
+--------------------------
+Rental Scraper Log: Mon Sep 21 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 4
+--------------------------
+--------------------------
+Rental Scraper Log: Tue Sep 22 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 3
+--------------------------
+--------------------------
+Rental Scraper Log: Wed Sep 23 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 70
+--------------------------
+--------------------------
+Rental Scraper Log: Thu Sep 24 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 1
+--------------------------
+--------------------------
+Rental Scraper Log: Sun Sep 27 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 43
+--------------------------
+--------------------------
+Rental Scraper Log: Mon Sep 28 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 3
+--------------------------
+--------------------------
+Rental Scraper Log: Tue Sep 29 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 4
+--------------------------
+--------------------------
+Rental Scraper Log: Wed Sep 30 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 2
+--------------------------
+--------------------------
+Rental Scraper Log: Thu Oct 01 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 86
+--------------------------
+--------------------------
+Rental Scraper Log: Sun Oct 04 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 101
+--------------------------
+--------------------------
+Rental Scraper Log: Mon Oct 05 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 458
+--------------------------
+--------------------------
+Rental Scraper Log: Tue Oct 06 2015 01:15:02 GMT-0500 (CDT)
+New features collected: 417
+--------------------------
+--------------------------
+Rental Scraper Log: Wed Oct 07 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 258
+--------------------------
+--------------------------
+Rental Scraper Log: Thu Oct 08 2015 01:15:01 GMT-0500 (CDT)
+New features collected: 54
+--------------------------
