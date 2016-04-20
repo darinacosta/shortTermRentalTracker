@@ -7,6 +7,7 @@ var mongo = require('mongodb');
 var mdbServer = mongo.Server('localhost', 27017, {'auto_reconnect' : true});
 var strdb = mongo.Db('shorttermrentals', mdbServer);
 var ltrdb = mongo.Db('longtermrentals', mdbServer);
+var assessordb = mongo.Db('assessordata', mdbServer);
 var reviewdb = mongo.Db('reviewtracker', mdbServer);
 var BSON = require('mongodb').BSON;
 
@@ -51,6 +52,25 @@ app.get('/longtermrentals', function(req, res){
   })();
   console.log(query);
   ltrdb.open(function(err, db){
+     db.collection('features')
+     .find(query)
+     .toArray(function(err,features){
+       res.send({body:features});
+       db.close()
+     });
+   });
+});
+
+app.get('/assessordata', function(req, res){
+  res.setHeader('Content-Type', 'application/json');
+  var urlParts = url.parse(req.url, true);
+  var queryPost = urlParts.query;
+  var query = (function(){
+    var queryObject = {};
+    return queryObject;
+  })();
+  console.log(query);
+  assessordb.open(function(err, db){
      db.collection('features')
      .find(query)
      .toArray(function(err,features){
