@@ -19,10 +19,10 @@ app.get('/reviewtracker', function(req, res){
   var queryPost = urlParts.query;
   var query = (function(){
     var queryObject = {};
-    
+
     if (queryPost.neighborhood){
-      queryObject['properties.neighborhood'] =  {'$regex': queryPost.neighborhood, '$options': 'i'}; 
-    };
+      queryObject['properties.neighborhood'] =  {'$regex': queryPost.neighborhood, '$options': 'i'};
+    }
 
     return queryObject;
   })();
@@ -32,7 +32,7 @@ app.get('/reviewtracker', function(req, res){
      .find(query)
      .toArray(function(err,features){
        res.send({body:features});
-       db.close()
+       db.close();
      });
    });
 });
@@ -43,10 +43,10 @@ app.get('/longtermrentals', function(req, res){
   var queryPost = urlParts.query;
   var query = (function(){
     var queryObject = {};
-    
+
     if (queryPost.neighborhood){
-      queryObject['properties.neighborhood'] =  {'$regex': queryPost.neighborhood, '$options': 'i'}; 
-    };
+      queryObject['properties.neighborhood'] =  {'$regex': queryPost.neighborhood, '$options': 'i'};
+    }
 
     return queryObject;
   })();
@@ -56,7 +56,7 @@ app.get('/longtermrentals', function(req, res){
      .find(query)
      .toArray(function(err,features){
        res.send({body:features});
-       db.close()
+       db.close();
      });
    });
 });
@@ -74,48 +74,48 @@ app.get('/assessordata', function(req, res){
      db.collection('features')
      .find(query)
      .toArray(function(err,features){
-       res.send({body:features});
-       db.close()
+       res.send(features);
+       db.close();
      });
    });
 });
 
 app.get('/rentaltracker', function(req, res){
-  res.setHeader('Content-Type', 'application/json'); 
+  res.setHeader('Content-Type', 'application/json');
   var urlParts = url.parse(req.url, true);
   var queryPost = urlParts.query;
   var propertiesInt = ["monthlyprice","nightlyprice"];
   var propertiesStr = ["city","id","roomtype","provider","user","url"];
   var query = (function(){
     var queryObject = {};
-    
+
     for (var property in queryPost){
       if (propertiesInt.indexOf(property) > -1){
-        queryObject['properties.' + property] = parseInt(queryPost[property]); 
+        queryObject['properties.' + property] = parseInt(queryPost[property]);
       } else if (propertiesStr.indexOf(property) > -1){
         queryObject['properties.' + property] = queryPost[property];
-      };
+      }
 
       //Query for active listings
       if (queryPost.pasttwoweeks === "true"){
         var today = new Date();
-        var twoWeeks = new Date(today.setDate(today.getDate() - 75));  
+        var twoWeeks = new Date(today.setDate(today.getDate() - 75));
         queryObject['properties.updated'] = {"$gte": twoWeeks};
-      };
+      }
 
       //Query for verified lisitings
       if (queryPost['userexists'] === "true"){
         queryObject["properties.user"] = { "$exists" : true };
       } else if (queryPost.userexists === "false"){
         queryObject["properties.user"] = { "$exists" : false };
-      };
-      
+      }
+
       //Query feature to determine New Orleans listings for now; geospatial solution later
       if (queryPost['neworleans'] === "true"){
         queryObject['properties.city'] = /^new[ +]orleans$/i;
-      };
+      }
 
-    };
+    }
 
     return queryObject;
   })();
@@ -125,16 +125,16 @@ app.get('/rentaltracker', function(req, res){
      .find(query)
      .toArray(function(err,features){
        res.send({body:features});
-       db.close()
+       db.close();
      });
    });
 });
 
 
 
-//Servers 
+//Servers
 var port = 8080;
 app.listen(port, function(err, res) {
-   if (err) { console.log( err ) };
+   if (err) { console.log( err ); }
    console.log('server listening on port ' + port);
 });
