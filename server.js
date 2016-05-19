@@ -74,7 +74,9 @@ app.get('/assessordata', function(req, res){
      db.collection('features')
      .find(query)
      .toArray(function(err,features){
-       res.send(features);
+       res.send({
+         "type": "FeatureCollection",
+         "features": features});
        db.close();
      });
    });
