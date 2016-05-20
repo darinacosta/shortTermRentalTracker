@@ -22,7 +22,7 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
   $scope.scrollTo = scrollHelper.scrollTo;
   $scope.scrollToTop = scrollHelper.scrollToTop;
   
-  $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pasttwoweeks=true").success(function(data){
+  $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true").success(function(data){
       gatherStats(data.body)
     }
   );
@@ -96,7 +96,7 @@ function sidebarCtrl($scope, $q, $timeout, asyncHelper, layerSvc, layerHelpers, 
     asyncHelper(function() {
       //$scope.searchOutput = 'To search a user by ID, click an Airbnb point in the map, copy the "User ID" from the popup, paste it into the search bar, and click "Map".'
     });
-    $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true&pasttwoweeks=true").success(function(data){
+    $http.get("http://nolarentalreport.com/rentaltracker?userexists=true&neworleans=true").success(function(data){
       var filteredFeatures = [],
       queryValid;
       data['body'].filter(function (feature) {
